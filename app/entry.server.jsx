@@ -18,6 +18,24 @@ export default async function handleRequest(
   context,
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    defaultSrc: [
+      "'self'",
+      'cdn.shopify.com',
+      'shopify.com',
+      '*.youtube.com',
+      '*.google.com',
+      'fonts.gstatic.com',
+      'connect.facebook.net',
+      'geolocation.onetrust.com',
+    ],
+    imgSrc: ["'self'", 'data:', 'cdn.shopify.com', 'www.facebook.com'],
+    styleSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      'fonts.googleapis.com',
+      'cdn.shopify.com',
+    ],
+    connectSrc: ["'self'", 'https://monorail-edge.shopifysvc.com', 'https://geolocation.onetrust.com'],
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
