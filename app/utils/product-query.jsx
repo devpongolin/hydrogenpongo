@@ -1,6 +1,7 @@
 export const FETCH_PRODUCT_USING_HANDLE = `
     query ProductTitle {
         product(handle: "waggle-smart-ai-bowl-for-puppies") {
+            id
             title
             description
             images(first:10){
@@ -13,6 +14,7 @@ export const FETCH_PRODUCT_USING_HANDLE = `
             variants(first:10){
                 edges{
                     node{
+                    id
                     price{
                         amount
                     }

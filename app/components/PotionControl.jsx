@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Star} from 'lucide-react';
+import { CustomAddToCartButton } from './CustomAddToCartButton';
+import {useAside} from './Aside';
 
 import mainImage from '../assets/main-product.webp';
 import bowlDetail from '../assets/bowl-detail.webp';
@@ -28,7 +30,9 @@ import shoppingCartIcon from '../assets/shopping-cart.webp';
 import menuIcon from '../assets/menu.webp';
 
 export default function PotionControl(ProductData) {
+  const {open} = useAside();
   const productDetails = ProductData?.ProductData?.product?.data?.product || {};
+  
   const PolicyData =
     ProductData?.ProductData?.instructionMetaobjectData
       ?.instructionMetaobjectDatas?.metaobjects || [];
@@ -38,9 +42,7 @@ export default function PotionControl(ProductData) {
 
   const productPrice = productDetails?.variants?.edges[0]?.node?.price?.amount;
   const productComparePrice = productDetails?.variants?.edges[0]?.node?.compareAtPrice?.amount;
-
-  console.log(productComparePrice);
-  
+  const productVariantID = productDetails?.variants?.edges[0]?.node?.id; 
 
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -172,7 +174,7 @@ export default function PotionControl(ProductData) {
         </header>
       </div>
 
-      <div className="block md:hidden">
+      {/* <div className="block md:hidden">
         <div className="mb-4">
           <h1 className="lexend font-medium text-xl leading-[1.24] tracking-[-0.07px] text-dark-gray">
             {productData.title}
@@ -351,8 +353,8 @@ export default function PotionControl(ProductData) {
             ))}
           </div>
         </div>
-      </div>
-      <div className="hidden md:flex flex-row gap-[64px]">
+      </div> */}
+      <div className="md:flex flex-row gap-[64px]">
         <div>
           <div className="relative">
             <img
@@ -494,12 +496,30 @@ export default function PotionControl(ProductData) {
                 +
               </button>
             </div>
-            <button
+            <CustomAddToCartButton
+                disabled={false}
+                  onClick={() => {
+                    open('cart');
+                  }}
+                  lines={
+                    productData
+                      ? [
+                          {
+                            merchandiseId: productVariantID,
+                            quantity,
+                          },
+                        ]
+                      : []
+                  }
+            >
+        {productData.buttons.addToCart}
+            </CustomAddToCartButton>
+            {/* <button
               onClick={increaseQuantity}
               className="button2 cursor-pointer white-text-element w-[376.97px] h-[56px] rounded-[64px] lato font-bold text-base leading-5 tracking-normal"
             >
               {productData.buttons.addToCart}
-            </button>
+            </button> */}
           </div>
           <div className="flex gap-[27px] pt-[40px]">
             {productData.trustBadges.map((badge, index) => (
