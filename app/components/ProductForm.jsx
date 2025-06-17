@@ -8,7 +8,7 @@ import {useAside} from './Aside';
  *   selectedVariant: ProductFragment['selectedOrFirstAvailableVariant'];
  * }}
  */
-export function ProductForm({productOptions, selectedVariant}) {
+export function ProductForm({productOptions, selectedVariant}) {  
   const navigate = useNavigate();
   const {open} = useAside();
   return (
