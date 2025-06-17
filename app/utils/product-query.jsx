@@ -15,6 +15,7 @@ export const FETCH_PRODUCT_USING_HANDLE = `
                 edges{
                     node{
                     id
+                    quantityAvailable
                     price{
                         amount
                     }

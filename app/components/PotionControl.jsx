@@ -31,7 +31,7 @@ import menuIcon from '../assets/menu.webp';
 
 export default function PotionControl(ProductData) {
   const {open} = useAside();
-  const productDetails = ProductData?.ProductData?.product?.data?.product || {};
+  const productDetails = ProductData?.ProductData?.product?.data?.product || {}; 
   
   const PolicyData =
     ProductData?.ProductData?.instructionMetaobjectData
@@ -43,6 +43,19 @@ export default function PotionControl(ProductData) {
   const productPrice = productDetails?.variants?.edges[0]?.node?.price?.amount;
   const productComparePrice = productDetails?.variants?.edges[0]?.node?.compareAtPrice?.amount;
   const productVariantID = productDetails?.variants?.edges[0]?.node?.id; 
+  const availableQuantity = productDetails?.variants?.edges[0]?.node?.quantityAvailable;
+  const [addTocartbuttonText,setaddTocartbuttonText] = useState('Add to cart');
+  const [isAddTocartDisable,setisAddTocartDisable] = useState(false);
+  useEffect(() => {
+    if (availableQuantity === 0) {
+      setaddTocartbuttonText('Out of Stock');
+      setisAddTocartDisable(true);
+    } else {
+      setaddTocartbuttonText('Add to cart');
+      setisAddTocartDisable(false);
+    }
+  }, [availableQuantity]);
+
 
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -108,7 +121,7 @@ export default function PotionControl(ProductData) {
       termsText: 'Terms',
     },
     buttons: {
-      addToCart: 'Add to cart',
+      addToCart: addTocartbuttonText,
     },
     trustBadges: mappedPolicyData,
   };
@@ -497,7 +510,7 @@ export default function PotionControl(ProductData) {
               </button>
             </div>
             <CustomAddToCartButton
-                disabled={false}
+                disabled={isAddTocartDisable}
                   onClick={() => {
                     open('cart');
                   }}
