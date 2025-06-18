@@ -1,22 +1,22 @@
 import React from 'react';
-import CameraImage from '../assets/waggle-camera.webp';
-import SmartBowlImage from '../assets/waggle-smart.webp';
+import CameraImage from '../assets/waggle-monitor.webp';
+import SmartBowlImage from '../assets/waggle-camera.webp';
 import PlusIcon from '../assets/plus-icon.webp';
 
 const texts = {
   sectionTitle: "Frequently Bought Together",
   products: [
     {
+      alt: "Waggle Pet Monitor",
+      title: "Waggle Pet Monitor",
+      originalPrice: "$199.00",
+      discountedPrice: "$99.00"
+    },
+    {
       alt: "Waggle Camera LITE+",
       title: "Waggle Camera LITE+",
       originalPrice: "$120.00",
       discountedPrice: "$59.00"
-    },
-    {
-      alt: "Waggle Smart AI Bowl",
-      title: "Waggle Smart AI Bowl",
-      originalPrice: "$199.00",
-      discountedPrice: "$99.00"
     }
   ],
   totalPriceText: "Total price:",
@@ -25,7 +25,7 @@ const texts = {
   buttonText: "Grab this now"
 };
 
-export default function FrequentlyBoughtTogether() {
+export default function WaggleCameraLITE() {
   return (
     <div className="dark-slate-bg extra-padding md:px-[182px] md:py-[56px] px-[20px] py-[48px]">
       <div className="hidden md:flex justify-between">

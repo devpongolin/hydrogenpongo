@@ -172,7 +172,7 @@ export default function PotionControl(ProductData) {
   };
 
   return (
-    <div className="mx-auto px-4 py-4 md:px-[112px] md:py-[56px]">
+    <div className="mx-auto px-4 py-4 md:px-[112px] md:py-[56px] flex justify-center items-center">
       <div className="block md:hidden mb-4">
         <header className="flex items-center justify-between bg-white mx-auto px-4 py-3 h-13 rounded-3xl shadow-sm">
           <div className="flex items-center">
