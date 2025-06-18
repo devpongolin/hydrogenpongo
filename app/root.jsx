@@ -14,6 +14,7 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from './components/PageLayout';
+import { METOBJECT_DATA_QUERY } from '~/utils/metaobject-query';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -68,8 +69,11 @@ export function links() {
  * @param {LoaderFunctionArgs} args
  */
 export async function loader(args) {
+  const { context } = args;
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
+  const footerData = await getFooterData({ context })
+  const footerCountryData = await getFooterCountryData({ context })
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
@@ -92,6 +96,8 @@ export async function loader(args) {
       country: args.context.storefront.i18n.country,
       language: args.context.storefront.i18n.language,
     },
+    footerData,
+    footerCountryData,
   };
 }
 
@@ -116,6 +122,40 @@ async function loadCriticalData({context}) {
   return {header};
 }
 
+async function getFooterCountryData({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const footerCountryMetaobjectData = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'footer_countries_list' },
+    },
+  );
+
+  return { footerCountryMetaobjectDatas: footerCountryMetaobjectData };
+}
+
+async function getFooterData({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const footerMetaobjectData = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'footer_top_left_part' },
+    },
+  );
+
+  return { footerMetaobjectDatas: footerMetaobjectData };
+}
+
 /**
  * Load data for rendering content below the fold. This data is deferred and will be
  * fetched after the initial page load. If it's unavailable, the page should still 200.
@@ -130,7 +170,7 @@ function loadDeferredData({context}) {
     .query(FOOTER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        footerMenuHandle: 'footer', // Adjust to your footer menu handle
+        footerMenuHandle: 'footer-menu-new', // Adjust to your footer menu handle
       },
     })
     .catch((error) => {

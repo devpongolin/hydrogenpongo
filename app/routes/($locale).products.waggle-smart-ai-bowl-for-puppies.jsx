@@ -19,14 +19,31 @@ export async function loader({context}) {
     STOREFRONT_ACCESS_TOKEN,
   );
 
-  const instructionMetaobjectData = await getInstructionMetaobjectData({ context })  
+  const instructionMetaobjectData = await getInstructionMetaobjectData({ context })
+  const effortlessPetNeed = await geteffortlessPetNeed({ context })  
 
   return {
     product,
     instructionMetaobjectData,
+    effortlessPetNeed,
   };
 }
+async function geteffortlessPetNeed({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
 
+  const { storefront } = context;
+
+  const petaneedtData = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'pdp_effortless_pet_needs' },
+    },
+  );
+
+  return { effortlessPetNeeds: petaneedtData };
+}
 async function getInstructionMetaobjectData({ context } = {}) {
     if (!context?.storefront) {
       throw new Error("Missing storefront context.");
@@ -81,7 +98,7 @@ export default function CustomPage() {
   return (
     <div>
       <PotionControl ProductData={ProductData} />
-      <SmartPetBowlShowcase />
+      <SmartPetBowlShowcase ProductData={ProductData} />
       <FrequentlyBoughtTogether />
       <WaggleSteps />
       <TestimonialsSection />
