@@ -287,7 +287,7 @@ export default function PotionControl() {
           </div>
         </div>
       </div>
-      <div className="hidden md:flex flex-row gap-[64px]">
+      <div className="hidden md:flex flex-row gap-[64px] justify-center">
         <div>
           <div className="relative">
             <img

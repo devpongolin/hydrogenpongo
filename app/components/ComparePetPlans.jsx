@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import step1 from '../assets/step1-setup-bowl.webp';
+import step1 from '../assets/product-comparison.webp';
 import step2 from '../assets/step2-connect-app.webp';
-import step3 from '../assets/step3-monitor-nutrition.webp';
+import step3 from '../assets/pet-with-owner.webp';
 
 const content = {
   header: {
@@ -13,21 +13,21 @@ const content = {
     {
       number: "01",
       title: "Install the Waggle pet temperature monitoring system",
-      fullTitle: "Set Up the Smart AI Bowl",
+      fullTitle: "Install the Waggle pet temperature monitoring system",
       image: step1,
       box2: { number: "02", text: "Connect" },
-      box3: { number: "03", text: "Monitor" }
+      box3: { number: "03", text: "Stay Safe" }
     },
     {
       title: "Connect to the Waggle App",
       image: step2,
       box1: { number: "01", text: "Install" },
       number: "02",
-      box3: { number: "03", text: "Monitor" }
+      box3: { number: "03", text: "Stay Safe" }
     },
     {
       title: "Stay Informed, Stay Safe",
-      fullTitle: "Monitor Pet Food and Nutrition",
+      fullTitle: "Stay Informed, Stay Safe",
       image: step3,
       box1: { number: "01", text: "Install" },
       box2: { number: "02", text: "Connect" },
@@ -36,7 +36,7 @@ const content = {
   ]
 };
 
-export default function WaggleSteps() {
+export default function ComparePetPlans() {
   const [activeStep, setActiveStep] = useState(0);
   const [expandedStep, setExpandedStep] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
@@ -56,7 +56,7 @@ export default function WaggleSteps() {
   const Box = ({ box, stepIndex }) => (
     <div className="flex justify-center items-center lg:flex-shrink-0">
       <div
-        className={`cursor-pointer waggle-blue-bg w-full max-w-[150px] rounded-[20px] border border-transparent pt-[52px] px-[47px] pb-[71px] h-full flex flex-col items-center justify-between 
+        className={`cursor-pointer waggle-blue-bg w-full max-w-[150px] rounded-[20px] border border-transparent pt-[52px] px-[26px] pb-[71px] h-full flex flex-col items-center justify-between 
         ${activeStep === stepIndex ? 'bg-blue-600 text-white' : ''}`}
         onClick={() => {
           setActiveStep(stepIndex);

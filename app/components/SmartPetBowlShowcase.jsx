@@ -64,13 +64,13 @@ const textContent = {
 
 const SmartPetBowlShowcase = () => {
   return (
-    <div className="px-4 py-8 md:px-[215px] md:py-[56px]">
+    <div className="py-[48px] px-[20px] md:px-[215px] md:py-[56px]">
       <div className="text-center mb-8 md:mb-[32px]">
-        <h1 className="lexend medium text-2xl md:text-[36px] leading-[100%] mt-[9px] text-dark-gray px-4 md:px-0">
+        <h1 className="lexend medium text-[20px] leading-[1.44] md:text-[36px] md:leading-[100%] text-dark-gray px-4 ">
           {textContent.title}
         </h1>
       </div>
-      <div className="hidden md:flex gap-[25px]">
+      <div className="hidden md:flex gap-[25px] justify-center">
         <div className="flex flex-col gap-[25px] h-full max-w-[246px]">
           <div className="primary-gradient white-text-element rounded-[21px] flex flex-col max-w-[233px]">
             <h2 className="max-w-[13rem] lato pt-[28px] px-[28px] font-semibold text-[28px] text-left white-text-element leading-tight">
@@ -113,7 +113,7 @@ const SmartPetBowlShowcase = () => {
             <h2 className="lexend font-normal text-[28px] leading-[112%]  white-text-element mt-[14px]">
               {textContent.middleColumn.topCard.heading}
             </h2>
-            <p className=" white-text-element lexend font-normal text-[28px]">
+            <p className="white-text-element lexend font-normal text-[28px]">
               {textContent.middleColumn.topCard.paragraph}
             </p>
           </div>
@@ -201,16 +201,16 @@ const SmartPetBowlShowcase = () => {
           </div>
         </div>
       </div>
-      <div className="md:hidden flex flex-col gap-6 relative">
-        <div className="flex flex-col gap-6">
-          <div className="warm-radial-gradient pt-6  pb-8 w-[320px] h-[227px] white-text-element rounded-[20px] flex flex-col text-center mx-auto">
+      <div className="md:hidden flex flex-col gap-[16px] relative">
+        <div className="flex flex-col gap-[16px]">
+          <div className="warm-radial-gradient md:pt-6  py-[15px] md:pb-8 w-[320px] h-[227px] white-text-element rounded-[20px] flex flex-col text-center mx-auto">
             <img
-              src={aiTrackingIcon}
+              src={aiTrackingIcon}  
               alt={textContent.middleColumn.topCard.iconAlt}
               className="mx-auto w-12 h-12"
               loading="lazy"
             />
-            <h2 className="lexend font-normal text-xl leading-[112%] white-text-element mt-4">
+            <h2 className="lexend font-[400] text-[18px] leading-[100%] md:font-normal md:text-xl md:leading-[112%] white-text-element mt-[9px] md:mt-4">
               {textContent.middleColumn.topCard.heading}
             </h2>
             <p className="white-text-element lexend font-normal text-xl">
@@ -218,22 +218,22 @@ const SmartPetBowlShowcase = () => {
             </p>
           </div>
           <div className="flex gap-4 justify-center">
-            <div className="rounded-[15px] overflow-hidden">
+            <div className="rounded-[15px] w-1/2 overflow-hidden">
               <img
                 src={dogWithBowlImg}
                 alt={textContent.middleColumn.bottomSection.dogImageAlt}
-                className="w-full max-w-[152px] h-[237px] object-cover"
+                className="w-full max-w-none h-[237px] object-cover"
                 loading="lazy"
               />
             </div>
-            <div className="w-[152px] h-[237px] primary-gradient white-text-element rounded-[20px] flex flex-col items-center justify-center text-center p-4">
+            <div className="h-[237px] w-1/2 primary-gradient white-text-element rounded-[20px] flex flex-col pt-[115px] px-[18px] pb-[16px]">
               <img
                 src={scheduleIcon}
                 alt={textContent.middleColumn.bottomSection.scheduleCard.iconAlt}
-                className="w-8 h-8 mb-2"
+                className="w-8 h-8"
                 loading="lazy"
               />
-              <h2 className="lato font-semibold text-sm leading-tight white-text-element text-center">
+              <h2 className="lato mt-[15px] font-[600] text-[18px] leading-[100%] tracking-[-1%] white-text-element">
                 {textContent.middleColumn.bottomSection.scheduleCard.heading}
               </h2>
             </div>
@@ -241,19 +241,19 @@ const SmartPetBowlShowcase = () => {
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex gap-4 justify-center">
-            <div className="primary-gradient white-text-element rounded-[20px] h-[240px] w-[160px] p-4">
+            <div className="relative primary-gradient white-text-element w-1/2 rounded-[20px] h-[240px] p-4">
               <h2 className="lato font-semibold text-lg text-left white-text-element leading-tight mb-4">
                 {textContent.leftColumn.card1.heading}
               </h2>
               <img
                 src={wifiSmartBowlImg}
                 alt={textContent.leftColumn.card1.imageAlt}
-                className="rounded-[15px] w-full"
+                className="rounded-[15px]  absolute bottom-0 w-[88%]"
                 loading="lazy"
-              />
+              />  
             </div>
-            <div className="flex flex-col gap-4">
-              <div className="bg-[#d1681d4b] rounded-[15px] overflow-hidden w-[152.83px] h-[128.33px]">
+            <div className="flex w-1/2 flex-col gap-4">
+              <div className="bg-[#d1681d4b] rounded-[15px] overflow-hidden h-[128.33px]">
                 <img
                   src={portimage}
                   alt={textContent.leftColumn.card2.imageAlt}
@@ -261,7 +261,7 @@ const SmartPetBowlShowcase = () => {
                   loading="lazy"
                 />
               </div>  
-              <div className="bg-[#73a0b229] rounded-[15px] overflow-hidden w-[152px] h-[95px]">
+              <div className="bg-[#73a0b229] w-full rounded-[15px] overflow-hidden  h-[95px]">
                 <img
                   src={bowlBaseImg}
                   alt={textContent.leftColumn.card3.imageAlt}
@@ -271,45 +271,45 @@ const SmartPetBowlShowcase = () => {
               </div>
             </div>
           </div>
-          <div className="flex gap-4 justify-center">
-            <div className="flex flex-col gap-4">
-              <div className="brown-linear-radial-gradient white-text-element rounded-[15px] p-4 flex flex-col justify-between w-[126.18px] h-[147.34px]">
+          <div className="flex gap-4 justify-center w-full">
+            <div className="flex w-1/2 flex-col gap-4">
+              <div className="brown-linear-radial-gradient white-text-element rounded-[15px] pt-[13px] px-[15px] pb-[15px] flex flex-col justify-between w-full h-[147.34px]">
                 <img
                   src={petSafeIcon}
                   alt={textContent.rightColumn.middleCard.iconAlt}
                   className="w-8 h-8 mb-4"
                 />
-                <h2 className="lato font-semibold text-sm leading-tight white-text-element">
+                <h2 className="lato font-[600] text-[16px] leading-[100%] tracking-[-1%] white-text-element">
                   {textContent.rightColumn.middleCard.heading}
                 </h2>
               </div>
-              <div className="primary-gradient white-text-element rounded-[15px] p-4 flex items-center gap-3 w-[126.18px] h-[70.07px]">
+              <div className="primary-gradient white-text-element rounded-[15px] px-[9px] py-[21px] flex items-center gap-3 w-full h-[70.07px]">
                 <img
-                  src={weightSensorIcon}
+                  src={alertsIcon}
                   alt={textContent.rightColumn.bottomCard.iconAlt}
                   className="w-6 h-6"
                   loading="lazy"
                 />
-                <p className="lato font-medium text-sm white-text-element">
+                <p className="lato font-[500] text-[12px] leading-[100%] tracking-[0%] white-text-element">
                   {textContent.rightColumn.bottomCard.paragraph}
                 </p>
               </div>
             </div>
-            <div className="w-[181.36px] h-[229.68px] primary-gradient white-text-element rounded-[20px] flex flex-col items-center justify-center text-center p-4 relative">
+            <div className="w-1/2 h-[229.68px] primary-gradient white-text-element rounded-[20px] flex flex-col items-center justify-center text-center p-[15px] relative">
               <img
                 src={sideNotificationImg}
                 alt={textContent.rightColumn.topCard.leftNotificationAlt}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-8"
+                className="absolute left-2 top-[60%] transform -translate-y-1/2"
                 loading="lazy"
               />
               <img
                 src={sideNotificationImg}
                 alt={textContent.rightColumn.topCard.rightNotificationAlt}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-8"
+                className="absolute right-2 top-[60%] transform -translate-y-1/2"
                 loading="lazy"
               />
               <img
-                src={alertsIcon}
+                src={weightSensorIcon}
                 alt={textContent.rightColumn.topCard.centerImageAlt}
                 className="mx-auto w-10 h-10 mb-4"
                 loading="lazy"
@@ -325,13 +325,13 @@ const SmartPetBowlShowcase = () => {
             <img
               src={bowlShadowImg}
               alt={textContent.middleColumn.centerImage.shadowAlt}
-              className="w-[200px] h-[200px] object-contain"
+              className=" h-[200px] object-contain"
               loading="lazy"
             />
             <img
               src={bowl450gImg}
               alt={textContent.middleColumn.centerImage.bowlAlt}
-              className="absolute top-0 left-0 w-[200px] h-[200px] object-contain"
+              className="absolute top-0 left-0 h-[200px] object-contain"
               loading="lazy"
             />
           </div>

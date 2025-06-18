@@ -10,7 +10,7 @@ const petSafetyContent = {
     {
       title: "Watch Over Your Pet Anytime:",
       description:
-        "Remote monitoring lets you check in on your pet, no matter where you ar",
+        "Remote monitoring lets you check in on your pet, no matter where you are",
       date: "February 1, 2025",
       image: dogImage1,
       alt: "Husky dog with owner",
@@ -18,7 +18,7 @@ const petSafetyContent = {
     {
       title: "Watch Over Your Pet Anytime:",
       description:
-        "Remote monitoring lets you check in on your pet, no matter where you ar",
+        "Remote monitoring lets you check in on your pet, no matter where you are",
       date: "February 1, 2025",
       image: dogImage2,
       alt: "White dog with owner",
@@ -26,7 +26,7 @@ const petSafetyContent = {
     {
       title: "Watch Over Your Pet Anytime:",
       description:
-        "Remote monitoring lets you check in on your pet, no matter where you ar",
+        "Remote monitoring lets you check in on your pet, no matter where you are",
       date: "February 1, 2025",
       image: dogImage3,
       alt: "Golden retriever with owner",
@@ -37,21 +37,17 @@ const petSafetyContent = {
 const PetSafetyGrid = () => {
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isScrollable, setIsScrollable] = useState(false);
 
-  // On scroll, update active dot based on which card is mostly visible
   const handleScroll = () => {
     if (!scrollRef.current) return;
 
     const scrollLeft = scrollRef.current.scrollLeft;
-    const cardWidth = 366; // 360px width + 6px gap approx
+    const cardWidth = 366;
     const newIndex = Math.round(scrollLeft / cardWidth);
-
-    if (newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
+    if (newIndex !== activeIndex) setActiveIndex(newIndex);
   };
 
-  // Scroll smoothly to clicked dot card
   const scrollToIndex = (index) => {
     if (!scrollRef.current) return;
     const cardWidth = 366;
@@ -60,42 +56,51 @@ const PetSafetyGrid = () => {
       behavior: "smooth",
     });
   };
+
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
 
+    const handleResize = () => {
+      setIsScrollable(window.innerWidth < 1250);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
     container.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [activeIndex]);
 
   return (
-    <div className="py-[55px] md:px-[112px] px-[10px] sm:px-6 lg:px-8">
+    <div className="py-[48px] px-[16px] sm:px-6 md:px-[30px] [@media(min-width:1416px)]:px-[112px] [@media(min-width:1416px)]:py-[55px]">
       <div className="max-w-[1216px] w-full mx-auto">
-        <h1 className="lexend font-medium text-[36px] leading-[100%] tracking-[0] text-center text-dark-gray mb-[28px]">
+        <h1 className="lexend font-[400] text-[17px] leading-[100%] tracking-[-0.36px] md:font-medium md:text-[36px] md:leading-[100%] md:tracking-[0] text-center text-dark-gray mb-[28px]">
           {petSafetyContent.title}
         </h1>
 
         <div
           ref={scrollRef}
-          className="
-            mb-[16px]
-            overflow-x-auto
-            scrollbar-hide
-            md:grid md:grid-cols-3 md:gap-8 md:overflow-visible
-            flex flex-row gap-6
-          "
-          style={{ scrollSnapType: "x mandatory" }}
+          className={`
+            mb-[16px] transition-all scrollbar-hide
+            ${
+              isScrollable
+                ? "flex flex-row gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory"
+                : "grid grid-cols-1 md:grid-cols-3 md:gap-8 overflow-visible"
+            }
+          `}
         >
           {petSafetyContent.articles.map((item, idx) => (
             <div
               key={idx}
-              className="
+              className={`
                 rounded-[40px] overflow-hidden shadow-lg relative mx-auto group
-                flex-shrink-0 w-[360px] h-[380px]
-                scroll-snap-align-start
-                md:w-auto md:h-auto md:flex-shrink-1
-              "
+                ${isScrollable ? "flex-shrink-0 w-[360px] h-[380px] snap-start" : ""}
+                md:w-auto md:h-auto
+              `}
             >
               <div className="relative h-full">
                 <img
@@ -105,19 +110,19 @@ const PetSafetyGrid = () => {
                   className="w-full h-full object-cover"
                 />
                 <div
-                  className="absolute bottom-[10px] left-[10px] cursor-pointer
-                             md:w-[360px] md:h-[200px] rounded-[30px] shadow-md
-                             px-[30px] py-[30px] bg-white transition-all duration-300
-                             transform origin-bottom-left group-hover:bg-blue-500
-                             group-hover:w-[380px] group-hover:left-0
-                             group-hover:bottom-0 group-hover:rounded-b-none"
+                  className="px-[14px] py-[20px] absolute bottom-[10px] left-[10px] cursor-pointer
+                  md:w-[360px] md:h-[200px] rounded-[30px] shadow-md
+                  md:px-[30px] md:py-[30px] bg-white transition-all duration-300
+                  transform origin-bottom-left group-hover:bg-blue-500
+                  group-hover:w-[380px] group-hover:left-0
+                  group-hover:bottom-0 group-hover:rounded-b-none"
                 >
                   <div className="h-full flex flex-col justify-between">
                     <div>
-                      <h3 className="lato font-bold text-[20px] leading-[100%] tracking-[0]  group-hover:text-white">
+                      <h3 className="lato font-[700] md:font-bold text-[18px] md:text-[20px] leading-[100%] tracking-[0] group-hover:text-white">
                         {item.title}
                       </h3>
-                      <p className="max-w-[17rem] lato font-medium text-[16px] leading-[130%] tracking-[0] mt-[11px] text-[#6C6F73] group-hover:text-white group-hover:text-opacity-90">
+                      <p className="max-w-[17rem] lato font-medium text-[14px] md:text-[16px] leading-[100%] md:leading-[130%] tracking-[0] mt-[11px] text-[#6C6F73] group-hover:text-white group-hover:text-opacity-90">
                         {item.description}
                       </p>
                     </div>
@@ -136,22 +141,23 @@ const PetSafetyGrid = () => {
           ))}
         </div>
 
-        {/* Navigation Dots */}
-        <div className="flex justify-center gap-4 mb-[24px] md:hidden">
-          {petSafetyContent.articles.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollToIndex(idx)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                idx === activeIndex ? "bg-blue-500" : "bg-gray-300"
-              }`}
-              aria-label={`Scroll to item ${idx + 1}`}
-            />
-          ))}
-        </div>
+        {isScrollable && (
+          <div className="flex justify-center gap-4 mb-[24px]">
+            {petSafetyContent.articles.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollToIndex(idx)}
+                className={`w-3 h-3 rounded-full transition-colors ${
+                  idx === activeIndex ? "bg-blue-500" : "bg-gray-300"
+                }`}
+                aria-label={`Scroll to item ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
 
         <div className="text-center">
-          <button className="inline-flex lato text-[18px] leading-[100%] tracking-[0] items-center px-[32px] py-[18px] blue-400 white-text-element font-semibold rounded-[100px] button-hover2">
+          <button className="inline-flex py-[15.01px] px-[26.69px] lato text-[14px] md:text-[18px] leading-[100%] tracking-[0] items-center md:px-[32px] md:py-[18px] blue-400 white-text-element font-semibold rounded-[100px] button-hover2">
             View All
             <ArrowRight className="ml-2 h-5 w-5 cursor-pointer" />
           </button>
