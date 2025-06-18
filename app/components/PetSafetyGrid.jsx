@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import dogImage1 from "../assets/dog1.webp";
-import dogImage2 from "../assets/dog2.webp";
-import dogImage3 from "../assets/dog3.webp";
+import pet_Guide_one from "../assets/pet_Guide_one.png";
+import pet_Guide_two from "../assets/pet_Guide_two.png";
+import pet_Guide_three from "../assets/pet_Guide_three.png";
 
 const petSafetyContent = {
   title: "The Ultimate Pet Parent Guide",
@@ -106,7 +105,6 @@ const PetSafetyGrid = () => {
                 <img
                   src={item.image}
                   alt={item.alt}
-                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
                 <div

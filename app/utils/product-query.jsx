@@ -44,6 +44,24 @@ export const METOBJECT_DATA_QUERY = `#graphql
                 fields {                    
                     key
                     value
+                    reference {
+                        ... on MediaImage {
+                          image {
+                            url
+                            altText
+                          }
+                        }
+                    }
+                    references(first:250) {
+                        nodes{
+                          ... on MediaImage {
+                                image {
+                                    url
+                                    altText
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
