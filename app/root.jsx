@@ -73,6 +73,7 @@ export async function loader(args) {
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
   const footerData = await getFooterData({ context })
+  const footerCountryData = await getFooterCountryData({ context })
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
@@ -96,6 +97,7 @@ export async function loader(args) {
       language: args.context.storefront.i18n.language,
     },
     footerData,
+    footerCountryData,
   };
 }
 
@@ -118,6 +120,23 @@ async function loadCriticalData({context}) {
   ]);
 
   return {header};
+}
+
+async function getFooterCountryData({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const footerCountryMetaobjectData = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'footer_countries_list' },
+    },
+  );
+
+  return { footerCountryMetaobjectDatas: footerCountryMetaobjectData };
 }
 
 async function getFooterData({ context } = {}) {
@@ -151,7 +170,7 @@ function loadDeferredData({context}) {
     .query(FOOTER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        footerMenuHandle: 'footer', // Adjust to your footer menu handle
+        footerMenuHandle: 'footer-menu-new', // Adjust to your footer menu handle
       },
     })
     .catch((error) => {

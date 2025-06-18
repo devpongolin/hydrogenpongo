@@ -17,9 +17,10 @@ import { ArrowRight, Bell, BellRing, Zap, Shield } from "lucide-react";
  */
 export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
   const data = useLoaderData();
+
   const metaobjectData = data?.footerData?.footerMetaobjectDatas?.metaobjects?.edges;
-  console.log("Metaobject Data ..................... ");
-  console.log(metaobjectData)
+  const countryMetaobjectData = data?.footerCountryData?.footerCountryMetaobjectDatas?.metaobjects?.edges;
+
 
   const footerLogoMain = metaobjectData[0]?.node;
   const footerLogoImage = footerLogoMain?.fields.find(item => item.key === "footer_top_left_logo");
@@ -32,9 +33,11 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
   const socialImages = metaobjectData[0]?.node;
   const topLeftGridImagesEntry = socialImages?.fields.find(item => item.key === "top_left_grid_images");
 
-  const socialImagesLink = metaobjectData[0]?.node;
-  const instagramLink = socialImagesLink?.fields?.find(item => item.key === "instagram_link")?.value;
-  const linkedinLink = socialImagesLink?.fields?.find(item => item.key === "linkedin_link")?.value;
+  const footerLinks = metaobjectData[0]?.node;
+  const instagramLink = footerLinks?.fields?.find(item => item.key === "instagram_link")?.value;
+  const linkedinLink = footerLinks?.fields?.find(item => item.key === "linkedin_link")?.value;
+  const facebookLink = footerLinks?.fields?.find(item => item.key === "facebook_link")?.value;
+  const youtubeLink = footerLinks?.fields?.find(item => item.key === "youtube_link")?.value;
 
 
 
@@ -46,35 +49,30 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
   const facebook_hover = topLeftGridImagesEntry.references?.nodes[1]?.image?.url;
   const youtube = topLeftGridImagesEntry.references?.nodes[6]?.image?.url;
   const youtube_hover = topLeftGridImagesEntry.references?.nodes[7]?.image?.url;
+
   const topRightText = metaobjectData[0]?.node?.fields.find(
     field => field.key === "top_right_text"
   )?.value;
   const topRightTextBottom = metaobjectData[0]?.node?.fields.find(
     field => field.key === "top_right_text_bottom"
   )?.value;
+
   const copyrightText = metaobjectData[0]?.node?.fields.find(
     field => field.key === "copywriter_text"
   )?.value;
-  const countriesText = metaobjectData[0]?.node?.fields.find(
-    field => field.key === "country_text"
-  )?.value;
-  const countryArray = JSON.parse(countriesText);
+
+  
   const cmsPageFooter = metaobjectData[0]?.node?.fields.find(
     field => field.key === "cms_page_footer_bottom"
   )?.value;
   const cmsPageFooterArray = JSON.parse(cmsPageFooter);
-
-  // console.log(countriesText)
-  // console.log(JSON.parse(countriesText))
-
-  // console.log(typeof countriesText)
 
 
   return (
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="footer">
+          <footer className="footer flex flex-col">
             {/* Static Logo Above the Footer Menu */}
             <div className="max-w-[1216px] w-full flex justify-between my-[80px] mb-[23px] mx-auto">
               <div className='flex flex-col gap-[10px]'>
@@ -94,12 +92,16 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
                     </a>
                   </div>
                   <div className="group m-0">
-                    <img src={facebook} alt="Facebook" className="block group-hover:hidden" />
-                    <img src={facebook_hover} alt="Facebook Hover" className="hidden group-hover:block" />
+                    <a href={facebookLink}>
+                      <img src={facebook} alt="Facebook" className="block group-hover:hidden" />
+                      <img src={facebook_hover} alt="Facebook Hover" className="hidden group-hover:block" />
+                    </a>
                   </div>
                   <div className="group m-0">
-                    <img src={youtube} alt="YouTube" className="block group-hover:hidden" />
-                    <img src={youtube_hover} alt="YouTube Hover" className="hidden group-hover:block" />
+                    <a href={youtubeLink}>
+                      <img src={youtube} alt="YouTube" className="block group-hover:hidden" />
+                      <img src={youtube_hover} alt="YouTube Hover" className="hidden group-hover:block" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -149,7 +151,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
                     <LinkComponent {...linkProps} className="md:text-[18px] text-[16px] font-bold">{item.title}</LinkComponent>
 
                     {item.items && item.items.length > 0 && (
-                      <ul className="footer-submenu pl-4 mt-2 space-y-1 flex flex-col gap-[17px]">
+                      <ul className="footer-submenu mt-2 space-y-1 flex flex-col gap-[17px]">
                         {item.items.map((child) => {
                           if (!child.url) return null;
 
@@ -198,19 +200,54 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
                 </div>
 
                 <div className="flex justify-center space-x-6 mb-2 md:mb-0">
-                  {countryArray.map((item, index) => (
-                    <a key={index} href="#" className="text-[16px] !text-[#ffffff] transition-colors">
-                      {item}
-                    </a>
-                  ))}
+                  {countryMetaobjectData.map((item, index) => {
+                    const fields = item?.node?.fields || [];
+
+                    const label = fields.find(field => field.key === "country_label")?.value;
+                    const url = fields.find(field => field.key === "country_url")?.value;
+                    const linkType = fields.find(field => field.key === "link_type")?.value;
+
+                    if (!label || !url) return null;
+                    if(linkType !== "country") return;
+
+                    return (
+                      <a
+                        key={index}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[16px] !text-[#ffffff] transition-colors"
+                      >
+                        {label}
+                      </a>
+                    );
+                  })}
                 </div>
 
+
                 <div className="flex space-x-6">
-                  {cmsPageFooterArray.map((item, index) => (
-                    <a key={index} href="#" className="text-[16px] !text-[#ffffff] transition-colors">
-                      {item}
-                    </a>
-                  ))}
+                {countryMetaobjectData.map((item, index) => {
+                    const fields = item?.node?.fields || [];
+
+                    const label = fields.find(field => field.key === "country_label")?.value;
+                    const url = fields.find(field => field.key === "country_url")?.value;
+                    const linkType = fields.find(field => field.key === "link_type")?.value;
+
+                    if (!label || !url) return null;
+                    if(linkType !== "cms page footer") return;
+
+                    return (
+                      <a
+                        key={index}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[16px] !text-[#ffffff] transition-colors"
+                      >
+                        {label}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>

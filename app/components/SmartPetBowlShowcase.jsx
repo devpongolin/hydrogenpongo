@@ -1,5 +1,5 @@
 import React from "react";
-import wifiSmartBowlImg from "../assets/Wi-Fi-connectedsmartbowl.webp";
+// import wifiSmartBowlImg from "../assets/Wi-Fi-connectedsmartbowl.webp";
 import portimage from "../assets/portImg.webp";
 import bowlBaseImg from "../assets/bowlBaseImg.webp";
 import aiTrackingIcon from "../assets/aiTrackingIcon.webp";
@@ -12,57 +12,94 @@ import weightSensorIcon from "../assets/weightSensorIcon.webp";
 import bowlShadowImg from "../assets/bowlShadowImg.webp";
 import sideNotificationImg from "../assets/sideNotificationImg.webp";
 
-const textContent = {
-  title: "Smart. Effortless. Tailored to Your Pet's Needs.",
-  leftColumn: {
-    card1: {
-      heading: "Wi-Fi-connected smart bowl",
-      imageAlt: "Wi-Fi-connected smart bowl",
-    },
-    card2: {
-      imageAlt: "Port image",
-    },
-    card3: {
-      imageAlt: "Bowl base",
-    },
-  },
-  middleColumn: {
-    topCard: {
-      iconAlt: "AI icon",
-      heading: "AI-powered",
-      paragraph: "nutrition pet food tracking",
-    },
-    bottomSection: {
-      dogImageAlt: "Dog with bowl",
-      scheduleCard: {
-        iconAlt: "Schedule icon",
-        heading: "Automatic pet feeding schedule",
+
+
+const SmartPetBowlShowcase = (ProductData) => {
+  const metaobjectData = ProductData?.ProductData?.effortlessPetNeed?.effortlessPetNeeds?.metaobjects?.edges[0]?.node?.fields  || {};
+  console.log(metaobjectData)
+
+  // left part data...............
+  const topLeftText = metaobjectData?.find(
+    field => field.key === "pet_need_title_left_top"
+  )?.value;
+  const mainTitle = metaobjectData?.find(
+    field => field.key === "top_main_title"
+  )?.value;
+  const wifiSmartBowlImg = metaobjectData?.find(
+    field => field.key === "pet_need_image_left_top"
+  )?.reference?.image?.url;
+  const portimage = metaobjectData?.find(
+    field => field.key === "mid_left_image"
+  )?.reference?.image?.url;
+  const bowlBaseImg = metaobjectData?.find(
+    field => field.key === "pet_need_image_left_bottom"
+  )?.reference?.image?.url;
+
+  // mid part data................
+  const aiTrackingIcon = metaobjectData?.find(
+    field => field.key === "pet_need_image_mid_top"
+  )?.reference?.image?.url;
+  const midFirstCard = metaobjectData?.find(
+    field => field.key === "pet_need_text_mid_top"
+  )?.value;
+  const midFirstCardArray = JSON.parse(midFirstCard);
+  const bowlShadowImg = metaobjectData?.find(
+    field => field.key === "pet_need_image_middle_top"
+  )?.reference?.image?.url;
+  const bowl450gImg = metaobjectData?.find(
+    field => field.key === "pet_need_image_middle_bottom"
+  )?.reference?.image?.url;
+  
+
+  const textContent = {
+    title: mainTitle || "Smart. Effortless. Tailored to Your Pet's Needs.",
+    leftColumn: {
+      card1: {
+        heading: topLeftText || "Wi-Fi-connected smart bowl",
+        imageAlt: "Wi-Fi-connected smart bowl",
+      },
+      card2: {
+        imageAlt: "Port image",
+      },
+      card3: {
+        imageAlt: "Bowl base",
       },
     },
-    centerImage: {
-      shadowAlt: "Shadow circle",
-      bowlAlt: "450g Bowl",
+    middleColumn: {
+      topCard: {
+        iconAlt: "AI icon",
+        heading: midFirstCardArray?.[0] || "AI-powered",
+        paragraph: midFirstCardArray?.[1] || "nutrition pet food tracking",
+      },
+      bottomSection: {
+        dogImageAlt: "Dog with bowl",
+        scheduleCard: {
+          iconAlt: "Schedule icon",
+          heading: "Automatic pet feeding schedule",
+        },
+      },
+      centerImage: {
+        shadowAlt: "Shadow circle",
+        bowlAlt: "450g Bowl",
+      },
     },
-  },
-  rightColumn: {
-    topCard: {
-      leftNotificationAlt: "Left notification",
-      rightNotificationAlt: "Right notification",
-      centerImageAlt: "Alert icon",
-      paragraph: "Smart alerts & notifications",
+    rightColumn: {
+      topCard: {
+        leftNotificationAlt: "Left notification",
+        rightNotificationAlt: "Right notification",
+        centerImageAlt: "Alert icon",
+        paragraph: "Smart alerts & notifications",
+      },
+      middleCard: {
+        iconAlt: "Pet safe icon",
+        heading: "Pet-safe & easy to clean",
+      },
+      bottomCard: {
+        iconAlt: "Sensor icon",
+        paragraph: "Built-in weight sensor",
+      },
     },
-    middleCard: {
-      iconAlt: "Pet safe icon",
-      heading: "Pet-safe & easy to clean",
-    },
-    bottomCard: {
-      iconAlt: "Sensor icon",
-      paragraph: "Built-in weight sensor",
-    },
-  },
-};
-
-const SmartPetBowlShowcase = () => {
+  };
   return (
     <div className="px-4 py-8 md:px-[215px] md:py-[56px]">
       <div className="text-center mb-8 md:mb-[32px]">
