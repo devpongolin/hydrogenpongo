@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import pet_Guide_one from "../assets/pet_Guide_one.png";
-import pet_Guide_two from "../assets/pet_Guide_two.png";
-import pet_Guide_three from "../assets/pet_Guide_three.png";
+import dogImage1 from "../assets/pet_Guide_one.png";
+import dogImage2 from "../assets/pet_Guide_two.png";
+import dogImage3 from "../assets/pet_Guide_three.png";
 
 const petSafetyContent = {
   title: "The Ultimate Pet Parent Guide",
