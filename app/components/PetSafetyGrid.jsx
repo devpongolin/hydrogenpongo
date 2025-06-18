@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import dogImage1 from "../assets/pet_Guide_one.png";
 import dogImage2 from "../assets/pet_Guide_two.png";
