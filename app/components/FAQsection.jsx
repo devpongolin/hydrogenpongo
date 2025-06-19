@@ -48,11 +48,11 @@ export default function FAQsection() {
       <h2 className="lexend font-[500] text-[22px] leading-[100%] tracking-[-0.36px] md:text-center mb-[26px] md:mb-[24px] md:text-[36px] md:leading-[130%]">
         {faqContent.title}
       </h2>
-      <div className="space-y-4">
+      <div className="space-y-4 flex flex-col items-center max-w-[1216px] mx-auto">
         {faqContent.faqs.map((faq, index) => (
           <div
             key={index}
-            className="p-[16px] rounded-lg waggle-blue-bg cursor-pointer md:px-[24px]"
+            className="p-[16px] w-full rounded-lg waggle-blue-bg cursor-pointer md:px-[24px]"
             onClick={() => toggle(index)}
           >
             <div className="flex justify-between items-center">
