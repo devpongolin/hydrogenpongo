@@ -151,7 +151,6 @@ const TestimonialsSection = () => {
         <div
           ref={scrollRef}
           className="flex flex-nowrap overflow-x-auto scrollbar-hide gap-[26px]"
-          style={{scrollSnapType: 'x mandatory'}}
         >
           {testimonials.map((testimonial, index) => (
             <div
@@ -159,7 +158,6 @@ const TestimonialsSection = () => {
               className={`flex-shrink-0 bg-light rounded-3xl border light-black-transparent p-[19px] md:py-[36px] md:px-[34px] w-96 ${
                 index === 1 ? 'h-72 mt-3' : 'h-90'
               } ${index === 2 ? 'mt-9' : ''} ${index === 3 ? 'mt-1' : ''}`}
-              style={{scrollSnapAlign: 'start'}}
             >
               <div className="flex flex-col h-full">
                 {testimonial.img && (

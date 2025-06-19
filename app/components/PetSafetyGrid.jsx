@@ -78,10 +78,9 @@ const PetSafetyGrid = () => {
   return (
     <div className="py-[48px] px-[16px] sm:px-6 md:px-[30px] [@media(min-width:1416px)]:px-[112px] [@media(min-width:1416px)]:py-[55px]">
       <div className="max-w-[1216px] w-full mx-auto">
-        <h1 className="lexend font-[400] text-[17px] leading-[100%] tracking-[-0.36px] md:font-medium md:text-[36px] md:leading-[100%] md:tracking-[0] text-center text-dark-gray mb-[28px]">
+        <p className="lexend font-[400] text-[17px] leading-[100%] tracking-[-0.36px] md:font-medium md:text-[36px] md:leading-[100%] md:tracking-[0] text-center text-dark-gray mb-[28px]">
           {petSafetyContent.title}
-        </h1>
-
+        </p>
         <div
           ref={scrollRef}
           className={`
@@ -139,7 +138,6 @@ const PetSafetyGrid = () => {
             </div>
           ))}
         </div>
-
         {isScrollable && (
           <div className="flex justify-center gap-4 mb-[24px]">
             {petSafetyContent.articles.map((_, idx) => (
