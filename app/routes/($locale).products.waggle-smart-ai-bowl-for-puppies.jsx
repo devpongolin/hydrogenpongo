@@ -18,7 +18,6 @@ export async function loader({context}) {
     STOREFRONT_API_VERSION,
     STOREFRONT_ACCESS_TOKEN,
   );
-
   const instructionMetaobjectData = await getInstructionMetaobjectData({ context })
   const effortlessPetNeed = await geteffortlessPetNeed({ context })  
 

@@ -2,7 +2,8 @@ import {Await, useLoaderData, Link} from 'react-router';
 import {Suspense} from 'react';
 import {Image} from '@shopify/hydrogen';
 import {ProductItem} from '~/components/ProductItem';
-
+// import {waggleHomeContent} from '~/components/waggleHomeContent'
+import WaggleHome from '~/components/waggleHomeContent';
 /**
  * @type {MetaFunction}
  */
@@ -66,6 +67,8 @@ export default function Homepage() {
     <div className="home">
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
+      {/* <waggleHomeContent /> */}
+      <WaggleHome />
     </div>
   );
 }
