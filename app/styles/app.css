@@ -926,6 +926,9 @@ button.reset:hover:not(:has(> *)) {
     padding: 20px;
   }
 }
+/* header {
+  backdrop-filter: blur(19.25px) !important;
+} */
 
 @media (min-width: 767px) and (max-width: 1350px) {
   .extra-padding{
