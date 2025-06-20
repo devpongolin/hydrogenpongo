@@ -15,7 +15,7 @@ const data = {
 
 const WaggleHero = () => {
   return (
-    <div className="bg-[#B47E57] flex flex-col-reverse md:flex-col  mx-auto w-full md:px-[112px] md:py-[55px] pt-5 pb-[34px] md:rounded-t-[34px] rounded-t-[28px] overflow-hidden">
+    <div className="bg-[#B47E57] w-full max-w-[1440px] flex flex-col-reverse md:flex-col mx-auto w-full md:px-[112px] md:py-[55px] pt-5 pb-[34px] md:rounded-t-[34px] rounded-t-[28px] overflow-hidden">
       <div className="flex flex-col md:flex-row md:items-start justify-between">
         <div className="md:w-[50%] text-center md:text-left">
           <span className="text-custom47 white-text-element md:text-[63px] text-[28.48px] lexend mt-[13px] md:mt-0 leading-[36px] font-medium md:leading-[79px] tracking-[0]">

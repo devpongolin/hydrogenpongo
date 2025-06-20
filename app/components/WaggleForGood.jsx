@@ -79,7 +79,7 @@ export default function NoMoreRuffDays() {
   const [whatWeBelieveSection, gridSection, waggleForGoodSection] = data.sections;
 
   return (
-    <div className="w-full max-w-[1216px] mx-auto p-5 md:p-0 mt-0 pt-[61px] md:pt-0">
+    <div className="w-full max-w-[1440px] md:px-[112px] mx-auto px-5 md:p-0 mt-0 pt-[61px] md:pt-0">
       <h2 className="lexend text-dark-gray md:text-[47.37px] text-[28px] md:leading-[124%] leading-[100%] md:tracking-[0] font-medium text-center md:mb-7 md:pt-[67px] mb-4">
         {data.title}
       </h2>

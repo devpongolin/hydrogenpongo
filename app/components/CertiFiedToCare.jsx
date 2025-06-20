@@ -28,15 +28,15 @@ const Certifiedtocare = () => {
   const titleLines = data.textContent.title.split('\n');
 
   return (
-    <div className="w-full px-[20px] py-[36px] md:py-[63px] relative overflow-hidden rounded-[40px]  
- max-w-[1216px] mx-auto">
+    <div className="w-full max-w-[1440px] px-[20px] py-[36px] md:py-[63px] relative overflow-hidden rounded-[40px]  
+    md:px-[112px] mx-auto">
       <img
         src={isMobile ? data.images.hero.mobile : data.images.hero.desktop}
         alt="Hero"
         className="w-full h-auto object-cover rounded-[40px]"
         loading="lazy"
       />
-      <div className="justify-end px-[36px] py-[20px] bottom-[36px] md:pl-[104px] absolute inset-0 max-w-md flex flex-col  md:justify-center md:text-center md:text-left">
+      <div className="justify-end md:left-[8%] md:bottom-[0%] px-[36px] py-[20px] bottom-[36px] md:pl-[104px] absolute inset-0 max-w-md flex flex-col  md:justify-center md:text-center md:text-left">
         <span className="text-[28px] md:text-[48px] font-medium white-text-element lexend md:leading-[60px] leading-[139%] mb-[10px] md:mb-[17px]">
           {titleLines.map((line, i) => (
             <React.Fragment key={i}>
