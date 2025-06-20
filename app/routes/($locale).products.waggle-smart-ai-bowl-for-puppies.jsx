@@ -21,13 +21,33 @@ export async function loader({context}) {
 
   const instructionMetaobjectData = await getInstructionMetaobjectData({ context })
   const effortlessPetNeed = await geteffortlessPetNeed({ context })  
+  const weggelPDPGuide = await getWagglePDPGuide({ context })
 
   return {
     product,
     instructionMetaobjectData,
     effortlessPetNeed,
+    weggelPDPGuide,
   };
 }
+
+async function getWagglePDPGuide({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const waggleGuide = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'waggle_pdp_guide' },
+    },
+  );
+
+  return { waggleGuideData: waggleGuide };
+}
+
 async function geteffortlessPetNeed({ context } = {}) {
   if (!context?.storefront) {
     throw new Error("Missing storefront context.");
@@ -93,7 +113,9 @@ async function fetchProductByHandle(
 export default function CustomPage() {
   const ProductData = useLoaderData();
   const bundleProduct = ProductData?.product?.data?.product?.bundleProduct?.references?.edges;
-    // console.log(ProductData);
+  const waggleGuide = ProductData?.weggelPDPGuide?.waggleGuideData?.metaobjects?.edges;
+  const productFAQ = ProductData?.product?.data?.product?.productFaq?.value;  
+    // console.log(productFAQ);
     
   
   return (
@@ -101,9 +123,9 @@ export default function CustomPage() {
       <PotionControl ProductData={ProductData} />
       <SmartPetBowlShowcase ProductData={ProductData} />
       <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
-      <WaggleSteps />
+      <WaggleSteps waggleGuide={waggleGuide} />
       <TestimonialsSection />
-      <FAQsection />
+      <FAQsection productFAQ={productFAQ} />
       <PetSafetyGrid />
     </div>
   );

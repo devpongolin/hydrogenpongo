@@ -31,6 +31,9 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
             iconWithDiscriptionLabel: metafield(namespace:"custom", key:"description_with_icon_label") {
                     value
             }
+            productFaq: metafield(namespace:"custom", key:"product_faq_for_hydrogen") {
+                    value
+            }
             bundleProduct: metafield(namespace: "custom", key: "bundle_for_product") {
               references(first: 10) {
                 edges {
