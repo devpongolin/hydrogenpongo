@@ -4,10 +4,9 @@ import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
 import React, { useState } from 'react';
 import { MegaMenuDropdown } from './MegaMenuDropdown';
-import '../styles/mega-menu.css';
 
 /**
- * @param {HeaderProps}
+ * @param {HeaderProps}s
  */
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu, metaobjects} = header;

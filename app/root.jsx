@@ -15,6 +15,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from './components/PageLayout';
 import { METOBJECT_DATA_QUERY } from '~/utils/metaobject-query';
+import megamenuStyle from '~/styles/mega-menu.css?url';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -201,6 +202,7 @@ export function Layout({children}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        <link rel="stylesheet" href={megamenuStyle}></link>
         <Meta />
         <Links />
       </head>
