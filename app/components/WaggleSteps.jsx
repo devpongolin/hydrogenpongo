@@ -41,13 +41,13 @@ export default function WaggleSteps() {
   const [expandedStep, setExpandedStep] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
 
-  useEffect(() => {
-    if (!autoRotate) return;
-    const interval = setInterval(() => {
-      setActiveStep((prevStep) => (prevStep + 1) % content.steps.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [autoRotate]);
+  // useEffect(() => {
+  //   if (!autoRotate) return;
+  //   const interval = setInterval(() => {
+  //     setActiveStep((prevStep) => (prevStep + 1) % content.steps.length);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, [autoRotate]);
 
   const toggleStep = (stepIndex) => {
     setExpandedStep(expandedStep === stepIndex ? -1 : stepIndex);

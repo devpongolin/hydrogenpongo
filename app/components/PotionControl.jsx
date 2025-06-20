@@ -297,24 +297,25 @@ export default function PotionControl(ProductData) {
               </div>
             ))}
           </div>
-          <div className="flex mt-[20px] gap-1">
-            <span className="primary-yellow dark-slate rounded-[4px] py-1 px-2 lato font-semibold text-base leading-6 tracking-normal">
+          <div className="flex mt-[20px] gap-1 flex-col md:flex-row">
+            <span className="md:w-auto w-fit primary-yellow dark-slate rounded-[4px] py-1 px-2 lato font-semibold text-base leading-6 tracking-normal h-fit">
               {productData.coupon.label}
             </span>
+            <span className="NotoSans font-normal text-base leading-[28px] tracking-normal flex items-center gap-[3px]">
             <img src={promoBoxImage} alt="Promo Box" />
-            <span className="NotoSans font-normal text-base leading-[28px] tracking-normal">
               {productData.coupon.text}{' '}
               <span className="NotoSans font-bold text-base leading-[28px] tracking-normal">
                 {productData.coupon.code}
               </span>{' '}
               {productData.coupon.offer}
-            </span>
-            <button className="primary-blue font-normal text-base leading-[28px] tracking-normal underline">
+              <button className="primary-blue font-normal text-base leading-[28px] tracking-normal underline">
               {productData.coupon.termsText}
             </button>
+            </span>
+            
           </div>
-          <div className="flex gap-2 mt-[18px]">
-            <div className="flex border gray-medium rounded-[64px]">
+          <div className="flex gap-2 mt-[18px] flex-col md:flex-row pb-[20px] border-b border-[#2E313847]">
+            <div className="flex border gray-medium rounded-[64px] w-fit">
               <button
                 onClick={decreaseQuantity}
                 className="px-4 py-3 cursor-pointer"
@@ -351,10 +352,10 @@ export default function PotionControl(ProductData) {
         {productData.buttons.addToCart}
             </CustomAddToCartButton>
           </div>
-          <div className="flex gap-[27px] pt-[40px]">
+          <div className="flex gap-[0px] pt-[20px] flex-wrap">
             {productData.trustBadges.map((badge, index) => (
               <React.Fragment key={index}>
-                <div className="text-center ">
+                <div className="pdp-benifits-text-center md:w-[24%] w-[49%]">
                   <div className="flex items-center justify-center mx-auto">
                     <img src={badge.icon} alt={badge.text} />
                   </div>
@@ -362,9 +363,9 @@ export default function PotionControl(ProductData) {
                     {badge.text}
                   </p>
                 </div>
-                {index < productData.trustBadges.length - 1 && (
+                {/* {index < productData.trustBadges.length - 1 && (
                   <div className="w-px h-18 gray-400 mx-2"></div>
-                )}
+                )} */}
               </React.Fragment>
             ))}
           </div>
