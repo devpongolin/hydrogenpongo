@@ -15,6 +15,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from './components/PageLayout';
 import { METOBJECT_DATA_QUERY } from '~/utils/metaobject-query';
+import megamenuStyle from '~/styles/mega-menu.css?url';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -113,7 +114,7 @@ async function loadCriticalData({context}) {
     storefront.query(HEADER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+        headerMenuHandle: 'hydrogen-header-menu', // Adjust to your header menu handle
       },
     }),
     // Add other queries here, so that they are loaded in parallel
@@ -192,6 +193,7 @@ export function Layout({children}) {
   const nonce = useNonce();
   /** @type {RootLoader} */
   const data = useRouteLoaderData('root');
+  // console.log(data)
 
   return (
     <html lang="en">
@@ -200,6 +202,7 @@ export function Layout({children}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        <link rel="stylesheet" href={megamenuStyle}></link>
         <Meta />
         <Links />
       </head>
