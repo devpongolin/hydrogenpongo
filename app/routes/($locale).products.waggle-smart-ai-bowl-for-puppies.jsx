@@ -87,8 +87,6 @@ async function fetchProductByHandle(
   STOREFRONT_API_VERSION,
   STOREFRONT_ACCESS_TOKEN,
 ) {
-  const query = FETCH_PRODUCT_USING_HANDLE;
-
   const response = await fetch(
     `https://${SHOPIFY_DOMAIN}/api/${STOREFRONT_API_VERSION}/graphql.json`,
     {
@@ -97,7 +95,12 @@ async function fetchProductByHandle(
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
       },
-      body: JSON.stringify({query}),
+      body: JSON.stringify({
+        query: FETCH_PRODUCT_USING_HANDLE,
+        variables: {
+          handle: "waggle-smart-ai-bowl-for-puppies",
+        },
+      }),
     },
   );
 

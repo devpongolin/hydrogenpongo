@@ -1,6 +1,6 @@
 export const FETCH_PRODUCT_USING_HANDLE = `#graphql
-    query ProductTitle {
-        product(handle: "waggle-smart-ai-bowl-for-puppies") {
+    query ProductTitle($handle: String!) {
+        product(handle: $handle) {
             id
             title
             description
