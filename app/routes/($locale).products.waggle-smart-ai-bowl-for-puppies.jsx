@@ -7,26 +7,57 @@ import TestimonialsSection from '~/components/TestimonialsSection';
 import FAQsection from '~/components/FAQsection';
 import {useLoaderData} from 'react-router';
 import {FETCH_PRODUCT_USING_HANDLE,METOBJECT_DATA_QUERY} from '~/utils/product-query';
+import {getAvarageProductRating,getProductsReview} from '~/utils/common-functions';
 
 export async function loader({context}) {
   const SHOPIFY_DOMAIN = context.env.PUBLIC_STORE_DOMAIN;
   const STOREFRONT_API_VERSION = context.env.STOREFRONT_API_VERSION;
   const STOREFRONT_ACCESS_TOKEN = context.env.PUBLIC_STOREFRONT_API_TOKEN;
+  const ALI_REVIEWS_API_KEY = context.env.ALI_REVIEWS_API_KEY;
+  const ALI_REVIEW_URL = context.env.ALI_REVIEW_URL;
 
   const product = await fetchProductByHandle(
     SHOPIFY_DOMAIN,
     STOREFRONT_API_VERSION,
     STOREFRONT_ACCESS_TOKEN,
   );
+
+  const productId = product?.data?.product?.id?.split('/').pop();
+
   const instructionMetaobjectData = await getInstructionMetaobjectData({ context })
   const effortlessPetNeed = await geteffortlessPetNeed({ context })  
+  const weggelPDPGuide = await getWagglePDPGuide({ context })
+  const averageProductRating = await getAvarageProductRating(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL,productId)
+  const productReviews = await getProductsReview(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL)
 
   return {
+    productId,
+    averageProductRating,
     product,
     instructionMetaobjectData,
     effortlessPetNeed,
+    weggelPDPGuide,
+    productReviews,
   };
 }
+
+async function getWagglePDPGuide({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const waggleGuide = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'waggle_pdp_guide' },
+    },
+  );
+
+  return { waggleGuideData: waggleGuide };
+}
+
 async function geteffortlessPetNeed({ context } = {}) {
   if (!context?.storefront) {
     throw new Error("Missing storefront context.");
@@ -66,8 +97,6 @@ async function fetchProductByHandle(
   STOREFRONT_API_VERSION,
   STOREFRONT_ACCESS_TOKEN,
 ) {
-  const query = FETCH_PRODUCT_USING_HANDLE;
-
   const response = await fetch(
     `https://${SHOPIFY_DOMAIN}/api/${STOREFRONT_API_VERSION}/graphql.json`,
     {
@@ -76,7 +105,12 @@ async function fetchProductByHandle(
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
       },
-      body: JSON.stringify({query}),
+      body: JSON.stringify({
+        query: FETCH_PRODUCT_USING_HANDLE,
+        variables: {
+          handle: "pet-monitor",
+        },
+      }),
     },
   );
 
@@ -91,19 +125,32 @@ async function fetchProductByHandle(
 
 export default function CustomPage() {
   const ProductData = useLoaderData();
-  const bundleProduct = ProductData?.product?.data?.product?.bundleProduct?.references?.edges;
-    // console.log(ProductData);
+  const bundleProduct = ProductData?.product?.data?.product?.bundleProduct?.references?.edges || [];
+  const waggleGuide = ProductData?.weggelPDPGuide?.waggleGuideData?.metaobjects?.edges || [];
+  const productFAQ = ProductData?.product?.data?.product?.productFaq?.value || []; 
+  const productReviews = ProductData?.productReviews?.data?.reviews || []; 
+  const productAvarageRating = ProductData?.averageProductRating?.data || {};
+  const productIdValue = ProductData?.productId || null;
+    // console.log(productAvarageRating);
     
   
   return (
     <div>
       <PotionControl ProductData={ProductData} />
-      <SmartPetBowlShowcase ProductData={ProductData} />
+       <SmartPetBowlShowcase ProductData={ProductData} />
+       {bundleProduct.length > 0 && (
       <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
-      <WaggleSteps />
-      <TestimonialsSection />
-      <FAQsection />
-      <PetSafetyGrid />
+      )}
+      {waggleGuide.length > 0 && (
+        <WaggleSteps waggleGuide={waggleGuide} />
+      )}
+      {productReviews.length > 0 && Object.keys(productAvarageRating).length > 0 && (
+        <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} productIdValue={productIdValue} />
+      )}
+      {productFAQ.length > 0 && (
+        <FAQsection productFAQ={productFAQ} />
+      )}
+       <PetSafetyGrid />
     </div>
   );
 }

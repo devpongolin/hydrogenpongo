@@ -1,60 +1,49 @@
 import { useState, useRef, useEffect } from 'react';
-import pawActive from '../assets/dogleg1.webp';
-import pawRegular from '../assets/dogleg2.webp';
-import arrowLeft from '../assets/leftarrow.webp';
-import arrowRight from '../assets/rightarrow.webp';
-import rotateArrow1 from '../assets/rotateArrow1.webp';
-import rotateArrow2 from '../assets/rotateArrow2.webp';
 
-const data = {
-  images: {
-    pawActive,
-    pawRegular,
-    arrowLeft,
-    arrowRight,
-    rotateArrow1,
-    rotateArrow2,
-  },
-  timelineData: [
-    {
-      year: "2006",
-      description: "Nimble US is founded in San Diego, <br />focused on wireless design.",
-    },
-    {
-      year: "2007-2008",
-      description: "Developed the world's smallest <br />CDMA 1x wireless module.",
-    },
-    {
-      year: "2015-2017",
-      description: "Launched our first pet safety product:<br /> the RV Pet Safety Monitor.",
-    },
-    {
-      year: "2018",
-      description: "Introduced the first 4G Pet Temperature <br />Monitor in the U.S. Waggle is born.",
-    },
-    {
-      year: "2021-2022",
-      description: "10,000+ monitors shipped <br />Launched Vet Chat—25,000+ pet parents helped",
-    },
-    {
-      year: "2023-2024",
-      description:
-        "Rolled out Pet Camera with Treat Tosser <br />Launched Pet Safety Monitor with Air Quality Sensor <br />80,000+ pet parents trust Waggle across the U.S., Canada, and Australia",
-    },
-  ],
-  textContent: {
-    title: "Where Tech Meets Tails",
-    paragraph:
-      "We didn't start in pet tech—we started in wireless. But as pet parents ourselves, we saw something was missing. No easy way to check in on your pet when you're away. So, we built one.",
-  },
-};
 
-export default function Meetstails() {
+export default function Meetstails(metaData) {
+  const fields =
+    metaData?.metaData?.aboutUsWhereTechMeetsTailsData?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+    const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+    const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+    const mainTitle = getValue('aboutus_where_tech_meets_tails_title');
+    const description = getValue('aboutus_where_tech_meets_tails_description');
+    const activeYear = getReferenceImageUrl('aboutus_where_tech_meets_tails_active_year');
+    const notActiveYears = getReferenceImageUrl('aboutus_where_tech_meets_tails_not_active_years');
+    const leftArrow = getReferenceImageUrl('aboutus_where_tech_meets_tails_left_arrow');
+    const leftArrowActive = getReferenceImageUrl('aboutus_where_tech_meets_tails_left_arrow_active');
+    const rightArrow = getReferenceImageUrl('aboutus_where_tech_meets_tails_right_arrow');
+    const rightArrowActive = getReferenceImageUrl('aboutus_where_tech_meets_tails_right_arrow_active');
+    const aboutus_where_tech_meets_tails_data_by_years = getValue('aboutus_where_tech_meets_tails_data_by_years');
+
+    const data = {
+      images: {
+        pawActive: activeYear,
+        pawRegular: notActiveYears,
+        arrowLeft: leftArrow,
+        arrowRight: rightArrow,
+        rotateArrow1: leftArrowActive,
+        rotateArrow2: rightArrowActive,
+      },
+      timelineData: JSON.parse(aboutus_where_tech_meets_tails_data_by_years),
+      textContent: {
+        title: mainTitle || "Where Tech Meets Tails",
+        paragraph: description || "We didn't start in pet tech—we started in wireless. But as pet parents ourselves, we saw something was missing. No easy way to check in on your pet when you're away. So, we built one.",
+      },
+    };
+    
+
+
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [prevActiveSlide, setPrevActiveSlide] = useState(0);
   const [hoveredArrow, setHoveredArrow] = useState(null);
-  const [leftArrowImg, setLeftArrowImg] = useState(arrowLeft);
-  const [rightArrowImg, setRightArrowImg] = useState(arrowRight);
+  const [leftArrowImg, setLeftArrowImg] = useState(data.images.arrowLeft);
+  const [rightArrowImg, setRightArrowImg] = useState(data.images.arrowRight);
 
   const carouselRef = useRef(null);
   const buttonRefs = useRef([]);

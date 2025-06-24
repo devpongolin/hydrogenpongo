@@ -11,8 +11,8 @@ import { MegaMenuDropdown } from './MegaMenuDropdown';
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu, metaobjects} = header;
   return (
-    <header className="header border-b-[0.5px] border-b-[rgba(223,223,223,1)] test-1">
-      <div className="max-w-[1280px] mx-auto w-full flex h-[inherit] items-center">
+    <header className="header border-b-[0.5px] border-b-[rgba(223,223,223,1)] !h-auto">
+      <div className="max-w-[1280px] mx-auto w-full flex py-[16px] h-[inherit] items-center">
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
           <strong></strong>
           <img src={shop.brand.logo.image.url} alt="" width="112" height="28" />
@@ -69,7 +69,7 @@ export function HeaderMenu({
 
   function renderMenuItems(items, isSublist = false) {
     return (
-      <ul className={isSublist ? "" : "flex flex-row items-center justify-center list-none p-0 m-0 w-full gap-[20px] h-[inherit]"}>
+      <ul className={isSublist ? "" : "flex flex-row flex-wrap justify-between items-center list-none p-0 m-0 w-full gap-[20px] h-[inherit]"}>
         {items.map((item) => {
           if (!item.url) return null;
           const url =
@@ -82,7 +82,7 @@ export function HeaderMenu({
           return (
             <li
               key={item.id}
-              className="relative inline-flex items-center group h-[inherit] hover-effect-main"
+              className="inline-flex items-center group h-[inherit] hover-effect-main"
               onMouseEnter={() => setHoveredMenu(item.title)}
               onMouseLeave={() => setHoveredMenu(null)}
             >
@@ -125,7 +125,7 @@ export function HeaderMenu({
   }
 
   return (
-    <nav className={`relative z-50 w-full h-[inherit] ${className}`} role="navigation">
+    <nav className={`z-50 w-full h-[inherit] ${className}`} role="navigation">
       {viewport === 'mobile' && (
         <NavLink
           end
