@@ -6,77 +6,66 @@ import missionImg from '../assets/Layer_1.webp';
 import waggleForGoodImg from '../assets/WaggleForGood.webp';
 import arrowImg from '../assets/wagglearrow.webp';
 
-const data = {
-  title: "No More RUFF Days",
-  images: {
-    whatWeBelieve: whatWeBelieveImg,
-    whatWeBelieveMobile: whatWeBelieveMobileImg,
-    vision: visionImg,
-    mission: missionImg,
-    waggleForGood: waggleForGoodImg,
-    arrow: arrowImg
-  },
-  sections: [
-    {
-      type: "WhatWeBelieveSection",
-      header: { text: "What We Believe" },
-      text: {
-        content: "Taking care of real-life worries. Getting better at what we do. We're here to make life easier for you and your furry sidekick."
-      }
-    },
-    {
-      type: "GridSection",
-      columns: [
-        {
-          type: "VisionPanel",
-          header: {
-            title: "Our Vision",
-            subtitle: "A world where pets are safe, loved, and never left wondering when you'll be back."
-          }
-        },
-        {
-          header: {
-            title: "Our Mission",
-            subtitle: "We build smart, easy-to-use tech that helps you check in, stay connected, and worry less."
-          }
-        }
-      ]
-    },
-    {
-      type: "WaggleForGoodSection",
-      title: "Waggle For Good",
-      text: [
-        "Caring doesn't stop with our products.",
-        "Waggle for Good is how we give back through free safety resources, travel guides, emergency checklists, and community programs that have already reached over 100,000 pet parents.",
-        "From teaching families how to road-trip safely with pets to sharing tips for weather emergencies, we're here to support pet parents beyond the tech."
-      ],
-      button: {
-        text: "Join the Community",
-        link: "#"
-      }
-    }
-  ]
-};
-function GridCard({ title, subtitle, image, alt }) {
-  return (
-    <div className="md:rounded-[28px] rounded-[20px] border border-soft relative overflow-hidden bg-cream">
-      <div className="pt-10 pb-9 pl-[18px] pr-5 md:pt-10 md:pb-10 md:pl-10 md:pr-[55px]">
-        <h3 className="md:text-[16px] text-[14px] lexendPeta font-light leading-[16px] tracking-[0] text-dark-gray">
-          {title}
-        </h3>
-        <h2 className="lexend font-medium md:text-[26.66px] md:leading-[40px] leading-[124%] tracking-[-0.5px] text-[20px] text-dark-gray mt-4">
-          {subtitle}
-        </h2>
-      </div>
-      <div className="relative mx-auto md:pb-[13px] pb-[7px]">
-        <img src={image} alt={alt} className="w-full h-auto" loading="lazy" />
-      </div>
-    </div>
-  );
-}
 
-export default function NoMoreRuffDays() {
+
+export default function NoMoreRuffDays(metaData) {
+  // --------------------------------------------------------------------------
+  const fields =
+  metaData?.metaData?.aboutUsNoMoreRUFFDays?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  // Top first card content
+  const mainTitle = getValue('aboutus_no_more_ruff_days_section_title');
+  const firstCardDesktop = getReferenceImageUrl('aboutus_no_more_ruff_days_image_dektop');
+  const FirstCardMobile = getReferenceImageUrl('aboutus_no_more_ruff_days_image_mobile');
+  const bottomFirstCardImage = getReferenceImageUrl('aboutus_no_more_ruff_days_bottom_card_first_image');
+  const bottomSecondCardImage = getReferenceImageUrl('aboutus_no_more_ruff_days_bottom_card_second_image');
+  const bottomLastCardImage = getReferenceImageUrl('aboutus_no_more_ruff_days_bottom_card_last_image');
+  const bottomLastCardArrow = getReferenceImageUrl('aboutus_no_more_ruff_days_button_arrow');
+  const aboutus_no_more_ruff_days_all_title_subtitle_data = getValue('aboutus_no_more_ruff_days_all_title_subtitle_data');
+
+
+  // -----------------------------------------------------------
+
+  const data = {
+    title: mainTitle || "No More RUFF Days",
+    images: {
+      whatWeBelieve: firstCardDesktop,
+      whatWeBelieveMobile: FirstCardMobile,
+      vision: bottomFirstCardImage,
+      mission: bottomSecondCardImage,
+      waggleForGood: bottomLastCardImage,
+      arrow: bottomLastCardArrow
+    },
+    sections: JSON.parse(aboutus_no_more_ruff_days_all_title_subtitle_data),
+  };
+  function GridCard({ title, subtitle, image, alt }) {
+    return (
+      <div className="md:rounded-[28px] rounded-[20px] border border-soft relative overflow-hidden bg-cream">
+        <div className="pt-10 pb-9 pl-[18px] pr-5 md:pt-10 md:pb-10 md:pl-10 md:pr-[55px]">
+          <h3 className="md:text-[16px] text-[14px] lexendPeta font-light leading-[16px] tracking-[0] text-dark-gray">
+            {title}
+          </h3>
+          <h2 className="lexend font-medium md:text-[26.66px] md:leading-[40px] leading-[124%] tracking-[-0.5px] text-[20px] text-dark-gray mt-4">
+            {subtitle}
+          </h2>
+        </div>
+        <div className="relative mx-auto md:pb-[13px] pb-[7px]">
+          <img src={image} alt={alt} className="w-full h-auto" loading="lazy" />
+        </div>
+      </div>
+    );
+  }
+
+
+
+
   const [whatWeBelieveSection, gridSection, waggleForGoodSection] = data.sections;
+  
 
   return (
     <div className="w-full max-w-[1440px] md:px-[112px] mx-auto px-5 md:p-0 mt-0 pt-[61px] md:pt-0">
