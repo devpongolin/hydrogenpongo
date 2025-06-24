@@ -44,7 +44,8 @@ const Certifiedtocare = (metaData) => {
   const titleLines = data.textContent.title.split('\n');
 
   return (
-    <div className="w-full px-[20px] md:px-[0px] py-[36px] md:py-[63px] relative overflow-hidden rounded-[40px] max-w-[1216px] mx-auto">
+    <div className="w-full max-w-[1440px] px-[20px] py-[36px] md:py-[63px] relative overflow-hidden rounded-[40px]  
+    md:px-[112px] mx-auto">
       <img
         src={isMobile ? data.images.hero.mobile : data.images.hero.desktop}
         alt="Hero"

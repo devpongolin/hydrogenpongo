@@ -1,6 +1,6 @@
 export const FETCH_PRODUCT_USING_HANDLE = `#graphql
-    query ProductTitle {
-        product(handle: "waggle-smart-ai-bowl-for-puppies") {
+    query ProductTitle($handle: String!) {
+        product(handle: $handle) {
             id
             title
             description
@@ -29,6 +29,9 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                     value
             }
             iconWithDiscriptionLabel: metafield(namespace:"custom", key:"description_with_icon_label") {
+                    value
+            }
+            productFaq: metafield(namespace:"custom", key:"product_faq_for_hydrogen") {
                     value
             }
             bundleProduct: metafield(namespace: "custom", key: "bundle_for_product") {

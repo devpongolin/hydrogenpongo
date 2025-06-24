@@ -1,53 +1,69 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import step1 from '../assets/step1-setup-bowl.webp';
-import step2 from '../assets/step2-connect-app.webp';
-import step3 from '../assets/step3-monitor-nutrition.webp';
 
-const content = {
-  header: {
-    title1: "Takes 2 Minutes.",
-    title2: "Saves a Lifetime of Stress."
-  },
-  steps: [
-    {
-      number: "01",
-      title: "Install the Waggle pet temperature monitoring system",
-      fullTitle: "Set Up the Smart AI Bowl",
-      image: step1,
-      box2: { number: "02", text: "Connect" },
-      box3: { number: "03", text: "Monitor" }
-    },
-    {
-      title: "Connect to the Waggle App",
-      image: step2,
-      box1: { number: "01", text: "Install" },
-      number: "02",
-      box3: { number: "03", text: "Monitor" }
-    },
-    {
-      title: "Stay Informed, Stay Safe",
-      fullTitle: "Monitor Pet Food and Nutrition",
-      image: step3,
-      box1: { number: "01", text: "Install" },
-      box2: { number: "02", text: "Connect" },
-      number: "03"
+
+export default function WaggleSteps(waggleGuide) {
+
+const waggleGuideRaw = waggleGuide?.waggleGuide || [];
+const mainTitle = waggleGuide?.waggleGuide[0]?.node?.fields?.find(item=> item.key === 'waggle_guide_main_title')?.value;
+const subTitle = waggleGuide?.waggleGuide[0]?.node?.fields?.find(item=> item.key === 'waggle_guide_sub_title')?.value;
+
+const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
+  const fields = item.node.fields;
+
+  const getValue = (key) => fields.find(f => f.key === key)?.value;
+  const getImage = () => fields.find(f => f.key === 'waggle_guide_file')?.reference?.image?.url;
+
+  const stepPosition = getValue("step_position");
+  const number = stepPosition.padStart(2, "0");
+
+  const title = getValue("waggle_mobile_text");
+  const fullTitle = getValue("waggle_guide_text");
+  const image = getImage();
+
+  // Build box1, box2, box3
+  const boxes = {};
+  arr.forEach((step, i) => {
+    const stepFields = step.node.fields;
+    const pos = stepFields.find(f => f.key === "step_position")?.value;
+    const txt = stepFields.find(f => f.key === "closed_text")?.value;
+    const stepNum = pos.padStart(2, "0");
+    const boxKey = `box${parseInt(pos)}`;
+
+    if (pos !== stepPosition) {
+      boxes[boxKey] = { number: stepNum, text: txt };
     }
-  ]
-};
+  });
 
-export default function WaggleSteps() {
+  return {
+    number,
+    title,
+    fullTitle,
+    image,
+    ...boxes
+  };
+});
+
+  const content = {
+    header: {
+      title1: mainTitle || "Takes 2 Minutes.",
+      title2: subTitle || "Saves a Lifetime of Stress."
+    },
+    steps: parsedGuide,
+  };
+  
+  
   const [activeStep, setActiveStep] = useState(0);
   const [expandedStep, setExpandedStep] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
 
-  useEffect(() => {
-    if (!autoRotate) return;
-    const interval = setInterval(() => {
-      setActiveStep((prevStep) => (prevStep + 1) % content.steps.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [autoRotate]);
+  // useEffect(() => {
+  //   if (!autoRotate) return;
+  //   const interval = setInterval(() => {
+  //     setActiveStep((prevStep) => (prevStep + 1) % content.steps.length);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, [autoRotate]);
 
   const toggleStep = (stepIndex) => {
     setExpandedStep(expandedStep === stepIndex ? -1 : stepIndex);
@@ -106,7 +122,7 @@ export default function WaggleSteps() {
                   </div>
                 )}
               </div>
-              {typeof window !== 'undefined' && window.innerWidth >= 1024 && activeStep === index && (
+              {typeof window !== 'undefined' && window.outerWidth >= 1023 && activeStep === index && (
                 <div className="flex flex-col lg:flex-row gap-5 w-full transition-all duration-300">
                   {index === 1 && (
                     <div className="hidden lg:flex justify-center lg:flex-shrink-0">

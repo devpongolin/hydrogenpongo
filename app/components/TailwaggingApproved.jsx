@@ -47,12 +47,11 @@ const Tailwaggingapproved = (metaData) => {
 
 
   return (
-    <div className="w-full md:pt-[38px] pt-[18px] pb-[38px] md:lg:py-[48px] md:lg:px-[112px]">
-      <div className="max-w-6xl mx-auto">
+    <div className="w-full mx-auto pt-[18px] pb-[38px] md:py-[48px] md:px-[112px]">
         <h2 className="text-center text-dark-gray pl-[15.5px] pr-[15.5px] md:text-[47.37px] text-[28px] leading-[124%] tracking-[0] lexend font-medium">
           {data.textContent.title}
         </h2>
-        <div className="flex flex-col pl-5 pr-5 md:flex-col xl:flex-row gap-4 md:gap-8 xl:gap-[40px] justify-center mt-4 md:mt-7">
+        <div className="flex flex-col pl-5 pr-5 md:px-[0] md:flex-col xl:flex-row gap-4 md:gap-8 xl:gap-[40px] justify-center mt-4 md:mt-7">
           {data.sections.map((section, index) => {
             const isCertification = section.type === "certification";
 
@@ -105,7 +104,6 @@ const Tailwaggingapproved = (metaData) => {
             );
           })}
         </div>
-      </div>
     </div>
   );
 };
