@@ -10,9 +10,9 @@
   --color-light: #fff;
 }
 
-img {
+/* img {
   border-radius: 4px;
-}
+} */
 
 /*
 * --------------------------------------------------
@@ -221,7 +221,7 @@ button.reset:hover:not(:has(> *)) {
 * --------------------------------------------------
 */
 .footer {
-  background: var(--color-dark);
+  background: rgb(46, 49, 56);
   margin-top: auto;
 }
 
@@ -627,6 +627,10 @@ button.reset:hover:not(:has(> *)) {
 --primary-gradient: 
     linear-gradient(0deg, #0085FF, #0085FF),
     radial-gradient(217.75% 144.07% at 217.75% 107.58%, rgba(127, 139, 210, 0.3) 0%, rgba(127, 139, 210, 0) 100%);
+--custom-dark-gradient: linear-gradient(121.48deg, rgba(46, 49, 56, 0.64) 31.01%, rgba(130, 138, 158, 0.64) 90.53%);
+}
+.my-dark-gradient-box {
+  background: var(--custom-dark-gradient);
 }
 .color-bg-opacity{
   color: var(--color-bg-opacity);
@@ -924,5 +928,65 @@ button.reset:hover:not(:has(> *)) {
   }
   .layout-padding{
     padding: 20px;
+  }
+}
+/* header {
+  backdrop-filter: blur(19.25px) !important;
+} */
+
+@media (min-width: 767px) and (max-width: 1350px) {
+  .extra-padding{
+    padding: 50px;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 1345px) {
+  .mobile-flex-center{
+    left: 50%;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 1234px){
+  .hide-on-mobile-temp{
+    display: none;
+  }
+  .responsive-temp-box{
+    left: 50%;
+    display: flex;
+    flex-direction: row;
+  }
+  .Section-heading{
+    font-size: 35px;
+  }
+  .Secondary-text{
+    margin-bottom: 10px;
+  }
+}
+
+.pdp-benifits-text-center:after {
+  border-right: 1px solid #2E313847;
+  content: '';
+  display: flex;
+  width: 2px;
+  height: 86%;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+.pdp-benifits-text-center:nth-child(4):after{
+  display: none;
+}
+.pdp-benifits-text-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media(max-width: 768px){
+  .pdp-benifits-text-center:nth-child(2):after{
+    display: none;
   }
 }

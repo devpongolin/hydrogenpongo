@@ -14,6 +14,8 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from './components/PageLayout';
+import { METOBJECT_DATA_QUERY } from '~/utils/metaobject-query';
+import megamenuStyle from '~/styles/mega-menu.css?url';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -68,8 +70,11 @@ export function links() {
  * @param {LoaderFunctionArgs} args
  */
 export async function loader(args) {
+  const { context } = args;
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
+  const footerData = await getFooterData({ context })
+  const footerCountryData = await getFooterCountryData({ context })
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
@@ -92,6 +97,8 @@ export async function loader(args) {
       country: args.context.storefront.i18n.country,
       language: args.context.storefront.i18n.language,
     },
+    footerData,
+    footerCountryData,
   };
 }
 
@@ -107,13 +114,47 @@ async function loadCriticalData({context}) {
     storefront.query(HEADER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+        headerMenuHandle: 'hydrogen-header-menu', // Adjust to your header menu handle
       },
     }),
     // Add other queries here, so that they are loaded in parallel
   ]);
 
   return {header};
+}
+
+async function getFooterCountryData({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const footerCountryMetaobjectData = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'footer_countries_list' },
+    },
+  );
+
+  return { footerCountryMetaobjectDatas: footerCountryMetaobjectData };
+}
+
+async function getFooterData({ context } = {}) {
+  if (!context?.storefront) {
+    throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const footerMetaobjectData = await storefront.query(
+    METOBJECT_DATA_QUERY,
+    {
+      variables: { type: 'footer_top_left_part' },
+    },
+  );
+
+  return { footerMetaobjectDatas: footerMetaobjectData };
 }
 
 /**
@@ -130,7 +171,7 @@ function loadDeferredData({context}) {
     .query(FOOTER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        footerMenuHandle: 'footer', // Adjust to your footer menu handle
+        footerMenuHandle: 'footer-menu-new', // Adjust to your footer menu handle
       },
     })
     .catch((error) => {
@@ -152,6 +193,7 @@ export function Layout({children}) {
   const nonce = useNonce();
   /** @type {RootLoader} */
   const data = useRouteLoaderData('root');
+  // console.log(data)
 
   return (
     <html lang="en">
@@ -160,6 +202,7 @@ export function Layout({children}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        <link rel="stylesheet" href={megamenuStyle}></link>
         <Meta />
         <Links />
       </head>
