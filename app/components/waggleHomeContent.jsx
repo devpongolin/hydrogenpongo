@@ -72,11 +72,13 @@ export default function WaggleHome() {
         src={backgroundImage}
         alt="Background"
         className="mt-[4%] inset-0 w-full h-full object-cover hidden md:block"
+        loading="lazy"
       />
       <img
         src={mobileBackgroundImage}
         alt="Mobile Background"
         className="md:mt-[10%] inset-0 w-full h-full object-cover block md:hidden"
+        loading="lazy"
       />  
       <div className="absolute top-0 brand-brown white-text-element md:px-[80px] md:py-[23px] p-[6px] md:h-[59px] w-full rounded-t-[40.56px]">
         <div className="hidden md:flex justify-between items-center h-full">
@@ -108,9 +110,9 @@ export default function WaggleHome() {
       <div className="responsive-temp-box mobile-flex-center max-w-[1280px] w-full top-[50%] md:top-[60.5%] left-[50%] md:left-[48.5%] translate-x-[-50%] translate-y-[-50%] absolute py-[30px] md:py-[0] md:px-[20px] px-[15px] flex flex-col h-full justify-between md:h-auto md:justify-normal">
         <div className="flex flex-col lg:flex-row gap-8 items-center">
           <div className="w-full lg:w-2/3 md:mb-12">
-            <h1 className="Section-heading text-center md:text-left mb-[12px] md:max-w-[33rem] white-text-element lexend font-medium md:text-[63px] text-[34px] md:leading-[104%] leading-[113%] tracking-[0]">
+            <h2 className="Section-heading text-center md:text-left mb-[12px] md:max-w-[33rem] white-text-element lexend font-medium md:text-[63px] text-[34px] md:leading-[104%] leading-[113%] tracking-[0]">
               {waggleHomeContent.hero.headline}                   
-            </h1>
+            </h2>
             <p className="text-center Secondary-text md:text-left lato font-medium text-[20px] leading-[144%] tracking-[0] white-text-element md:mb-[40px] mb-[24px]">
               {waggleHomeContent.hero.subheadline}
             </p>
@@ -125,12 +127,13 @@ export default function WaggleHome() {
                       src={feature.image}
                       alt={feature.title}
                       className="object-cover"
+                      loading="lazy"
                     />
                     <div className="max-w-[5rem] inter font-medium text-[16px] leading-[100%] tracking-[0] text-center md:text-left">
                       {feature.title}
                     </div>
                   </div>
-                  <img src={feature.arrow} alt="Arrow" />
+                  <img src={feature.arrow} alt="Arrow" loading="lazy" className='cursor-pointer' />
                 </button>
               ))}
             </div>
@@ -140,6 +143,7 @@ export default function WaggleHome() {
               src={waggleHomeContent.hero.rightImage.image}
               alt={waggleHomeContent.hero.rightImage.alt}
               className='hide-on-mobile-temp'
+              loading="lazy"
             />
           </div>
         </div>
@@ -147,7 +151,6 @@ export default function WaggleHome() {
           <p className="white-text-element lexendPeta font-light md:text-[11.57px] text-[14px] leading-[100%] tracking-[0] mb-4">
             {waggleHomeContent.footerLogos.label}
           </p>
-
           <div className="flex items-center justify-start divide-x-[0.72px] divide-[#C3CDD6]">
             {waggleHomeContent.footerLogos.logos.map((logo, index) => (
               <div
@@ -155,7 +158,8 @@ export default function WaggleHome() {
                 className={index === 0 ? 'md:pr-[19px] pr-[12px]' : 'md:px-[28px] px-[5px]'}
               >
                 <img src={logo.image} alt={logo.alt} 
-                className='max-w-[94px] md:max-w-none'/>
+                className='max-w-[94px] md:max-w-none'
+                loading="lazy"/>
               </div>
             ))}
           </div>

@@ -627,6 +627,10 @@ button.reset:hover:not(:has(> *)) {
 --primary-gradient: 
     linear-gradient(0deg, #0085FF, #0085FF),
     radial-gradient(217.75% 144.07% at 217.75% 107.58%, rgba(127, 139, 210, 0.3) 0%, rgba(127, 139, 210, 0) 100%);
+--custom-dark-gradient: linear-gradient(121.48deg, rgba(46, 49, 56, 0.64) 31.01%, rgba(130, 138, 158, 0.64) 90.53%);
+}
+.my-dark-gradient-box {
+  background: var(--custom-dark-gradient);
 }
 .color-bg-opacity{
   color: var(--color-bg-opacity);
