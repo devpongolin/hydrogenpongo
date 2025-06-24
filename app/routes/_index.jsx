@@ -4,6 +4,10 @@ import {Image} from '@shopify/hydrogen';
 import {ProductItem} from '~/components/ProductItem';
 // import {waggleHomeContent} from '~/components/waggleHomeContent'
 import WaggleHome from '~/components/waggleHomeContent';
+import ProductShowcase from '~/components/ProductShowcase';
+// import ImageCarousel from '~/components/ImageCarousel';
+import PetSafetyCards from '~/components/PetSafetyCards'
+import UltimatePetParent from '~/components/UltimatePetParent'
 /**
  * @type {MetaFunction}
  */
@@ -69,6 +73,10 @@ export default function Homepage() {
       <RecommendedProducts products={data.recommendedProducts} /> */}
       {/* <waggleHomeContent /> */}
       <WaggleHome />
+      <ProductShowcase />
+      {/* <ImageCarousel /> */}
+      <PetSafetyCards />
+      <UltimatePetParent />
     </div>
   );
 }
