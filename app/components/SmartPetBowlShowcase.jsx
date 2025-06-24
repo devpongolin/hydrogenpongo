@@ -1,21 +1,5 @@
-import React from "react";
-// import wifiSmartBowlImg from "../assets/Wi-Fi-connectedsmartbowl.webp";
-import portimage from "../assets/portImg.webp";
-import bowlBaseImg from "../assets/bowlBaseImg.webp";
-import aiTrackingIcon from "../assets/aiTrackingIcon.webp";
-import bowl450gImg from "../assets/bowl450gImg.webp";
-import dogWithBowlImg from "../assets/dogWithBowlImg.webp";
-import scheduleIcon from "../assets/scheduleIcon.webp";
-import alertsIcon from "../assets/alertsIcon.webp";
-import petSafeIcon from "../assets/petSafeIcon.webp";
-import weightSensorIcon from "../assets/weightSensorIcon.webp";
-import bowlShadowImg from "../assets/bowlShadowImg.webp";
-import sideNotificationImg from "../assets/sideNotificationImg.webp";
-
-
 const SmartPetBowlShowcase = (ProductData) => {
   const metaobjectData = ProductData?.ProductData?.effortlessPetNeed?.effortlessPetNeeds?.metaobjects?.edges[0]?.node?.fields  || {};
-  console.log(metaobjectData)
 
   // left part data...............
   const topLeftText = metaobjectData?.find(
@@ -48,7 +32,37 @@ const SmartPetBowlShowcase = (ProductData) => {
   const bowl450gImg = metaobjectData?.find(
     field => field.key === "pet_need_image_middle_bottom"
   )?.reference?.image?.url;
-  
+  const dogWithBowlImg = metaobjectData?.find(
+    field => field.key === "pet_need_image_middle_bottom_left_image"
+  )?.reference?.image?.url;
+  const scheduleIcon = metaobjectData?.find(
+    field => field.key === "pet_need_image_middle_bottom_right_image"
+  )?.reference?.image?.url;
+  const pet_need_image_middle_bottom_right_text = metaobjectData?.find(
+    field => field.key === "pet_need_image_middle_bottom_right_text"
+  )?.value;
+  const petSafeIcon = metaobjectData?.find(
+    field => field.key === "pet_need_right_top_image"
+  )?.reference?.image?.url;
+  const pet_need_right_top_text = metaobjectData?.find(
+    field => field.key === "pet_need_right_top_text"
+  )?.value;
+  const alertsIcon = metaobjectData?.find(
+    field => field.key === "pet_need_right_middle_image"
+  )?.reference?.image?.url;
+  const pet_need_right_middle_text = metaobjectData?.find(
+    field => field.key === "pet_need_right_middle_text"
+  )?.value;
+  const weightSensorIcon = metaobjectData?.find(
+    field => field.key === "pet_need_right_bottom_image"
+  )?.reference?.image?.url;
+  const pet_need_right_bottom_text = metaobjectData?.find(
+    field => field.key === "pet_need_right_bottom_text"
+  )?.value;
+  const sideNotificationImg = metaobjectData?.find(
+    field => field.key === "pet_need_right_bottom_side_notification"
+  )?.reference?.image?.url;
+
 
   const textContent = {
     title: mainTitle || "Smart. Effortless. Tailored to Your Pet's Needs.",
@@ -74,7 +88,7 @@ const SmartPetBowlShowcase = (ProductData) => {
         dogImageAlt: "Dog with bowl",
         scheduleCard: {
           iconAlt: "Schedule icon",
-          heading: "Automatic pet feeding schedule",
+          heading: pet_need_image_middle_bottom_right_text || "Automatic pet feeding schedule",
         },
       },
       centerImage: {
@@ -87,15 +101,15 @@ const SmartPetBowlShowcase = (ProductData) => {
         leftNotificationAlt: "Left notification",
         rightNotificationAlt: "Right notification",
         centerImageAlt: "Alert icon",
-        paragraph: "Smart alerts & notifications",
+        paragraph: pet_need_right_bottom_text || "Smart alerts & notifications",
       },
       middleCard: {
         iconAlt: "Pet safe icon",
-        heading: "Pet-safe & easy to clean",
+        heading: pet_need_right_top_text || "Pet-safe & easy to clean",
       },
       bottomCard: {
         iconAlt: "Sensor icon",
-        paragraph: "Built-in weight sensor",
+        paragraph: pet_need_right_middle_text || "Built-in weight sensor",
       },
     },
   };
