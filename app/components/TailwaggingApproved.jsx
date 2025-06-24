@@ -1,37 +1,51 @@
 import React from "react";
-import certificationLogo from "../assets/wagglelogo1.webp";
-import rvLogo from "../assets/logo2.webp";
-import fmcaLogo from "../assets/logo3.webp";
-import appaLogo from "../assets/logo4.webp";
 
-// JSON data
-const data = {
-  images: {
-    certification: certificationLogo,
-    rv: rvLogo,
-    fmca: fmcaLogo,
-    appa: appaLogo
-  },
-  textContent: {
-    title: "Tested, Trusted, Tail-Wagging Approved.",
-    certificationLabel: "CERTIFICATION",
-    membershipLabel: "MEMBERSHIP"
-  },
-  sections: [
-    {
-      type: "certification",
-      label: "CERTIFICATION",
-      logos: ["certification"]
+const Tailwaggingapproved = (metaData) => {
+  const fields =
+  metaData?.metaData?.aboutUsWaggingApproved?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+
+  const mainTitle = getValue('aboutus_wagging_approved_main_title');
+  const firstCardTitle = getValue('aboutus_wagging_approved_first_card_title');
+  const firstCardImage = getReferenceImageUrl('aboutus_wagging_approved_first_card_image');
+
+  const secondCardTitle = getValue('aboutus_wagging_approved_second_card_title');
+  const secondLeftCardImage = getReferenceImageUrl('aboutus_wagging_approved_second_card_left_image');
+  const secondMidCardImage = getReferenceImageUrl('aboutus_wagging_approved_second_card_mid_image');
+  const secondRightCardImage = getReferenceImageUrl('aboutus_wagging_approved_second_card_right_image');
+
+  const data = {
+    images: {
+      certification: firstCardImage,
+      rv: secondLeftCardImage,
+      fmca: secondMidCardImage,
+      appa: secondRightCardImage
     },
-    {
-      type: "membership",
-      label: "MEMBERSHIP",
-      logos: ["rv", "fmca", "appa"]
-    }
-  ]
-};
+    textContent: {
+      title: mainTitle || "Tested, Trusted, Tail-Wagging Approved.",
+      certificationLabel: "CERTIFICATION",
+      membershipLabel: "MEMBERSHIP"
+    },
+    sections: [
+      {
+        type: "certification",
+        label: firstCardTitle || "CERTIFICATION",
+        logos: ["certification"]
+      },
+      {
+        type: "membership",
+        label: secondCardTitle || "MEMBERSHIP",
+        logos: ["rv", "fmca", "appa"]
+      }
+    ]
+  };
 
-const Tailwaggingapproved = () => {
+
   return (
     <div className="w-full md:pt-[38px] pt-[18px] pb-[38px] md:lg:py-[48px] md:lg:px-[112px]">
       <div className="max-w-6xl mx-auto">

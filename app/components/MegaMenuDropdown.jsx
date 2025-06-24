@@ -11,7 +11,7 @@ export function MegaMenuDropdown({ type, isVisible, dynamicItems }) {
   return (
     <div
       className={[
-        'block fixed left-0 right-0 w-full  z-[1000] top-[3rem] pt-[1.5rem] max-w-[1280px] mx-auto',
+        'block fixed left-0 right-0 w-full  z-[1000] top-[3rem] pt-[3.5rem] max-w-[1280px] mx-auto',
         isVisible
           ? 'opacity-100 visible translate-y-0'
           : 'opacity-0 invisible -translate-y-2',

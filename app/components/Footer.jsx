@@ -84,7 +84,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
                   return (
                     <div key={item.title}>
                       {item.items.map((child, index) => {
-                        console.log(child.title);
+                        // console.log(child.title);
                         return (
                           <p
                             key={index}

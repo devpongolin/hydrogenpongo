@@ -3,17 +3,36 @@ import dogsImage from '../assets/Heroimage_(2).webp';
 import mobileDogsImage from '../assets/moblieimg.webp';
 import arrowImage from '../assets/arrow.webp';
 
-const data = {
-  images: { dogsImage, mobileDogsImage, arrowImage },
-  textContent: {
-    heading: "We built Waggle for pet parents like us.",
-    description:
-      "You walk out the door and instantly wonder—did I leave the AC on? Did the dog spill the water bowl? Is it too hot in the RV? Is my pet okay? So we built a way to check in, no matter where you are.",
-    buttonText: "Find Your Waggle",
-  },
-};
 
-const WaggleHero = () => {
+
+const WaggleHero = (metaData) => {
+  const fields =
+    metaData?.metaData?.aboutUsBannersData?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  const mainTitle = getValue('aboutus_main_title');
+  const description = getValue('aboutus_discription');
+  const buttonText = getValue('aboutus_button_text');
+  const desktopImage = getReferenceImageUrl('aboutus_banner_image_desktop');
+  const mobileImage = getReferenceImageUrl('aboutus_banner_image_mobile');
+  const buttonIcon = getReferenceImageUrl('aboutus_button_logo');
+
+
+  const data = {
+    images: { dogsImage, mobileDogsImage, arrowImage },
+    textContent: {
+      heading: mainTitle || "We built Waggle for pet parents like us." ,
+      description: description || "You walk out the door and instantly wonder—did I leave the AC on? Did the dog spill the water bowl? Is it too hot in the RV? Is my pet okay? So we built a way to check in, no matter where you are.",
+      buttonText: buttonText || "Find Your Waggle",
+    },
+  };
+
+
   return (
     <div className="bg-[#B47E57] flex flex-col-reverse md:flex-col container mx-auto w-full md:px-[112px] md:py-[55px] pt-5 pb-[34px] md:rounded-t-[34px] rounded-t-[28px] overflow-hidden">
       <div className="flex flex-col md:flex-row md:items-start justify-between">
@@ -33,7 +52,7 @@ const WaggleHero = () => {
               </span>
               <span className="flex items-center justify-center rounded-full">
                 <img
-                  src={data.images.arrowImage}
+                  src={buttonIcon}
                   alt="Arrow right"
                   loading="lazy"
                   width="40"
@@ -47,13 +66,13 @@ const WaggleHero = () => {
       </div>
       <div className="flex justify-center mt-6 md:mt-10">
         <img
-          src={data.images.mobileDogsImage}
+          src={mobileImage}
           alt="Golden retriever with owner"
           loading="lazy"
           className="block md:hidden object-contain"
         />
         <img
-          src={data.images.dogsImage}
+          src={desktopImage}
           alt="Two dogs with owners connected by curved line"
           loading="lazy"
           className="hidden md:block object-contain"

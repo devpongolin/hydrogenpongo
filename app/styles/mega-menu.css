@@ -251,11 +251,11 @@
   }
   
   /* Grid Layout */
-  .grid {
+  /* .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
     gap: 2rem;
-  }
+  } */
   
   /* Container styles */
   .mega-menu-container {
@@ -299,6 +299,11 @@
     padding: 8px 14px;
   }
   .hover-effect-main .hover-effect {
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 8px 14px;
+  }
+  .hover-effect-main .hover-effect {
     padding: 8px 14px;
   }
   
@@ -335,9 +340,12 @@
     }
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .mega-menu-dropdown {
       position: static;
       transform: none;
+    }
+    .header-menu-desktop {
+      display: none;
     }
   } 
