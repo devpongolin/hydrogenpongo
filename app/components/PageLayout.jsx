@@ -150,12 +150,14 @@ function SearchAside() {
  * }}
  */
 function MobileMenuAside({header, publicStoreDomain}) {
+  const {shop, menu, metaobjects} = header;
   return (
     header.menu &&
     header.shop.primaryDomain?.url && (
       <Aside className="test-2" type="mobile" heading="MENU">
         <HeaderMenu
-          menu={header.menu}
+          menu={menu}
+          metaMap={metaobjects?.nodes}
           viewport="mobile"
           primaryDomainUrl={header.shop.primaryDomain.url}
           publicStoreDomain={publicStoreDomain}
