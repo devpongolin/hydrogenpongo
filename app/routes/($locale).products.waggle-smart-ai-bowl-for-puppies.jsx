@@ -127,11 +127,11 @@ export default function CustomPage() {
   const ProductData = useLoaderData();
   const bundleProduct = ProductData?.product?.data?.product?.bundleProduct?.references?.edges || [];
   const waggleGuide = ProductData?.weggelPDPGuide?.waggleGuideData?.metaobjects?.edges || [];
-  const productFAQ = ProductData?.product?.data?.product?.productFaq?.value || []; 
+  const productFAQS= ProductData?.product?.data?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
   const productIdValue = ProductData?.productId || null;
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
-    // console.log(productAvarageRating);  
+    // console.log(productFAQS);  
   
   return (
     <div>
@@ -146,8 +146,8 @@ export default function CustomPage() {
       {productReviews.length > 0 && (
         <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} />
       )}
-      {productFAQ.length > 0 && (
-        <FAQsection productFAQ={productFAQ} />
+      {productFAQS.length > 0 && (
+        <FAQsection productFAQS={productFAQS} />
       )}
        <PetSafetyGrid />
     </div>

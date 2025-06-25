@@ -1,11 +1,24 @@
 import {useState} from 'react';
 
 
-export default function FAQsection(productFAQ) {  
+export default function FAQsection({productFAQS}) {  
+  const formattedFAQs = productFAQS.map(item => {
+    const fields = item.node.fields;
+    const faq = {};
+  
+    fields.forEach(field => {
+      faq[field.key] = field.value;
+    });
+  
+    return {
+      question: faq.question,
+      answer: faq.answer
+    };
+  });  
 
   const faqContent = {
     title: 'Your Questions, Answered',
-    faqs: JSON.parse(productFAQ?.productFAQ),
+    faqs: formattedFAQs,
   };
   
   const [openIndex, setOpenIndex] = useState(null);
