@@ -3,38 +3,18 @@ import {Star} from 'lucide-react';
 import { CustomAddToCartButton } from './CustomAddToCartButton';
 import {useAside} from './Aside';
 
-import mainImage from '../assets/main-product.webp';
-import bowlDetail from '../assets/bowl-detail.webp';
-import appInterface from '../assets/app-interface.webp';
-import feedingDemo from '../assets/feeding-demo.webp';
-import petUsingBowl from '../assets/pet-using-bowl.webp';
-import smartFeederSide from '../assets/smartFeederSide.webp';
-import petEating from '../assets/petEating.webp';
-import appSettings from '../assets/appSettings.webp';
-import productPackaging from '../assets/productPackaging.webp';
-
 import chevronLeftIcon from '../assets/chevronLeftIcon.webp';
 import chevronRightIcon from '../assets/chevronRightIcon.webp';
-import wifiIcon from '../assets/wifi.webp';
-import shieldIcon from '../assets/shield.webp';
-import batteryIcon from '../assets/battery.webp';
-import truckIcon from '../assets/truck.webp';
-import rotateCcwIcon from '../assets/rotate-ccw.webp';
-import awardIcon from '../assets/award.webp';
-import lockIcon from '../assets/lock.webp';
-import secureCheckoutIcon from '../assets/secureCheckoutIcon.webp';
-import starIcon from '../assets/star.webp';
 import promoBoxImage from '../assets/promo-box.webp';
-import waggleLogo from '../assets/waggle-logo.webp';
-import shoppingCartIcon from '../assets/shopping-cart.webp';
-import menuIcon from '../assets/menu.webp';
+import { StarRating } from './Starratting';
 
-export default function PotionControl(ProductData) {
+
+export default function PotionControl({ProductData,productAvarageRating}) {
   const {open} = useAside();
-  const productDetails = ProductData?.ProductData?.product?.data?.product || {}; 
+  const productDetails = ProductData?.product?.data?.product || {}; 
   
   const PolicyData =
-    ProductData?.ProductData?.instructionMetaobjectData
+    ProductData?.instructionMetaobjectData
       ?.instructionMetaobjectDatas?.metaobjects || [];
   const ProductImages = productDetails?.images?.edges || [];
   const iconWithDiscriptionLabel =
@@ -91,11 +71,6 @@ export default function PotionControl(ProductData) {
 
   const productData = {
     title: productDetails?.title || 'Waggle Smart AI Bowl for Puppies',
-    rating: {
-      score: 4.3,
-      stars: 4,
-      text: '4.3 out of 5',
-    },
     badge: {
       text: 'Limited time deal',
       color: 'bg-amber-600',
@@ -178,17 +153,9 @@ export default function PotionControl(ProductData) {
               {productData.title}
             </span>
             <div className="flex items-center gap-4 mt-[14px] md:hidden block">
-              <div className="flex">
-                {[1, 2, 3, 4].map((star) => (
-                  <Star
-                    key={star}
-                    className="w-4 h-7 fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-                <Star className="w-4 h-7 gray-400" />
-              </div>
+              <StarRating  rating={productAvarageRating}/>
               <span className="dark-slate lato font-normal text-base leading-6 tracking-normal align-middle">
-                {productData.rating.text}
+                {productAvarageRating} out of 5
               </span>
             </div>
           <div className="relative">
@@ -242,17 +209,9 @@ export default function PotionControl(ProductData) {
               {productData.title}
             </span>
             <div className="flex items-center gap-4 mt-[14px] md:block hidden">
-              <div className="flex">
-                {[1, 2, 3, 4].map((star) => (
-                  <Star
-                    key={star}
-                    className="w-4 h-7 fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-                <Star className="w-4 h-7 gray-400" />
-              </div>
+              <StarRating  rating={productAvarageRating}/>
               <span className="dark-slate lato font-normal text-base leading-6 tracking-normal align-middle">
-                {productData.rating.text}
+                {productAvarageRating} out of 5
               </span>
             </div>
             <div

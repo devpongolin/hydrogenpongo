@@ -9,8 +9,7 @@ import starRating from '../assets/starRating.webp';
 import { StarRating } from './Starratting';
 
 
-const TestimonialsSection = ({ productReviews, productAvarageRating,productIdValue }) => {
-  const productAvarageratingData = productAvarageRating?.[productIdValue]?.average_rating || 5; 
+const TestimonialsSection = ({ productReviews, productAvarageRating }) => {
 
   const transformedReviews = productReviews?.map((review) => {
     const text = review.content?.trim() || "";
@@ -23,7 +22,7 @@ const TestimonialsSection = ({ productReviews, productAvarageRating,productIdVal
 
   const textData = {
     sectionTitle: '80,000+ Happy Tails & Counting!',
-    rating: `${productAvarageratingData}/5`,
+    rating: `${productAvarageRating}/5`,
     altTexts: {
       star: 'star',
       starRating: 'star rating',
@@ -80,7 +79,7 @@ const TestimonialsSection = ({ productReviews, productAvarageRating,productIdVal
           {textData.sectionTitle}
         </h2>
         <div className="flex justify-center items-center bg-gray-light rounded-[6.58px] pt-[10.97px] pr-[13.16px] pb-[10.97px] pl-[13.16px] mb-[16px] md:mb-[23px] w-fit mx-auto">
-           <StarRating rating={productAvarageratingData}/>
+           <StarRating rating={productAvarageRating}/>
           <span className="gray-medium-text font-medium text-[15.36px] leading-[21.94px] md:text-base ml-[5px] mt-[2px]">
             {textData.rating}
           </span>
