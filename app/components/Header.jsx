@@ -89,7 +89,7 @@ export function HeaderMenu({
               <NavLink
                 className="no-underline text-neutral-800 px-4 py-2 flex items-center h-[inherit]"
                 end
-                onClick={close}
+                // onClick={close}
                 prefetch="intent"
                 style={activeLinkStyle}
                 to={url}
