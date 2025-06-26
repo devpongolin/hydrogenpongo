@@ -31,7 +31,7 @@ export const METOBJECT_DATA_QUERY = `#graphql
   }
 `;
 
-export const PAGE_DATA_QUERY = `
+export const PAGE_DATA_QUERY = `#graphql
 query PagaeObjectData($handle: String){
   page(handle:$handle) {
      	id
@@ -49,6 +49,20 @@ query PagaeObjectData($handle: String){
                 }
               }
           }
+          }
+        }
+      }
+    }
+    faqData: metafield(namespace:"custom", key:"faq") {
+      references(first: 250) {
+        edges {
+          node {
+            ... on Metaobject {
+              fields {
+                key
+                value
+              }
+            }
           }
         }
       }
