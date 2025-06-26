@@ -1,16 +1,6 @@
-import React from 'react';
-import heartIcon from '../assets/shield-icon.webp'; 
-import toggleIcon from '../assets/toggle-icon.webp'; 
-import shieldIcon from '../assets/heart-icon.webp'; 
-import heroSectionDesktop from '../assets/hero-section2.webp'; 
-import heroSectionMobile from '../assets/hero-section-mobile.webp';
+export default function PartnerwithWaggle({BannerData}) {
 
-
-
-export default function PartnerwithWaggle(metaData) {
-
-  const fields =
-  metaData?.metaData?.partnerProgramBannersData?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const fields = BannerData || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 

@@ -1,3 +1,5 @@
+import { PAGE_DATA_QUERY } from "./metaobject-query";
+
 export async function getAvarageProductRating(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL,productId){
   const myHeaders = new Headers();
   myHeaders.append("Authorization", ALI_REVIEWS_API_KEY);
@@ -34,4 +36,22 @@ const prodcutreview = await fetch(`${ALI_REVIEW_URL}/reviews?limit=12&sort=by_da
   const reviewData = await prodcutreview.json();
   return reviewData;
 
+}
+
+
+export async function getPageData({ context, pageHandle } = {}) {
+  if (!context?.storefront) {
+      throw new Error("Missing storefront context.");
+  }
+
+  const { storefront } = context;
+
+  const pageData = await storefront.query(
+    PAGE_DATA_QUERY,
+      {
+          variables: { handle: pageHandle },
+      },
+  );
+
+  return { pageDatas: pageData };
 }
