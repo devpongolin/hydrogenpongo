@@ -1,8 +1,5 @@
-import React from 'react';
-
-const SimpleStepsSection = (metaData) => {
-  const fields =
-  metaData?.metaData?.partnerProgramSimpleSteps?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const SimpleStepsSection = ({SimpleSteps}) => {
+  const fields = SimpleSteps || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 

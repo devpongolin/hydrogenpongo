@@ -10,6 +10,8 @@ import PetSafetyCards from '~/components/PetSafetyCards'
 import UltimatePetParent from '~/components/UltimatePetParent'  
 import WaggleAppLanding from '~/components/WaggleAppLanding'
 import HappyTailsSection from '~/components/HappyTailsSection'
+import { getPageData } from '~/utils/common-functions';
+
 /**
  * @type {MetaFunction}
  */
@@ -21,13 +23,15 @@ export const meta = () => {
  * @param {LoaderFunctionArgs} args
  */
 export async function loader(args) {
+  const {context} = args;
+  const pageDataByHandle = await getPageData({ context,pageHandle:"hydrogen-home-page" })
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
 
-  return {...deferredData, ...criticalData};
+  return {...deferredData, ...criticalData,pageDataByHandle};
 }
 
 /**
@@ -67,19 +71,23 @@ function loadDeferredData({context}) {
 }
 
 export default function Homepage() {
+
+
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  const mainBannerData = data?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
+
   return (
     <div className="home">
       {/* <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} /> */}
       {/* <waggleHomeContent /> */}
-      <div className='bg-[#EEDED3]'>
-      <WaggleHome />
+       {mainBannerData.length > 0 && (
+          <WaggleHome mainBannerData={mainBannerData}/>
+      )}
       <ProductShowcase />
        <ImageCarousel /> 
       <PetSafetyCards />
-      </div>
       <HappyTailsSection />
       <WaggleAppLanding />
       <UltimatePetParent />

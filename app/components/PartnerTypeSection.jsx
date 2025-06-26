@@ -1,14 +1,5 @@
-import React from 'react';
-import petAdvocateImage from '../assets/pet-advocate-image.webp';
-import resellerImage from '../assets/reseller-image.webp';
-import brandsImage from '../assets/brands-image.webp';
-import arrowIcon from '../assets/arrow-icon.webp';
-
-
-
-const PartnerTypeSection = (metaData) => {
-  const fields =
-  metaData?.metaData?.partnerProgramFindYourPartnerType?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const PartnerTypeSection = ({FindYourPartner}) => {
+  const fields = FindYourPartner || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 

@@ -200,11 +200,15 @@ export default function WaggleHome({ mainBannerData }) {
           </div>
         )}
         <div className="md:mt-21 mb-[11px] md:mb-[34px]">
+          {waggleHomeContent.footerLogos.label &&
           <p className="white-text-element lexendPeta font-light md:text-[11.57px] text-[14px] leading-[100%] tracking-[0] mb-4">
             {waggleHomeContent.footerLogos.label}
           </p>
+          }
           <div className="flex items-center justify-start divide-x-[0.72px] divide-[#C3CDD6]">
-            {waggleHomeContent.footerLogos.logos.map((logo, index) => (
+            {waggleHomeContent.footerLogos.logos.map((logo, index) => {
+            if (!logo.image) return;
+            return(
               <div
                 key={index}
                 className={index === 0 ? 'md:pr-[19px] pr-[12px]' : 'md:px-[28px] px-[5px]'}
@@ -213,7 +217,8 @@ export default function WaggleHome({ mainBannerData }) {
                   className='max-w-[94px] md:max-w-none'
                   loading="lazy" />
               </div>
-            ))}
+            )}
+            )}
           </div>
         </div>
       </div>

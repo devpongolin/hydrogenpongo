@@ -1,13 +1,9 @@
-import React from 'react';
 import dogsImage from '../assets/Heroimage_(2).webp';
 import mobileDogsImage from '../assets/moblieimg.webp';
 import arrowImage from '../assets/arrow.webp';
 
-
-
-const WaggleHero = (metaData) => {
-  const fields =
-    metaData?.metaData?.aboutUsBannersData?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const WaggleHero = ({BannerData}) => {
+  const fields = BannerData || [];
 
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;

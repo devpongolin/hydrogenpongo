@@ -8,10 +8,9 @@ import arrowImg from '../assets/wagglearrow.webp';
 
 
 
-export default function NoMoreRuffDays(metaData) {
+export default function NoMoreRuffDays({noMoreRuffDays}) {
   // --------------------------------------------------------------------------
-  const fields =
-  metaData?.metaData?.aboutUsNoMoreRUFFDays?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const fields = noMoreRuffDays || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 
