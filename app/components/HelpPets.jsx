@@ -1,27 +1,41 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import desktopImage from '../assets/product-showcase.webp';
-import mobileImage from '../assets/product-showcase-mobile.webp';
-import arrowRightIcon from '../assets/arrow-right-blue.webp';
-import secondMobileImage from '../assets/second-mobile-image.webp';
 
-const helpPetsData = {
-  titleLines: [
-    "Help pets stay safe.",
-    "Earn perks while you're at it."
-  ],
-  description: "Become a Waggle Ambassador and help more pet parents keep their furry ones safe.",
-  button: {
-    text: "Join the Pack",
-    iconAlt: "Arrow Right",
-  },
-  images: {
-    desktop: desktopImage,
-    mobile: mobileImage,
-    arrowIcon: arrowRightIcon,
-  },
-};
-                           
-const HelpPets = () => {
+const HelpPets = (metaData) => {
+  const fields =
+  metaData?.metaData?.ambassadorBannerData?.AmbassadorDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  
+  const desktopImg = getReferenceImageUrl('ambassador_banner_desktop_image');
+  const mobileImg = getReferenceImageUrl('ambassador_banner_mobile_image');
+  const mobileSecImg = getReferenceImageUrl('ambassador_banner_second_mobile_image');
+
+  const descriptionText = getValue('ambassador_banner_description');
+  const buttonText = getValue('ambassador_banner_button_text');
+  const buttonImage = getReferenceImageUrl('ambassador_banner_button_icon');
+  const ambassador_banner_main_title_data = getValue('ambassador_banner_main_title_data');
+
+
+
+  const helpPetsData = {
+    titleLines: JSON.parse(ambassador_banner_main_title_data),
+    description: descriptionText || "Become a Waggle Ambassador and help more pet parents keep their furry ones safe.",
+    button: {
+      text: buttonText || "Join the Pack",
+      iconAlt: "Arrow Right",
+    },
+    images: {
+      desktop: desktopImg,
+      mobile: mobileImg,
+      arrowIcon: buttonImage,
+    },
+  };
+
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -73,7 +87,7 @@ const HelpPets = () => {
       {isMobile && (
         <div className="absolute bottom-7 left-0 right-0 flex justify-center">
           <img
-            src={secondMobileImage}
+            src={mobileSecImg}
             alt="Second Mobile Image"
             loading="lazy"
           />

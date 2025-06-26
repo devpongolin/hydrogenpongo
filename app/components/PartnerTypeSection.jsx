@@ -4,76 +4,37 @@ import resellerImage from '../assets/reseller-image.webp';
 import brandsImage from '../assets/brands-image.webp';
 import arrowIcon from '../assets/arrow-icon.webp';
 
-// Import mobile images
-import petAdvocateImageMobile from '../assets/pet-advocate-image-mobile.webp';
-import resellerImageMobile from '../assets/reseller-image-mobile.webp';
-import brandsImageMobile from '../assets/brands-image-mobile.webp';
 
-const data = {
-  images: {
-    petAdvocateImage,
-    resellerImage,
-    brandsImage,
-    arrowIcon,
-    petAdvocateImageMobile,
-    resellerImageMobile,
-    brandsImageMobile,
-  },
-  textContent: {
-    heading: "Find Your Partner Type"
-  },
-  partnerTypes: [
-    {
-      id: "pet-advocates",
-      title: "Pet Advocates",
-      description:
-        "Got a loyal following or work directly with pet parents? If you're a trainer, influencer, or just a pet-obsessed human, share Waggle and earn while you do it.",
-      image: "petAdvocateImage",
-      mobileImage: "petAdvocateImageMobile",
-      imageAlt: "Pet advocate working with clients and pets",
-      buttonText: "Join as an Advocate",
-      backgroundColor: "brand-brown",
-      mobileMb: 'mb-[38px]'
+
+const PartnerTypeSection = (metaData) => {
+  const fields =
+  metaData?.metaData?.partnerProgramFindYourPartnerType?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  const mainTitle = getValue('partnerprogram_find_your_partner_type_main_title');
+  const imageNone1 = getReferenceImageUrl('partnerprogram_find_your_partner_type_image_node_1');
+  const imageNone2 = getReferenceImageUrl('partnerprogram_find_your_partner_type_image_node_2');
+  const imageNone3 = getReferenceImageUrl('partnerprogram_find_your_partner_type_image_node_3');
+  const buttonImage = getReferenceImageUrl('partnerprogram_find_your_partner_type_button_icon');
+  const partnerprogram_find_your_partner_type_typography_data = getValue('partnerprogram_find_your_partner_type_typography_data');
+
+
+  const data = {
+    images: {
+      petAdvocateImage: imageNone1,
+      resellerImage: imageNone2,
+      brandsImage: imageNone3,
+      arrowIcon: buttonImage,
     },
-    {
-      id: "resellers",
-      title: "Resellers",
-      description:
-        "Own a pet shop, RV store, or online storefront? Bring Waggle to your shelves (digital or physical) and give your customers pet safety that sells.",
-      image: "resellerImage",
-      mobileImage: "resellerImageMobile",
-      imageAlt: "Pet shop owner with dogs and products",
-      buttonText: "Become a Reseller",
-      backgroundColor: "brand-dark",
-      mobileMb: 'mb-[15px]'
+    textContent: {
+      heading: mainTitle || "Find Your Partner Type"
     },
-    {
-      id: "brands",
-      title: "Brands",
-      description:
-        "Big ideas start with the right partner. Team up with Waggle on campaigns, content, or initiatives that put pets first.",
-      image: "brandsImage",
-      mobileImage: "brandsImageMobile",
-      imageAlt: "Veterinarian examining a small dog",
-      buttonText: "Partner with Us",
-      backgroundColor: "brand-brown",
-      mobileMb: 'mb-[17px]'
-    },
-  ],
-};
-
-const PartnerTypeSection = () => {
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
+    partnerTypes: JSON.parse(partnerprogram_find_your_partner_type_typography_data),
+  };
   return (
     <div className="md:py-[56px] py-[37px] some-class mx-auto">
       <h2 className="lexend text-dark-gray font-medium md:text-[47.37px] text-[28.48px] md:leading-[124%] leading-[100%] tracking-normal text-center md:mb-[28px] mb-[17px]">
@@ -85,11 +46,11 @@ const PartnerTypeSection = () => {
             key={partner.id}
             className={`w-full md:flex-[0_0_34%] ${partner.backgroundColor} white-text-element md:rounded-[28px] rounded-[20px] md:p-[28px] p-[20px] flex flex-col`}
           >
-            <div className={`md:mb-[28px] mb-[14px] ${isMobile ? 'flex justify-center' : ''}`}>
+            <div className={`md:mb-[28px] mb-[14px] flex justify-center`}>
               <img
-                src={data.images[isMobile ? partner.mobileImage : partner.image]}
+                src={data.images[partner.image]}
                 alt={partner.imageAlt}
-                className={`max-w-none ${isMobile ? 'w-full block md:hidden image-width' : 'hidden md:block'}`}
+                className="w-full max-w-none"
                 loading="lazy"
               />
             </div>
@@ -100,7 +61,6 @@ const PartnerTypeSection = () => {
               <p className={`md:mb-[28px] ${partner.mobileMb} center-on-mobile text-off-white-80 lato font-normal md:text-[18px] text-[15.75px] leading-[144%] tracking-normal`}>
                 {partner.description}
               </p>
-
             </div>
             <button className="button-hover btn-center-mobile main-bg-color text-dark-gray lato font-bold text-[16px] leading-[100%] tracking-normal pt-[8px] pr-[9px] pb-[8px] pl-[28px] rounded-[30px] border flex items-center transparent w-fit ">
               <span>{partner.buttonText}</span>

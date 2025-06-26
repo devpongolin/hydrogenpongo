@@ -30,3 +30,29 @@ export const METOBJECT_DATA_QUERY = `#graphql
     }
   }
 `;
+
+export const PAGE_DATA_QUERY = `
+query PagaeObjectData($handle: String){
+  page(handle:$handle) {
+     	id
+      mainBannerData:metafield(namespace:"custom",key:"cms_page"){
+      reference{
+        ... on Metaobject{
+          fields{
+            key
+            value
+            reference {
+              ... on MediaImage {
+                image {
+                  url
+                  altText
+                }
+              }
+          }
+          }
+        }
+      }
+    }
+  }
+}
+`;

@@ -1,27 +1,38 @@
 import React from 'react';
-import modernDogLogo from '../assets/moderndog.webp';
-import travelswithdelaneyLogo from '../assets/travelswithdelaney.webp';
-import harvestHostsLogo from '../assets/harvesthosts.webp';
-import fmcaLogo from '../assets/fmca.webp';
-import likeTheresNoTomorrowLogo from '../assets/liketheresnottomorrow.webp';
-import dogsterLogo from '../assets/dogster.webp';
-import catsterLogo from '../assets/catster.webp';
 
-const contentData = {
-  heading: "Trusted by Top Dogs"
-};
+const ModernDog = (metaData) => {
+  const fields =
+  metaData?.metaData?.partnerProgramtrustedByTopDogs?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
 
-const partnersData = [
-  { id: 1, name: "Modern Dog Magazine", logo: modernDogLogo, alt: "Modern Dog Magazine" },
-  { id: 2, name: "Travels with Delaney", logo: travelswithdelaneyLogo, alt: "Travels with Delaney" },
-  { id: 3, name: "Harvest Hosts", logo: harvestHostsLogo, alt: "Harvest Hosts" },
-  { id: 4, name: "FMCA", logo: fmcaLogo, alt: "FMCA" },
-  { id: 5, name: "Like There's No Tomorrow", logo: likeTheresNoTomorrowLogo, alt: "Like There's No Tomorrow" },
-  { id: 6, name: "Dogster", logo: dogsterLogo, alt: "Dogster" },
-  { id: 7, name: "Catster", logo: catsterLogo, alt: "Catster" }
-];
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
 
-const ModernDog = () => {
+  const mainTitle = getValue('partnerprogram_trusted_by_top_dogs_title');
+  const imageNone1 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_1');
+  const imageNone2 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_2');
+  const imageNone3 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_3');
+  const imageNone4 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_4');
+  const imageNone5 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_5');
+  const imageNone6 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_6');
+  const imageNone7 = getReferenceImageUrl('partnerprogram_trusted_by_top_dogs_image_7');
+
+  const contentData = {
+    heading: mainTitle || "Trusted by Top Dogs"
+  };
+  
+  const partnersData = [
+    { id: 1, name: "Modern Dog Magazine", logo: imageNone1, alt: imageNone1 },
+    { id: 2, name: "Travels with Delaney", logo: imageNone2, alt: imageNone2 },
+    { id: 3, name: "Harvest Hosts", logo: imageNone3, alt: imageNone3 },
+    { id: 4, name: "FMCA", logo: imageNone4, alt: imageNone4 },
+    { id: 5, name: "Like There's No Tomorrow", logo: imageNone5, alt: imageNone5 },
+    { id: 6, name: "Dogster", logo: imageNone6, alt: imageNone6 },
+    { id: 7, name: "Catster", logo: imageNone7, alt: imageNone7 }
+  ];
+
+
   return (
     <div className="w-full mx-auto pt-[40px] pb-[50px] px-[20px] md:py-[56px] md:px-[65px]">
       <h2 className="md:mb-[37px] mb-[16px] inter gray-medium text-center font-normal text-[14px] md:text-[16px] leading-[164%] tracking-[0] uppercase">
