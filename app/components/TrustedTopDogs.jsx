@@ -1,8 +1,5 @@
-import React from 'react';
-
-const ModernDog = (metaData) => {
-  const fields =
-  metaData?.metaData?.partnerProgramtrustedByTopDogs?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const ModernDog = ({TrustByDog}) => {
+  const fields = TrustByDog || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 
