@@ -56,7 +56,7 @@ const petSafetyData = {
       frontImage: waggleCameraFront,
       backImage: waggleCameraBack,
       frontPadding: 'pt-[4rem] pl-[34px]',
-      backImagePadding: 'pt-[1.5rem]',
+      backImagePadding: '',
       features: [
         {
           text: 'Follows your pet automatically room-to-room',
@@ -124,15 +124,15 @@ const PetSafetyCards = () => {
   };
 
   return (
-    <div className="bg-[#EEDED3] max-w-[1440px] mx-auto py-[55px] w-full">
-      <span className="block text-center font-[400] text-[47px] leading-[100%] tracking-[0] lexend mb-[39px]">
+    <div className="bg-[#EEDED3]  px-[16px] md:px-[0px] md:py-[55px] w-full py-[40px]">
+      <span className="block text-center font-medium md:font-[400] text-[28px] md:text-[47px] leading-[100%] tracking-[-0.36px] md:tracking-[0] lexend mb-[19px] md:mb-[39px]">
         {petSafetyData.title}
       </span>
-      <div className="max-w-[1280px] mx-auto flex flex-wrap justify-center gap-2">
+      <div className="max-w-[1280px] mx-auto flex flex-wrap justify-center md:gap-2 gap-[38px]">
         {petSafetyData.productCards.map((card, index) => (
           <div
             key={index}
-            className={`md:w-[314px] w-[328px] h-[549px] transition-transform duration-700 [transform-style:preserve-3d] ${
+            className={`md:w-[314px] w-full max-w-[328px] h-[549px] transition-transform duration-700 [transform-style:preserve-3d] ${
               flippedCards[index] ? '[transform:rotateY(180deg)]' : ''
             }`}
           >
@@ -191,7 +191,7 @@ const PetSafetyCards = () => {
                     className="object-contain"
                   />
                 </div>
-                <div className=" px-[22px]">
+                <div className={`px-[22px] ${index === 2 || index === 3 ? 'pt-[4.5rem]' : ''}`}>
                   {card.features.map((feature, i) => (
                     <div key={i} className="flex flex-col">
                       <div className="flex space-x-3 pb-3">
@@ -220,7 +220,7 @@ const PetSafetyCards = () => {
                     <span className="absolute left-0 top-1/2 w-full h-[2px] bg-[#007AFF] transform -rotate-[15deg] origin-center"></span>
                   </span>
 
-                  <span className="text-white font-[600] text-[48px] leading-[100%] tracking-[0] lato ml-2">
+                  <span className="text-white font-[600] text-[42px] md:text-[48px] leading-[100%] tracking-[0] lato ml-2">
                     {card.price}
                   </span>
                   <div className="flex items-center cursor-pointer">

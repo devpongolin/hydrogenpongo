@@ -5,7 +5,7 @@ import {ProductItem} from '~/components/ProductItem';
 // import {waggleHomeContent} from '~/components/waggleHomeContent'
 import WaggleHome from '~/components/waggleHomeContent';
 import ProductShowcase from '~/components/ProductShowcase';
-// import ImageCarousel from '~/components/ImageCarousel';
+ import ImageCarousel from '~/components/ImageCarousel';
 import PetSafetyCards from '~/components/PetSafetyCards'
 import UltimatePetParent from '~/components/UltimatePetParent'  
 import WaggleAppLanding from '~/components/WaggleAppLanding'
@@ -86,12 +86,11 @@ export default function Homepage() {
           <WaggleHome mainBannerData={mainBannerData}/>
       )}
       <ProductShowcase />
-      {/* <ImageCarousel /> */}
+       <ImageCarousel /> 
       <PetSafetyCards />
       <HappyTailsSection />
       <WaggleAppLanding />
       <UltimatePetParent />
-     
     </div>
   );
 }

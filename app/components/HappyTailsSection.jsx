@@ -9,9 +9,9 @@ import dog1 from '../assets/human-dog-1.webp';
 import dog2 from '../assets/human-dog-2.webp';
 import dog3 from '../assets/human-dog-3.webp';
 import paw from '../assets/paw-icon.webp';
-import icon1 from '../assets/icon-1.webp';
-import icon2 from '../assets/icon-2.webp';
-import icon3 from '../assets/icon-3.webp';
+import icon1 from '../assets/icon_1.webp';
+import icon2 from '../assets/icon_2.webp';
+import icon3 from '../assets/icon_3.webp';
 import arrow1 from '../assets/rightarrow.webp';
 import arrow2 from '../assets/leftarrow.webp';
 
@@ -27,27 +27,31 @@ function useIsClient() {
 const cardData = [
   { type: 'image', image: dog1 },
   {
-    type: 'card',
-    icon: icon1,
-    quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away.",
-    author: "Jackie's Parent",
-    handle: '@RVAdventureFam',
+    image: dog1,
+    card: {
+      icon: icon1,
+      quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away.",
+      author: "Jackie's Parent",
+      handle: '@RVAdventureFam',
+    }
   },
-  { type: 'image', image: dog2 },
   {
-    type: 'card',
-    icon: icon2,
-    quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away. It's my go-to for dog safety at home!",
-    author: "Spark's Parent",
-    handle: '@PetParentDiaries',
+    image: dog2,
+    card: {
+      icon: icon2,
+      quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away. It's my go-to for dog safety at home!",
+      author: "Spark's Parent",
+      handle: '@PetParentDiaries',
+    }
   },
-  { type: 'image', image: dog3 },
   {
-    type: 'card',
-    icon: icon3,
-    quote: "Waggle gives me peace of mind knowing I can always stay connected with my furry family members no matter where I am.",
-    author: "Max's Parent",
-    handle: '@DogLoverLife',
+    image: dog3,
+    card: {
+      icon: icon3,
+      quote: "Waggle gives me peace of mind knowing I can always stay connected with my furry family members no matter where I am.",
+      author: "Max's Parent",
+      handle: '@DogLoverLife',
+    }
   }
 ];
 
