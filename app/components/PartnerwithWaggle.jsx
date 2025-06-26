@@ -5,54 +5,53 @@ import shieldIcon from '../assets/heart-icon.webp';
 import heroSectionDesktop from '../assets/hero-section2.webp'; 
 import heroSectionMobile from '../assets/hero-section-mobile.webp';
 
-const data = {
-  images: { 
-    heartIcon, 
-    toggleIcon, 
-    shieldIcon, 
-    heroSectionDesktop,
-    heroSectionMobile
-  },
-  textContent: {
-    heading: "Partner with Waggle.",
-    description: "Whether you're reselling, sharing it with your followers, or teaming up on something bigger—this is for folks who care about pets and want to do some real good."
-  },
-  features: [
-    {
-      id: "feature1",
-      icon: "heartIcon",
-      iconAlt: "Heart with checkmark",
-      title: "Help More Pets Stay Safe",
-      description: "Every recommendation helps keep more pets safe and parents worry-free."
-    },
-    {
-      id: "feature2", 
-      icon: "toggleIcon",
-      iconAlt: "Toggle switches",
-      title: "Do Good, Feel Good",
-      description: "Our partners promote products that genuinely improve pets' lives."
-    },
-    {
-      id: "feature3",
-      icon: "shieldIcon",
-      iconAlt: "Shield with checkmark", 
-      title: "Earn More as You Grow",
-      description: "Grow your reach, help more pets, and get rewarded along the way."
-    }
-  ],
-  heroImage: {
-    desktop: {
-      src: "heroSectionDesktop",
-      alt: "Partner with Waggle - People working with pets"
-    },
-    mobile: {
-      src: "heroSectionMobile", 
-      alt: "Partner with Waggle - People working with pets (Mobile)"
-    }
-  }
-};
 
-export default function PartnerwithWaggle() {
+
+export default function PartnerwithWaggle(metaData) {
+
+  const fields =
+  metaData?.metaData?.partnerProgramBannersData?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  const partnerprogram_banner_title_and_sub_title_data = getValue('partnerprogram_banner_title_and_sub_title_data');
+  const bannerMainTitle = getValue('partnerprogram_banner_main_title');
+  const bannerSubTitle = getValue('partnerprogram_banner_subtitle');
+  const bannerDesktop = getReferenceImageUrl('partnerprogram_banner_desktop_image');
+  const bannerMobile = getReferenceImageUrl('partnerprogram_banner_mobile_image');
+  const bannerBottomLeft = getReferenceImageUrl('partnerprogram_banner_bottom_left_image');
+  const bannerBottomMid = getReferenceImageUrl('partnerprogram_banner_bottom_mid_image');
+  const bannerBottomRight = getReferenceImageUrl('partnerprogram_banner_bottom_image_right');
+
+
+  const data = {
+    images: { 
+      heartIcon: bannerBottomLeft, 
+      toggleIcon: bannerBottomMid, 
+      shieldIcon: bannerBottomRight, 
+      heroSectionDesktop: bannerDesktop,
+      heroSectionMobile: bannerMobile
+    },
+    textContent: {
+      heading: bannerMainTitle || "Partner with Waggle.",
+      description: bannerSubTitle || "Whether you're reselling, sharing it with your followers, or teaming up on something bigger—this is for folks who care about pets and want to do some real good."
+    },
+    features: JSON.parse(partnerprogram_banner_title_and_sub_title_data),
+    heroImage: {
+      desktop: {
+        src: "heroSectionDesktop",
+        alt: "Partner with Waggle - People working with pets"
+      },
+      mobile: {
+        src: "heroSectionMobile", 
+        alt: "Partner with Waggle - People working with pets (Mobile)"
+      }
+    }
+  };
+
   return (
     <div className="main-bg-color md:py-[56px] md:pb-[77px] py-[37px] pb-[53px] w-full max-w-[1440px] mx-auto my-class rounded-tl-[28px] rounded-tr-[28px] flex flex-col items-center px-4">
       <img

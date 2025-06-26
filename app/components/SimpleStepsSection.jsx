@@ -1,39 +1,36 @@
 import React from 'react';
-import backgroundImage from '../assets/background-image.webp';
-import backgroundImageMobile from '../assets/background-image-mobile.webp';
-import arrowIcon from '../assets/arrow-icon2.webp';
 
-const data = {
-  images: {
-    backgroundImage,
-    backgroundImageMobile,
-    arrowIcon,
-  },
-  textContent: {
-    heading: "3 Simple Steps to Get Started",
-    buttonText: "Partner with Us"
-  },
-  backgroundImageAlt: "Woman with golden retriever dog",
-  steps: [
-    {
-      id: "step1",
-      stepNumber: "Step 1",
-      title: "Choose the Partner Track That Fits"
-    },
-    {
-      id: "step2",
-      stepNumber: "Step 2",
-      title: "Get the Tools and Support You Need"
-    },
-    {
-      id: "step3",
-      stepNumber: "Step 3",
-      title: "Start Helping Pets and Earning Rewards"
-    }
-  ]
-};
+const SimpleStepsSection = (metaData) => {
+  const fields =
+  metaData?.metaData?.partnerProgramSimpleSteps?.partnerProgramDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
 
-const SimpleStepsSection = () => {
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  const mainTitle = getValue('partnerprogram_simple_steps_main_title');
+  const buttonText = getValue('partnerprogram_simple_steps_button_text');
+  const desktopImage = getReferenceImageUrl('partnerprogram_simple_steps_desktop_image');
+  const mobileImage = getReferenceImageUrl('partnerprogram_simple_steps_mobile_image');
+  const buttonImage = getReferenceImageUrl('partnerprogram_simple_steps_button_icon');
+  const partnerprogram_simple_steps_title_and_description_data = getValue('partnerprogram_simple_steps_title_and_description_data');
+
+
+
+  const data = {
+    images: {
+      backgroundImage: desktopImage,
+      backgroundImageMobile: mobileImage,
+      arrowIcon: buttonImage,
+    },
+    textContent: {
+      heading: mainTitle || "3 Simple Steps to Get Started",
+      buttonText: buttonText || "Partner with Us"
+    },
+    backgroundImageAlt: "Woman with golden retriever dog",
+    steps: JSON.parse(partnerprogram_simple_steps_title_and_description_data),
+  };
   return (
     <div className="semi-transparent-bg padding-custom md:px-[112px] pt-[50px] px-[20px] pb-[40px] md:py-[56px]">
       <div className="relative w-full max-w-[1440px] mx-auto rounded-[32px] overflow-hidden">
@@ -57,7 +54,7 @@ const SimpleStepsSection = () => {
               </h2>
             </div>
             <div className="relative bottom-[140px] md:bottom-[0px] px-[26px] flex-1 bg-radial-peach flex items-end md:px-[51px] md:pb-[54px]">
-              <div className="md:grid grid-cols-4 gap-4 w-full flex flex-col gap-4 max-w-sm mx-auto md:max-w-none md:mx-0">
+              <div className="md:grid grid-cols-4 w-full flex flex-col gap-4 max-w-sm mx-auto md:max-w-none md:mx-0">
                 {data.steps.map((step) => (
                   <div key={step.id} className="p-[40px] md:p-[39px] layout-padding bg-uniq-color rounded-[28px]">
                     <div className="lato my-text-color font-medium text-[14px] pt-[4px] pb-[4px] px-[12px] leading-[100%] tracking-[0] md:tracking-normal mb-[12px]">

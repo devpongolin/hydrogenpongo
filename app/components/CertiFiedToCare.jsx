@@ -52,7 +52,7 @@ const Certifiedtocare = (metaData) => {
         className="w-full h-auto object-cover rounded-[40px]"
         loading="lazy"
       />
-      <div className="justify-end px-[36px] py-[20px] bottom-[36px] md:pl-[104px] absolute inset-0 max-w-md flex flex-col  md:justify-center md:text-left">
+      <div className="justify-end px-[36px] py-[20px] bottom-[36px] md:pl-[104px] absolute inset-0 max-w-md flex flex-col  md:justify-center md:text-left md:left-[5%]">
         <span className="text-[28px] md:text-[48px] font-medium white-text-element lexend md:leading-[60px] leading-[139%] mb-[10px] md:mb-[17px]">
           {titleLines.map((line, i) => (
             <React.Fragment key={i}>
