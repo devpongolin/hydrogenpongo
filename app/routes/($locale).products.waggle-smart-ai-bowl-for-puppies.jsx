@@ -108,7 +108,7 @@ async function fetchProductByHandle(
       body: JSON.stringify({
         query: FETCH_PRODUCT_USING_HANDLE,
         variables: {
-          handle: "pet-monitor",
+          handle: "waggle-smart-ai-bowl-for-puppies",
         },
       }),
     },
@@ -127,16 +127,15 @@ export default function CustomPage() {
   const ProductData = useLoaderData();
   const bundleProduct = ProductData?.product?.data?.product?.bundleProduct?.references?.edges || [];
   const waggleGuide = ProductData?.weggelPDPGuide?.waggleGuideData?.metaobjects?.edges || [];
-  const productFAQ = ProductData?.product?.data?.product?.productFaq?.value || []; 
+  const productFAQS= ProductData?.product?.data?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
-  const productAvarageRating = ProductData?.averageProductRating?.data || {};
   const productIdValue = ProductData?.productId || null;
-    // console.log(productAvarageRating);
-    
+  const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
+    // console.log(productFAQS);  
   
   return (
     <div>
-      <PotionControl ProductData={ProductData} />
+      <PotionControl ProductData={ProductData} productAvarageRating={productAvarageRating}/>
        <SmartPetBowlShowcase ProductData={ProductData} />
        {bundleProduct.length > 0 && (
       <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
@@ -144,11 +143,11 @@ export default function CustomPage() {
       {waggleGuide.length > 0 && (
         <WaggleSteps waggleGuide={waggleGuide} />
       )}
-      {productReviews.length > 0 && Object.keys(productAvarageRating).length > 0 && (
-        <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} productIdValue={productIdValue} />
+      {productReviews.length > 0 && (
+        <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} />
       )}
-      {productFAQ.length > 0 && (
-        <FAQsection productFAQ={productFAQ} />
+      {productFAQS.length > 0 && (
+        <FAQsection productFAQS={productFAQS} />
       )}
        <PetSafetyGrid />
     </div>
