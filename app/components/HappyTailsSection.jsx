@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, FreeMode } from 'swiper/modules';
 import 'swiper/css';
@@ -14,6 +14,15 @@ import icon2 from '../assets/icon-2.webp';
 import icon3 from '../assets/icon-3.webp';
 import arrow1 from '../assets/rightarrow.webp';
 import arrow2 from '../assets/leftarrow.webp';
+
+// Prevent Swiper SSR crash
+function useIsClient() {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient;
+}
 
 const cardData = [
   { type: 'image', image: dog1 },
@@ -44,6 +53,9 @@ const cardData = [
 
 const HappyTailsSection = () => {
   const swiperRef = useRef(null);
+  const isClient = useIsClient();
+
+  if (!isClient) return null;
 
   return (
     <div className="bg-[#2c2f36] text-white py-16 px-4 relative min-h-screen">
@@ -70,59 +82,57 @@ const HappyTailsSection = () => {
 
       {/* Slider */}
       <div className="overflow-hidden md:px-10">
-      <Swiper
-        modules={[FreeMode, Navigation]}
-        onSwiper={(swiper) => (swiperRef.current = swiper)}
-        spaceBetween={24}
-        slidesPerView={4.5}
-        freeMode={true}
-        className="!overflow-visible"
-        breakpoints={{
-          0: {
-            slidesPerView: 1.5,
-          },
-          768: {
-            slidesPerView: 3.5,
-          },
-          1280: {
-            slidesPerView: 4.5,
-          },
-        }}
-      >
-        {cardData.map((item, index) => (
-          <SwiperSlide
-            key={index}
-          >
-            {item.type === 'image' ? (
-              <div className="w-full h-96 rounded-xl">
-                <img
-                  src={item.image}
-                  alt={`dog-${index}`}
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              </div>
-            ) : (
-              <div className="bg-white text-black flex flex-col p-6 relative w-full h-96 rounded-xl">
-                <div className="absolute top-3 left-5">
-                  <img src={paw} alt="paw" />
+        <Swiper
+          modules={[FreeMode, Navigation]}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          spaceBetween={24}
+          slidesPerView={4.5}
+          freeMode={true}
+          className="!overflow-visible"
+          breakpoints={{
+            0: {
+              slidesPerView: 1.5,
+            },
+            768: {
+              slidesPerView: 3.5,
+            },
+            1280: {
+              slidesPerView: 4.5,
+            },
+          }}
+        >
+          {cardData.map((item, index) => (
+            <SwiperSlide key={index}>
+              {item.type === 'image' ? (
+                <div className="w-full h-96 rounded-xl">
+                  <img
+                    src={item.image}
+                    alt={`dog-${index}`}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
-                <div className="flex flex-col justify-end px-2 mt-12">
-                  <p className="text-gray-700 text-base leading-relaxed mb-6">
-                    "{item.quote}"
-                  </p>
-                  <div>
-                    <h3 className="font-semibold text-black text-base">{item.author}</h3>
-                    <a href="#" className="text-gray-500 text-sm">{item.handle}</a>
+              ) : (
+                <div className="bg-white text-black flex flex-col p-6 relative w-full h-96 rounded-xl">
+                  <div className="absolute top-3 left-5">
+                    <img src={paw} alt="paw" />
+                  </div>
+                  <div className="flex flex-col justify-end px-2 mt-12">
+                    <p className="text-gray-700 text-base leading-relaxed mb-6">
+                      "{item.quote}"
+                    </p>
+                    <div>
+                      <h3 className="font-semibold text-black text-base">{item.author}</h3>
+                      <a href="#" className="text-gray-500 text-sm">{item.handle}</a>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-7 right-7 bg-white rounded-lg p-2 w-10 h-10">
+                    <img src={item.icon} alt="icon" className="w-full h-full object-contain" />
                   </div>
                 </div>
-                <div className="absolute bottom-7 right-7 bg-white rounded-lg p-2 w-10 h-10">
-                  <img src={item.icon} alt="icon" className="w-full h-full object-contain" />
-                </div>
-              </div>
-            )}
-          </SwiperSlide>
-        ))}
-      </Swiper>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
