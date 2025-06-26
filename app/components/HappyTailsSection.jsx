@@ -123,4 +123,3 @@ const HappyTailsSection = () => {
 };
 
 export default HappyTailsSection;
- 
