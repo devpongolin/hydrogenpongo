@@ -42,41 +42,63 @@ const UltimatePetParent = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-[#D6E7FF] to-white py-[55px] max-w-[1440px] mx-auto">
-      <div className="relative max-w-[1280px] mx-auto mb-[40px]">
-        <h1 className="font-[400] text-[47px] leading-[100%] tracking-[0] lexend text-center">
+    <div className="bg-gradient-to-r from-[#D6E7FF] to-white py-[40px] md:py-[55px] max-w-[1440px] mx-auto">
+      {/* Title and Button */}
+      <div className="relative max-w-[1280px] mx-auto mb-[40px] px-4 md:px-0">
+        <h1 className="text-center font-[500] md:font-[400] text-[28px] md:text-[47px] leading-[100%] tracking-[0] lexend">
           The Ultimate Pet Parent Guide
         </h1>
-        <button className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-2 cursor-pointer">
+        <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 items-center gap-2 cursor-pointer">
           <span className="font-[700] text-[16px] leading-[100%] tracking-[0] lato">View All</span>
           <img src={buttonIcon} alt="Arrow" loading="lazy" />
-        </button>
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-[20px] justify-center lg:justify-between max-w-[1280px] mx-auto">
-        {cardData.map((card) => (
-          <div
-            key={card.id}
-            className="flex flex-col rounded-[32px] overflow-hidden bg-white hover:bg-blue-600 transition-colors duration-300 group shadow-md w-[305px]"
-          >
-            <img src={card.image} alt={card.title} className="object-cover" loading="lazy" />   
-            <div className="px-[28px] py-[19px] flex flex-col flex-grow">
-              <p className="font-[400] text-[13.13px] leading-[100%] tracking-[0] lato group-hover:text-white mb-[30px]">
-                {card.date}
-              </p>
-              <h3 className="font-[700] text-[16px] leading-[100%] tracking-[0] lato group-hover:text-white mb-[3px]">
-                {card.title}
-              </h3>
-              <p className="text-sm text-gray-600 group-hover:text-white mb-[30px]">
-                {card.description}
-              </p>
-              <button className="flex items-center gap-2 font-[400] text-[14px] leading-[100%] tracking-[0] align-middle lato group-hover:text-white mt-auto cursor-pointer">
-                <span>Read more</span>
-                <img src={buttonIcon} alt="Arrow" loading="lazy" />
-              </button>
+      {/* Cards Section */}
+      <div className="max-w-[1280px] mx-auto px-4 md:px-0">
+        <div className="flex md:flex-wrap md:justify-center gap-[20px] overflow-x-auto pb-4 scrollbar-hide">
+          {cardData.map((card) => (
+            <div
+              key={card.id}
+              className="flex-shrink-0 md:flex-shrink md:w-[305px] w-[280px] bg-white rounded-[6.65px] md:rounded-[32px] overflow-hidden shadow-md transition-colors duration-300 hover:bg-blue-600 group"
+            >
+              <div className="w-full">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="px-[22px] md:px-[28px] py-[17px] md:py-[19px] flex flex-col flex-grow">
+                <p className="font-[400] text-[11px] md:text-[13.13px] lato leading-[100%] group-hover:text-white mb-[8px] md:mb-[30px]">
+                  {card.date}
+                </p>
+                <h3 className="font-[700] text-[18px] md:text-[16px] lato leading-[100%] group-hover:text-white mb-[3px]">
+                  {card.title}
+                </h3>
+                <p className="font-medium text-[14px] lato leading-[100%] text-gray-600 group-hover:text-white mb-[11px] md:mb-[30px]">
+                  {card.description}
+                </p>
+                <a
+                  href="#"
+                  className="flex items-center gap-2 font-[400] text-[14px] lato leading-[100%] group-hover:text-white mt-auto cursor-pointer"
+                >
+                  <span>Read more</span>
+                  <img src={buttonIcon} alt="Arrow" loading="lazy" />
+                </a>
+              </div>
             </div>
+          ))}
+        </div>
+
+        {/* Mobile View All Button */}
+        <div className="md:hidden flex justify-center mt-8">
+          <div className="flex items-center gap-2 cursor-pointer">
+            <span className="font-[700] text-[16px] leading-[100%] lato">View All</span>
+            <img src={buttonIcon} alt="Arrow" loading="lazy" />
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
