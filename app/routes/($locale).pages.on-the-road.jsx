@@ -37,12 +37,14 @@ const pageFaqData = pageData?.pageDataByHandle?.pageDatas?.page?.faqData?.refere
 // console.log(pageData);
   return (
     <>
-    {mainBannerData.length > 0 && (
-        <WaggleHome mainBannerData={mainBannerData}/>
-    )}
-    {pageFaqData.length > 0 && (
-     <PageFAQ pageFaqData={pageFaqData}/>
-    )}
+    <div className='bg-[#F7EEE9]'>
+      {mainBannerData.length > 0 && (
+          <WaggleHome mainBannerData={mainBannerData}/>
+      )}
+      {pageFaqData.length > 0 && (
+      <PageFAQ pageFaqData={pageFaqData}/>
+      )}
+    </div>
     </>
   )
 }
