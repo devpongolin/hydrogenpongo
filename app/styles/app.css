@@ -587,6 +587,7 @@ button.reset:hover:not(:has(> *)) {
   --gray-medium: #929292;
   --black-dark: #111111;
   --dark-overlay: #18212D80;
+  --custom-radial-blue: radial-gradient(75.76% 501.49% at 0% 74.23%, rgba(173, 214, 255, 0.3) 8.48%, rgba(173, 214, 255, 0) 20%);
   --gradient-dark-fade: linear-gradient(  
   180deg,
   #2E2E2E 0%,
@@ -628,6 +629,9 @@ button.reset:hover:not(:has(> *)) {
     linear-gradient(0deg, #0085FF, #0085FF),
     radial-gradient(217.75% 144.07% at 217.75% 107.58%, rgba(127, 139, 210, 0.3) 0%, rgba(127, 139, 210, 0) 100%);
 --custom-dark-gradient: linear-gradient(121.48deg, rgba(46, 49, 56, 0.64) 31.01%, rgba(130, 138, 158, 0.64) 90.53%);
+}
+.custom-radial-blue-bg {
+  background: var(--custom-radial-blue);
 }
 .my-dark-gradient-box {
   background: var(--custom-dark-gradient);
@@ -962,7 +966,23 @@ button.reset:hover:not(:has(> *)) {
     margin-bottom: 10px;
   }
 }
-
+@media (min-width: 767px) and (max-width: 930px){
+   .Padding-left-right{
+    padding: 20px;
+   }
+   }
+   
+@media (min-width: 767px) and (max-width: 1024px){
+  .section-wrapper{
+    padding: 20px;
+  }
+  .layout-center{
+    width: auto;
+  }
+  .responsive-container{
+   font-size: 33px;
+  }
+}
 .pdp-benifits-text-center:after {
   border-right: 1px solid #2E313847;
   content: '';

@@ -97,11 +97,11 @@ export default function WaggleHome({ mainBannerData }) {
   }, [messages.length]);
 
   return (
-    <div className="relative max-w-[1440px] overflow-hidden mx-auto rounded-[40.56px]">
+    <div className="relative overflow-hidden mx-auto rounded-[40.56px]">
       <img
         src={mainBannerDesktopImage || backgroundImage}
         alt="Background"
-        className="mt-[4%] inset-0 w-full h-full object-cover hidden md:block"
+        className="inset-0 w-full h-full object-cover hidden md:block"
         loading="lazy"
       />
       <img
@@ -140,7 +140,7 @@ export default function WaggleHome({ mainBannerData }) {
       <div className="responsive-temp-box mobile-flex-center max-w-[1280px] w-full top-[50%] md:top-[60.5%] left-[50%] md:left-[48.5%] translate-x-[-50%] translate-y-[-50%] absolute py-[30px] md:py-[0] md:px-[20px] px-[15px] flex flex-col h-full justify-between md:h-auto md:justify-normal">
         <div className="flex flex-col lg:flex-row gap-8 items-center">
           <div className="w-full lg:w-2/3 md:mb-12">
-            <h2 className="Section-heading text-center md:text-left mb-[12px] md:max-w-[791px] white-text-element lexend font-medium md:text-[63px] text-[34px] md:leading-[104%] leading-[113%] tracking-[0]">
+            <h2 className="Section-heading text-center md:text-left md:max-w-[34rem] mb-[12px] white-text-element lexend font-medium md:text-[63px] text-[34px] md:leading-[104%] leading-[113%] tracking-[0] pt-[30px] md:pt-[0px]">
               {waggleHomeContent.hero.headline}
             </h2>
             <p className="text-center Secondary-text md:text-left lato font-medium text-[20px] leading-[144%] tracking-[0] white-text-element md:mb-[40px] mb-[24px]">

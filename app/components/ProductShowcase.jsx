@@ -46,26 +46,26 @@ const ProductShowcase = () => {
   const content = productShowcaseContent;
 
   return (
-    <div className="bg-[#EEDED3] md:py-[55px] py-[40px] md:px-[80px] px-[26px] max-w-[1440px] mx-auto">
-      <div className="relative overflow-hidden">
+    <div className="bg-[#EEDED3] Padding-left-right md:py-[55px] py-[40px] md:px-[80px] px-[26px] ">
+      <div className="relative overflow-hidden max-w-[1280px] mx-auto w-full">
         <img
           src={content.background.desktop}
           alt="Background Desktop"
-          className="border border-gray-300 rounded-[32px] hidden md:block absolute w-full h-full object-cover object-center"
+          className="border border-gray-300 rounded-[32px] hidden md:block absolute w-full h-full object-cover max-w-[1440px] mx-auto"
         />
         <img
           src={content.background.mobile}
           alt="Background Mobile"
-          className="md:hidden absolute w-full h-full object-cover"
+          className="md:hidden absolute w-full h-full object-cover rounded-[22px]"
         />
         <div className="items-center md:px-[68px] md:py-[55px] py-[27px] px-[22px] md:min-h-[535px] relative flex flex-col md:flex-row  md:items-start justify-between gap-8 md:gap-12">
           <div className="flex flex-col">
             <div className="flex items-center mb-6 md:mb-[24px]">
-              <img src={content.amazon.logo} alt="Amazon" />
+              <img src={content.amazon.logo} alt="Amazon" className='w-[126px] md:w-auto'/>
               <img
                 src={content.amazon.star}
                 alt="Star Rating"
-                className="ml-3 md:ml-3 md:mb-[10px] flex items-center"
+                className="ml-3 md:ml-3 md:mb-[10px] flex items-center w-[126px] md:w-auto"
               />
             </div>
             <h1 className="lexend font-extralight md:text-[47px] text-[28px] leading-[1.12] tracking-[-0.03em] text-dark-gray mb-2">
@@ -82,11 +82,11 @@ const ProductShowcase = () => {
               </span>
             </h1>
           </div>
-          <div className="flex flex-col gap-4 mt-4 gap-[17px] w-[262px]">
+          <div className="flex flex-col gap-4 mt-4 md:gap-[17px] px-[22px] md:px-[0px] gap-[8px] w-[262px]">
             {content.stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="my-dark-gradient-box rounded-[10px] p-5 md:p-[15px] white-text-element"
+                className="my-dark-gradient-box rounded-[10px] p-[15px] white-text-element"
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="lexend font-semibold md:text-[47.37px] text-[28px] leading-[124%] tracking-[-0.02px] mb-[5px]">
@@ -94,7 +94,7 @@ const ProductShowcase = () => {
                   </span>
                   <img src={stat.icon} alt={stat.label} loading="lazy" />
                 </div>
-                <p className="lexend font-normal text-base leading-[124%] tracking-[-0.02px]">
+                <p className="lexend font-normal md:text-base text-sm  leading-[124%] tracking-[-0.02px]">
                   {stat.label}
                 </p>    
               </div>
