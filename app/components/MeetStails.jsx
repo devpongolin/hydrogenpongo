@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 
 
-export default function Meetstails(metaData) {
-  const fields =
-    metaData?.metaData?.aboutUsWhereTechMeetsTailsData?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+export default function Meetstails({whereToTails}) {
+  const fields = whereToTails || [];
     const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const Certifiedtocare = (metaData) => {
-  const fields =
-  metaData?.metaData?.aboutUsCertifiedCare?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const Certifiedtocare = ({cartifiedCare}) => {
+  const fields = cartifiedCare || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 

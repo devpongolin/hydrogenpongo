@@ -1,8 +1,7 @@
 import React from "react";
 
-const Tailwaggingapproved = (metaData) => {
-  const fields =
-  metaData?.metaData?.aboutUsWaggingApproved?.aboutUsDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const Tailwaggingapproved = ({waggingApproved}) => {
+  const fields = waggingApproved || [];
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 
