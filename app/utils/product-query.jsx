@@ -15,6 +15,7 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                 edges{
                     node{
                     id
+                    title
                     quantityAvailable
                     price{
                         amount
@@ -22,14 +23,59 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                     compareAtPrice{
                         amount
                     }
+                    image {
+                        url
+                        altText
+                    }
                     }
                 }
             }
-            iconWithDiscription: metafield(namespace:"custom", key:"description_with_icon") {
+            productFeatureTitle: metafield(namespace:"custom", key:"product_feature_title") {
                     value
             }
-            iconWithDiscriptionLabel: metafield(namespace:"custom", key:"description_with_icon_label") {
-                    value
+            productFeatureDescription: metafield(namespace:"custom", key:"product_features_entries") {
+              references(first: 250) {
+                edges {
+                  node {
+                    ... on Metaobject {
+                      fields {
+                        key
+                        value
+                        reference {
+                        ... on MediaImage {
+                          image {
+                            url
+                            altText
+                          }
+                        }
+                    }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            petGuideSteps: metafield(namespace:"custom", key:"guide_steps") {
+              references(first: 250) {
+                edges {
+                  node {
+                    ... on Metaobject {
+                      fields {
+                        key
+                        value
+                        reference {
+                        ... on MediaImage {
+                          image {
+                            url
+                            altText
+                          }
+                        }
+                    }
+                      }
+                    }
+                  }
+                }
+              }
             }
             questionAnswer: metafield(namespace: "custom", key: "product_faq_referance") {
               references(first: 250) {
@@ -39,6 +85,24 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                       fields {
                         key
                         value
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            petsNeeds: metafield(namespace: "custom", key: "pets_needs") {
+              reference{
+                ... on Metaobject {
+                  fields {
+                    key
+                    value
+                    reference {
+                      ... on MediaImage {
+                        image {
+                          url
+                          altText
+                        }
                       }
                     }
                   }

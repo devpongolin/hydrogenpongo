@@ -12,7 +12,7 @@ import { getInstructionMetaobjectData } from '~/utils/common-functions';
 export async function loader({context}) {
   const ALI_REVIEWS_API_KEY = context.env.ALI_REVIEWS_API_KEY;
   const ALI_REVIEW_URL = context.env.ALI_REVIEW_URL;
-  const product = await fetchProductByHandle({ context, handle: "waggle-smart-ai-bowl-for-puppies" });
+  const product = await fetchProductByHandle({ context, handle: "waggle-pet-camera" });
   const productId = product?.data?.product?.id?.split('/').pop();
   const instructionMetaobjectData = await getInstructionMetaobjectData({ context,type: 'product_instruction' })
   const averageProductRating = await getAvarageProductRating(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL,productId)

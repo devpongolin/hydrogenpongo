@@ -1,5 +1,7 @@
-const SmartPetBowlShowcase = (ProductData) => {
-  const metaobjectData = ProductData?.ProductData?.effortlessPetNeed?.effortlessPetNeeds?.metaobjects?.edges[0]?.node?.fields  || {};
+const SmartPetBowlShowcase = ({petsNeeds}) => {
+  const metaobjectData = petsNeeds  || {};
+  // console.log(metaobjectData);
+  
 
   // left part data...............
   const topLeftText = metaobjectData?.find(
