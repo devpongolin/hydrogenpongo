@@ -25,34 +25,55 @@ function useIsClient() {
 }
 
 const cardData = [
+
   { type: 'image', image: dog1 },
+
   {
-    image: dog1,
-    card: {
-      icon: icon1,
-      quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away.",
-      author: "Jackie's Parent",
-      handle: '@RVAdventureFam',
-    }
+
+    type: 'card',
+
+    icon: icon1,
+
+    quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away.",
+
+    author: "Jackie's Parent",
+
+    handle: '@RVAdventureFam',
+
   },
+
+  { type: 'image', image: dog2 },
+
   {
-    image: dog2,
-    card: {
-      icon: icon2,
-      quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away. It's my go-to for dog safety at home!",
-      author: "Spark's Parent",
-      handle: '@PetParentDiaries',
-    }
+
+    type: 'card',
+
+    icon: icon2,
+
+    quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away. It's my go-to for dog safety at home!",
+
+    author: "Spark's Parent",
+
+    handle: '@PetParentDiaries',
+
   },
+
+  { type: 'image', image: dog3 },
+
   {
-    image: dog3,
-    card: {
-      icon: icon3,
-      quote: "Waggle gives me peace of mind knowing I can always stay connected with my furry family members no matter where I am.",
-      author: "Max's Parent",
-      handle: '@DogLoverLife',
-    }
+
+    type: 'card',
+
+    icon: icon3,
+
+    quote: "Waggle gives me peace of mind knowing I can always stay connected with my furry family members no matter where I am.",
+
+    author: "Max's Parent",
+
+    handle: '@DogLoverLife',
+
   }
+
 ];
 
 const HappyTailsSection = () => {
@@ -62,7 +83,7 @@ const HappyTailsSection = () => {
   if (!isClient) return null;
 
   return (
-    <div className="bg-[#2c2f36] text-white py-16 px-4 relative min-h-screen">
+    <div className="bg-[#2c2f36] text-white py-16 px-4 relative">
       {/* Title and Buttons */}
       <div className="text-center mb-10 relative">
         <h1 className="text-5xl font-bold mb-2">80,000+</h1>
@@ -129,7 +150,7 @@ const HappyTailsSection = () => {
                       <a href="#" className="text-gray-500 text-sm">{item.handle}</a>
                     </div>
                   </div>
-                  <div className="absolute bottom-7 right-7 bg-white rounded-lg p-2 w-10 h-10">
+                  <div className="absolute bottom-0 right-0 bg-white rounded-lg">
                     <img src={item.icon} alt="icon" className="w-full h-full object-contain" />
                   </div>
                 </div>
