@@ -1,4 +1,34 @@
 import { PAGE_DATA_QUERY } from "./metaobject-query";
+import { FETCH_PRODUCT_USING_HANDLE, METOBJECT_DATA_QUERY } from "./product-query";
+
+export async function fetchProductByHandle({ context,handle } = {}) {
+   const { storefront } = context;
+  const response = await storefront.query(
+    FETCH_PRODUCT_USING_HANDLE,
+    {
+      variables: { handle },
+    },
+  );
+  return { product: response }
+}
+
+export async function getInstructionMetaobjectData({ context,type } = {}) {
+    if (!context?.storefront) {
+      throw new Error("Missing storefront context.");
+    }
+  
+    const { storefront } = context;
+  
+    const instructionMetaobjectData = await storefront.query(
+      METOBJECT_DATA_QUERY,
+      {
+        variables: { type },
+      },
+    );
+  
+    return { instructionMetaobjectDatas: instructionMetaobjectData };
+  }
+
 
 export async function getAvarageProductRating(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL,productId){
   const myHeaders = new Headers();
