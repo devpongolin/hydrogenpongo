@@ -12,7 +12,7 @@ import { getInstructionMetaobjectData } from '~/utils/common-functions';
 export async function loader({context}) {
   const ALI_REVIEWS_API_KEY = context.env.ALI_REVIEWS_API_KEY;
   const ALI_REVIEW_URL = context.env.ALI_REVIEW_URL;
-  const product = await fetchProductByHandle({ context, handle: "waggle-smart-ai-bowl-for-puppies" });
+  const product = await fetchProductByHandle({ context, handle: "waggle-rv-pet-temperature-monitor" });
   const productId = product?.data?.product?.id?.split('/').pop();
   const instructionMetaobjectData = await getInstructionMetaobjectData({ context,type: 'product_instruction' })
   const averageProductRating = await getAvarageProductRating(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL,productId)
@@ -35,7 +35,8 @@ export default function CustomPage() {
   const productFAQS= ProductData?.product?.product?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
   const productIdValue = ProductData?.productId || null;
-  const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5; 
+  const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
+    // console.log(ProductData);  
   
   return (
     <div>
@@ -43,12 +44,12 @@ export default function CustomPage() {
       {petsNeeds.length > 0 && (
         <SmartPetBowlShowcase petsNeeds={petsNeeds} />
       )}
-      {bundleProduct.length > 0 && (
-        <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
+       {bundleProduct.length > 0 && (
+      <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
       )}
-      {waggleGuide.length > 0 && (
-        <WaggleSteps waggleGuide={waggleGuide} />
-      )}
+       {waggleGuide.length > 0 && (
+              <WaggleSteps waggleGuide={waggleGuide} />
+        )}
       {productReviews.length > 0 && (
         <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} />
       )}

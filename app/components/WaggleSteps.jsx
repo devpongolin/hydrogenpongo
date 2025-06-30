@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 
 export default function WaggleSteps(waggleGuide) {
-
 const waggleGuideRaw = waggleGuide?.waggleGuide || [];
-const mainTitle = waggleGuide?.waggleGuide[0]?.node?.fields?.find(item=> item.key === 'waggle_guide_main_title')?.value;
-const subTitle = waggleGuide?.waggleGuide[0]?.node?.fields?.find(item=> item.key === 'waggle_guide_sub_title')?.value;
+const mainTitle = 'Takes 2 Minutes.';
+const subTitle = 'Saves a Lifetime of Stress.';
 
-const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
+let parsedGuide = waggleGuideRaw.map((item, index, arr) => {
   const fields = item.node.fields;
 
   const getValue = (key) => fields.find(f => f.key === key)?.value;
@@ -44,6 +43,9 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
   };
 });
 
+parsedGuide.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+
+
   const content = {
     header: {
       title1: mainTitle || "Takes 2 Minutes.",
@@ -57,21 +59,13 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
   const [expandedStep, setExpandedStep] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
 
-  // useEffect(() => {
-  //   if (!autoRotate) return;
-  //   const interval = setInterval(() => {
-  //     setActiveStep((prevStep) => (prevStep + 1) % content.steps.length);
-  //   }, 5000);
-  //   return () => clearInterval(interval);
-  // }, [autoRotate]);
-
   const toggleStep = (stepIndex) => {
     setExpandedStep(expandedStep === stepIndex ? -1 : stepIndex);
   };
 
   const Box = ({ box, stepIndex }) => (
     <div className="flex justify-center items-center lg:flex-shrink-0">
-      <div
+      <button
         className={`cursor-pointer waggle-blue-bg w-full max-w-[150px] rounded-[20px] border border-transparent pt-[52px] px-[47px] pb-[71px] h-full flex flex-col items-center justify-between 
         ${activeStep === stepIndex ? 'bg-blue-600 text-white' : ''}`}
         onClick={() => {
@@ -81,7 +75,7 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
       >
         <span className="lato font-[400] text-[48px] leading-[100%] tracking-[0] dark-overlay mb-4">{box.number}</span>
         <span className="lexend font-[400] text-[20px] leading-[100%] tracking-[0] dark-overlay">{box.text}</span>
-      </div>
+      </button>
     </div>
   );
 
@@ -100,7 +94,7 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
         <div className="space-y-5 lg:space-y-0 lg:pb-[64px] pb-[48px]">
           {content.steps.map((step, index) => (
             <div key={index} className="flex flex-col lg:flex-row">
-              <div
+              <button
                 className="lg:hidden w-full text-left bg-white rounded-xl p-[20px]"
                 onClick={() => toggleStep(index)}
               >
@@ -121,7 +115,7 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
                     />
                   </div>
                 )}
-              </div>
+              </button>
               {typeof window !== 'undefined' && window.outerWidth >= 1023 && activeStep === index && (
                 <div className="flex flex-col lg:flex-row gap-5 w-full transition-all duration-300">
                   {index === 1 && (
@@ -139,7 +133,7 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
                       </div>
                     </>
                   )}
-                  <div
+                  <button
                     className="waggle-blue-bg w-full max-w-full lg:max-w-[876px] border border-transparent flex rounded-[20px] flex-col lg:flex-row gap-[27px]"
                     onClick={() => {
                       setActiveStep(index);
@@ -162,7 +156,7 @@ const parsedGuide = waggleGuideRaw.map((item, index, arr) => {
                       </h3>
                       <div className="w-50 h-1 blue-400 rounded"></div>
                     </div>
-                  </div>
+                  </button>
                   {index === 0 && (
                     <>
                       <div className="hidden lg:flex justify-center lg:flex-shrink-0">
