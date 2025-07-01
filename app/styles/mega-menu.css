@@ -292,12 +292,6 @@
   .section-title:hover::after {
     transform: translateX(4px);
   }
-  .hover-effect-main:hover .hover-effect {
-    background: #D8C2A94D;
-    border-radius: 9999px;
-    border: 1px solid #80808040;
-    padding: 8px 14px;
-  }
   .hover-effect-main .hover-effect {
     border-radius: 9999px;
     border: 1px solid transparent;
@@ -327,6 +321,15 @@
 
 
   /* Responsive styles */
+  @media(min-width: 768px){
+    .hover-effect-main:hover .hover-effect {
+      background: #D8C2A94D;
+      border-radius: 9999px;
+      border: 1px solid #80808040;
+      padding: 8px 14px;
+    }
+  }
+
   @media (max-width: 1200px) {
     .mega-menu-container {
       max-width: 100%;
@@ -347,5 +350,9 @@
     }
     .header-menu-desktop {
       display: none;
+    }
+    .mega-menu-grid {
+      display: flex !important;
+      flex-direction: column;
     }
   } 

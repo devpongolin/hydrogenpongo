@@ -82,30 +82,23 @@ export function HeaderMenu({
           return (
             <li
               key={item.id}
-              className="inline-flex items-center group h-[inherit] hover-effect-main"
+              className="inline-flex items-center group h-[inherit] hover-effect-main w-full md:w-auto flex-col md:flex-row"
               onMouseEnter={() => setHoveredMenu(item.title)}
               onMouseLeave={() => setHoveredMenu(null)}
             >
               <NavLink
-                className="no-underline text-neutral-800 px-4 py-2 flex items-center h-[inherit]"
+                className="no-underline text-neutral-800 md:px-4 md:py-2 flex items-center h-[inherit] w-full"
                 end
                 // onClick={close}
                 prefetch="intent"
                 style={activeLinkStyle}
                 to={url}
               >
-                <span className="flex items-center gap-2 text-[1.1rem] font-medium !text-[#18212D] hover-effect">
+                <span className="flex items-center gap-2 text-[1.1rem] font-medium !text-[#18212D] hover-effect w-full">
                   {item.title}
                   {hasDropdown && (
-                    <svg
-                      className={`inline-flex items-center transition-transform duration-300 ease-in-out text-[1.2rem] ml-1 w-3 h-3 text-neutral-400 !text-[#18212D] ${hoveredMenu === item.title ? 'rotate-180' : ''}`}
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    <svg className={`inline-flex items-center transition-transform duration-300 ease-in-out text-[1.2rem] ml-1 w-3 h-3 !text-[#18212D] ${hoveredMenu === item.title ? 'rotate-180' : ''}`} width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1.23309L7.96953 8.20262L14.9391 1.23309" stroke="#02070D" stroke-width="1.85854" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   )}
                 </span>
@@ -125,6 +118,7 @@ export function HeaderMenu({
   }
 
   return (
+    <>
     <nav className={`z-50 w-full h-[inherit] ${className}`} role="navigation">
       {viewport === 'mobile' && (
         <NavLink
@@ -139,6 +133,18 @@ export function HeaderMenu({
       )}
       {renderMenuItems((menu || FALLBACK_HEADER_MENU).items)}
      </nav>
+     {/* <button className="reset" onClick={() => open('search')}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_1_6872" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+          <rect width="32" height="32" fill="#D9D9D9"/>
+          </mask>
+          <g mask="url(#mask0_1_6872)">
+          <path d="M28.2591 30.0333L17.6538 19.4281C16.8474 20.127 15.907 20.6714 14.8328 21.0612C13.7585 21.451 12.6155 21.6459 11.4036 21.6459C8.49598 21.6459 6.03513 20.6378 4.02108 18.6216C2.00703 16.6054 1 14.1725 1 11.323C1 8.47339 2.0081 6.04051 4.0243 4.0243C6.04051 2.0081 8.48011 1 11.3431 1C14.2061 1 16.639 2.0081 18.6418 4.0243C20.6445 6.04051 21.6459 8.47541 21.6459 11.329C21.6459 12.4809 21.4577 13.5945 21.0814 14.6699C20.705 15.7452 20.1405 16.7533 19.3878 17.6942L30.0333 28.2591L28.2591 30.0333ZM11.3633 19.2265C13.5475 19.2265 15.4042 18.4536 16.9332 16.9078C18.4621 15.3621 19.2265 13.5005 19.2265 11.323C19.2265 9.14546 18.4621 7.28383 16.9332 5.73808C15.4042 4.19232 13.5475 3.41944 11.3633 3.41944C9.15675 3.41944 7.28115 4.19232 5.73646 5.73808C4.19178 7.28383 3.41944 9.14546 3.41944 11.323C3.41944 13.5005 4.19178 15.3621 5.73646 16.9078C7.28115 18.4536 9.15675 19.2265 11.3633 19.2265Z" fill="#2E3138"/>
+          </g>
+        </svg>
+
+      </button> */}
+     </>
   );
 }
 

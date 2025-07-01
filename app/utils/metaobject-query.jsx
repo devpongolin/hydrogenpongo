@@ -110,6 +110,36 @@ query PageObjectData($handle: String) {
         ...MetaobjectFields
       }      
     }
+
+    AmbassadorHelpPetsStaySafe: metafield(namespace: "custom", key: "ambassador_banner_data") {
+      reference {
+        ...MetaobjectFields
+      }      
+    }
+
+    AmbassadorCurrentPartner: metafield(namespace: "custom", key: "ambassador_current_partner_data") {
+      reference {
+        ...MetaobjectFields
+      }      
+    }
+
+    AmbassadorWaysYouCanHelp: metafield(namespace: "custom", key: "ambassador_ways_you_can_help_data") {
+      reference {
+        ...MetaobjectFields
+      }      
+    }
+
+    AmbassadorWeGotThose: metafield(namespace: "custom", key: "ambassador_we_got_those_data") {
+      reference {
+        ...MetaobjectFields
+      }      
+    }
+
+    AmbassadorClaimYourPerksToday: metafield(namespace: "custom", key: "ambassador_claim_your_perks_today_data") {
+      reference {
+        ...MetaobjectFields
+      }      
+    }
   }
 }
 

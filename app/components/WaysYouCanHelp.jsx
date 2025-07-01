@@ -1,54 +1,72 @@
 import React from "react";
-import communityConnectorImg from "../assets/event-rep.webp";
-import eventRepImg from "../assets/community-connector.webp";
-import brandAdvocateImg from "../assets/feedback-insider.webp";
-import feedbackInsiderImg from "../assets/brand-advocate.webp";
-import arrowIcon from "../assets/arrow-right-blue.webp";
 
-export default function WaysYouCanHelp() {
-  const mainTitle = "Ways You Can Help";
+export default function WaysYouCanHelp({AmbassadorWaysYouCanHelp}) {
+  const fields = AmbassadorWaysYouCanHelp || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
+
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  const MainTitleText = getValue('ambassador_ways_you_can_help_main_title');
+  const ambassador_ways_you_can_help_card_title_node_1 = getValue('ambassador_ways_you_can_help_card_title_node_1');
+  const ambassador_ways_you_can_help_card_title_node_2 = getValue('ambassador_ways_you_can_help_card_title_node_2');
+  const ambassador_ways_you_can_help_card_title_node_3 = getValue('ambassador_ways_you_can_help_card_title_node_3');
+  const ambassador_ways_you_can_help_card_title_node_4 = getValue('ambassador_ways_you_can_help_card_title_node_4');
+  const ambassador_ways_you_can_help_card_subtitle_node_1 = getValue('ambassador_ways_you_can_help_card_subtitle_node_1');
+  const ambassador_ways_you_can_help_card_subtitle_node_2 = getValue('ambassador_ways_you_can_help_card_subtitle_node_2');
+  const ambassador_ways_you_can_help_card_subtitle_node_3 = getValue('ambassador_ways_you_can_help_card_subtitle_node_3');
+  const ambassador_ways_you_can_help_card_subtitle_node_4 = getValue('ambassador_ways_you_can_help_card_subtitle_node_4');
+  const ambassador_ways_you_can_help_card_image_node_1 = getReferenceImageUrl('ambassador_ways_you_can_help_card_image_node_1');
+  const ambassador_ways_you_can_help_card_image_node_2 = getReferenceImageUrl('ambassador_ways_you_can_help_card_image_node_2');
+  const ambassador_ways_you_can_help_card_image_node_3 = getReferenceImageUrl('ambassador_ways_you_can_help_card_image_node_3');
+  const ambassador_ways_you_can_help_card_image_node_4 = getReferenceImageUrl('ambassador_ways_you_can_help_card_image_node_4');
+  const ambassador_ways_you_can_help_button_icon = getReferenceImageUrl('ambassador_ways_you_can_help_button_icon');
+  const ambassador_ways_you_can_help_button_text = getValue('ambassador_ways_you_can_help_button_text');
+  
+  const mainTitle = MainTitleText || "Ways You Can Help";
 
   const volunteerRoles = [
     {
-      title: "Community Connector",
+      title: ambassador_ways_you_can_help_card_title_node_1 || "Community Connector",
       description:
-        "You're the one friends go to for advice and we love that. Help us reach more pet parents by being the friendly face (and voice) of Waggle in your circles.",
-      image: communityConnectorImg,
+      ambassador_ways_you_can_help_card_subtitle_node_1 || "You're the one friends go to for advice and we love that. Help us reach more pet parents by being the friendly face (and voice) of Waggle in your circles.",
+      image: ambassador_ways_you_can_help_card_image_node_1,
       maxWidthClass: "max-w-[32rem] max-[768px]:max-w-[16rem]",
       boxClass: "w-[608px] h-[609.18px] max-[768px]:w-full max-[768px]:h-auto",
       imageMarginTop: "md:mt-[48px]",
     },
     {
-      title: "Event Rep",
+      title: ambassador_ways_you_can_help_card_title_node_2 || "Event Rep",
       description:
-        "Like chatting with fellow pet lovers? Represent Waggle at local events, meetups, or shows, and spread the word about keeping pets safe and happy—on the road and at home.",
-      image: eventRepImg,
+      ambassador_ways_you_can_help_card_subtitle_node_2 || "Like chatting with fellow pet lovers? Represent Waggle at local events, meetups, or shows, and spread the word about keeping pets safe and happy—on the road and at home.",
+      image: ambassador_ways_you_can_help_card_image_node_2,
       maxWidthClass: "max-w-[29rem]",
       boxClass: "w-[566px] h-[609.18px] max-[768px]:w-full max-[768px]:h-auto",
       imageMarginTop: "md:mt-[20px]",
     },
     {
-      title: "Brand Advocate",
+      title: ambassador_ways_you_can_help_card_title_node_3 || "Brand Advocate",
       description:
-        "Got a knack for storytelling or content creation? Use your voice, photos, or reels to show how Waggle makes a difference and inspire others to join the movement.",
-      image: brandAdvocateImg,
+      ambassador_ways_you_can_help_card_subtitle_node_3 || "Got a knack for storytelling or content creation? Use your voice, photos, or reels to show how Waggle makes a difference and inspire others to join the movement.",
+      image: ambassador_ways_you_can_help_card_image_node_3,
       maxWidthClass: "max-w-[32rem] max-[768px]:max-w-[16rem]",
       boxClass: "w-[608px] h-[609.18px] max-[768px]:w-full max-[768px]:h-auto",
       imageMarginTop: "md:mt-[48px]",
     },
     {
-      title: "Feedback Insider",
+      title: ambassador_ways_you_can_help_card_title_node_4 || "Feedback Insider",
       description:
-        "Your voice matters. Help us build better tech for pets by sharing honest feedback, fresh ideas, and the little details only real pet parents notice.",
-      image: feedbackInsiderImg,
+      ambassador_ways_you_can_help_card_subtitle_node_4 || "Your voice matters. Help us build better tech for pets by sharing honest feedback, fresh ideas, and the little details only real pet parents notice.",
+      image: ambassador_ways_you_can_help_card_image_node_4,
       maxWidthClass: "max-w-[29rem] max-[768px]:max-w-[16rem]",
       boxClass: "w-[566px] h-[609.18px] max-[768px]:w-full max-[768px]:h-auto",
       imageMarginTop: "md:mt-[20px]",
     },
   ];
   const button = {
-    text: "Join the Pack",
-    icon: arrowIcon,
+    text: ambassador_ways_you_can_help_button_text || "Join the Pack",
+    icon: ambassador_ways_you_can_help_button_icon,
     altText: "Arrow",
   };
 
