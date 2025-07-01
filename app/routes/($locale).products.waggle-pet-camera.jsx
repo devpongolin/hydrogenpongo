@@ -1,5 +1,6 @@
 import PetSafetyGrid from '~/components/PetSafetyGrid';
 import PotionControl from '~/components/PotionControl';
+import PerfectWagglePet from '~/components/PerfectWagglePet';
 import SmartPetBowlShowcase from '~/components/SmartPetBowlShowcase';
 import FrequentlyBoughtTogether from '~/components/FrequentlyBoughtTogether';
 import WaggleSteps from '~/components/WaggleSteps';
@@ -43,6 +44,7 @@ export default function CustomPage() {
       {petsNeeds.length > 0 && (
         <SmartPetBowlShowcase petsNeeds={petsNeeds} />
       )}
+      <PerfectWagglePet product={ProductData?.product?.product?.product} />
       {bundleProduct.length > 0 && (
         <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
       )}

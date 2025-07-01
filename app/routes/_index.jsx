@@ -82,6 +82,7 @@ export default function Homepage() {
       {/* <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} /> */}
       {/* <waggleHomeContent /> */}
+      <RecommendedProducts products={data.recommendedProducts} />
        {mainBannerData.length > 0 && (
           <WaggleHome mainBannerData={mainBannerData}/>
       )}

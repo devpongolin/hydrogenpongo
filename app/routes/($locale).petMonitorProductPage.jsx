@@ -9,11 +9,11 @@ export default function Ambassador() {
     return (
       <div>
        <PerfectWagglePet />
-      <WaggleCameraLITE />
+      {/* <WaggleCameraLITE />
       <ComparePetPlans />
       <TestimonialsSection />
       <Petquestions />
-      <PetSafetyGrid/>
+      <PetSafetyGrid/> */}
       </div>  
   );
  }  
