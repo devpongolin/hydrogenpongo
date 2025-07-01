@@ -1,41 +1,56 @@
-import partnerImg from '../assets/otherway.webp';
-import sponsorshipImg from '../assets/sponsorship.webp';
-import ambassadorImg from '../assets/ambassador.webp';
+const SponsorshipForEvents = ({AmbassadorClaimYourPerksToday}) => {
+  const fields = AmbassadorClaimYourPerksToday || [];
+  const getValue = (key) =>
+    fields.find((field) => field.key === key)?.value;
 
-const sponsorshipData = {
-  topCards: [
-    {
-      id: 1,
-      image: partnerImg,
-      alt: "Woman with laptop and golden retriever",
-      title: "Other Ways to Help",
-      description: "Not ready to become an ambassador? Explore our Partner Program to see other ways to make an impact and help pets stay safe.",
-      button: {
-        text: "Become a Partner",
-        action: "partner"
+  const getReferenceImageUrl = (key) =>
+    fields.find((field) => field.key === key)?.reference?.image?.url;
+
+  const ambassador_claim_your_perks_today_image_1 = getReferenceImageUrl('ambassador_claim_your_perks_today_image_1');
+  const ambassador_claim_your_perks_today_image_2 = getReferenceImageUrl('ambassador_claim_your_perks_today_image_2');
+  const ambassador_claim_your_perks_today_image_3 = getReferenceImageUrl('ambassador_claim_your_perks_today_image_3');
+  const ambassador_claim_your_perks_today_title_1 = getValue('ambassador_claim_your_perks_today_title_1');
+  const ambassador_claim_your_perks_today_title_2 = getValue('ambassador_claim_your_perks_today_title_2');
+  const ambassador_claim_your_perks_today_title_3 = getValue('ambassador_claim_your_perks_today_title_3');
+  const ambassador_claim_your_perks_today_sub_title_1 = getValue('ambassador_claim_your_perks_today_sub_title_1');
+  const ambassador_claim_your_perks_today_sub_title_2 = getValue('ambassador_claim_your_perks_today_sub_title_2');
+  const ambassador_claim_your_perks_today_button_text_1 = getValue('ambassador_claim_your_perks_today_button_text_1');
+  const ambassador_claim_your_perks_today_button_text_2 = getValue('ambassador_claim_your_perks_today_button_text_2');
+
+  const sponsorshipData = {
+    topCards: [
+      {
+        id: 1,
+        image: ambassador_claim_your_perks_today_image_1,
+        alt: "Woman with laptop and golden retriever",
+        title: ambassador_claim_your_perks_today_title_1 || "Other Ways to Help",
+        description: ambassador_claim_your_perks_today_sub_title_1 || "Not ready to become an ambassador? Explore our Partner Program to see other ways to make an impact and help pets stay safe.",
+        button: {
+          text: ambassador_claim_your_perks_today_button_text_1 || "Become a Partner",
+          action: "partner"
+        }
+      },
+      {
+        id: 2,
+        image: ambassador_claim_your_perks_today_image_2,
+        alt: "Dogs at a pet show",
+        title: ambassador_claim_your_perks_today_title_2 || "Sponsorship for Events & Pet Shows",
+        description: ambassador_claim_your_perks_today_sub_title_2 || "Get the chance to showcase Waggle at top pet events and shows, expanding your reach while sharing our mission with pet lovers everywhere.",
+        button: null
       }
-    },
-    {
-      id: 2,
-      image: sponsorshipImg,
-      alt: "Dogs at a pet show",
-      title: "Sponsorship for Events & Pet Shows",
-      description: "Get the chance to showcase Waggle at top pet events and shows, expanding your reach while sharing our mission with pet lovers everywhere.",
-      button: null
+    ],
+    bottomCard: {
+      image: ambassador_claim_your_perks_today_image_3,
+      alt: "Woman high-fiving a golden retriever",
+      title: ambassador_claim_your_perks_today_title_3 || "Claim Your Perks Today",
+      button: {
+        text: ambassador_claim_your_perks_today_button_text_2 || "Become An Ambassador",
+        action: "ambassador"
+      }
     }
-  ],
-  bottomCard: {
-    image: ambassadorImg,
-    alt: "Woman high-fiving a golden retriever",
-    title: "Claim Your Perks Today",
-    button: {
-      text: "Become An Ambassador",
-      action: "ambassador"
-    }
-  }
-};
+  };
 
-const SponsorshipForEvents = () => {
+
   return (
     <div className="md:pt-[56px] md:pb-[56px] md:pl-[114px] md:pr-[114px] image-padding pl-[15px] pr-[15px] pt-[34px] pb-[38px]">
       <div className="flex flex-col md:flex-row w-full gap-[16px] md:gap-[40px] md:mb-[40px] mb-[14px] justify-center">

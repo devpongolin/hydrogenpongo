@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const HelpPets = (metaData) => {
-  const fields =
-  metaData?.metaData?.ambassadorBannerData?.AmbassadorDatas?.metaobjects?.edges?.[0]?.node?.fields || [];
+const HelpPets = ({BannerData}) => {
+  const fields = BannerData || [];
+
   const getValue = (key) =>
     fields.find((field) => field.key === key)?.value;
 
