@@ -11,19 +11,41 @@ import { StarRating } from './Starratting';
 
 export default function PotionControl({ProductData,productAvarageRating}) {
   const {open} = useAside();
-  const productDetails = ProductData?.product?.data?.product || {}; 
+  const productDetails = ProductData?.product?.product?.product || {}; 
+  const productVariantsData = productDetails?.variants?.edges || []; 
+  const productFeatureTitle = productDetails?.productFeatureTitle?.value || '';
+  const productFeatureDescription = productDetails?.productFeatureDescription?.references?.edges || [];
+
+  const features = productFeatureDescription.map(({ node }) => {
+    const iconField = node.fields.find(f => f.key === 'feature_icon');
+    const textField = node.fields.find(f => f.key === 'feature_text');
+  
+    return {
+      icon: iconField?.reference?.image?.url || '',
+      text: textField?.value || ''
+    };
+  }).reverse(); // reverse to match the desired order
+  
   
   const PolicyData =
     ProductData?.instructionMetaobjectData
       ?.instructionMetaobjectDatas?.metaobjects || [];
   const ProductImages = productDetails?.images?.edges || [];
-  const iconWithDiscriptionLabel =
-    productDetails?.iconWithDiscriptionLabel?.value;
 
-  const productPrice = productDetails?.variants?.edges[0]?.node?.price?.amount;
-  const productComparePrice = productDetails?.variants?.edges[0]?.node?.compareAtPrice?.amount;
-  const productVariantID = productDetails?.variants?.edges[0]?.node?.id; 
-  const availableQuantity = productDetails?.variants?.edges[0]?.node?.quantityAvailable;
+  const [productPrice,setProductPrice] = useState(
+    productDetails?.variants?.edges[0]?.node?.price?.amount || 'N/A',
+  );
+  const [productComparePrice, setproductComparePrice] = useState(
+    productDetails?.variants?.edges[0]?.node?.compareAtPrice?.amount || 'N/A',
+  );
+  const [productVariantID,setproductVariantID] = useState(
+    productDetails?.variants?.edges[0]?.node?.id || 'N/A',
+  );
+  const [availableQuantity, setAvailableQuantity] = useState(
+    productDetails?.variants?.edges[0]?.node?.quantityAvailable || 0,
+  );
+  // const availableQuantity = productDetails?.variants?.edges[0]?.node?.quantityAvailable;
+  const [selectedVariantId, setSelectedVariantId] = useState(null);
   const [addTocartbuttonText,setaddTocartbuttonText] = useState('Add to cart');
   const [isAddTocartDisable,setisAddTocartDisable] = useState(false);
   useEffect(() => {
@@ -39,22 +61,6 @@ export default function PotionControl({ProductData,productAvarageRating}) {
 
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const thumbnailContainerRef = useRef(null);
-
-  let features = [];
-
-  try {
-    const parsedData = JSON.parse(
-      productDetails?.iconWithDiscription?.value || '[]',
-    );
-    features = parsedData.map((item) => ({
-      icon: item.icon,
-      text: item.text,
-    }));
-  } catch (error) {
-    console.error('Error parsing IconWithDiscription:', error);
-  }
-
   const mappedPolicyData = PolicyData?.edges.map((item) => {
     const fields = item.node.fields;
 
@@ -76,9 +82,8 @@ export default function PotionControl({ProductData,productAvarageRating}) {
       color: 'bg-amber-600',
     },
     pricing: {
-      originalPrice: `$ ${productComparePrice}`,
-      currentPrice: `$ ${productPrice}`,
-      discount: '-50%',
+      originalPrice: `${productComparePrice}`,
+      currentPrice: `${productPrice}`,
       description: 'One-time device cost',
       subscription: {
         text: '+ Monthly subscription through our app @',
@@ -86,7 +91,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
         note: '(Required for alerts)',
       },
     },
-    sectionTitle: iconWithDiscriptionLabel || 'Waggle RV 4G Camera',
+    sectionTitle: productFeatureTitle,
     features,
     coupon: {
       label: 'Coupon',
@@ -144,6 +149,15 @@ export default function PotionControl({ProductData,productAvarageRating}) {
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
+  };
+
+  const handleVariantClick = (id,productPrice,productComparePrice,quantityAvailable) => {
+    setproductVariantID(id);
+    setProductPrice(productPrice)
+    setproductComparePrice(productComparePrice);;
+    setSelectedVariantId(id);
+    setAvailableQuantity(quantityAvailable)
+    setQuantity(1);
   };
 
   return (
@@ -219,17 +233,57 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             >
               {productData.badge.text}
             </div>
+            { productVariantsData.length > 1 && (
+              <div className="mt-5">
+                <span>Select options</span>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {productVariantsData.map((variant, index) => {
+                    const { title, image, id,price,compareAtPrice,quantityAvailable  } = variant.node;
+                    const productPrice = price?.amount || 'N/A';
+                    const productComparePrice = compareAtPrice?.amount || 'N/A';
+                    // console.log(price.amount);
+                    
+                    const isActive = selectedVariantId === id;
+
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleVariantClick(id,productPrice,productComparePrice,quantityAvailable)}
+                        className={`px-[18px] py-[12px] w-[27%] border rounded-[8px] mt-1 cursor-pointer ${
+                          isActive ? "border-black bg-gray-100" : "border-[#80808040]"
+                        }`}
+                      >
+                        <img src={image?.url} alt={image?.altText || title} />
+                        <span>{title}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex items-end mt-[20px]">
-            <span className="lexend font-light text-sm leading-[1.24] tracking-normal dark-slate line-through">
-              {productData.pricing.originalPrice}
-            </span>
+            {parseFloat(productData.pricing.originalPrice) > parseFloat(productData.pricing.currentPrice) && (
+              <span className="lexend font-light text-sm leading-[1.24] tracking-normal dark-slate line-through">
+                ${productData.pricing.originalPrice}
+              </span>
+            )}
             <span className="lexend font-medium text-[28px] leading-[28px] tracking-normal text-dark-gray">
-              {productData.pricing.currentPrice}
+              ${productData.pricing.currentPrice}
             </span>
-            <span className="primary-red lexend font-light text-[23px] leading-[28px] tracking-normal">
-              {productData.pricing.discount}
-            </span>
+            {(() => {
+              const original = parseFloat(productData.pricing.originalPrice);
+              const current = parseFloat(productData.pricing.currentPrice);
+              const discount = Math.round(((original - current) / original) * 100);
+
+              return discount > 0 ? (
+                <>
+                        <span className="primary-red lexend font-light text-[23px] leading-[28px] tracking-normal">
+                        {discount}% OFF
+                        </span>
+                        </>
+              ) : null;
+            })()}
           </div>
           <p className="bg-dark-translucent lato font-normal text-base leading-[18px] tracking-normal mt-[8px]">
             {productData.pricing.description}
@@ -287,6 +341,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
               <button
                 onClick={increaseQuantity}
                 className="px-4 py-3 black-dark cursor-pointer"
+                disabled={availableQuantity <= quantity}
               >
                 +
               </button>
