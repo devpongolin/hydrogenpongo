@@ -62,7 +62,7 @@ export default function FrequentlyBoughtTogether(bundleProduct) {
           {texts.sectionTitle}
         </h2>
         <div className="flex justify-center md:justify-start gap-[23px] md:gap-15">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center w-1/2">
             <img
               src={texts.products[0].image || CameraImage}
               alt={texts.products[0].alt}

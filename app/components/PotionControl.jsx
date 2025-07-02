@@ -161,7 +161,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
   };
 
   return (
-    <div className="px-[20px] md:px-[0] md:py-[55px] py-[48px] mx-auto max-w-[1160px] gap-[55px] w-full md:flex md:items-start md:justify-between">
+    <div className="px-[20px] md:px-[0] md:py-[55px] py-[48px] mx-auto max-w-[1160px] gap-[55px] w-full md:flex md:items-start md:justify-between test">
         <div className='flex flex-col items-start justify-start w-full md:w-[50%]'>
             <span className="lexend font-medium text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:hidden block">
               {productData.title}
@@ -222,14 +222,14 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             <span className="lexend font-medium text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:block hidden">
               {productData.title}
             </span>
-            <div className="flex items-center gap-4 mt-[14px] md:block hidden">
+            <div className="items-center gap-4 mt-[14px] md:flex hidden border-b border-[#DFDFDF] pb-[14px]">
               <StarRating  rating={productAvarageRating}/>
               <span className="dark-slate lato font-normal text-base leading-6 tracking-normal align-middle">
                 {productAvarageRating} out of 5
               </span>
             </div>
             <div
-              className={`inline-block brand-brown rounded-[4px] white-text-element pt-[6px] pr-[12px] pb-[6px] pl-[12px] lato font-semibold text-base leading-6 tracking-normal mt-[42px]`}
+              className={`inline-block brand-brown rounded-[4px] white-text-element pt-[6px] pr-[12px] pb-[6px] pl-[12px] lato font-semibold text-base leading-6 tracking-normal mt-[34px]`}
             >
               {productData.badge.text}
             </div>
@@ -250,7 +250,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                         key={index}
                         onClick={() => handleVariantClick(id,productPrice,productComparePrice,quantityAvailable)}
                         className={`px-[18px] py-[12px] w-[27%] border rounded-[8px] mt-1 cursor-pointer ${
-                          isActive ? "border-black bg-gray-100" : "border-[#80808040]"
+                          isActive ? "border-black bg-[#D8EDFF]" : "border-[#80808040]"
                         }`}
                       >
                         <img src={image?.url} alt={image?.altText || title} />
@@ -310,12 +310,12 @@ export default function PotionControl({ProductData,productAvarageRating}) {
               </div>
             ))}
           </div>
-          <div className="flex mt-[20px] gap-1 flex-col md:flex-row">
+          <div className="flex mt-[20px] gap-[10px] flex-col md:flex-row">
             <span className="md:w-auto w-fit primary-yellow dark-slate rounded-[4px] py-1 px-2 lato font-semibold text-base leading-6 tracking-normal h-fit">
               {productData.coupon.label}
             </span>
             <span className="NotoSans font-normal text-base leading-[28px] tracking-normal flex items-center gap-[3px]">
-            <img src={promoBoxImage} alt="Promo Box" />
+            <img src={promoBoxImage} alt="Promo Box" className="mr-[5px]" />
               {productData.coupon.text}{' '}
               <span className="NotoSans font-bold text-base leading-[28px] tracking-normal">
                 {productData.coupon.code}
@@ -333,9 +333,11 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                 onClick={decreaseQuantity}
                 className="px-4 py-3 cursor-pointer"
               >
-                −
+                <svg width="15" height="3" viewBox="0 0 15 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1228 2.97998H0.122803V0.97998H14.1228V2.97998Z" fill="#CCCCCC"/>
+                </svg>
               </button>
-              <span className="px-4 py-3 black-dark font-bold text-base leading-6 tracking-normal NotoSans">
+              <span className="px-4 py-3 black-dark font-bold text-base leading-6 tracking-normal NotoSans flex items-center">
                 {quantity}
               </span>
               <button
@@ -343,7 +345,9 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                 className="px-4 py-3 black-dark cursor-pointer"
                 disabled={availableQuantity <= quantity}
               >
-                +
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.48218 8.97607V14.9761H8.48218V8.97607H14.4822V6.97607H8.48218V0.976074H6.48218V6.97607H0.482178V8.97607H6.48218Z" fill="#111111"/>
+                </svg>
               </button>
             </div>
             <CustomAddToCartButton
