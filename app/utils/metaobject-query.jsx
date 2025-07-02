@@ -41,6 +41,12 @@ query PageObjectData($handle: String) {
         ...MetaobjectFields
       }
     }
+    
+    SafetyAtYourFingertipsData: metafield(namespace: "custom", key: "hydrogen_safety_at_your_fingertips_data") {
+      reference {
+        ...MetaobjectFields
+      }
+    }
 
     faqData: metafield(namespace: "custom", key: "faq") {
       references(first: 250) {
