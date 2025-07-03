@@ -1065,6 +1065,9 @@ button.reset:hover:not(:has(> *)) {
   display: flex;
   flex-direction: column;
 }
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
 
 @keyframes scroll-marquee {
   0% {
