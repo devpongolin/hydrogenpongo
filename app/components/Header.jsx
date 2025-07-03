@@ -60,7 +60,7 @@ export function HeaderMenu({
           image: meta.image || '',
           icon: meta.icon || '',
           price: meta.price || '',
-          link: subItem.url,
+          link: subItem?.url?.replace("https://mywaggle.com", ""),
         };
       });
     }
