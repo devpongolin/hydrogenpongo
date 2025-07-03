@@ -23,14 +23,21 @@ const pageData = useLoaderData();
 const mainBannerData = pageData?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
 const pageFaqData = pageData?.pageDataByHandle?.pageDatas?.page?.faqData?.references?.edges || [];
 const SafetyAtYourFingertipsData = pageData?.pageDataByHandle?.pageDatas?.page?.SafetyAtYourFingertipsData?.reference?.fields || [];
+const hydrogenFeaturesSectionData = pageData?.pageDataByHandle?.pageDatas?.page?.hydrogenFeaturesSectionData?.reference?.fields || [];
+const HydrogenGallerySliderData = pageData?.pageDataByHandle?.pageDatas?.page?.HydrogenGallerySliderData?.references?.edges || [];
+// console.log(HydrogenGallerySliderData);
   return (
     <>
     <div className='bg-[#F7EEE9]'>
       {mainBannerData.length > 0 && (
         <WaggleHome mainBannerData={mainBannerData}/>
       )}
-      <FeaturesSection />
-      <ImageMarqueeSlider />
+      {hydrogenFeaturesSectionData.length > 0 && (
+        <FeaturesSection hydrogenFeaturesSectionData={hydrogenFeaturesSectionData} />
+      )}
+      {HydrogenGallerySliderData.length > 0 && (
+        <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
+      )}
       {SafetyAtYourFingertipsData.length > 0 && (
         <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
       )}

@@ -48,6 +48,28 @@ query PageObjectData($handle: String) {
       }
     }
 
+    hydrogenFeaturesSectionData: metafield(namespace: "custom", key: "hydrogen_features_section_data") {
+      reference {
+        ...MetaobjectFields
+      }
+    }
+
+    HydrogenGallerySliderData: metafield(namespace: "custom", key: "hydrogen_gallery_slider_data") {
+      references(first: 250) {
+        edges {
+          node {
+            ...MetaobjectFields
+          }
+        }
+      }
+    }
+
+    HydrogenSmartPetHavenData: metafield(namespace: "custom", key: "hydrogen_smart_pet_haven_data") {
+      reference {
+        ...MetaobjectFields 
+      }
+    }
+
     faqData: metafield(namespace: "custom", key: "faq") {
       references(first: 250) {
         edges {
