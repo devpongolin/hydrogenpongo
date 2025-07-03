@@ -7,7 +7,7 @@ import {useLoaderData} from 'react-router';
 import { getPageData } from '~/utils/common-functions';
 
 export async function loader({context}) {
-  const pageDataByHandle = await getPageData({ context,pageHandle:"hydrogen-about-us" })
+  const pageDataByHandle = await getPageData({ context,pageHandle:"about-us" })
 
   return {
     pageDataByHandle,
