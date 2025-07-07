@@ -97,7 +97,7 @@ export default function Meetstails({whereToTails}) {
         />
       </div>
 
-      <div className="relative mt-[38px] md:mt-[38px] px-5 md:px-27">
+      <div className="relative mt-[28px] md:mt-[32px] pl-[48px] md:px-27">
         <div className="absolute top-1/2 left-0 w-full h-[2px] blue-400 z-0"></div>
         <div
           ref={carouselRef}
@@ -124,13 +124,13 @@ export default function Meetstails({whereToTails}) {
           ))}
         </div>
       </div>
-      <div className="mt-8 md:mt-6 px-5 md:px-0">
+      <div className="mt-[11px] md:mt-[15px] px-5 md:px-0">
         <div className="flex flex-col md:flex-col-reverse text-left">
           <p
-            className="text-dark-gray font-bold md:font-normal text-[17px] md:text-[23px] leading-[153%] mt-[17px] lato tracking-[0]"
+            className="text-dark-gray font-bold md:font-normal text-[18px] md:px-0 px-4 md:text-[23px] leading-[153%] mt-[17px] lato tracking-[0]"
             dangerouslySetInnerHTML={{ __html: data.timelineData[activeSlide].description }}
           />
-          <span className="font-medium text-[63px] md:text-[112px] leading-[122%] md:leading-[100%] text-dark-gray lexend mt-[20px] md:mt-10">
+          <span className="font-medium text-[63px] md:text-[112px] leading-[122%] md:leading-[100%] text-dark-gray lexend md:ml-[0] ml-[14px] mt-[37px] md:mt-0">
             {data.timelineData[activeSlide].year}
           </span>
         </div>
