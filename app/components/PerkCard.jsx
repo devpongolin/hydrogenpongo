@@ -98,7 +98,7 @@ const PerksSection = ({ AmbassadorWeGotThose }) => {
   const JoinCard = () => (
     <div className="md:pl-[28px] md:pb-[27px] pl-[14px] pb-[24px] blue-color rounded-[20px] flex flex-col white-text-element h-[221px] md:h-[290px] justify-end items-start w-full">
       <h3
-        className="font-medium md:text-[28px] text-[20px] leading-[124%] tracking-[-0.04px] lexend md:mb-1 mb-2"
+        className="font-medium md:text-[28px] text-[20px] leading-[124%] tracking-[-0.04px] lexend md:mb-1 mb-2 w-[87%]"
         dangerouslySetInnerHTML={{ __html: perksData.joinCard.title }}
       />
       <img

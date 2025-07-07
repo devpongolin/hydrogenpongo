@@ -59,7 +59,7 @@ const UltimatePetParent = () => {
           {cardData.map((card) => (
             <div
               key={card.id}
-              className="flex-shrink-0 md:flex-shrink md:w-[305px] w-[280px] bg-white rounded-[30px] md:rounded-[32px] overflow-hidden shadow-md transition-colors duration-300 hover:bg-blue-600 group"
+              className="flex-shrink-0 md:flex-shrink md:w-[305px] w-[280px] bg-white rounded-[30px] md:rounded-[32px] overflow-hidden shadow-md transition-colors duration-300 hover:bg-[#0085FF] group"
             >
               <div className="w-full">
                 <img

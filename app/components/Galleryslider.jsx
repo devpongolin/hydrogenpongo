@@ -20,7 +20,7 @@ const ImageMarqueeSlider = ({HydrogenGallerySliderData}) => {
 
   return (
     <div className="marquee-wrapper">
-      <span className="text-center w-full block pb-[27px]">Gallery</span>
+      <span className="text-center w-full block md:pb-[27px] pb-[20px] text-[27px] md:text-[35px] font-medium lexend">Gallery</span>
       <div className="marquee-track">
         {repeatedPairs.map(({ top, bottom, marginClass }, index) => (
           <div key={index} className={`image-pair ${marginClass}`}>

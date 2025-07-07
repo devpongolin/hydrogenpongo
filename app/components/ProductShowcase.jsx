@@ -51,14 +51,14 @@ const ProductShowcase = () => {
         <img
           src={content.background.desktop}
           alt="Background Desktop"
-          className="border border-gray-300 rounded-[32px] hidden md:block absolute w-full h-full object-cover max-w-[1440px] mx-auto"
+          className="border border-gray-300 rounded-[32px] hidden md:block w-full h-full object-cover max-w-[1440px] mx-auto"
         />
         <img
           src={content.background.mobile}
           alt="Background Mobile"
-          className="md:hidden absolute w-full h-full object-cover rounded-[22px]"
+          className="md:hidden w-full h-full object-cover rounded-[22px]"
         />
-        <div className="items-center md:px-[68px] md:py-[55px] py-[27px] px-[22px] md:min-h-[535px] relative flex flex-col md:flex-row  md:items-start justify-between gap-8 md:gap-12">
+        <div className="absolute top-0 w-full h-[-webkit-fill-available] items-center md:px-[68px] md:py-[55px] py-[27px] px-[22px] md:min-h-[535px] flex flex-col md:flex-row  md:items-start justify-between gap-8 md:gap-12">
           <div className="flex flex-col">
             <div className="flex items-center mb-6 md:mb-[24px]">
               <img src={content.amazon.logo} alt="Amazon" className='w-[126px] md:w-auto'/>
@@ -82,7 +82,7 @@ const ProductShowcase = () => {
               </span>
             </h1>
           </div>
-          <div className="flex flex-col gap-4 mt-4 md:gap-[17px] px-[22px] md:px-[0px] gap-[8px] w-[262px]">
+          <div className="flex flex-col gap-4 mt-4 md:gap-[17px] md:px-[0px] gap-[8px] w-[262px]">
             {content.stats.map((stat, idx) => (
               <div
                 key={idx}

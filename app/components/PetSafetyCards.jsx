@@ -124,7 +124,7 @@ const PetSafetyCards = () => {
   };
 
   return (
-    <div className="bg-[#EEDED3]  px-[16px] md:px-[0px] md:py-[55px] w-full py-[40px]">
+    <div className="bg-[#EEDED3]  px-[16px] md:px-[0px] md:py-[64px] w-full py-[40px]">
       <span className="block text-center font-medium md:font-[400] text-[28px] md:text-[47px] leading-[100%] tracking-[-0.36px] md:tracking-[0] lexend mb-[19px] md:mb-[39px]">
         {petSafetyData.title}
       </span>

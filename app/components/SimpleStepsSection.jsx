@@ -44,7 +44,7 @@ const SimpleStepsSection = ({SimpleSteps}) => {
             className="w-full object-cover relative pt-[56px] hidden md:block"
             loading="lazy"
           />
-          <div className="md:absolute inset-0 flex flex-col">
+          <div className="md:absolute inset-0 flex flex-col md:h-auto h-[640px]">
             <div className="absolute top-0 left-0 pt-[24px] pr-[90px] pl-[19px] md:relative md:p-[56px]">
               <h2 className="lexend font-normal text-[28.48px] leading-[100%] tracking-[0] md:text-4xl md:lg:text-5xl md:leading-tight max-w-[22rem]  md:text-inherit">
                 {data.textContent.heading}
@@ -53,8 +53,8 @@ const SimpleStepsSection = ({SimpleSteps}) => {
             <div className="relative bottom-[140px] md:bottom-[0px] px-[26px] flex-1 bg-radial-peach flex items-end md:px-[51px] md:pb-[54px]">
               <div className="md:grid grid-cols-4 w-full flex flex-col gap-4 max-w-sm mx-auto md:max-w-none md:mx-0">
                 {data.steps.map((step) => (
-                  <div key={step.id} className="p-[40px] md:p-[39px] layout-padding bg-uniq-color rounded-[28px]">
-                    <div className="lato my-text-color font-medium text-[14px] pt-[4px] pb-[4px] px-[12px] leading-[100%] tracking-[0] md:tracking-normal mb-[12px]">
+                  <div key={step.id} className="p-[40px] md:p-[39px] layout-padding bg-[#ffffff] rounded-[28px]">
+                    <div className="lato my-text-color font-medium text-[14px] pt-[4px] pb-[4px] px-[12px] leading-[100%] tracking-[0] md:tracking-normal mb-[10px] w-fit bg-[#FBFAF9] border border-[#18181812] rounded-[50px]">
                       {step.stepNumber}
                     </div>
                     <h3 className="lexend my-text-color font-normal text-[20px] leading-[121%] tracking-[0] md:text-[23px] md:leading-[100%] md:tracking-normal">
@@ -63,7 +63,7 @@ const SimpleStepsSection = ({SimpleSteps}) => {
                   </div>
                 ))}
                 <div>
-                  <button className="blue-400 rounded-[28px] h-full white-text-element font-bold p-[40px] md:p-[39px] flex flex-col gap-[30px] md:justify-between group w-full">
+                  <button className="blue-400 rounded-[28px] h-full white-text-element font-bold p-[40px] md:p-[39px] flex flex-col gap-[30px] md:justify-between group w-full last:gap-[69px]">
                     <span className="lexend font-normal text-[20px] leading-[100%] tracking-normal md:text-[23px]">
                       {data.textContent.buttonText}
                     </span>

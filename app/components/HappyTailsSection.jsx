@@ -83,13 +83,13 @@ const HappyTailsSection = () => {
   if (!isClient) return null;
 
   return (
-    <div className="bg-[#2c2f36] text-white py-16 px-4 relative">
+    <div className="bg-[#2c2f36] text-white py-[55px] relative z-0">
       {/* Title and Buttons */}
       <div className="text-center mb-10 relative">
-        <h1 className="text-5xl font-bold mb-2">80,000+</h1>
-        <h2 className="text-3xl font-semibold">Happy Tails & Counting!</h2>
+        <p className="text-[28px] md:text-[47px] font-normal lexend leading-none mb-[13px]">80,000+</p>
+        <p className="text-[28px] md:text-[47px] font-normal lexend leading-none">Happy Tails & Counting!</p>
 
-        <div className="absolute top-4 right-8 flex gap-2 z-10">
+        <div className="absolute gap-2 z-10 top-[49%] right-[5%] hidden md:flex">
           <button
             onClick={() => swiperRef.current?.slidePrev()}
             className="flex items-center justify-center"
@@ -106,7 +106,7 @@ const HappyTailsSection = () => {
       </div>
 
       {/* Slider */}
-      <div className="overflow-hidden md:px-10">
+      <div className="overflow-hidden md:px-[79px]">
         <Swiper
           modules={[FreeMode, Navigation]}
           onSwiper={(swiper) => (swiperRef.current = swiper)}

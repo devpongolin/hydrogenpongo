@@ -62,7 +62,7 @@ const SponsorshipForEvents = ({AmbassadorClaimYourPerksToday}) => {
               className="absolute inset-0 w-full h-full object-cover"
               loading="lazy"
             />
-            <div className={`relative flex flex-col image-responsive-padding my-element h-full p-[19px] md:pt-[62px] md:pl-[62px] ${card.id === 1 ? 'md:pr-[183px]' : 'pr-[65px]'} `}>
+            <div className={`relative flex flex-col image-responsive-padding my-element h-full p-[19px] md:pt-[62px] md:pl-[62px] ${card.id === 1 ? 'md:pr-[183px]' : 'pr-[21px]'} `}>
               <h2 className={`font-medium text-[25.31px] md:text-[35.54px] leading-[40px] md:leading-[120%] tracking-[-0.5px] md:tracking-[-0.36px] lexend ${card.id === 1 ? 'mb-[12px]' : 'mb-[13px]'} ${card.id === 2 ? 'md:max-w-[26rem]' : ''}`}>
                 {card.title}
               </h2>
