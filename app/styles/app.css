@@ -798,7 +798,7 @@ button.reset:hover:not(:has(> *)) {
 }
 .button-hover:hover {
   background-color: var(--blue-color);
-  color: var(--hover-color);
+  color: var(--white-text);
 }
 .button-hover2:hover{
   background-color: var(--hover-color);

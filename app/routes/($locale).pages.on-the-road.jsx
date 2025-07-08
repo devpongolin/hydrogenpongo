@@ -6,6 +6,8 @@ import WaggleAppLanding from '~/components/WaggleAppLanding';
 import FeaturesSection from '~/components/FeaturesSection';
 import ImageMarqueeSlider from '~/components/Galleryslider';
 import { getPageData } from '~/utils/common-functions';
+import OfferBanner from '~/components/OfferBanner';
+import VideoBanner from '~/components/VideoBanner';
 
 
 
@@ -35,6 +37,8 @@ const HydrogenGallerySliderData = pageData?.pageDataByHandle?.pageDatas?.page?.H
       {hydrogenFeaturesSectionData.length > 0 && (
         <FeaturesSection hydrogenFeaturesSectionData={hydrogenFeaturesSectionData} />
       )}
+      <OfferBanner />
+      <VideoBanner />
       {HydrogenGallerySliderData.length > 0 && (
         <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
       )}
