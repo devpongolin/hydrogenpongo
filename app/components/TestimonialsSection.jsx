@@ -73,7 +73,7 @@ const TestimonialsSection = ({ productReviews, productAvarageRating }) => {
   }, []);
 
   return (
-    <div className="mx-auto md:py-[60px] md:px-[112px] py-[37px] px-[16px]">
+    <div className="mx-auto md:py-[55px] md:px-[112px] py-[37px] px-[16px]">
       <div className="text-center relative">
         <h2 className="lexend font-medium md:text-[36px] text-[17px] leading-[100%] tracking-[-0.36px] md:tracking-[0] md:mb-[28px] mb-[16px]">
           {textData.sectionTitle}
@@ -117,7 +117,7 @@ const TestimonialsSection = ({ productReviews, productAvarageRating }) => {
             <div
               key={index}
               className={`flex-shrink-0 bg-light rounded-3xl border light-black-transparent p-[19px] md:py-[36px] md:px-[34px] w-96 ${
-                index === 1 ? 'h-72 mt-3' : 'h-90'
+                index === 1 ? 'h-fit mt-3' : 'h-fit'
               } ${index === 2 ? 'mt-9' : ''} ${index === 3 ? 'mt-1' : ''}`}
             >
               <div className="flex flex-col h-full">

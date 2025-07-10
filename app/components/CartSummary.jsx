@@ -9,10 +9,10 @@ export function CartSummary({cart, layout}) {
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
 
   return (
-    <div aria-labelledby="cart-summary" className={className}>
-      <h4>Totals</h4>
-      <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
+    <div aria-labelledby="cart-summary" className={`${className} md:!w-[443px] !w-[328px] !border-t !border-[#80808040] !py-[41px]`}>
+      {/* <h4>Totals</h4> */}
+      <dl className="cart-subtotal justify-between font-medium text-[20px] tracking-[0px] lexend mb-[16px]">
+        <dt>Subtotal:</dt>
         <dd>
           {cart.cost?.subtotalAmount?.amount ? (
             <Money data={cart.cost?.subtotalAmount} />
@@ -21,8 +21,8 @@ export function CartSummary({cart, layout}) {
           )}
         </dd>
       </dl>
-      <CartDiscounts discountCodes={cart.discountCodes} />
-      <CartGiftCard giftCardCodes={cart.appliedGiftCards} />
+      {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
+      {/* <CartGiftCard giftCardCodes={cart.appliedGiftCards} /> */}
       <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
     </div>
   );
@@ -34,9 +34,9 @@ function CartCheckoutActions({checkoutUrl}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div>
-      <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+    <div className="flex">
+      <a href={checkoutUrl} target="_self" className="button-hover2 block w-full text-center bg-[#0085FF] text-white py-[18px] rounded-[64px]">
+        <p className="text-[16px] font-bold lato">Check Out</p>
       </a>
       <br />
     </div>

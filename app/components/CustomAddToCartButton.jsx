@@ -31,7 +31,7 @@ export function CustomAddToCartButton({
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
-            className={`button2 cursor-pointer white-text-element w-[376.97px] h-[56px] rounded-[64px] lato font-bold text-base leading-5 tracking-normal ${className}`}
+            className={`button2 cursor-pointer white-text-element w-full md:w-[376.97px] h-[56px] rounded-[64px] lato font-bold text-base leading-5 tracking-normal ${className}`}
           >
             {children}
           </button>
