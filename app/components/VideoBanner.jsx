@@ -11,6 +11,8 @@ import showImage3 from '../assets/OBJECT3.webp';
 
 import arrow from '../assets/arrow11.webp';
 import cart from '../assets/cart.webp';
+import { useAside } from './Aside';
+import { CustomAddToCartButton } from './CustomAddToCartButton';
 
 const videoBannerData = {
   bannerImages: {
@@ -35,20 +37,36 @@ const videoBannerData = {
           {
             icon: showImage1,
             text: 'Real-time temperature',
-            position: 'absolute left-[8%] top-[18%]'
+            position: 'md:absolute left-[8%] top-[18%]'
           },
           {
             icon: showImage2,
             text: 'Instant power loss notifications',
-            position: 'absolute right-[2%] top-[24%]'
+            position: 'md:absolute right-[2%] top-[24%]'
           },
           {
             icon: showImage3,
             text: 'Cellular-based monitoring',
-            position: 'absolute left-[8%] bottom-[12%]'
+            position: 'md:absolute left-[8%] bottom-[12%]'
           }
         ],
-        price: '$199.00'
+        price: '$199.00',
+        actionButtons: [
+          {
+            text: 'View Product',
+            icon: arrow,
+            url: '/products/waggle-rv-pet-temperature-monitor',
+            variant: 'primary',
+            className: 'button-hover2 font-semibold lato px-[32px] py-[18px] flex items-center gap-[10px] bg-[#0085FF] rounded-[55px] text-white text-[18px] h-fit w-full md:w-auto justify-between mb-[12px] md:mb-[0]'
+          },
+          {
+            text: 'Add to Cart',
+            icon: cart,
+            variant: 'secondary',
+            className: '!button-hover font-semibold !text-[#000000] lato px-[32px] py-[18px] flex items-center gap-[10px] !bg-[#E5F3FF] rounded-[55px] text-[18px] h-fit w-full md:w-auto justify-between',
+            variantId: 'gid://shopify/ProductVariant/43925523661041'
+          }
+        ]
       }
     },
     {
@@ -62,44 +80,46 @@ const videoBannerData = {
           {
             icon: showImage1,
             text: 'Motion alerts to monitor',
-            position: 'absolute left-[8%] top-[18%]'
+            position: 'md:absolute left-[8%] top-[18%]'
           },
           {
             icon: showImage2,
             text: 'GPS tracking for theft prevention',
-            position: 'absolute right-[2%] top-[24%]'
+            position: 'md:absolute right-[2%] top-[24%]'
           },
           {
             icon: showImage3,
             text: 'Heatproof & built for rugged travel',
-            position: 'absolute left-[8%] bottom-[12%]'
+            position: 'md:absolute left-[8%] bottom-[12%]'
           }
         ],
-        price: '$149.00'
+        price: '$149.00',
+        actionButtons: [
+          {
+            text: 'View Product',
+            icon: arrow,
+            url: '/products/waggle-pet-camera',
+            variant: 'primary',
+            className: 'button-hover2 font-semibold lato px-[32px] py-[18px] flex items-center gap-[10px] bg-[#0085FF] rounded-[55px] text-white text-[18px] h-fit w-full md:w-auto justify-between mb-[12px] md:mb-[0]'
+          },
+          {
+            text: 'Add to Cart',
+            icon: cart,
+            variant: 'secondary',
+            className: '!button-hover font-semibold lato px-[32px] py-[18px] flex items-center gap-[10px] !text-[#000000] !bg-[#E5F3FF] rounded-[55px] text-[18px] h-fit w-full md:w-auto justify-between',
+            variantId: 'gid://shopify/ProductVariant/46072149508337'
+          }
+        ]
       }
     }
   ],
-  priceLabel: 'starting from',
-  actionButtons: [
-    {
-      text: 'View Product',
-      icon: arrow,
-      variant: 'primary',
-      className: 'button-hover2 font-semibold lato px-[32px] py-[18px] flex items-center gap-[10px] bg-[#0085FF] rounded-[55px] text-white text-[18px] h-fit'
-    },
-    {
-      text: 'Add to Cart',
-      icon: cart,
-      variant: 'secondary',
-      className: 'button-hover font-semibold lato px-[32px] py-[18px] flex items-center gap-[10px] bg-[#E5F3FF] rounded-[55px] text-[18px] h-fit'
-    }
-  ]
+  priceLabel: 'starting from'
 };
 
 const VideoBanner = () => {
   const [activeProductIdx, setActiveProductIdx] = useState(0);
   const activeProduct = videoBannerData.ctaButtons[activeProductIdx].product;
-
+  const { open } = useAside();
   return (
     <div className="w-full">
       <picture className="max-w-[1230px] w-full block mx-auto relative z-1 top-[57px]">
@@ -120,7 +140,7 @@ const VideoBanner = () => {
           />
         </picture>
         <div>
-          <span className="w-full block text-center max-w-[642px] mx-auto text-white font-[500] lexend text-[47.37px] mt-[57px] leading-[1.4]">
+          <span className="w-full block text-center max-w-[642px] mx-auto text-white font-[500] lexend text-[28.37px] md:text-[47.37px] mt-[57px] leading-[1.4]">
             {videoBannerData.headline}
           </span>
           <div className="p-[10px] bg-[#ffffff] flex w-fit mx-auto rounded-[55px] mt-[46px]">
@@ -128,7 +148,7 @@ const VideoBanner = () => {
               <button
                 key={idx}
                 onClick={() => setActiveProductIdx(idx)}
-                className={`px-[57px] py-[18px] text-[16px] lato ${
+                className={`md:px-[57px] md:py-[18px] px-[8px] py-[10px] text-[16px] lato ${
                   activeProductIdx === idx ? 'bg-[#0085ff] text-white' : ''
                 } rounded-[55px]`}
               >
@@ -137,29 +157,49 @@ const VideoBanner = () => {
             ))}
           </div>
           <div className="max-w-[612px] w-full mx-auto text-center text-white mt-[27px]">
-            <span className="text-[35px] font-[500] lexend">{activeProduct.title}</span>
-            <p className="text-[16px] lato my-[5px] mx-[3px]">{activeProduct.description}</p>
+            <span className="text-[25px] md:text-[35px] font-[500] lexend">{activeProduct.title}</span>
+            <p className="text-[14px] md:text-[16px] lato my-[5px] mx-[3px]">{activeProduct.description}</p>
           </div>
           <div className="flex flex-col relative items-center max-w-[833px] mx-auto w-full mt-[27px]">
             <img src={activeProduct.image} alt="" className="w-[336px] ml-[5%] z-1" />
             {activeProduct.features.map((feature, idx) => (
-              <div key={idx} className={`rounded-[12px] ${feature.position} border-[0.64px] border-[#80808040] flex items-center bg-[#FFFFFF1F] px-[25px] py-[20px] gap-[12px] text-white w-[29%]`}>
+              <div key={idx} className={`rounded-[12px] ${feature.position} border-[0.64px] border-[#80808040] flex items-center bg-[#FFFFFF1F] md:px-[25px] md:py-[20px] p-[10px] gap-[12px] text-white w-full md:w-[29%] mb-[7px] md:mb-[0px]`}>
                 <img src={feature.icon} alt="" />
-                <span className="text-[18px] w-[82%]">{feature.text}</span>
+                <span className="text-[15px] md:text-[18px] w-[82%]">{feature.text}</span>
               </div>
             ))}
           </div>
           <div className="flex justify-center items-end gap-[14px] mt-[11px]">
-            <span className="text-[20px] text-[#FEFDFDCC] lato">{videoBannerData.priceLabel}</span>
-            <span className="text-[35px] text-white font-[500] lexend">{activeProduct.price}</span>
+            <span className="text-[17px] md:text-[20px] text-[#FEFDFDCC] lato">{videoBannerData.priceLabel}</span>
+            <span className="text-[25px] md:text-[35px] text-white font-[500] lexend">{activeProduct.price}</span>
           </div>
-          <div className="flex justify-center gap-[12px] mt-[18px] pb-[51px]">
-            {videoBannerData.actionButtons.map((btn, idx) => (
-              <button key={idx} className={btn.className}>
-                {btn.text}
-                <img src={btn.icon} alt="" className={idx === 0 ? 'w-[10px]' : 'w-[26px] object-none'} />
-              </button>
-            ))}
+          <div className="block md:flex justify-center gap-[12px] mt-[18px] pb-[51px]">
+            {activeProduct.actionButtons.map((btn, idx) => {
+              const buttonContent = (
+                <button className={btn.className}>
+                  {btn.text}
+                  <img src={btn.icon} alt="" className={idx === 0 ? 'w-[10px]' : 'w-[26px] object-none'} />
+                </button>
+              );
+
+              return btn.url ? (
+                <a key={idx} href={btn.url} className="w-full md:w-auto">
+                  {buttonContent}
+                </a>
+              ) : (
+                <div key={idx} className="w-full md:w-auto">
+                  <CustomAddToCartButton
+                    disabled={false}
+                    onClick={() => open('cart')}
+                    lines={[{"merchandiseId":`${btn.variantId}`,"quantity":1}]}
+                    className={`${btn.className}`}
+                  >
+                    {btn.text}
+                    <img src={btn.icon} alt="" className={idx === 0 ? 'w-[10px]' : 'w-[26px] object-none'} />
+                  </CustomAddToCartButton>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

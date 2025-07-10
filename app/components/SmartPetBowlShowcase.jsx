@@ -214,7 +214,56 @@ const SmartPetBowlShowcase = ({petsNeeds}) => {
           </div>
         </div>
         {/* right part................. */}
-        <div className="flex flex-row md:flex-col gap-[16px] md:gap-[25px] order-3 md:order-none">
+        <div className="flex-row md:flex-col gap-[16px] md:gap-[25px] order-3 md:order-none hidden md:flex">
+          <div className="flex flex-col gap-[16px] md:gap-[25px] w-1/2 md:w-full">
+          <div className="primary-gradient white-text-element rounded-[20px] flex flex-col items-center justify-center text-center w-1/2 md:w-full h-[230px] md:h-[295px] max-w-full md:max-w-[232.94px] pl-[15px] md:pl-[14px] pr-[15px] md:pr-[14px] pt-[20px] md:pt-[46px] pb-[20px] md:pb-[88px] relative">
+            <img
+              src={sideNotificationImg}
+              alt={textContent.rightColumn.topCard.leftNotificationAlt}
+              className="absolute left-2 md:left-3  transform -translate-y-1/2  top-[60%] md:top-[59%]"
+              loading="lazy"
+            />
+            <img
+              src={sideNotificationImg}
+              alt={textContent.rightColumn.topCard.rightNotificationAlt}
+              className="absolute right-2 md:right-3 top-[60%] md:top-[59%] transform -translate-y-1/2"
+              loading="lazy"
+            />
+            <img
+              src={weightSensorIcon}
+              alt={textContent.rightColumn.topCard.centerImageAlt}
+              className="w-10 h-10 md:w-auto md:h-auto"
+              loading="lazy"
+            />
+            <p className="lato pt-[16px] md:pt-[40px] font-bold text-[14px] md:text-[18px] leading-[100%] md:leading-[100%] tracking-[0] white-text-element">
+              {textContent.rightColumn.topCard.paragraph}
+            </p>
+          </div>
+            <div className="brown-linear-radial-gradient white-text-element rounded-[15px] md:rounded-[21px] w-full max-w-full md:max-w-[232.94px] h-[147px] md:h-[272px] flex flex-col pt-[13px] md:pt-[24px] pl-[15px] md:pl-[28px] pr-[15px] md:pr-[28px] pb-[15px] md:pb-[28px]">
+              <img
+                src={petSafeIcon}
+                alt={textContent.rightColumn.middleCard.iconAlt}
+                className="mb-[20px] md:mb-[109px] w-8 h-8 md:w-[48px] md:h-[48px]"
+              />
+              <h2 className="lato font-[600] md:font-semibold text-[16px] md:text-[28px] leading-[100%] md:leading-[100%] tracking-[-1%] md:tracking-[-0.01em] white-text-element ">
+                {textContent.rightColumn.middleCard.heading}
+              </h2>
+            </div>
+          </div>
+          <div className="primary-gradient w-full max-w-full md:max-w-[232.94px] white-text-element rounded-[15px] md:rounded-[21px] h-[70px] md:h-[127px] flex md:pt-[45px] pl-[9px] md:pl-[30px] pr-[9px] md:pr-[30px] py-[21px] md:pb-[42px] gap-[12px] md:gap-[12px] items-center md:items-start">
+              <img
+                src={alertsIcon}
+                alt={textContent.rightColumn.bottomCard.iconAlt}
+                className="w-6 h-6 md:w-[40px] md:h-[40px]"
+                loading="lazy"
+              />
+              <p className="lato font-[500] md:font-medium text-[12px] md:text-[18px] leading-[100%] md:leading-[100%] tracking-[0%] md:tracking-normal white-text-element">
+                {textContent.rightColumn.bottomCard.paragraph}
+              </p>
+            </div>
+        </div>
+        {/* right part.................mobile */}
+        <div className="flex flex-row md:flex-col gap-[16px] md:gap-[25px] order-3 md:order-none md:hidden">
           <div className="flex flex-col gap-[16px] md:gap-[25px] w-1/2 md:w-full">
             <div className="brown-linear-radial-gradient white-text-element rounded-[15px] md:rounded-[21px] w-full max-w-full md:max-w-[232.94px] h-[147px] md:h-[272px] flex flex-col pt-[13px] md:pt-[24px] pl-[15px] md:pl-[28px] pr-[15px] md:pr-[28px] pb-[15px] md:pb-[28px]">
               <img

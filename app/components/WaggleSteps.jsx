@@ -82,7 +82,7 @@ parsedGuide.sort((a, b) => parseInt(a.number) - parseInt(b.number));
   return (
     <div className="max-w-[1440px] w-full mx-auto bg-[#D6EAFF] md:bg-blue-50">
       <div className="lg:px-4 px-[20px]">
-        <div className="text-center pt-[48px] lg:pt-18 mb-[14px] lg:mb-[28px]">
+        <div className="text-center pt-[48px] lg:pt-15 mb-[14px] lg:mb-[19px]">
           <span className="lexend font-medium md:text-[36px] leading-[100%] text-[20px] tracking-[-0.36px] text-gray-800 ">
             {content.header.title1} 
           </span>
@@ -117,7 +117,7 @@ parsedGuide.sort((a, b) => parseInt(a.number) - parseInt(b.number));
                 )}
               </button>
               {typeof window !== 'undefined' && window.outerWidth >= 1023 && activeStep === index && (
-                <div className="flex flex-col lg:flex-row gap-5 w-full transition-all duration-300">
+                <div className="flex flex-col lg:flex-row gap-5 w-full transition-all duration-300 justify-center">
                   {index === 1 && (
                     <div className="hidden lg:flex justify-center lg:flex-shrink-0">
                       <Box box={content.steps[1].box1} stepIndex={0} />
