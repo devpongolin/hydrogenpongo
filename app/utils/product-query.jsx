@@ -91,7 +91,34 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                 }
               }
             }
-
+            featuredBlogs: metafield(namespace: "custom", key: "hydrogen_featured_blogs_new") {
+              references(first: 250) {
+                edges {
+                  node {
+                    ... on Metaobject {
+                      fields {
+                        key
+                        value
+                        reference {
+                          ... on MediaImage {
+                            image {
+                              url
+                              altText
+                            }
+                          }
+                          ... on Metaobject {
+                            fields {
+                              key
+                              value
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
             specComparison: metafield(namespace: "custom", key: "hydrogen_features_compare") {
               references(first: 250) {
                 edges {

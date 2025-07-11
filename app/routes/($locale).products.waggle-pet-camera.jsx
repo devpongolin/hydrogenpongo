@@ -62,9 +62,10 @@ export default function CustomPage() {
   const waggleGuide = ProductData?.product?.product?.product?.petGuideSteps?.references?.edges  || [];
   const productFAQS= ProductData?.product?.product?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
+  const featuredBlogs = ProductData?.product?.product?.product?.featuredBlogs?.references?.edges || []; 
   const productIdValue = ProductData?.productId || null;
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5; 
- 
+
   return (
     <div>
       <PotionControl ProductData={ProductData} productAvarageRating={productAvarageRating}/>
@@ -84,7 +85,7 @@ export default function CustomPage() {
       {productFAQS.length > 0 && (
         <FAQsection productFAQS={productFAQS} />
       )}
-       <PetSafetyGrid />
+       <PetSafetyGrid featuredBlogs={featuredBlogs} />
     </div>
   );
 }
