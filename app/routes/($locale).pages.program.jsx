@@ -2,11 +2,12 @@ import PartnerwithWaggle from "~/components/PartnerwithWaggle"
 import TrustedTopDogs from "~/components/TrustedTopDogs"
 import PartnerTypeSection from "~/components/PartnerTypeSection"
 import SimpleStepsSection from "~/components/SimpleStepsSection"
-import {useLoaderData} from 'react-router';
+import { useLoaderData } from 'react-router';
 import { getPageData } from '~/utils/common-functions';
+import { useInView } from 'react-intersection-observer';
 
 export async function loader({ context }) {
-    const pageDataByHandle = await getPageData({ context,pageHandle:"program" })
+    const pageDataByHandle = await getPageData({ context, pageHandle: "program" })
 
     return {
         pageDataByHandle,
@@ -19,21 +20,28 @@ export default function PartnerProgram() {
     const TrustByDog = metaData?.pageDataByHandle?.pageDatas?.page?.partnerProgramTrustByDog?.reference?.fields || [];
     const FindYourPartner = metaData?.pageDataByHandle?.pageDatas?.page?.partnerProgramFindYourPartner?.reference?.fields || [];
     const SimpleSteps = metaData?.pageDataByHandle?.pageDatas?.page?.partnerProgramSimpleStep?.reference?.fields || [];
-    
+    const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
     return (
         <div>
-            { BannerData.length > 0 && (
-                <PartnerwithWaggle BannerData = {BannerData} />
+            {BannerData.length > 0 && (
+                <PartnerwithWaggle BannerData={BannerData} />
             )}
-            { TrustByDog.length > 0 && (
-                <TrustedTopDogs TrustByDog = {TrustByDog} />
+            {TrustByDog.length > 0 && (
+                <TrustedTopDogs TrustByDog={TrustByDog} />
             )}
-            { FindYourPartner.length > 0 && (
-                <PartnerTypeSection FindYourPartner = {FindYourPartner} />
-            )}
-            { SimpleSteps.length > 0 && (
-                <SimpleStepsSection SimpleSteps = {SimpleSteps} />
-            )}
+            <div ref={belowFoldRef}>
+                {inView && (
+                    <>
+                        {FindYourPartner.length > 0 && (
+                            <PartnerTypeSection FindYourPartner={FindYourPartner} />
+                        )}
+                        {SimpleSteps.length > 0 && (
+                            <SimpleStepsSection SimpleSteps={SimpleSteps} />
+                        )}
+                    </>
+                )}
+            </div>
         </div>
     );
 }   
