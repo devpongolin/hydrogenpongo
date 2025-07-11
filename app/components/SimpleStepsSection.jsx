@@ -64,7 +64,7 @@ const SimpleStepsSection = ({SimpleSteps}) => {
                 ))}
                 <div>
                   <button className="blue-400 rounded-[28px] h-full white-text-element font-bold p-[40px] md:p-[39px] flex flex-col gap-[30px] md:justify-between group w-full last:gap-[69px]">
-                    <span className="lexend font-normal text-[20px] leading-[100%] tracking-normal md:text-[23px]">
+                    <span className="lexend font-normal text-[20px] leading-[100%] tracking-normal md:text-[22px]">
                       {data.textContent.buttonText}
                     </span>
                     <img
