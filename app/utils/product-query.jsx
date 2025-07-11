@@ -91,6 +91,40 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                 }
               }
             }
+
+            specComparison: metafield(namespace: "custom", key: "hydrogen_features_compare") {
+              references(first: 250) {
+                edges {
+                  node {
+                    ... on Metaobject {
+                      fields {
+                        key
+                        value
+                        reference {
+                          ... on MediaImage {
+                            image {
+                              url
+                              altText
+                            }
+                          }
+                          ... on ProductVariant {
+                            id
+                            title
+                            quantityAvailable
+                            price {
+                              amount
+                            }
+                            compareAtPrice {
+                              amount
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
             petsNeeds: metafield(namespace: "custom", key: "pets_needs") {
               reference{
                 ... on Metaobject {

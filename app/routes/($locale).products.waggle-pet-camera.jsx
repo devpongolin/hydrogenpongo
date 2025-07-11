@@ -1,13 +1,16 @@
 import PetSafetyGrid from '~/components/PetSafetyGrid';
 import PotionControl from '~/components/PotionControl';
+import PerfectWagglePet from '~/components/PerfectWagglePet';
 import SmartPetBowlShowcase from '~/components/SmartPetBowlShowcase';
 import FrequentlyBoughtTogether from '~/components/FrequentlyBoughtTogether';
 import WaggleSteps from '~/components/WaggleSteps';
 import TestimonialsSection from '~/components/TestimonialsSection';
 import FAQsection from '~/components/FAQsection';
-import {useLoaderData} from 'react-router';
+import {useLoaderData, useActionData} from 'react-router';
 import {getAvarageProductRating,getProductsReview,fetchProductByHandle} from '~/utils/common-functions';
 import { getInstructionMetaobjectData } from '~/utils/common-functions';
+import {cartCreateDefault, useOptimisticCart} from '@shopify/hydrogen';
+import {redirect} from '@shopify/remix-oxygen';
 
 export async function loader({context}) {
   const ALI_REVIEWS_API_KEY = context.env.ALI_REVIEWS_API_KEY;
@@ -27,22 +30,48 @@ export async function loader({context}) {
   };
 }
 
+export async function action({request, context}) {
+  const {cart, storefront} = context;
+  const cartId = cart.getCartId() || null;
+  request.formData = await request.formData();
+  const merchandiseId = request.formData.get('merchandiseId');
+  const cartCreate = cartCreateDefault({
+    storefront,
+    cartId,
+  });
+  try {
+    const result = await cartCreate({
+      lines: [
+        {
+          merchandiseId: merchandiseId,
+          quantity: 1,
+        },
+      ],
+    });
+    return redirect(result?.cart?.checkoutUrl);
+  } catch (error) {
+    console.error('Error in handleBuyNow:', error);
+  }
+}
+
 export default function CustomPage() {
   const ProductData = useLoaderData();
   const bundleProduct = ProductData?.product?.product?.product?.bundleProduct?.references?.edges || [];
+  const specCompare = ProductData?.product?.product?.product?.specComparison?.references?.edges || [];
   const petsNeeds = ProductData?.product?.product?.product?.petsNeeds?.reference?.fields || [];
   const waggleGuide = ProductData?.product?.product?.product?.petGuideSteps?.references?.edges  || [];
   const productFAQS= ProductData?.product?.product?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
   const productIdValue = ProductData?.productId || null;
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5; 
-  
+ 
   return (
     <div>
       <PotionControl ProductData={ProductData} productAvarageRating={productAvarageRating}/>
       {petsNeeds.length > 0 && (
         <SmartPetBowlShowcase petsNeeds={petsNeeds} />
       )}
+      <PerfectWagglePet specCompare={specCompare} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
       {bundleProduct.length > 0 && (
         <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
       )}
