@@ -43,7 +43,7 @@ export default function PartnerwithWaggle({BannerData}) {
   };
 
   return (
-    <div className="main-bg-color md:py-[56px] md:pb-[77px] py-[37px] pb-[53px] w-full max-w-[1440px] mx-auto my-class rounded-tl-[28px] rounded-tr-[28px] flex flex-col items-center px-4">
+    <div className="main-bg-color md:py-[56px] md:pb-[77px] py-[37px] pb-[53px] w-full max-w-[1440px] mx-auto my-class rounded-tl-[28px] rounded-tr-[28px] flex flex-col items-center px-0">
       <img
         src={data.images.heroSectionMobile}
         alt={data.heroImage.mobile.alt}
@@ -62,7 +62,7 @@ export default function PartnerwithWaggle({BannerData}) {
         className="mx-auto mb-[39px] hidden md:block"
         loading="lazy"
       />
-      <div className="flex flex-col md:flex-row gap-[20px] md:gap-[40px] description-padding md:px-[245px]">
+      <div className="flex flex-col md:flex-row gap-[20px] md:gap-[40px] description-padding md:px-[0px] max-w-[949px] w-full">
         {data.features.map((feature) => (
           <div key={feature.id} className="text-center group">
             <div className="mx-auto mb-[18px] md:mb-[28px] flex items-center justify-center">

@@ -8,7 +8,7 @@ import { getPageData } from '~/utils/common-functions';
 import { useInView } from 'react-intersection-observer';
 
 export async function loader({context}) {
-  const pageDataByHandle = await getPageData({ context,pageHandle:"hydrogen-about-us" })
+  const pageDataByHandle = await getPageData({ context,pageHandle:"about-us" })
 
   return {
     pageDataByHandle,

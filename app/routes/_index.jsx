@@ -75,22 +75,25 @@ export default function Homepage() {
 
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  const pageData = useLoaderData();
   const mainBannerData = data?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
+  const SafetyAtYourFingertipsData = pageData?.pageDataByHandle?.pageDatas?.page?.SafetyAtYourFingertipsData?.reference?.fields || [];
 
   return (
     <div className="home">
       {/* <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} /> */}
       {/* <waggleHomeContent /> */}
-      <RecommendedProducts products={data.recommendedProducts} />
-       {mainBannerData.length > 0 && (
-          <WaggleHome mainBannerData={mainBannerData}/>
+      {mainBannerData.length > 0 && (
+        <WaggleHome mainBannerData={mainBannerData}/>
       )}
       <ProductShowcase />
-       <ImageCarousel /> 
+      <ImageCarousel /> 
       <PetSafetyCards />
       <HappyTailsSection />
-      <WaggleAppLanding />
+      {SafetyAtYourFingertipsData.length > 0 && (
+        <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
+      )}
       <UltimatePetParent />
     </div>
   );

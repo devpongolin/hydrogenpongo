@@ -8,7 +8,7 @@ export function StarRating({ rating = 5 }) {
   const totalStars = 5;
 
   return (
-    <div style={{ display: 'flex', gap: '2px' }}>
+    <div style={{ display: 'flex', gap: '3px' }}> 
       {Array.from({ length: totalStars }, (_, index) => {
         let icon = emptyStar;
 
@@ -18,7 +18,7 @@ export function StarRating({ rating = 5 }) {
           icon = halfStar;
         }
 
-        return <img key={index} src={icon} alt="star" style={{ width: '20px', height: '20px' }} />;
+        return <img key={index} src={icon} alt="star" style={{ width: '15px', height: '15px' }} />;
       })}
     </div>
   );

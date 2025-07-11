@@ -563,7 +563,7 @@ button.reset:hover:not(:has(> *)) {
   --main-bg-color: #D1E7FA;
   --bg-color: #0085FF;
   --blue-color: #0085FF;
-  --hover-color: #FFFFFF;
+  --hover-color: #B47E57;
   --hover-text-color: #000000;
   --white-text: #FFFFFF;
   --off-white-80: #FEFDFDCC;
@@ -798,11 +798,11 @@ button.reset:hover:not(:has(> *)) {
 }
 .button-hover:hover {
   background-color: var(--blue-color);
-  color: var(--hover-color);
+  color: var(--white-text);
 }
 .button-hover2:hover{
   background-color: var(--hover-color);
-   color: var(--hover-text-color);
+   /* color: var(--hover-text-color); */
    transition: background-color 0.3s ease;
 }
 .blue-color{
@@ -1013,4 +1013,86 @@ button.reset:hover:not(:has(> *)) {
 
 .custom-after-empty::after {
   content: "";
+}
+
+/* css for marquee image slide on cms pages */
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 34px;
+  width: max-content;
+  animation: scroll-marquee 30s linear infinite;
+}
+
+.image-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.image-pair img {
+  width: 100%;
+  object-fit: contain;
+  height: 100%;
+}
+
+.margin-top {
+  margin-top: 79px;
+}
+
+.margin-bottom {
+  margin-bottom: 30px;
+}
+
+.image-label {
+  font-size: 16px !important;
+  color: #ffffff;
+  font-weight: 500;
+  text-align: center;
+  background-color: #B47E57;  
+  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 18px;
+  text-align: left;
+  padding: 10px 16px;
+}
+
+.image-block {
+  display: flex;
+  flex-direction: column;
+}
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.backdrop-blur-custom{
+  backdrop-filter: blur(31.70804214477539px);
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@media(max-width: 768px){
+  .marquee-track {
+    gap: 24px;
+  }
+  .image-pair img {
+    width: 124px;
+  }
+  .image-label {
+    font-size: 9px !important;
+    padding: 5px 10px;
+  }
+  .margin-top {
+    margin-top: 47px;
+  }
 }

@@ -112,7 +112,7 @@ export default function NoMoreRuffDays({noMoreRuffDays}) {
           );
         })}
       </div>
-      <div className="justify-between flex flex-col md:flex-row md:mt-10 md:pb-16 pb-10 mt-[26px]">
+      <div className="justify-between flex flex-col md:flex-row md:mt-10 md:pb-16 pb-[60px] mt-[26px]">
         <div className="w-full md:w-1/2 flex flex-col">
           <h2 className="md:mb-7 text-dark-gray mb-4 font-medium md:text-[36px] leading-[40px] tracking-[-0.5px] text-[25px] lexend">
             {waggleForGoodSection.title}

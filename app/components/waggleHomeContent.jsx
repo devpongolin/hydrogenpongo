@@ -98,19 +98,7 @@ export default function WaggleHome({ mainBannerData }) {
 
   return (
     <div className="relative overflow-hidden mx-auto rounded-[40.56px]">
-      <img
-        src={mainBannerDesktopImage || backgroundImage}
-        alt="Background"
-        className="inset-0 w-full h-full object-cover hidden md:block"
-        loading="lazy"
-      />
-      <img
-        src={mainBannerMobileImage || mobileBackgroundImage}
-        alt="Mobile Background"
-        className="md:mt-[10%] inset-0 w-full h-full object-cover block md:hidden"
-        loading="lazy"
-      />
-      <div className="absolute top-0 brand-brown white-text-element md:px-[80px] md:py-[23px] p-[6px] md:h-[59px] w-full rounded-t-[40.56px]">
+      <div className="brand-brown white-text-element md:px-[80px] md:py-[23px] p-[6px] md:h-[59px] w-full rounded-t-[40.56px]">
         <div className="hidden md:flex justify-between items-center h-full">
           <span className="lato font-bold text-[18px] leading-[100%] tracking-[0]">
             {waggleHomeContent.topBar.leftText}
@@ -137,6 +125,18 @@ export default function WaggleHome({ mainBannerData }) {
           </div>
         </div>
       </div>
+      <img
+        src={mainBannerDesktopImage || backgroundImage}
+        alt="Background"
+        className="inset-0 w-full h-full object-cover hidden md:block"
+        loading="lazy"
+      />
+      <img
+        src={mainBannerMobileImage || mobileBackgroundImage}
+        alt="Mobile Background"
+        className="md:mt-[10%] inset-0 w-full h-full object-cover block md:hidden"
+        loading="lazy"
+      />
       <div className="responsive-temp-box mobile-flex-center max-w-[1280px] w-full top-[50%] md:top-[60.5%] left-[50%] md:left-[48.5%] translate-x-[-50%] translate-y-[-50%] absolute py-[30px] md:py-[0] md:px-[20px] px-[15px] flex flex-col h-full justify-between md:h-auto md:justify-normal">
         <div className="flex flex-col lg:flex-row gap-8 items-center">
           <div className="w-full lg:w-2/3 md:mb-12">
@@ -153,10 +153,10 @@ export default function WaggleHome({ mainBannerData }) {
                 if (!feature.arrow) return;
                 if (!feature.url) return;
                 return (
-                  <a href={feature.url}>
+                  <a href={feature.url} className="h-inherit">
                     <button
                       key={index}
-                      className="bg-white/10 text-white rounded-[46.99px] p-[6.27px] gap-[15px] md:gap-[22px] flex flex-col md:flex-row items-center justify-center md:justify-between"
+                      className="h-[100%] bg-white/10 text-white rounded-[46.99px] p-[6.27px] gap-[15px] md:gap-[22px] flex flex-col md:flex-row items-center justify-center md:justify-between"
                     >
                       <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-3">
                         <img
@@ -177,7 +177,7 @@ export default function WaggleHome({ mainBannerData }) {
             </div>
           </div>
           {mainBannerSeconderyImage && (
-            <div className="justify-center lg:justify-end absolute right-[1.5%] bottom-[5.5%] hidden md:block">
+            <div className="justify-center lg:justify-end absolute right-[1.5%] bottom-[5.5%] hidden md:block backdrop-blur-custom rounded-[26px] border-[0.61px] border-white/45">
               <img
                 src={waggleHomeContent.hero.rightImage.image}
                 alt={waggleHomeContent.hero.rightImage.alt}
@@ -189,7 +189,7 @@ export default function WaggleHome({ mainBannerData }) {
         </div>
         {waggleHomeContent.bannerButton.url && waggleHomeContent.bannerButton.title && waggleHomeContent.bannerButton.icon && (
           <div>
-            <a href={waggleHomeContent.bannerButton.url} className='flex items-center gap-[10px] px-8 py-[18px] bg-[#0085FF] rounded-[55px] text-white font-semibold w-fit'>
+            <a href={waggleHomeContent.bannerButton.url} className='flex items-center gap-[10px] px-8 py-[18px] bg-[#0085FF] rounded-[55px] text-white font-semibold w-fit button-hover2'>
               <span>{waggleHomeContent.bannerButton.title}</span>
               <img
                   src={waggleHomeContent.bannerButton.icon}

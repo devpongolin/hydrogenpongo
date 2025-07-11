@@ -11,7 +11,7 @@ import { MegaMenuDropdown } from './MegaMenuDropdown';
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu, metaobjects} = header;
   return (
-    <header className="header border-b-[0.5px] border-b-[rgba(223,223,223,1)] !h-auto">
+    <header className="header border-b-[0.5px] border-b-[rgba(223,223,223,1)] !h-auto !z-2">
       <div className="max-w-[1280px] mx-auto w-full flex py-[16px] h-[inherit] items-center">
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
           <strong></strong>
@@ -60,7 +60,7 @@ export function HeaderMenu({
           image: meta.image || '',
           icon: meta.icon || '',
           price: meta.price || '',
-          link: subItem.url,
+          link: subItem?.url?.replace("https://mywaggle.com", ""),
         };
       });
     }

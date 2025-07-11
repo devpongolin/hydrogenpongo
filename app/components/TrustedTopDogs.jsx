@@ -35,7 +35,7 @@ const ModernDog = ({TrustByDog}) => {
       <h2 className="md:mb-[37px] mb-[16px] inter gray-medium text-center font-normal text-[14px] md:text-[16px] leading-[164%] tracking-[0] uppercase">
         {contentData.heading}
       </h2>
-      <div className="flex flex-wrap gap-[22px] md:hidden justify-center">
+      <div className="flex flex-wrap gap-[22px] md:hidden justify-center gap-y-[25px] md:gap-y-[0px]">
         {partnersData.map(({ id, logo, alt }) => (
           <div key={id} className="min-w-0 basis-[calc(33.333%-15px)] flex justify-center">
             <img

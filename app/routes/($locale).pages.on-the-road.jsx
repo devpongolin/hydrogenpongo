@@ -2,7 +2,14 @@ import React from 'react'
 import { useLoaderData } from 'react-router';
 import PageFAQ from '~/components/PageFAQ';
 import WaggleHome from '~/components/waggleHomeContent';
+import WaggleAppLanding from '~/components/WaggleAppLanding';
+import FeaturesSection from '~/components/FeaturesSection';
+import ImageMarqueeSlider from '~/components/Galleryslider';
 import { getPageData } from '~/utils/common-functions';
+import OfferBanner from '~/components/OfferBanner';
+import VideoBanner from '~/components/VideoBanner';
+
+
 
 
 export async function loader({ context }) {
@@ -17,12 +24,26 @@ export default function onTheRoad() {
 const pageData = useLoaderData();
 const mainBannerData = pageData?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
 const pageFaqData = pageData?.pageDataByHandle?.pageDatas?.page?.faqData?.references?.edges || [];
-// console.log(pageData);
+const SafetyAtYourFingertipsData = pageData?.pageDataByHandle?.pageDatas?.page?.SafetyAtYourFingertipsData?.reference?.fields || [];
+const hydrogenFeaturesSectionData = pageData?.pageDataByHandle?.pageDatas?.page?.hydrogenFeaturesSectionData?.reference?.fields || [];
+const HydrogenGallerySliderData = pageData?.pageDataByHandle?.pageDatas?.page?.HydrogenGallerySliderData?.references?.edges || [];
+// console.log(HydrogenGallerySliderData);
   return (
     <>
     <div className='bg-[#F7EEE9]'>
       {mainBannerData.length > 0 && (
-          <WaggleHome mainBannerData={mainBannerData}/>
+        <WaggleHome mainBannerData={mainBannerData}/>
+      )}
+      {hydrogenFeaturesSectionData.length > 0 && (
+        <FeaturesSection hydrogenFeaturesSectionData={hydrogenFeaturesSectionData} />
+      )}
+      <OfferBanner />
+      <VideoBanner />
+      {HydrogenGallerySliderData.length > 0 && (
+        <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
+      )}
+      {SafetyAtYourFingertipsData.length > 0 && (
+        <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
       )}
       {pageFaqData.length > 0 && (
       <PageFAQ pageFaqData={pageFaqData}/>

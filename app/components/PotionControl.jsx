@@ -161,12 +161,12 @@ export default function PotionControl({ProductData,productAvarageRating}) {
   };
 
   return (
-    <div className="px-[20px] md:px-[0] md:py-[55px] py-[48px] mx-auto max-w-[1160px] gap-[55px] w-full md:flex md:items-start md:justify-between">
+    <div className="px-[20px] md:px-[0] md:py-[55px] py-[48px] mx-auto max-w-[1210px] gap-[55px] w-full md:flex md:items-start md:justify-between test">
         <div className='flex flex-col items-start justify-start w-full md:w-[50%]'>
-            <span className="lexend font-medium text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:hidden block">
+            <span className="lexend font-medium text-[22px] md:text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:hidden block">
               {productData.title}
             </span>
-            <div className="flex items-center gap-4 mt-[14px] md:hidden block">
+            <div className="pb-[11px] w-full border-b border-[#DFDFDF] mb-[27px] mt-[14px] md:hidden flex flex-col gap-[13px] items-start">
               <StarRating  rating={productAvarageRating}/>
               <span className="dark-slate lato font-normal text-base leading-6 tracking-normal align-middle">
                 {productAvarageRating} out of 5
@@ -193,14 +193,14 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             </button>
           </div>
           <div className="w-full">
-            <div className="flex gap-[23px] mt-[14px] overflow-auto">
+            <div className="flex gap-[17px] md:gap-[23px] mt-[14px] overflow-auto">
               {thumbnailImages.map((thumb, index) => {
                 const actualIndex = thumbnailStartIndex + index;
                 return (
                   <button
                     key={actualIndex}
                     onClick={() => setCurrentImage(actualIndex)}
-                    className={`w-[93.2px] h-[93.2px] rounded-[13.48px] border-[1.08px] border-solid flex-shrink-0 overflow-hidden transition-all ${
+                    className={`w-[72px] h-[72px] md:w-[93.2px] md:h-[93.2px] rounded-[13.48px] border-[1.08px] border-solid flex-shrink-0 overflow-hidden transition-all ${
                       currentImage === actualIndex
                         ? 'color-dark'
                         : 'border-soft'
@@ -217,19 +217,19 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="mt-[26px] border-t border-[#DFDFDF] md:mt-0 md:border-0">
           <div>
-            <span className="lexend font-medium text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:block hidden">
+            <span className="lexend font-medium text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:block hidden mt-[2px]">
               {productData.title}
             </span>
-            <div className="flex items-center gap-4 mt-[14px] md:block hidden">
+            <div className="items-center gap-4 mt-[14px] md:flex hidden border-b border-[#DFDFDF] pb-[14px]">
               <StarRating  rating={productAvarageRating}/>
               <span className="dark-slate lato font-normal text-base leading-6 tracking-normal align-middle">
                 {productAvarageRating} out of 5
               </span>
             </div>
             <div
-              className={`inline-block brand-brown rounded-[4px] white-text-element pt-[6px] pr-[12px] pb-[6px] pl-[12px] lato font-semibold text-base leading-6 tracking-normal mt-[42px]`}
+              className={`inline-block brand-brown rounded-[4px] white-text-element pt-[6px] pr-[12px] pb-[6px] pl-[12px] lato font-semibold text-base leading-6 tracking-normal mt-[27px]`}
             >
               {productData.badge.text}
             </div>
@@ -250,7 +250,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                         key={index}
                         onClick={() => handleVariantClick(id,productPrice,productComparePrice,quantityAvailable)}
                         className={`px-[18px] py-[12px] w-[27%] border rounded-[8px] mt-1 cursor-pointer ${
-                          isActive ? "border-black bg-gray-100" : "border-[#80808040]"
+                          isActive ? "border-black bg-[#D8EDFF]" : "border-[#80808040]"
                         }`}
                       >
                         <img src={image?.url} alt={image?.altText || title} />
@@ -262,7 +262,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
               </div>
             )}
           </div>
-          <div className="flex items-end mt-[20px]">
+          <div className="flex items-end mt-[20px] gap-[8px]">
             {parseFloat(productData.pricing.originalPrice) > parseFloat(productData.pricing.currentPrice) && (
               <span className="lexend font-light text-sm leading-[1.24] tracking-normal dark-slate line-through">
                 ${productData.pricing.originalPrice}
@@ -279,7 +279,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
               return discount > 0 ? (
                 <>
                         <span className="primary-red lexend font-light text-[23px] leading-[28px] tracking-normal">
-                        {discount}% OFF
+                        -{discount}%
                         </span>
                         </>
               ) : null;
@@ -295,7 +295,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             </span>{' '}
             {productData.pricing.subscription.note}
           </p>
-          <h3 className="lexend font-medium text-[20px] leading-[23.2px] tracking-[-0.07px] text-dark-gray mt-[20px]">
+          <h3 className="lexend font-medium text-[14px] md:text-[20px] leading-[23.2px] tracking-[-0.07px] text-dark-gray mt-[20px]">
             {productData.sectionTitle}
           </h3>
           <div className="mt-[14px]">
@@ -304,18 +304,18 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                 <div className="rounded-full flex items-center justify-center">
                   <img src={feature.icon} alt="Feature" />
                 </div>
-                <span className="text-dark-gray NotoSans font-normal text-base leading-7 tracking-normal">
+                <span className="text-dark-gray NotoSans font-normal text-base leading-7 tracking-normal text-[14px] md:text-[16px]">
                   {feature.text}
                 </span>
               </div>
             ))}
           </div>
-          <div className="flex mt-[20px] gap-1 flex-col md:flex-row">
+          <div className="flex mt-[20px] gap-[10px] flex-col md:flex-row">
             <span className="md:w-auto w-fit primary-yellow dark-slate rounded-[4px] py-1 px-2 lato font-semibold text-base leading-6 tracking-normal h-fit">
               {productData.coupon.label}
             </span>
             <span className="NotoSans font-normal text-base leading-[28px] tracking-normal flex items-center gap-[3px]">
-            <img src={promoBoxImage} alt="Promo Box" />
+            <img src={promoBoxImage} alt="Promo Box" className="mr-[5px]" />
               {productData.coupon.text}{' '}
               <span className="NotoSans font-bold text-base leading-[28px] tracking-normal">
                 {productData.coupon.code}
@@ -331,19 +331,23 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             <div className="flex border gray-medium rounded-[64px] w-fit">
               <button
                 onClick={decreaseQuantity}
-                className="px-4 py-3 cursor-pointer"
+                className="px-[9px] py-4 cursor-pointer"
               >
-                −
+                <svg width="30" height="3" viewBox="0 0 15 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1228 2.97998H0.122803V0.97998H14.1228V2.97998Z" fill="#CCCCCC"/>
+                </svg>
               </button>
-              <span className="px-4 py-3 black-dark font-bold text-base leading-6 tracking-normal NotoSans">
+              <span className="px-[9px] py-4 black-dark font-bold text-base leading-6 tracking-normal NotoSans flex items-center">
                 {quantity}
               </span>
               <button
                 onClick={increaseQuantity}
-                className="px-4 py-3 black-dark cursor-pointer"
+                className="px-[9px] py-4 black-dark cursor-pointer"
                 disabled={availableQuantity <= quantity}
               >
-                +
+                <svg width="25" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.48218 8.97607V14.9761H8.48218V8.97607H14.4822V6.97607H8.48218V0.976074H6.48218V6.97607H0.482178V8.97607H6.48218Z" fill="#111111"/>
+                </svg>
               </button>
             </div>
             <CustomAddToCartButton
@@ -369,7 +373,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
           <div className="flex gap-[0px] pt-[20px] flex-wrap">
             {productData.trustBadges.map((badge, index) => (
               <React.Fragment key={index}>
-                <div className="pdp-benifits-text-center md:w-[24%] w-[49%]">
+                <div className="pdp-benifits-text-center md:w-[25%] w-[50%]">
                   <div className="flex items-center justify-center mx-auto">
                     <img src={badge.icon} alt={badge.text} />
                   </div>
