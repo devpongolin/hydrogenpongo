@@ -161,7 +161,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
   };
 
   return (
-    <div className="px-[20px] md:px-[0] md:py-[55px] py-[48px] mx-auto max-w-[1210px] gap-[55px] w-full md:flex md:items-start md:justify-between test">
+    <div className="px-[20px] md:px-[0] md:py-[55px] py-[26px] mx-auto max-w-[1210px] gap-[55px] w-full md:flex md:items-start md:justify-between test">
         <div className='flex flex-col items-start justify-start w-full md:w-[50%]'>
             <span className="lexend font-medium text-[22px] md:text-[28px] leading-[1.24] tracking-[-0.07px] text-dark-gray md:hidden block">
               {productData.title}
@@ -193,7 +193,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             </button>
           </div>
           <div className="w-full">
-            <div className="flex gap-[17px] md:gap-[23px] mt-[14px] overflow-auto">
+            <div className="flex gap-[17px] md:gap-[23px] mt-[14px] overflow-auto hide-scrollbar">
               {thumbnailImages.map((thumb, index) => {
                 const actualIndex = thumbnailStartIndex + index;
                 return (
@@ -236,7 +236,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             { productVariantsData.length > 1 && (
               <div className="mt-5">
                 <span>Select options</span>
-                <div className="flex flex-wrap gap-2 mt-2">
+                <div className="flex flex-wrap gap-[16px]">
                   {productVariantsData.map((variant, index) => {
                     const { title, image, id,price,compareAtPrice,quantityAvailable  } = variant.node;
                     const productPrice = price?.amount || 'N/A';
@@ -249,12 +249,12 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                       <button
                         key={index}
                         onClick={() => handleVariantClick(id,productPrice,productComparePrice,quantityAvailable)}
-                        className={`px-[18px] py-[12px] w-[27%] border rounded-[8px] mt-1 cursor-pointer ${
+                        className={`px-[10px] py-[11px] w-[126px] h-[144px] border rounded-[8px] mt-1 cursor-pointer ${
                           isActive ? "border-black bg-[#D8EDFF]" : "border-[#80808040]"
                         }`}
                       >
                         <img src={image?.url} alt={image?.altText || title} />
-                        <span>{title}</span>
+                        <span className="text-[14px] truncate">{title}</span>
                       </button>
                     );
                   })}

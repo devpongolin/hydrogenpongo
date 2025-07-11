@@ -166,7 +166,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
 
                 return (
                   <div key={item.id} className={`footer-link-group flex flex-col gap-[26px] !m-0 w-full !mb-auto ${
-                    item.title === 'Contact Us' ? 'hidden md:block' : ''
+                    item.title === 'Contact Us' ? 'hidden md:flex' : ''
                   }`}>
                     <LinkComponent {...linkProps} className="md:text-[18px] text-[16px] font-bold">{item.title}</LinkComponent>
 
@@ -347,7 +347,7 @@ function FooterForm() {
           onChange={(e) => setSubscribeEmail(e.target.value)}
           className="border-0 focus:outline-0 w-full bg-[#ffffff] text-[#B9B9B9] !m-0 !rounded-[30px] !px-[28px] !py-[15px] text-[15px]"
         />
-        <button type="submit" className="uppercase border-0 cursor-pointer w-fit text-[#ffffff] bg-[#0085FF] px-8 py-3 rounded-[30px] absolute right-[8px] top-[14%]">
+        <button type="submit" className="uppercase border-0 cursor-pointer w-fit text-[#ffffff] bg-[#0085FF] px-8 py-3 rounded-[30px] absolute right-[8px] top-[14%] button-hover2">
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>

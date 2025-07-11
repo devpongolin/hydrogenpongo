@@ -57,8 +57,8 @@ export default function FrequentlyBoughtTogether(bundleProduct) {
 
   return (
     <div className="dark-slate-bg px-4 py-8 md:px-[170px] md:py-[55px] extra-padding max-w-[1440px] w-full mx-auto">
-      <div className="flex flex-col md:flex-row md:justify-between gap-6">
-        <h2 className="white-text-element lexend font-medium text-[24px] md:text-[36px] tracking-[-0.24px] md:tracking-[-0.36px] text-center md:text-left leading-[1.3] h-fit mt-[9px] w-min ml-[35px]">
+      <div className="flex flex-col md:flex-row md:justify-between gap-[15px] md:gap-6">
+        <h2 className="white-text-element lexend font-medium text-[20px] md:text-[35px] tracking-[-0.24px] md:tracking-[-0.36px] text-center md:text-left leading-[1.3] h-fit mt-[18px] md:mt-[9px] md:w-min md:ml-[35px]">
           {texts.sectionTitle}
         </h2>
         <div className="flex justify-center md:justify-start gap-[23px] md:ml-[4%] md:mr-[1%] md:gap-0">
@@ -105,8 +105,8 @@ export default function FrequentlyBoughtTogether(bundleProduct) {
           </div>
         </div>
         <div className="text-center md:text-right">
-          <div className="mt-6 md:mt-[21%]">
-            <div className="md:text-left white-text-element lato font-medium text-[16px] md:text-[20px] leading-[19px] md:leading-[23.2px] tracking-[0] mb-[12px]">
+          <div className="mt-0 md:mt-[21%]">
+            <div className="md:text-left white-text-element lato font-medium text-[20px] leading-[19px] md:leading-[23.2px] tracking-[0] mb-[12px]">
               {texts.totalPriceText}
             </div>
             <div className="flex items-center justify-center md:justify-end gap-2 mb-4">
@@ -125,7 +125,7 @@ export default function FrequentlyBoughtTogether(bundleProduct) {
               merchandiseId: product.variantId,
               quantity: 1,
             }))}
-            className="button2 button-hover2 px-6 md:px-8 py-[14px] md:py-[18px] lato rounded-[100px] white-text-element font-bold text-[16px] md:text-[18px] leading-[100%] cursor-pointer tracking-[0] max-w-[280px] md:max-w-none !w-auto flex"
+            className="button2 button-hover2 px-6 md:px-8 py-[14px] md:py-[18px] lato rounded-[100px] white-text-element font-bold text-[16px] md:text-[18px] leading-[100%] cursor-pointer tracking-[0] max-w-[280px] md:max-w-none !w-auto flex mx-auto items-center h-auto md:mx-0 md:items-start md:h-full"
           >
             {texts.buttonText}
           </CustomAddToCartButton>

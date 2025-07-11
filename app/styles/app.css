@@ -811,6 +811,17 @@ button.reset:hover:not(:has(> *)) {
 .custom-translate-y {
   transform: translateX(-50%) translateY(-340%);
 }
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+.truncate{
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-box-orient: horizontal;
+  -webkit-line-clamp: 1;
+}
 
 @media (min-width: 767px) and (max-width: 906px) {
   .text-custom47 {

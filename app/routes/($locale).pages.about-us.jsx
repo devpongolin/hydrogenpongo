@@ -5,6 +5,7 @@ import CertifiedToCare from "~/components/CertiFiedToCare";
 import PetParents from "~/components/PetParents";
 import {useLoaderData} from 'react-router';
 import { getPageData } from '~/utils/common-functions';
+import { useInView } from 'react-intersection-observer';
 
 export async function loader({context}) {
   const pageDataByHandle = await getPageData({ context,pageHandle:"about-us" })
@@ -21,7 +22,8 @@ export default function CustomPage() {
   const whereToTails = metaData?.pageDataByHandle?.pageDatas?.page?.aboutUsWhereToMeetTails?.reference?.fields || [];
   const noMoreRuffDays = metaData?.pageDataByHandle?.pageDatas?.page?.aboutNoMoreRuffDays?.reference?.fields || [];
   const waggingApproved = metaData?.pageDataByHandle?.pageDatas?.page?.abourWaggiesApproved?.reference?.fields || [];
-  const cartifiedCare = metaData?.pageDataByHandle?.pageDatas?.page?.abourCartifiedCare?.reference?.fields || [];  
+  const cartifiedCare = metaData?.pageDataByHandle?.pageDatas?.page?.abourCartifiedCare?.reference?.fields || []; 
+  const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 }); 
 
   return (
     <div>
@@ -31,16 +33,20 @@ export default function CustomPage() {
       {whereToTails.length > 0 && (
         <MeetStails whereToTails = {whereToTails} />
       )}
-      <div className="bg-custom-gradient ">
-        {noMoreRuffDays.length > 0 && (
-           <WaggleForGood noMoreRuffDays = {noMoreRuffDays} />
-        )}
-        {waggingApproved.length > 0 && (
-            <TailwaggingApproved waggingApproved = {waggingApproved} />
-        )}
-        {cartifiedCare.length > 0 && (
-          <CertifiedToCare cartifiedCare = {cartifiedCare} />
-        )}
+      <div ref={belowFoldRef} className="bg-custom-gradient ">
+      {inView && (
+        <>
+          {noMoreRuffDays.length > 0 && (
+            <WaggleForGood noMoreRuffDays = {noMoreRuffDays} />
+          )}
+          {waggingApproved.length > 0 && (
+              <TailwaggingApproved waggingApproved = {waggingApproved} />
+          )}
+          {cartifiedCare.length > 0 && (
+            <CertifiedToCare cartifiedCare = {cartifiedCare} />
+          )}
+        </>
+      )}
       </div>
     </div>
   );

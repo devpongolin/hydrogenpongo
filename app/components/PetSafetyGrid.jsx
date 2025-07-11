@@ -97,7 +97,7 @@ const PetSafetyGrid = () => {
               key={idx}
               className={`
                 rounded-[40px] overflow-hidden shadow-lg relative mx-auto group
-                ${isScrollable ? "flex-shrink-0 w-[360px] h-[380px] snap-start" : ""}
+                ${isScrollable ? "flex-shrink-0 w-[76%] h-[380px] snap-start" : ""}
                 md:w-auto md:h-auto
               `}
             >
@@ -108,11 +108,11 @@ const PetSafetyGrid = () => {
                   className="w-full h-full object-cover"
                 />
                 <div
-                  className="px-[14px] py-[20px] absolute bottom-[10px] left-[10px] cursor-pointer
+                  className="px-[14px] py-[20px] absolute bottom-[10px] left-[4%] w-[91%] md:left-[10px] cursor-pointer
                   md:w-[360px] md:h-[200px] rounded-[30px] shadow-md
                   md:px-[30px] md:py-[30px] bg-white transition-all duration-300
                   transform origin-bottom-left group-hover:bg-blue-500
-                  group-hover:w-[380px] group-hover:left-0
+                  group-hover:md:w-[380px] group-hover:w-[100%] group-hover:left-0
                   group-hover:bottom-0 group-hover:rounded-b-none"
                 >
                   <div className="h-full flex flex-col justify-between">
