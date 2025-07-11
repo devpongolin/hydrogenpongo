@@ -1,37 +1,38 @@
-import {Await, useLoaderData, Link} from 'react-router';
-import {Suspense} from 'react';
-import {Image} from '@shopify/hydrogen';
-import {ProductItem} from '~/components/ProductItem';
+import { Await, useLoaderData, Link } from 'react-router';
+import { Suspense } from 'react';
+import { Image } from '@shopify/hydrogen';
+import { ProductItem } from '~/components/ProductItem';
 // import {waggleHomeContent} from '~/components/waggleHomeContent'
 import WaggleHome from '~/components/waggleHomeContent';
 import ProductShowcase from '~/components/ProductShowcase';
- import ImageCarousel from '~/components/ImageCarousel';
+import ImageCarousel from '~/components/ImageCarousel';
 import PetSafetyCards from '~/components/PetSafetyCards'
-import UltimatePetParent from '~/components/UltimatePetParent'  
+import UltimatePetParent from '~/components/UltimatePetParent'
 import WaggleAppLanding from '~/components/WaggleAppLanding'
 import HappyTailsSection from '~/components/HappyTailsSection'
 import { getPageData } from '~/utils/common-functions';
+import { useInView } from 'react-intersection-observer';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{ title: 'Hydrogen | Home' }];
 };
 
 /**
  * @param {LoaderFunctionArgs} args
  */
 export async function loader(args) {
-  const {context} = args;
-  const pageDataByHandle = await getPageData({ context,pageHandle:"hydrogen-home-page" })
+  const { context } = args;
+  const pageDataByHandle = await getPageData({ context, pageHandle: "hydrogen-home-page" })
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
 
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
 
-  return {...deferredData, ...criticalData,pageDataByHandle};
+  return { ...deferredData, ...criticalData, pageDataByHandle };
 }
 
 /**
@@ -39,8 +40,8 @@ export async function loader(args) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {LoaderFunctionArgs}
  */
-async function loadCriticalData({context}) {
-  const [{collections}] = await Promise.all([
+async function loadCriticalData({ context }) {
+  const [{ collections }] = await Promise.all([
     context.storefront.query(FEATURED_COLLECTION_QUERY),
     // Add other queries here, so that they are loaded in parallel
   ]);
@@ -56,7 +57,7 @@ async function loadCriticalData({context}) {
  * Make sure to not throw any errors here, as it will cause the page to 500.
  * @param {LoaderFunctionArgs}
  */
-function loadDeferredData({context}) {
+function loadDeferredData({ context }) {
   const recommendedProducts = context.storefront
     .query(RECOMMENDED_PRODUCTS_QUERY)
     .catch((error) => {
@@ -78,23 +79,27 @@ export default function Homepage() {
   const pageData = useLoaderData();
   const mainBannerData = data?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
   const SafetyAtYourFingertipsData = pageData?.pageDataByHandle?.pageDatas?.page?.SafetyAtYourFingertipsData?.reference?.fields || [];
+  const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <div className="home">
-      {/* <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} /> */}
-      {/* <waggleHomeContent /> */}
       {mainBannerData.length > 0 && (
-        <WaggleHome mainBannerData={mainBannerData}/>
+        <WaggleHome mainBannerData={mainBannerData} />
       )}
       <ProductShowcase />
-      <ImageCarousel /> 
-      <PetSafetyCards />
-      <HappyTailsSection />
-      {SafetyAtYourFingertipsData.length > 0 && (
-        <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
-      )}
-      <UltimatePetParent />
+      <div ref={belowFoldRef}>
+        {inView && (
+          <>
+            <ImageCarousel />
+            <PetSafetyCards />
+            <HappyTailsSection />
+            {SafetyAtYourFingertipsData.length > 0 && (
+              <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
+            )}
+            <UltimatePetParent />
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -104,7 +109,7 @@ export default function Homepage() {
  *   collection: FeaturedCollectionFragment;
  * }}
  */
-function FeaturedCollection({collection}) {
+function FeaturedCollection({ collection }) {
   if (!collection) return null;
   const image = collection?.image;
   return (
@@ -127,7 +132,7 @@ function FeaturedCollection({collection}) {
  *   products: Promise<RecommendedProductsQuery | null>;
  * }}
  */
-function RecommendedProducts({products}) {
+function RecommendedProducts({ products }) {
   return (
     <div className="recommended-products">
       <h2>Recommended Products</h2>
@@ -137,8 +142,8 @@ function RecommendedProducts({products}) {
             <div className="recommended-products-grid">
               {response
                 ? response.products.nodes.map((product) => (
-                    <ProductItem key={product.id} product={product} />
-                  ))
+                  <ProductItem key={product.id} product={product} />
+                ))
                 : null}
             </div>
           )}
