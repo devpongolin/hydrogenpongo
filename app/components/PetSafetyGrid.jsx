@@ -1,43 +1,45 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import dogImage1 from "../assets/pet_Guide_one.png";
-import dogImage2 from "../assets/pet_Guide_two.png";
-import dogImage3 from "../assets/pet_Guide_three.png";
 
-const petSafetyContent = {
-  title: "The Ultimate Pet Parent Guide",
-  articles: [
-    {
-      title: "Watch Over Your Pet Anytime:",
-      description:
-        "Remote monitoring lets you check in on your pet, no matter where you are",
-      date: "February 1, 2025",
-      image: dogImage1,
-      alt: "Husky dog with owner",
-    },
-    {
-      title: "Watch Over Your Pet Anytime:",
-      description:
-        "Remote monitoring lets you check in on your pet, no matter where you are",
-      date: "February 1, 2025",
-      image: dogImage2,
-      alt: "White dog with owner",
-    },
-    {
-      title: "Watch Over Your Pet Anytime:",
-      description:
-        "Remote monitoring lets you check in on your pet, no matter where you are",
-      date: "February 1, 2025",
-      image: dogImage3,
-      alt: "Golden retriever with owner",
-    },
-  ],
-};
-
-const PetSafetyGrid = () => {
+const PetSafetyGrid = ({featuredBlogs}) => {
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isScrollable, setIsScrollable] = useState(false);
+
+  const commonFieldItem = featuredBlogs?.find((item) => {
+    const sectionFields = item?.node?.fields?.find((field) => field.key === "section_common_fields")?.reference?.fields;
+    return sectionFields; // returns first item with fields
+  });
+
+  let commonFields = null;
+  if (commonFieldItem) {
+    const sectionFields = commonFieldItem.node.fields.find((field) => field.key === "section_common_fields")?.reference?.fields;
+    commonFields = {
+      headingText:
+        sectionFields.find((subField) => subField.key === "section_heading")
+          ?.value || "",
+      buttonText:
+        sectionFields.find((subField) => subField.key === "button_text")
+          ?.value || "",
+      buttonLink:
+        sectionFields.find((subField) => subField.key === "view_all_button_link")
+          ?.value || "",
+    };
+  }
+
+  const articles = featuredBlogs?.map((item) => ({
+    title: item?.node?.fields?.find(field => field.key === "article_title")?.value || "",
+    description: item?.node?.fields?.find(field => field.key === "article_short_description")?.value || "",
+    date: item?.node?.fields?.find(field => field.key === "article_date")?.value || "",
+    handle: item?.node?.fields?.find(field => field.key === "article_handle")?.value || "",
+    image: item?.node?.fields?.find(field => field.key === "blog_article_image")?.reference?.image?.url || "",
+    alt: item?.node?.fields?.find(field => field.key === "blog_article_image")?.reference?.image?.altText || "Pet safety image",
+  }));
+
+  const petSafetyContent = {
+    title: commonFields?.headingText || "",
+    articles,
+  };
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
