@@ -68,8 +68,6 @@ export default function CustomPage() {
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5; 
-
   return (
     <div>
       <PotionControl ProductData={ProductData} productAvarageRating={productAvarageRating} />
