@@ -9,6 +9,8 @@ import { getPageData } from '~/utils/common-functions';
 import OfferBanner from '~/components/OfferBanner';
 import VideoBanner from '~/components/VideoBanner';
 import { useInView } from 'react-intersection-observer';
+import ImageCarousel from '~/components/ImageCarousel';
+import UltimatePetParent from '~/components/UltimatePetParent';
 
 
 
@@ -43,6 +45,7 @@ export default function onTheRoad() {
           {inView && (
             <>
               <OfferBanner />
+              <ImageCarousel />
               <VideoBanner />
               {HydrogenGallerySliderData.length > 0 && (
                 <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
@@ -50,6 +53,7 @@ export default function onTheRoad() {
               {SafetyAtYourFingertipsData.length > 0 && (
                 <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
               )}
+              <UltimatePetParent />
               {pageFaqData.length > 0 && (
                 <PageFAQ pageFaqData={pageFaqData} />
               )}
