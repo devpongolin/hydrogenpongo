@@ -18,6 +18,26 @@ export default function specCompare({specCompare, storefront, getCartId}) {
   }
   const metaobjectData = specCompare || {};
   if(!metaobjectData?.length) return null;
+  const compareKeys = [];
+  const featureCompare = metaobjectData?.map(item => {
+    const rawString = item?.node?.fields?.find(field => field.key === "feature_compare_text")?.value;
+    try {
+      const features = JSON.parse(rawString || '[]');
+      return features.map(str => {
+        const [key, ...rest] = str.split(':');
+        const trimmedKey = key.trim();
+        if (!compareKeys.includes(trimmedKey)) {
+          compareKeys.push(trimmedKey);
+        }
+        return {
+          key: trimmedKey,
+          value: rest.join(':').trim()
+        };
+      });
+    } catch (e) {
+      return [];
+    }
+  });
 
   const productComparisonData = {
     title: "Find The Perfect\nWaggle For Your Pet",
@@ -41,57 +61,16 @@ export default function specCompare({specCompare, storefront, getCartId}) {
           field => field.key === "sale_price"
         )?.value || ""
       })) || [],
-    features: [
-      {
-        name: "Temperature & Humidity Alerts",
-        values: metaobjectData.map(item => 
-          item?.node?.fields?.find(field => field.key === "temperature_alerts")?.value === "true"
-        )
-      },
-      {
-        name: "Power Loss Alerts",
-        values: metaobjectData.map(item => 
-          item?.node?.fields?.find(field => field.key === "power_loss_alerts")?.value === "true"
-        )
-      },
-      {
-        name: "Wi-Fi Connectivity",
-        values: metaobjectData.map(item => 
-          item?.node?.fields?.find(field => field.key === "wifi_connectivity")?.value === "true"
-        )
-      },
-      {
-        name: "Built-in Rechargeable Battery",
-        values: metaobjectData.map(item => {
-          const batteryValue = item?.node?.fields?.find(field => field.key === "battery_info")?.value;
-          if (!batteryValue || batteryValue.toLowerCase() === "x") {
-            return false;
-          }
-          return { available: true, note: batteryValue };
-        })
-      },
-      {
-        name: "Cellular Connectivity",
-        values: metaobjectData.map(item => {
-          const batteryValue = item?.node?.fields?.find(field => field.key === "cellular_connectivity")?.value;
-          if (!batteryValue || batteryValue.toLowerCase() === "x") {
-            return false;
-          }
-          return { available: true, note: batteryValue };
-        })
-      },
-      {
-        name: "GPS Tracking",
-        values: metaobjectData.map(item => 
-          item?.node?.fields?.find(field => field.key === "gps_tracking")?.value === "true"
-        )
-      }
-    ],
+      features: compareKeys?.map((compare) => ({
+        name: compare || "",
+        values: featureCompare?.flat()?.filter(item => item.key === compare)?.map(item => item.value) || []
+      })) || [],
     buttons: {
       primary: "Buy Now",
       secondary: "Add to Cart"
     }
   };
+
   return (
     <div className="product !flex flex-col overflow-scroll">
       {/* <div className='flex'>
@@ -136,22 +115,40 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                       {feature.name}
                     </p>
                   </td>
-                  {feature?.values?.map((value, i) => (
-                    <td key={i} className={`md:py-[25.05px] md:px-[29.3px] text-center ${i % 2 !== 0 ? 'bg-[#FAFAFA]' : ''}`}>
-                      <div className={`flex justify-center ${typeof value === 'object' ? 'items-center relative gap-2' : ''}`}>
-                        <img
-                          className='max-md:w-4'
-                          src={typeof value === 'object' ? checkImage : value ? checkImage : crossImage}
-                          alt={value ? 'Check Box' : 'Cross Box'}
-                        />
-                        {typeof value === 'object' && value.note && (
-                          <p className="font-normal text-[16px] leading-[18px] align-middle text-[#202124] absolute lato left-[57%]">
-                            {value.note}
-                          </p>
-                        )}
-                      </div>
-                    </td>
-                  ))}
+
+                  {feature?.values?.map((value, i) => {
+                    const isBooleanTrue = value === true || value === 'true';
+                    const isBooleanFalse = value === false || value === 'false';
+                    const isObject = typeof value === 'object' && value !== null;
+
+                    return (
+                      <td key={i} className="md:py-[25.05px] md:px-[29.3px] text-center">
+                        <div className={`flex justify-center ${isObject ? 'items-center relative gap-2' : ''}`}>
+                          <img
+                            className="max-md:w-4"
+                            src={
+                              isBooleanFalse
+                                ? crossImage
+                                : checkImage
+                            }
+                            alt={isBooleanFalse ? 'Cross Box' : 'Check Box'}
+                          />
+
+                          {/* Show value label if not purely boolean true/false */}
+                          {!isBooleanTrue && !isBooleanFalse && typeof value !== 'object' && (
+                            <span className="ml-2 text-[16px] leading-[18px] text-[#202124]">{value}</span>
+                          )}
+
+                          {/* Optional: show object note (like for "test") */}
+                          {isObject && value.note && (
+                            <p className="font-normal text-[16px] leading-[18px] align-middle text-[#202124] absolute lato left-[57%]">
+                              {value.note}
+                            </p>
+                          )}
+                        </div>
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>
