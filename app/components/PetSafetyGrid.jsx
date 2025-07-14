@@ -27,6 +27,7 @@ const PetSafetyGrid = ({featuredBlogs}) => {
     };
   }
 
+  if(!featuredBlogs || !featuredBlogs.length) return null;
   const articles = featuredBlogs?.map((item) => ({
     title: item?.node?.fields?.find(field => field.key === "article_title")?.value || "",
     description: item?.node?.fields?.find(field => field.key === "article_short_description")?.value || "",
