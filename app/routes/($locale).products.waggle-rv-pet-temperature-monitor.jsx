@@ -9,6 +9,7 @@ import { useLoaderData } from 'react-router';
 import { getAvarageProductRating, getProductsReview, fetchProductByHandle } from '~/utils/common-functions';
 import { getInstructionMetaobjectData } from '~/utils/common-functions';
 import { useInView } from 'react-intersection-observer';
+import PerfectWagglePet from '~/components/PerfectWagglePet';
 
 export async function loader({ context }) {
   const ALI_REVIEWS_API_KEY = context.env.ALI_REVIEWS_API_KEY;
@@ -37,6 +38,7 @@ export default function CustomPage() {
   const productReviews = ProductData?.productReviews?.data?.reviews || [];
   const productIdValue = ProductData?.productId || null;
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
+  const specCompare = ProductData?.product?.product?.product?.specComparison?.references?.edges || [];
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   // console.log(ProductData);  
 
@@ -49,6 +51,7 @@ export default function CustomPage() {
       <div ref={belowFoldRef}>
         {inView && (
           <>
+            <PerfectWagglePet specCompare={specCompare} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
             {bundleProduct.length > 0 && (
               <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
             )}
