@@ -98,7 +98,6 @@ export default function Homepage() {
               <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
             )}
             <UltimatePetParent featuredBlogs={featuredBlogs} />
-            <PetSafetyGrid featuredBlogs={featuredBlogs} />
           </>
         )}
       </div>
