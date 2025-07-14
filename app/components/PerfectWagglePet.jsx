@@ -79,20 +79,21 @@ export default function specCompare({specCompare, storefront, getCartId}) {
       </div> */}
       <div>
         <div className="w-full max-w-[1216px] mx-auto md:py-[56px] py-[48px]">
-          <table className="w-full border-collapse">
+          <table className="w-full border-collapse table-product">
             <thead>
               <tr>
-                <th className="md:pl-[30px] pl-[12px] text-left">
+                <th className={`md:pl-[30px] pl-[12px] text-left min-w-[244px] w-[${productComparisonData?.products?.length ? (100 / (productComparisonData?.products?.length+1)) :'100' }%]`}>
                   <span className="font-medium text-[20px] leading-[144%] lato md:text-[22.78px] md:leading-[32.8px] md:font-bold tracking-[-0.36px] text-[#202124] ">
                     {productComparisonData?.title?.split('\n')?.map((line, index) => (
                       <div key={index}>{line}</div>
                     ))}
                   </span>
                 </th> 
+                {console.log(productComparisonData?.products.length)}
                 {productComparisonData?.products?.map((product, idx) => (
-                  <th key={idx} className="md:py-[25.05px] md:px-[29.3px] px-[30px] py-[14px] text-center w-[440px]">
+                  <th key={idx} className={`md:py-[25.05px] md:px-[29.3px] px-[30px] py-[14px] text-center	min-w-[244px] w-[${productComparisonData?.products?.length ? (100 / (productComparisonData?.products?.length+1)) :'100' }%]`}>
                     <div className="flex flex-col items-center">
-                      <img className='mb-[20px] w-[92px] md:w-auto' src={product.image} alt={`Product ${idx + 1}`} />
+                      <img className='mb-[20px] w-[92px] md:w-[153px]' src={product.image} alt={`Product ${idx + 1}`} />
                       <p className="mb-2 lexend font-medium md:text-[20px] text-[18px] md:leading-[23.2px] tracking-[-0.07px] text-center align-middle w-1/2 ">
                         {product.name}
                       </p>
@@ -109,7 +110,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
             <tbody>
               {productComparisonData?.features?.map((feature, index) => (
                 <tr key={index} className="border-b border-[rgba(128,128,128,0.25)]">
-                  <td className="md:py-[25.05px] p-[12px] md:px-[29.3px]">
+                  <td className="md:py-[25.05px] p-[12px] md:px-[29.3px] bg-[#FAFAFA]">
                     <p className="lato text-[14px] leading-[124%] font-normal align-middle md:text-[20.25px] md:text-[#202124] text-[#2E3138]">
                       {feature.name}
                     </p>
@@ -170,7 +171,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                           merchandiseId: compareItem.id,
                           quantity: 1,
                         }]}
-                        className={`w-[123px] h-[36px]  md:w-auto md:h-auto items-center justify-center border lato border-gray-300 rounded-full font-bold text-[14px] md:text-[18px] leading-[20px] text-center align-middle text-[#202124] md:px-[55px] md:py-[14px] flex ${compareItem.variantAvailable ? 'cursor-pointer button-hover1' : 'opacity-50 !cursor-not-allowed'}`}
+                        className={`w-[123px] h-[36px]  md:w-auto md:h-auto items-center justify-center border lato border-gray-300 rounded-full font-bold text-[14px] md:text-[18px] leading-[20px] text-center align-middle text-[#202124] md:px-[55px] md:py-[14px] flex ${compareItem.variantAvailable ? 'cursor-pointer button-hover2' : 'opacity-50 !cursor-not-allowed'}`}
                       >
                         {compareItem.variantAvailable ? productComparisonData.buttons.secondary : 'Sold Out'}
                       </CustomAddToCartButton>

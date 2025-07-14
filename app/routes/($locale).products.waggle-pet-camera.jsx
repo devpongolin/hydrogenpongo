@@ -6,20 +6,21 @@ import FrequentlyBoughtTogether from '~/components/FrequentlyBoughtTogether';
 import WaggleSteps from '~/components/WaggleSteps';
 import TestimonialsSection from '~/components/TestimonialsSection';
 import FAQsection from '~/components/FAQsection';
-import {useLoaderData, useActionData} from 'react-router';
-import {getAvarageProductRating,getProductsReview,fetchProductByHandle} from '~/utils/common-functions';
+import { useLoaderData, useActionData } from 'react-router';
+import { getAvarageProductRating, getProductsReview, fetchProductByHandle } from '~/utils/common-functions';
 import { getInstructionMetaobjectData } from '~/utils/common-functions';
-import {cartCreateDefault, useOptimisticCart} from '@shopify/hydrogen';
-import {redirect} from '@shopify/remix-oxygen';
+import { cartCreateDefault, useOptimisticCart } from '@shopify/hydrogen';
+import { redirect } from '@shopify/remix-oxygen';
+import { useInView } from 'react-intersection-observer';
 
-export async function loader({context}) {
+export async function loader({ context }) {
   const ALI_REVIEWS_API_KEY = context.env.ALI_REVIEWS_API_KEY;
   const ALI_REVIEW_URL = context.env.ALI_REVIEW_URL;
   const product = await fetchProductByHandle({ context, handle: "waggle-pet-camera" });
   const productId = product?.data?.product?.id?.split('/').pop();
-  const instructionMetaobjectData = await getInstructionMetaobjectData({ context,type: 'product_instruction' })
-  const averageProductRating = await getAvarageProductRating(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL,productId)
-  const productReviews = await getProductsReview(ALI_REVIEWS_API_KEY,ALI_REVIEW_URL)
+  const instructionMetaobjectData = await getInstructionMetaobjectData({ context, type: 'product_instruction' })
+  const averageProductRating = await getAvarageProductRating(ALI_REVIEWS_API_KEY, ALI_REVIEW_URL, productId)
+  const productReviews = await getProductsReview(ALI_REVIEWS_API_KEY, ALI_REVIEW_URL)
 
   return {
     productId,
@@ -30,8 +31,8 @@ export async function loader({context}) {
   };
 }
 
-export async function action({request, context}) {
-  const {cart, storefront} = context;
+export async function action({ request, context }) {
+  const { cart, storefront } = context;
   const cartId = cart.getCartId() || null;
   request.formData = await request.formData();
   const merchandiseId = request.formData.get('merchandiseId');
@@ -64,28 +65,35 @@ export default function CustomPage() {
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
   const featuredBlogs = ProductData?.product?.product?.product?.featuredBlogs?.references?.edges || []; 
   const productIdValue = ProductData?.productId || null;
-  const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5; 
+  const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
+  const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <div>
-      <PotionControl ProductData={ProductData} productAvarageRating={productAvarageRating}/>
+      <PotionControl ProductData={ProductData} productAvarageRating={productAvarageRating} />
       {petsNeeds.length > 0 && (
         <SmartPetBowlShowcase petsNeeds={petsNeeds} />
       )}
-      <PerfectWagglePet specCompare={specCompare} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
-      {bundleProduct.length > 0 && (
-        <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
-      )}
-      {waggleGuide.length > 0 && (
-        <WaggleSteps waggleGuide={waggleGuide} />
-      )}
-      {productReviews.length > 0 && (
-        <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} />
-      )}
-      {productFAQS.length > 0 && (
-        <FAQsection productFAQS={productFAQS} />
-      )}
-       <PetSafetyGrid featuredBlogs={featuredBlogs} />
+      <div ref={belowFoldRef}>
+        {inView && (
+          <>
+            <PerfectWagglePet specCompare={specCompare} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
+            {bundleProduct.length > 0 && (
+              <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
+            )}
+            {waggleGuide.length > 0 && (
+              <WaggleSteps waggleGuide={waggleGuide} />
+            )}
+            {productReviews.length > 0 && (
+              <TestimonialsSection productReviews={productReviews} productAvarageRating={productAvarageRating} />
+            )}
+            {productFAQS.length > 0 && (
+              <FAQsection productFAQS={productFAQS} />
+            )}
+            <PetSafetyGrid featuredBlogs={featuredBlogs} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
