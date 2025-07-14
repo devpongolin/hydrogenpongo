@@ -146,7 +146,7 @@ export default function WaggleHome({ mainBannerData }) {
             <p className="text-center Secondary-text md:text-left lato font-medium text-[20px] leading-[144%] tracking-[0] white-text-element md:mb-[40px] mb-[24px]">
               {waggleHomeContent.hero.subheadline}
             </p>
-            <div className="md:space-y-3 max-w-sm mx-auto md:mx-0 flex gap-[22px] md:block">
+            <div className="md:space-y-3 max-w-sm mx-auto md:mx-0 flex gap-[22px] md:gap-[0px] md:flex-col justify-center">
               {waggleHomeContent.hero.features.map((feature, index) => {
                 if (!feature.image) return;
                 if (!feature.title) return;

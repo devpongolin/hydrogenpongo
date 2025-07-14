@@ -297,9 +297,6 @@
     border: 1px solid transparent;
     padding: 8px 14px;
   }
-  .hover-effect-main .hover-effect {
-    padding: 8px 14px;
-  }
   
   .content-card:has(.product-image) {
     display: flex;
