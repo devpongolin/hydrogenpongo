@@ -114,17 +114,14 @@ const petSafetyData = {
 };
 
 const PetSafetyCards = () => {
-  const [flippedCards, setFlippedCards] = useState({});
+  const [activeCard, setActiveCard] = useState(null); // ✅ changed from flippedCards
 
   const toggleCard = (index) => {
-    setFlippedCards((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
+    setActiveCard((prevIndex) => (prevIndex === index ? null : index)); // ✅ flip only one
   };
 
   return (
-    <div className="bg-[#EEDED3]  px-[16px] md:px-[0px] md:py-[64px] w-full py-[40px]">
+    <div className="bg-[#EEDED3] px-[16px] md:px-[0px] md:py-[64px] w-full py-[40px]">
       <span className="block text-center font-medium md:font-[400] text-[28px] md:text-[47px] leading-[100%] tracking-[-0.36px] md:tracking-[0] lexend mb-[19px] md:mb-[39px]">
         {petSafetyData.title}
       </span>
@@ -133,10 +130,10 @@ const PetSafetyCards = () => {
           <div
             key={index}
             className={`md:w-[314px] w-full max-w-[328px] h-[549px] transition-transform duration-700 [transform-style:preserve-3d] ${
-              flippedCards[index] ? '[transform:rotateY(180deg)]' : ''
+              activeCard === index ? '[transform:rotateY(180deg)]' : ''
             }`}
           >
-            {!flippedCards[index] ? (
+            {activeCard !== index ? (
               // Front
               <div className="bg-[#B47E57] rounded-[12px] h-full overflow-hidden">
                 <div className="flex justify-between items-center p-[14px]">
@@ -213,13 +210,12 @@ const PetSafetyCards = () => {
                 </div>
                 <div className="px-4 ">
                   <span className="text-white lato font-[500] text-[16px] leading-[100%] tracking-[0] ">
-                    {card.priceText}{'  '}
+                    {card.priceText}{' '}
                   </span>
-                  <span className="relative inline-block text-white font-[500] text-[23px] leading-[100%] tracking-[0] lato mb-[20px]" >
+                  <span className="relative inline-block text-white font-[500] text-[23px] leading-[100%] tracking-[0] lato mb-[20px]">
                     {card.originalPrice}
                     <span className="absolute left-0 top-1/2 w-full h-[2px] bg-[#007AFF] transform -rotate-[15deg] origin-center"></span>
                   </span>
-
                   <span className="text-white font-[600] text-[42px] md:text-[48px] leading-[100%] tracking-[0] lato ml-2">
                     {card.price}
                   </span>

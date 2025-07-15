@@ -33,33 +33,35 @@ export default function onTheRoad() {
   // console.log(HydrogenSmartPetHavenData);
   return (
     <>
-      {mainBannerData.length > 0 && (
-        <WaggleHome mainBannerData={mainBannerData} />
-      )}
-      {hydrogenFeaturesSectionData.length > 0 && (
-        <FeaturesSection hydrogenFeaturesSectionData={hydrogenFeaturesSectionData} />
-      )}
-      <div ref={belowFoldRef}>
-        {inView && (
-          <>
-            <OfferBanner />
-            <ImageCarousel />
-            <VideoBanner />
-            {HydrogenSmartPetHavenData.length > 0 && (
-              <SmartPetHaven HydrogenSmartPetHavenData={HydrogenSmartPetHavenData} />
-            )}
-            {HydrogenGallerySliderData.length > 0 && (
-              <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
-            )}
-            {SafetyAtYourFingertipsData.length > 0 && (
-              <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
-            )}
-            <UltimatePetParent />
-            {pageFaqData.length > 0 && (
-              <PageFAQ pageFaqData={pageFaqData} />
-            )}
-          </>
+      <div className="at-home">
+        {mainBannerData.length > 0 && (
+          <WaggleHome mainBannerData={mainBannerData} />
         )}
+        {hydrogenFeaturesSectionData.length > 0 && (
+          <FeaturesSection hydrogenFeaturesSectionData={hydrogenFeaturesSectionData} />
+        )}
+        <div ref={belowFoldRef}>
+          {inView && (
+            <>
+              <OfferBanner />
+              <ImageCarousel />
+              <VideoBanner />
+              {HydrogenSmartPetHavenData.length > 0 && (
+                <SmartPetHaven HydrogenSmartPetHavenData={HydrogenSmartPetHavenData} />
+              )}
+              {HydrogenGallerySliderData.length > 0 && (
+                <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
+              )}
+              {SafetyAtYourFingertipsData.length > 0 && (
+                <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
+              )}
+              <UltimatePetParent />
+              {pageFaqData.length > 0 && (
+                <PageFAQ pageFaqData={pageFaqData} />
+              )}
+            </>
+          )}
+        </div>
       </div>
     </>
   )

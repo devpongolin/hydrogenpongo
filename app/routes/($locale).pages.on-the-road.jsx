@@ -34,7 +34,7 @@ export default function onTheRoad() {
   // console.log(HydrogenGallerySliderData);
   return (
     <>
-      <div className='bg-[#F7EEE9]'>
+      <div className='bg-[#F7EEE9] on-the-road'>
         {mainBannerData.length > 0 && (
           <WaggleHome mainBannerData={mainBannerData} />
         )}

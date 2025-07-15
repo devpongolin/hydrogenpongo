@@ -31,7 +31,7 @@ export default function onTheRoad() {
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   return (
     <>
-      <div>
+      <div className="gift-shop">
         {mainBannerData.length > 0 && (
           <WaggleHome mainBannerData={mainBannerData} />
         )}

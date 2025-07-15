@@ -205,6 +205,7 @@ export function Layout({children}) {
         <link rel="stylesheet" href={megamenuStyle}></link>
         <Meta />
         <Links />
+        <script src="/custom.js" defer></script>
       </head>
       <body>
         {data ? (
