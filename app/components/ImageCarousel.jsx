@@ -13,6 +13,20 @@ import node2 from '../assets/Group (2).png';
 import node3 from '../assets/Group (3).png';
 import node4 from '../assets/Group (4).png';
 
+import node2di from '../assets/Home Safe Home.png';
+import node2mi from '../assets/Item → Wellness and Longevity.png';
+import node3di from '../assets/Gifts That Matter.png';
+import node3mi from '../assets/Man wearing an Oura Ring while running outside.png';
+
+import node2mobile2 from '../assets/Family of 3 generations together (3).png';
+import node2mobile1 from '../assets/Home Safe  Home.png';
+import node2slidimg from '../assets/Frame 2085665392 (1).png';
+import node2pdpimg from '../assets/Group 1.png';
+
+
+import node3mobile2 from '../assets/Man wearing an Oura Ring while running outside (1).png';
+import node3mobile1 from '../assets/Gifts  That Matter.png';
+
 import left from '../assets/left-arrow.webp';
 import right from '../assets/right-arrow.webp';
 
@@ -21,7 +35,7 @@ const sectionHeading = "We Keep Watch While You're Out & About";
 const slides = [
   {
     id: 0,
-    title: 'Home Safe Home',
+    title: 'Road trip ready',
     activeImageDesktop: two,
     inactiveImageDesktop: one,
     activeImageMobile: twom,
@@ -41,80 +55,69 @@ const slides = [
   },
   {
     id: 1,
-    title: 'Track Every Step',
-    activeImageDesktop: two,
-    inactiveImageDesktop: one,
-    activeImageMobile: twom,
-    inactiveImageMobile: onem,
+    title: 'Home Safe Home',
+    activeImageDesktop: node2di,
+    inactiveImageDesktop: node2mi,
+    activeImageMobile: node2mobile1,
+    inactiveImageMobile: node2mobile2,
     openIcon: open,
     closeIcon: close,
-    slideImage: slidimg,
-    pdpImage: pdpimg,
+    slideImage: node2slidimg,
+    pdpImage: node2pdpimg,
     features: [
-      { icon: node1, text: 'Real-time GPS location' },
-      { icon: node2, text: 'Custom safe zones' },
-      { icon: node3, text: '24/7 tracking, no WiFi' },
-      { icon: node4, text: 'Motion-based alerts' },
+      { icon: node1, text: 'Real-time temp & humidity tracking' },
+      { icon: node2, text: 'Smart motion detection' },
+      { icon: node3, text: 'HD video with two-way audio' },
+      { icon: node4, text: 'AI feeding monitors' },
     ],
-    description: 'Let your pet roam while you stay in control.',
-    button: { text: 'Start Tracking', link: '#' },
+    description: 'Go about your day. We`ve got watch duty.',
+    button: { text: 'Home Monitoring', link: '#' },
   },
   {
     id: 2,
-    title: 'Fresh Air Always',
-    activeImageDesktop: two,
-    inactiveImageDesktop: one,
-    activeImageMobile: twom,
-    inactiveImageMobile: onem,
+    title: 'Gifts That Matter',
+    activeImageDesktop: node3di,
+    inactiveImageDesktop: node3mi,
+    activeImageMobile: node3mobile1,
+    inactiveImageMobile: node3mobile2,
     openIcon: open,
     closeIcon: close,
-    slideImage: slidimg,
-    pdpImage: pdpimg,
+    slideImage: '',
+    pdpImage: '',
     features: [
-      { icon: node1, text: 'CO2 level monitoring' },
-      { icon: node2, text: 'Humidity control alerts' },
-      { icon: node3, text: 'PM2.5 safe zone detection' },
-      { icon: node4, text: 'Clean air assurance' },
+      { icon: node1, text: 'Ready-to-use systems' },
+      { icon: node2, text: 'Every budget covered' },
+      { icon: node3, text: 'Premium gift packaging' },
+      { icon: node4, text: 'Extended warranties' },
     ],
-    description: 'Ensure allergen-free, fresh air for your pets.',
-    button: { text: 'Monitor Air', link: '#' },
+    description: 'For the pet parent who worries (aka all of them).',
+    button: { text: 'Paw-fect gifts', link: '#' },
   },
 ];
 
 const ImageCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const cards = slides.map((s) => s.id);
   const cardRefs = useRef([]);
+  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
-    if (activeIndex !== null && cardRefs.current[activeIndex]) {
+    if (
+      activeIndex !== null &&
+      activeIndex !== slides.length - 1 &&
+      cardRefs.current[activeIndex]
+    ) {
       const card = cardRefs.current[activeIndex];
-      const parent = card.parentElement;
+      const parent = card?.parentElement;
 
-      if (window.innerWidth <= 768 && parent && card) {
-        const parentRect = parent.getBoundingClientRect();
-        const cardRect = card.getBoundingClientRect();
-        const scrollLeft = parent.scrollLeft;
-
-        const offset = cardRect.left - parentRect.left - (parent.clientWidth / 2) + (card.clientWidth / 2);
-
+      if (parent && card) {
+        const offset = card.offsetLeft - parent.offsetLeft;
         parent.scrollTo({
-          left: scrollLeft + offset,
+          left: offset,
           behavior: 'smooth',
         });
-      } else {
-        setTimeout(() => {
-          card.scrollIntoView({
-            behavior: 'smooth',
-            inline: 'center',
-            block: 'nearest',
-          });
-        }, 10);
       }
     }
   }, [activeIndex]);
-
-  const isMobile = window.innerWidth <= 768;
 
   const goToNext = () => {
     if (activeIndex === null || activeIndex >= slides.length - 1) return;
@@ -125,11 +128,6 @@ const ImageCarousel = () => {
     if (activeIndex === null || activeIndex <= 0) return;
     setActiveIndex(activeIndex - 1);
   };
-
-  const orderedCards = (() => {
-    if (activeIndex === null || activeIndex === slides.length - 1) return cards;
-    return [activeIndex, ...cards.filter((i) => i !== activeIndex)];
-  })();
 
   return (
     <div className="bg-[#EEDED3] py-8">
@@ -146,9 +144,8 @@ const ImageCarousel = () => {
       </div>
 
       <div className="flex gap-4 px-4 max-w-[1440px] mx-auto pl-[20px] md:pl-[79px] overflow-x-auto hide-scrollbar scroll-snap-x snap-mandatory">
-        {orderedCards.map((index) => {
+        {slides.map((slide, index) => {
           const isActive = activeIndex === index;
-          const slide = slides[index];
           const imageSrc = isActive
             ? (isMobile ? slide.activeImageMobile : slide.activeImageDesktop)
             : (isMobile ? slide.inactiveImageMobile : slide.inactiveImageDesktop);
@@ -160,9 +157,11 @@ const ImageCarousel = () => {
               onClick={() => setActiveIndex(activeIndex === index ? null : index)}
               className={`flex-shrink-0 cursor-pointer relative snap-center ${isActive ? 'md:w-[81%] w-[90%] min-w-[360px] md:min-w-0' : 'md:w-[31.3%] w-[100%] h-fit md:h-auto'}`}
             >
-              <img src={imageSrc} alt="" className="w-full h-[100%] rounded-lg" />
+              <img src={imageSrc} alt="" className="w-full h-full object-cover rounded-lg" />
+
+              {/* Active content */}
               <div className={`${isActive ? 'block' : 'hidden'}`}>
-                <div className="mt-2 absolute top-[26px] left-[16px] md:top-[50px] md:left-[42px] text-[28px] md:text-[47px] text-white w-full leading-normal">
+                <div className="mt-2 absolute top-[26px] left-[16px] md:top-[50px] md:left-[42px] text-[28px] md:text-[47px] text-white w-full leading-normal flex flex-col justify-between mb-[20px] md:!h-auto" style={{ height: '-webkit-fill-available' }}>
                   <span className="font-semibold w-[60%] md:w-[30%] block leading-[1]">
                     {slide.title}
                   </span>
@@ -204,6 +203,7 @@ const ImageCarousel = () => {
                 </div>
               </div>
 
+              {/* Inactive content */}
               <div className={`${!isActive ? 'block' : 'hidden'}`}>
                 <div className="absolute bottom-0 text-white text-[37px] px-[32px] py-[38px] font-medium leading-normal">
                   <span className="w-[70%] block leading-[1]">
@@ -221,13 +221,7 @@ const ImageCarousel = () => {
 
       <div className="flex md:hidden justify-center mt-4 gap-[6px]">
         {slides.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-[8px] h-[8px] rounded-full`}
-            style={{
-              backgroundColor: activeIndex === idx ? '#AF7A56' : '#FFFFFF'
-            }}
-          ></div>
+          <div key={idx} className="w-[8px] h-[8px] rounded-full" style={{ backgroundColor: activeIndex === idx ? '#AF7A56' : '#FFFFFF' }}></div>
         ))}
       </div>
     </div>

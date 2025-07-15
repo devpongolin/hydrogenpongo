@@ -22,6 +22,7 @@ export async function loader({ context }) {
 }
 
 export default function onTheRoad() {
+  const data = useLoaderData();
   const pageData = useLoaderData();
   const mainBannerData = pageData?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
   const pageFaqData = pageData?.pageDataByHandle?.pageDatas?.page?.faqData?.references?.edges || [];
@@ -29,6 +30,7 @@ export default function onTheRoad() {
   const hydrogenFeaturesSectionData = pageData?.pageDataByHandle?.pageDatas?.page?.hydrogenFeaturesSectionData?.reference?.fields || [];
   const HydrogenGallerySliderData = pageData?.pageDataByHandle?.pageDatas?.page?.HydrogenGallerySliderData?.references?.edges || [];
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const featuredBlogs = data?.pageDataByHandle?.pageDatas?.page?.featuredBlogs.references?.edges || [];
   return (
     <>
       <div className="gift-shop">
@@ -50,7 +52,7 @@ export default function onTheRoad() {
               {SafetyAtYourFingertipsData.length > 0 && (
                 <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
               )}
-              <UltimatePetParent />
+              <UltimatePetParent featuredBlogs={featuredBlogs} />
               {pageFaqData.length > 0 && (
                 <PageFAQ pageFaqData={pageFaqData} />
               )}
