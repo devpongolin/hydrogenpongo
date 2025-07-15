@@ -119,6 +119,9 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                 }
               }
             }
+            specComparisonTitle: metafield(namespace: "custom", key: "hydrogen_feature_compare_title") {
+              value
+            }
             specComparison: metafield(namespace: "custom", key: "hydrogen_features_compare") {
               references(first: 250) {
                 edges {

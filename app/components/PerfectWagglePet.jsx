@@ -6,8 +6,9 @@ import crossImage from '../assets/cross.webp';
 import { useAside } from './Aside';
 import { CustomAddToCartButton } from './CustomAddToCartButton';
 import {useSubmit } from "react-router";
+import { Money } from "@shopify/hydrogen";
 
-export default function specCompare({specCompare, storefront, getCartId}) {
+export default function specCompare({specCompare, specCompareTitle, storefront, getCartId}) {
   const submit = useSubmit();
   const { open } = useAside();
   // Function to handle the Buy Now action
@@ -24,14 +25,17 @@ export default function specCompare({specCompare, storefront, getCartId}) {
     try {
       const features = JSON.parse(rawString || '[]');
       return features.map(str => {
-        const [key, ...rest] = str.split(':');
+        const [key, valuePart, ...noteParts] = str.split(':');
         const trimmedKey = key.trim();
+        const value = valuePart?.trim();
+
         if (!compareKeys.includes(trimmedKey)) {
           compareKeys.push(trimmedKey);
         }
         return {
           key: trimmedKey,
-          value: rest.join(':').trim()
+          value: value === 'true' ? true : value === 'false' ? false : value,
+          ...(noteParts.length > 0 && { note: noteParts.join(':').trim() })
         };
       });
     } catch (e) {
@@ -40,7 +44,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
   });
 
   const productComparisonData = {
-    title: "Find The Perfect\nWaggle For Your Pet",
+    title: specCompareTitle,
     products: metaobjectData?.map((item) => ({
         id: item?.node?.fields?.find(
           field => field.key === "buy_now_item"
@@ -63,7 +67,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
       })) || [],
       features: compareKeys?.map((compare) => ({
         name: compare || "",
-        values: featureCompare?.flat()?.filter(item => item.key === compare)?.map(item => item.value) || []
+        values: featureCompare?.flat()?.filter(item => item.key === compare)?.map(item => {return {value:item.value, note: item?.note || ''};}) || []
       })) || [],
     buttons: {
       primary: "Buy Now",
@@ -84,12 +88,12 @@ export default function specCompare({specCompare, storefront, getCartId}) {
               <tr>
                 <th className={`md:pl-[30px] pl-[12px] text-left min-w-[244px] w-[${productComparisonData?.products?.length ? (100 / (productComparisonData?.products?.length+1)) :'100' }%]`}>
                   <span className="font-medium text-[20px] leading-[144%] lato md:text-[22.78px] md:leading-[32.8px] md:font-bold tracking-[-0.36px] text-[#202124] ">
-                    {productComparisonData?.title?.split('\n')?.map((line, index) => (
+                    {productComparisonData?.title?.replace(/\\n/g, '\n')?.split('\n')?.map((line, index) => (
                       <div key={index}>{line}</div>
                     ))}
                   </span>
                 </th> 
-                {console.log(productComparisonData?.products.length)}
+
                 {productComparisonData?.products?.map((product, idx) => (
                   <th key={idx} className={`md:py-[25.05px] md:px-[29.3px] px-[30px] py-[14px] text-center	min-w-[244px] w-[${productComparisonData?.products?.length ? (100 / (productComparisonData?.products?.length+1)) :'100' }%]`}>
                     <div className="flex flex-col items-center">
@@ -98,8 +102,8 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                         {product.name}
                       </p>
                       <div className="flex items-end gap-2">
-                        <span className="lexend font-light text-[11.67px] md:text-[14.22px] leading-[124%] align-middle text-[#202124] line-through">{product.originalPrice}</span>
-                        <span className="lexend font-medium text-[23px] md:text-[26.66px] leading-[28px] align-middle text-[#202124]">{product.discountedPrice}</span>
+                        <span className="lexend font-light text-[11.67px] md:text-[14.22px] leading-[124%] align-middle text-[#202124] line-through"><Money data={{amount: product.originalPrice, currencyCode: 'USD'}} /></span>
+                        <span className="lexend font-medium text-[23px] md:text-[26.66px] leading-[28px] align-middle text-[#202124]"><Money data={{amount: product.discountedPrice, currencyCode: 'USD'}} /></span>
                       </div>
                     </div>
                   </th>
@@ -115,16 +119,15 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                       {feature.name}
                     </p>
                   </td>
-
                   {feature?.values?.map((value, i) => {
-                    const isBooleanTrue = value === true || value === 'true';
-                    const isBooleanFalse = value === false || value === 'false';
-                    const isObject = typeof value === 'object' && value !== null;
+                    const isBooleanTrue = value.value === true || value === 'true';
+                    const isBooleanFalse = value.value === false || value === 'false';
+                    const isNotAvailable = typeof value.value === "string" && !isBooleanTrue && !isBooleanFalse;
 
                     return (
                       <td key={i} className="md:py-[25.05px] md:px-[29.3px] text-center">
-                        <div className={`flex justify-center relative ${isObject ? 'items-center relative gap-2' : ''}`}>
-                          <img
+                        <div className={`flex justify-center relative ${isNotAvailable ? 'items-center relative gap-2' : ''}`}>
+                          {!isNotAvailable && (<img
                             className="max-md:w-4"
                             src={
                               isBooleanFalse
@@ -132,7 +135,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                                 : checkImage
                             }
                             alt={isBooleanFalse ? 'Cross Box' : 'Check Box'}
-                          />
+                          />)}
 
                           {/* Show value label if not purely boolean true/false */}
                           {!isBooleanTrue && !isBooleanFalse && typeof value !== 'object' && (
@@ -140,8 +143,8 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                           )}
 
                           {/* Optional: show object note (like for "test") */}
-                          {isObject && value.note && (
-                            <p className="font-normal text-[16px] leading-[18px] align-middle text-[#202124] absolute lato left-[57%]">
+                          {value?.note && (
+                            <p className="font-normal text-[16px] leading-[18px] align-middle text-[#202124] lato px-[5px]">
                               {value.note}
                             </p>
                           )}
