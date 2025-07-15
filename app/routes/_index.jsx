@@ -12,6 +12,7 @@ import WaggleAppLanding from '~/components/WaggleAppLanding'
 import HappyTailsSection from '~/components/HappyTailsSection'
 import { getPageData } from '~/utils/common-functions';
 import { useInView } from 'react-intersection-observer';
+import PetSafetyGrid from '~/components/PetSafetyGrid';
 
 /**
  * @type {MetaFunction}
@@ -79,8 +80,8 @@ export default function Homepage() {
   const pageData = useLoaderData();
   const mainBannerData = data?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
   const SafetyAtYourFingertipsData = pageData?.pageDataByHandle?.pageDatas?.page?.SafetyAtYourFingertipsData?.reference?.fields || [];
+  const featuredBlogs = data?.pageDataByHandle?.pageDatas?.page?.featuredBlogs.references?.edges || [];
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
   return (
     <div className="home">
       {mainBannerData.length > 0 && (
@@ -96,7 +97,7 @@ export default function Homepage() {
             {SafetyAtYourFingertipsData.length > 0 && (
               <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
             )}
-            <UltimatePetParent />
+            <UltimatePetParent featuredBlogs={featuredBlogs} />
           </>
         )}
       </div>

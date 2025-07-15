@@ -58,6 +58,7 @@ export async function action({ request, context }) {
 export default function CustomPage() {
   const ProductData = useLoaderData();
   const bundleProduct = ProductData?.product?.product?.product?.bundleProduct?.references?.edges || [];
+  const specCompareTitle = ProductData?.product?.product?.product?.specComparisonTitle?.value || "Find The Perfect Waggle For Your Pet";
   const specCompare = ProductData?.product?.product?.product?.specComparison?.references?.edges || [];
   const petsNeeds = ProductData?.product?.product?.product?.petsNeeds?.reference?.fields || [];
   const waggleGuide = ProductData?.product?.product?.product?.petGuideSteps?.references?.edges  || [];
@@ -77,7 +78,7 @@ export default function CustomPage() {
       <div ref={belowFoldRef}>
         {inView && (
           <>
-            <PerfectWagglePet specCompare={specCompare} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
+            <PerfectWagglePet specCompare={specCompare} specCompareTitle={specCompareTitle} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
             {bundleProduct.length > 0 && (
               <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
             )}

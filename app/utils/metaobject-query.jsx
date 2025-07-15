@@ -168,6 +168,34 @@ query PageObjectData($handle: String) {
         ...MetaobjectFields
       }      
     }
+    featuredBlogs: metafield(namespace: "custom", key: "hydrogen_featured_blogs") {
+      references(first: 250) {
+        edges {
+          node {
+            ... on Metaobject {
+              fields {
+                key
+                value
+                reference {
+                  ... on MediaImage {
+                    image {
+                      url
+                      altText
+                    }
+                  }
+                  ... on Metaobject {
+                    fields {
+                      key
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
