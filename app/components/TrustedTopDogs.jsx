@@ -31,7 +31,7 @@ const ModernDog = ({TrustByDog}) => {
 
 
   return (
-    <div className="w-full mx-auto pt-[40px] pb-[50px] px-[20px] md:py-[56px] md:px-[65px]">
+    <div className="w-full mx-auto pt-[40px] pb-[50px] px-[20px] md:py-[56px] md:px-[65px] max-w-[1440px]">
       <h2 className="md:mb-[37px] mb-[16px] inter gray-medium text-center font-normal text-[14px] md:text-[16px] leading-[164%] tracking-[0] uppercase">
         {contentData.heading}
       </h2>

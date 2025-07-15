@@ -56,79 +56,81 @@ export default function FrequentlyBoughtTogether(bundleProduct) {
   };
 
   return (
-    <div className="dark-slate-bg px-4 py-8 md:px-[170px] md:py-[55px] extra-padding max-w-[1440px] w-full mx-auto">
-      <div className="flex flex-col md:flex-row md:justify-between gap-[15px] md:gap-6">
-        <h2 className="white-text-element lexend font-medium text-[20px] md:text-[35px] tracking-[-0.24px] md:tracking-[-0.36px] text-center md:text-left leading-[1.3] h-fit mt-[18px] md:mt-[9px] md:w-min md:ml-[35px]">
-          {texts.sectionTitle}
-        </h2>
-        <div className="flex justify-center md:justify-start gap-[23px] md:ml-[4%] md:mr-[1%] md:gap-0">
-          <div className="flex flex-col items-center w-1/2">
-            <img
-              src={texts.products[0].image || CameraImage}
-              alt={texts.products[0].alt}
-              className="mb-[14px] object-contain rounded-[7px] md:h-[150px] md:w-[150px] h-[106px] w-[106px]"
-              loading="lazy"
-            />
-            <h3 className="white-text-element lexend font-medium text-[14px] md:text-[20px] leading-[17px] md:leading-[23.2px] tracking-[-0.05px] md:tracking-[-0.07px] text-center mb-2">
-              {texts.products[0].title}
-            </h3>
-            <div className="flex items-center gap-1 md:gap-2">
-              <span className="gray-400 line-through text-xs md:text-sm">
-                {texts.products[0].originalPrice}
-              </span>
-              <span className="white-text-element lexend font-medium text-[16px] md:text-[20px] leading-[20px] md:leading-[28px] tracking-[0]">
-                {texts.products[0].discountedPrice}
-              </span>
+    <div className="dark-slate-bg px-4 py-8 md:px-[170px] md:py-[55px] extra-padding">
+      <div className="max-w-[1440px] w-full mx-auto">
+        <div className="flex flex-col md:flex-row md:justify-between gap-[15px] md:gap-6">
+          <h2 className="white-text-element lexend font-medium text-[20px] md:text-[35px] tracking-[-0.24px] md:tracking-[-0.36px] text-center md:text-left leading-[1.3] h-fit mt-[18px] md:mt-[9px] md:w-min md:ml-[35px]">
+            {texts.sectionTitle}
+          </h2>
+          <div className="flex justify-center md:justify-start gap-[23px] md:ml-[4%] md:mr-[1%] md:gap-0">
+            <div className="flex flex-col items-center w-1/2">
+              <img
+                src={texts.products[0].image || CameraImage}
+                alt={texts.products[0].alt}
+                className="mb-[14px] object-contain rounded-[7px] md:h-[150px] md:w-[150px] h-[106px] w-[106px]"
+                loading="lazy"
+              />
+              <h3 className="white-text-element lexend font-medium text-[14px] md:text-[20px] leading-[17px] md:leading-[23.2px] tracking-[-0.05px] md:tracking-[-0.07px] text-center mb-2">
+                {texts.products[0].title}
+              </h3>
+              <div className="flex items-center gap-1 md:gap-2">
+                <span className="gray-400 line-through text-xs md:text-sm">
+                  {texts.products[0].originalPrice}
+                </span>
+                <span className="white-text-element lexend font-medium text-[16px] md:text-[20px] leading-[20px] md:leading-[28px] tracking-[0]">
+                  {texts.products[0].discountedPrice}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center md:max-h-[150px] max-h-[106px]">
+              <img src={PlusIcon} alt="plus" loading="lazy" className="w-[20px]" />
+            </div>
+            <div className="flex flex-col items-center w-1/2">
+              <img
+                src={texts.products[1].image || SmartBowlImage}
+                alt={texts.products[1].alt}
+                className="rounded-[7px] mb-[14px] object-contain md:h-[150px] md:w-[150px] h-[106px] w-[106px] max-w-none"
+                loading="lazy"
+              />
+              <h3 className="white-text-element lexend font-medium text-[14px] md:text-[20px] leading-[17px] md:leading-[23.2px] tracking-[-0.05px] md:tracking-[-0.07px] text-center mb-2">
+                {texts.products[1].title}
+              </h3>
+              <div className="flex items-center gap-1 md:gap-2">
+                <span className="gray-400 line-through text-xs md:text-sm">
+                  {texts.products[1].originalPrice}
+                </span>
+                <span className="white-text-element lexend font-medium text-[16px] md:text-[20px] leading-[20px] md:leading-[28px] tracking-[0]">
+                  {texts.products[1].discountedPrice}
+                </span>
+              </div>
             </div>
           </div>
-          <div className="flex items-center md:max-h-[150px] max-h-[106px]">
-            <img src={PlusIcon} alt="plus" loading="lazy" className="w-[20px]" />
-          </div>
-          <div className="flex flex-col items-center w-1/2">
-            <img
-              src={texts.products[1].image || SmartBowlImage}
-              alt={texts.products[1].alt}
-              className="rounded-[7px] mb-[14px] object-contain md:h-[150px] md:w-[150px] h-[106px] w-[106px] max-w-none"
-              loading="lazy"
-            />
-            <h3 className="white-text-element lexend font-medium text-[14px] md:text-[20px] leading-[17px] md:leading-[23.2px] tracking-[-0.05px] md:tracking-[-0.07px] text-center mb-2">
-              {texts.products[1].title}
-            </h3>
-            <div className="flex items-center gap-1 md:gap-2">
-              <span className="gray-400 line-through text-xs md:text-sm">
-                {texts.products[1].originalPrice}
-              </span>
-              <span className="white-text-element lexend font-medium text-[16px] md:text-[20px] leading-[20px] md:leading-[28px] tracking-[0]">
-                {texts.products[1].discountedPrice}
-              </span>
+          <div className="text-center md:text-right">
+            <div className="mt-0 md:mt-[21%]">
+              <div className="md:text-left white-text-element lato font-medium text-[20px] leading-[19px] md:leading-[23.2px] tracking-[0] mb-[12px]">
+                {texts.totalPriceText}
+              </div>
+              <div className="flex items-center justify-center md:justify-end gap-2 mb-4">
+                <span className="gray-400 line-through text-base md:text-lg">
+                  {texts.totalOriginalPrice}
+                </span>
+                <span className="white-text-element lexend font-medium text-[28px] md:text-[36px] leading-[22px] md:leading-[28px] tracking-[0]">
+                  {texts.totalDiscountedPrice}
+                </span>
+              </div>
             </div>
+            <CustomAddToCartButton
+              disabled={false}
+              onClick={() => open('cart')}
+              lines={formattedBundles.products.map((product) => ({
+                merchandiseId: product.variantId,
+                quantity: 1,
+              }))}
+              className="button2 button-hover2 px-6 md:px-8 py-[14px] md:py-[18px] lato rounded-[100px] white-text-element font-bold text-[16px] md:text-[18px] leading-[100%] cursor-pointer tracking-[0] max-w-[280px] md:max-w-none !w-auto flex mx-auto items-center h-auto md:mx-0 md:items-start md:h-full"
+            >
+              {texts.buttonText}
+            </CustomAddToCartButton>
           </div>
-        </div>
-        <div className="text-center md:text-right">
-          <div className="mt-0 md:mt-[21%]">
-            <div className="md:text-left white-text-element lato font-medium text-[20px] leading-[19px] md:leading-[23.2px] tracking-[0] mb-[12px]">
-              {texts.totalPriceText}
-            </div>
-            <div className="flex items-center justify-center md:justify-end gap-2 mb-4">
-              <span className="gray-400 line-through text-base md:text-lg">
-                {texts.totalOriginalPrice}
-              </span>
-              <span className="white-text-element lexend font-medium text-[28px] md:text-[36px] leading-[22px] md:leading-[28px] tracking-[0]">
-                {texts.totalDiscountedPrice}
-              </span>
-            </div>
-          </div>
-          <CustomAddToCartButton
-            disabled={false}
-            onClick={() => open('cart')}
-            lines={formattedBundles.products.map((product) => ({
-              merchandiseId: product.variantId,
-              quantity: 1,
-            }))}
-            className="button2 button-hover2 px-6 md:px-8 py-[14px] md:py-[18px] lato rounded-[100px] white-text-element font-bold text-[16px] md:text-[18px] leading-[100%] cursor-pointer tracking-[0] max-w-[280px] md:max-w-none !w-auto flex mx-auto items-center h-auto md:mx-0 md:items-start md:h-full"
-          >
-            {texts.buttonText}
-          </CustomAddToCartButton>
         </div>
       </div>
     </div>

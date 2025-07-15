@@ -30,7 +30,8 @@ const WaggleHero = ({BannerData}) => {
 
 
   return (
-    <div className="bg-[#B47E57] max-w-[1440px] flex flex-col-reverse md:flex-col mx-auto w-full md:px-[112px] md:py-[55px] pt-5 pb-[34px] md:rounded-t-[34px] rounded-t-[28px] overflow-hidden">
+    <div className="bg-[#B47E57] md:px-[112px] md:py-[55px] pt-5 pb-[34px] md:rounded-t-[34px] rounded-t-[28px] overflow-hidden">
+      <div className="max-w-[1280px] flex flex-col-reverse md:flex-col mx-auto w-full">
       <div className="flex flex-col md:flex-row md:items-start justify-between">
         <div className="md:w-[100%] text-center md:text-left flex flex-wrap">
           <span className="md:w-[52%] text-custom47 white-text-element md:text-[63px] text-[28.48px] lexend mt-[13px] md:mt-0 leading-[36px] font-medium md:leading-[79px] tracking-[0] ml-[15px] mr-[15px] md:ml-0 md:mr-0">
@@ -74,6 +75,7 @@ const WaggleHero = ({BannerData}) => {
           loading="lazy"
           className="hidden md:block object-contain"
         />
+      </div>
       </div>
     </div>
   );

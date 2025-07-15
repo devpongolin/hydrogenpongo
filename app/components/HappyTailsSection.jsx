@@ -106,7 +106,7 @@ const HappyTailsSection = () => {
       </div>
 
       {/* Slider */}
-      <div className="overflow-hidden md:px-[79px]">
+      <div className="overflow-hidden md:px-[79px] max-w-[1440px] mx-auto w-full">
         <Swiper
           modules={[FreeMode, Navigation]}
           onSwiper={(swiper) => (swiperRef.current = swiper)}

@@ -31,7 +31,7 @@ const PartnerTypeSection = ({FindYourPartner}) => {
       <h2 className="lexend text-dark-gray font-medium md:text-[47.37px] text-[28.48px] md:leading-[124%] leading-[100%] tracking-normal text-center md:mb-[28px] mb-[17px]">
         {data.textContent.heading}
       </h2>
-      <div className="flex px-5 md:px-0 flex-col md:flex-row justify-center gap-[40px] max-w-6xl mx-auto custom-flex-30">
+      <div className="flex px-5 md:px-0 flex-col md:flex-row justify-center gap-[40px] max-w-[1180px] mx-auto custom-flex-30">
         {data.partnerTypes.map((partner) => (
           <div
             key={partner.id}

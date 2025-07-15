@@ -145,7 +145,7 @@ const ImageCarousel = () => {
         </div>
       </div>
 
-      <div className="flex gap-4 px-4 min-w-full pl-[20px] md:pl-[79px] overflow-x-auto hide-scrollbar scroll-snap-x snap-mandatory">
+      <div className="flex gap-4 px-4 max-w-[1440px] mx-auto pl-[20px] md:pl-[79px] overflow-x-auto hide-scrollbar scroll-snap-x snap-mandatory">
         {orderedCards.map((index) => {
           const isActive = activeIndex === index;
           const slide = slides[index];
@@ -158,7 +158,7 @@ const ImageCarousel = () => {
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
               onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-              className={`flex-shrink-0 cursor-pointer relative snap-center ${isActive ? 'md:w-[81%] w-[90%] min-w-[360px] md:min-w-0' : 'md:w-[28.7%] w-[100%] h-fit md:h-auto'}`}
+              className={`flex-shrink-0 cursor-pointer relative snap-center ${isActive ? 'md:w-[81%] w-[90%] min-w-[360px] md:min-w-0' : 'md:w-[31.3%] w-[100%] h-fit md:h-auto'}`}
             >
               <img src={imageSrc} alt="" className="w-full h-[100%] rounded-lg" />
               <div className={`${isActive ? 'block' : 'hidden'}`}>

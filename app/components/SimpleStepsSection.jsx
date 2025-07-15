@@ -30,7 +30,7 @@ const SimpleStepsSection = ({SimpleSteps}) => {
   };
   return (
     <div className="semi-transparent-bg padding-custom md:px-[112px] pt-[50px] px-[20px] pb-[40px] md:py-[56px]">
-      <div className="relative w-full max-w-[1440px] mx-auto rounded-[32px] overflow-hidden">
+      <div className="relative w-full max-w-[1280px] mx-auto rounded-[32px] overflow-hidden">
           <div className="absolute md:inset-0 custom-background"></div>
           <img
             src={data.images.backgroundImageMobile}
