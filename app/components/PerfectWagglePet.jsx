@@ -72,7 +72,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
   };
 
   return (
-    <div className="product !flex flex-col overflow-scroll">
+    <div className="product !flex flex-col overflow-scroll hide-scrollbar">
       {/* <div className='flex'>
         <div className="product-image">
         </div>
@@ -123,7 +123,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
 
                     return (
                       <td key={i} className="md:py-[25.05px] md:px-[29.3px] text-center">
-                        <div className={`flex justify-center ${isObject ? 'items-center relative gap-2' : ''}`}>
+                        <div className={`flex justify-center relative ${isObject ? 'items-center relative gap-2' : ''}`}>
                           <img
                             className="max-md:w-4"
                             src={
@@ -136,7 +136,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
 
                           {/* Show value label if not purely boolean true/false */}
                           {!isBooleanTrue && !isBooleanFalse && typeof value !== 'object' && (
-                            <span className="ml-2 text-[16px] leading-[18px] text-[#202124]">{value}</span>
+                            <span className="text-[16px] leading-[18px] text-[#202124] absolute left-[65%] top-[15%]">{value}</span>
                           )}
 
                           {/* Optional: show object note (like for "test") */}
@@ -171,7 +171,7 @@ export default function specCompare({specCompare, storefront, getCartId}) {
                           merchandiseId: compareItem.id,
                           quantity: 1,
                         }]}
-                        className={`w-[123px] h-[36px]  md:w-auto md:h-auto items-center justify-center border lato border-gray-300 rounded-full font-bold text-[14px] md:text-[18px] leading-[20px] text-center align-middle text-[#202124] md:px-[55px] md:py-[14px] flex ${compareItem.variantAvailable ? 'cursor-pointer button-hover2' : 'opacity-50 !cursor-not-allowed'}`}
+                        className={`w-[123px] h-[36px]  md:w-auto md:h-auto items-center justify-center border lato border-gray-300 rounded-full font-bold text-[14px] md:text-[18px] leading-[20px] text-center align-middle text-[#202124] md:px-[55px] md:py-[14px] flex  ${compareItem.variantAvailable ? '!bg-[#ffffff] !text-[#000000] cursor-pointer button-hover2' : '!bg-[#ffffff] !text-[#000000] opacity-50 !cursor-not-allowed'}`}
                       >
                         {compareItem.variantAvailable ? productComparisonData.buttons.secondary : 'Sold Out'}
                       </CustomAddToCartButton>
