@@ -126,34 +126,29 @@ const ImageCarousel = () => {
     setActiveIndex(activeIndex - 1);
   };
 
+  const orderedCards = (() => {
+    if (activeIndex === null || activeIndex === slides.length - 1) return cards;
+    return [activeIndex, ...cards.filter((i) => i !== activeIndex)];
+  })();
+
   return (
     <div className="bg-[#EEDED3] py-8">
       <div className="flex w-full max-w-[1281px] mx-auto">
         <span className="block text-center font-medium md:font-[400] text-[28px] md:text-[47px] leading-[100%] tracking-[-0.36px] md:tracking-[0] lexend mb-[19px] md:mb-[34px] w-[51%] mx-auto">{sectionHeading}</span>
         <div className="gap-2 hidden md:flex">
-          <button
-            className="flex items-center justify-center"
-            onClick={goToPrev}
-            disabled={activeIndex === 0 || activeIndex === null}
-          >
+          <button className="flex items-center justify-center" onClick={goToPrev} disabled={activeIndex === 0 || activeIndex === null}>
             <img src={left} alt="left arrow" className={`${activeIndex === 0 || activeIndex === null ? 'opacity-30' : ''}`} />
           </button>
-          <button
-            className="flex items-center justify-center"
-            onClick={goToNext}
-            disabled={activeIndex === slides.length - 1 || activeIndex === null}
-          >
+          <button className="flex items-center justify-center" onClick={goToNext} disabled={activeIndex === slides.length - 1 || activeIndex === null}>
             <img src={right} alt="right arrow" className={`${activeIndex === slides.length - 1 || activeIndex === null ? 'opacity-30' : ''}`} />
           </button>
         </div>
       </div>
 
-      {/* Slide container */}
       <div className="flex gap-4 px-4 min-w-full pl-[20px] md:pl-[79px] overflow-x-auto hide-scrollbar scroll-snap-x snap-mandatory">
-        {cards.map((index) => {
+        {orderedCards.map((index) => {
           const isActive = activeIndex === index;
           const slide = slides[index];
-
           const imageSrc = isActive
             ? (isMobile ? slide.activeImageMobile : slide.activeImageDesktop)
             : (isMobile ? slide.inactiveImageMobile : slide.inactiveImageDesktop);
@@ -166,13 +161,39 @@ const ImageCarousel = () => {
               className={`flex-shrink-0 cursor-pointer relative snap-center ${isActive ? 'md:w-[81%] w-[90%] min-w-[360px] md:min-w-0' : 'md:w-[28.7%] w-[100%] h-fit md:h-auto'}`}
             >
               <img src={imageSrc} alt="" className="w-full h-[100%] rounded-lg" />
-
-              {/* Active content */}
               <div className={`${isActive ? 'block' : 'hidden'}`}>
                 <div className="mt-2 absolute top-[26px] left-[16px] md:top-[50px] md:left-[42px] text-[28px] md:text-[47px] text-white w-full leading-normal">
                   <span className="font-semibold w-[60%] md:w-[30%] block leading-[1]">
                     {slide.title}
                   </span>
+                  <div className="px-[22px] md:px-0 md:left-[42px] w-full md:w-[46%]">
+                    <div className="text-white flex mb-[22px] items-center md:mt-[50px]">
+                      <div className="border-r border-r-[#80808070]">
+                        {slide.features.slice(0, 2).map((f, i) => (
+                          <div key={i} className={`flex px-[3px] py-[0px] md:px-[10px] md:py-[9px] ${i === 0 ? 'border-b border-b-[#80808070]' : ''} gap-[5px] md:gap-[17px]`}>
+                            <img src={f.icon} alt="" className="w-[20px] h-[20px] my-auto" />
+                            <span className="w-full md:w-[66%] text-[14px]">{f.text}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div>
+                        {slide.features.slice(2, 4).map((f, i) => (
+                          <div key={i} className={`flex px-[3px] py-[0px] md:px-[10px] md:py-[9px] ${i === 0 ? 'border-b border-b-[#80808070]' : ''} gap-[5px] md:gap-[17px]`}>
+                            <img src={f.icon} alt="" className="w-[20px] h-[20px] my-auto" />
+                            <span className="w-full md:w-[66%] text-[14px]">{f.text}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="text-white text-[37px] font-medium flex gap-4 flex-col">
+                      <span className="text-[16px] md:text-[18px]">{slide.description}</span>
+                      <a href={slide.button.link}>
+                        <button className="button-hover2 text-[14px] cursor-pointer px-[26px] py-[14px] bg-[#0085FF] rounded-[55px] text-center flex items-center justify-center w-max">
+                          {slide.button.text}
+                        </button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
                 <div className="absolute top-[19px] right-[19px]">
                   <img src={slide.closeIcon} alt="close" />
@@ -181,43 +202,8 @@ const ImageCarousel = () => {
                   <img src={slide.slideImage} alt="badge" className="bg-[linear-gradient(360deg,rgba(153,153,153,0.45)_39.98%,rgba(255,255,255,0)_100%)] rounded-[33px]" />
                   <img src={slide.pdpImage} alt="product" className="absolute top-[18px] left-[-23%] w-[44%]" />
                 </div>
-                <div className="absolute bottom-[30px] px-[22px] md:px-0 md:bottom-[55px] md:left-[42px] w-full md:w-[46%]">
-                  <div className="text-white flex mb-[22px] items-center">
-                    <div className="border-r border-r-[#80808070]">
-                      {slide.features.slice(0, 2).map((f, i) => (
-                        <div
-                          key={i}
-                          className={`flex px-[3px] py-[0px] md:px-[10px] md:py-[9px] ${i === 0 ? 'border-b border-b-[#80808070]' : ''} gap-[5px] md:gap-[17px]`}
-                        >
-                          <img src={f.icon} alt="" className="w-[20px] h-[20px] my-auto" />
-                          <span className="w-full md:w-[66%] text-[14px]">{f.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      {slide.features.slice(2, 4).map((f, i) => (
-                        <div
-                          key={i}
-                          className={`flex px-[3px] py-[0px] md:px-[10px] md:py-[9px] ${i === 0 ? 'border-b border-b-[#80808070]' : ''} gap-[5px] md:gap-[17px]`}
-                        >
-                          <img src={f.icon} alt="" className="w-[20px] h-[20px] my-auto" />
-                          <span className="w-full md:w-[66%] text-[14px]">{f.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-white text-[37px] font-medium flex gap-4 flex-col">
-                    <span className="text-[16px] md:text-[18px]">{slide.description}</span>
-                    <a href={slide.button.link}>
-                      <button className="button-hover2 text-[14px] cursor-pointer px-[26px] py-[14px] bg-[#0085FF] rounded-[55px] text-center flex items-center justify-center w-max">
-                        {slide.button.text}
-                      </button>
-                    </a>
-                  </div>
-                </div>
               </div>
 
-              {/* Inactive content */}
               <div className={`${!isActive ? 'block' : 'hidden'}`}>
                 <div className="absolute bottom-0 text-white text-[37px] px-[32px] py-[38px] font-medium leading-normal">
                   <span className="w-[70%] block leading-[1]">
@@ -233,7 +219,6 @@ const ImageCarousel = () => {
         })}
       </div>
 
-      {/* Mobile Dots */}
       <div className="flex md:hidden justify-center mt-4 gap-[6px]">
         {slides.map((_, idx) => (
           <div
