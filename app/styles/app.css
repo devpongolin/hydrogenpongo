@@ -937,6 +937,18 @@ button.reset:hover:not(:has(> *)) {
   }
 }
 
+a,
+button {
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled],
+a:disabled,
+a[disabled] {
+  cursor: default;
+}
+
 @media (min-width: 767px) and (max-width: 1109px) {
   .padding-custom {
     padding: 20px;

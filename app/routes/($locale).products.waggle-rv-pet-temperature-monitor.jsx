@@ -34,9 +34,11 @@ export default function CustomPage() {
   const bundleProduct = ProductData?.product?.product?.product?.bundleProduct?.references?.edges || [];
   const petsNeeds = ProductData?.product?.product?.product?.petsNeeds?.reference?.fields || [];
   const waggleGuide = ProductData?.product?.product?.product?.petGuideSteps?.references?.edges || [];
+  const specCompareTitle = ProductData?.product?.product?.product?.specComparisonTitle?.value || "Find The Perfect Waggle For Your Pet";
   const productFAQS = ProductData?.product?.product?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || [];
   const productIdValue = ProductData?.productId || null;
+  const featuredBlogs = ProductData?.product?.product?.product?.featuredBlogs?.references?.edges || [];
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
   const specCompare = ProductData?.product?.product?.product?.specComparison?.references?.edges || [];
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -51,7 +53,7 @@ export default function CustomPage() {
       <div ref={belowFoldRef}>
         {inView && (
           <>
-            <PerfectWagglePet specCompare={specCompare} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
+            <PerfectWagglePet specCompare={specCompare} specCompareTitle={specCompareTitle} storefront={ProductData?.storefront} getCartId={ProductData?.getCartId} />
             {bundleProduct.length > 0 && (
               <FrequentlyBoughtTogether bundleProduct={bundleProduct} />
             )}
@@ -64,7 +66,7 @@ export default function CustomPage() {
             {productFAQS.length > 0 && (
               <FAQsection productFAQS={productFAQS} />
             )}
-            <PetSafetyGrid />
+            <PetSafetyGrid featuredBlogs={featuredBlogs} />
           </>
         )}
       </div>
