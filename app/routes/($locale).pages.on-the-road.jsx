@@ -9,8 +9,8 @@ import { getPageData } from '~/utils/common-functions';
 import OfferBanner from '~/components/OfferBanner';
 import VideoBanner from '~/components/VideoBanner';
 import { useInView } from 'react-intersection-observer';
-import ImageCarousel from '~/components/ImageCarousel';
 import UltimatePetParent from '~/components/UltimatePetParent';
+import OnTheRoadImageCarousel from '~/components/onTheRoadImageCaroisel';
 
 
 
@@ -24,6 +24,7 @@ export async function loader({ context }) {
 }
 
 export default function onTheRoad() {
+  const data = useLoaderData();
   const pageData = useLoaderData();
   const mainBannerData = pageData?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
   const pageFaqData = pageData?.pageDataByHandle?.pageDatas?.page?.faqData?.references?.edges || [];
@@ -31,6 +32,7 @@ export default function onTheRoad() {
   const hydrogenFeaturesSectionData = pageData?.pageDataByHandle?.pageDatas?.page?.hydrogenFeaturesSectionData?.reference?.fields || [];
   const HydrogenGallerySliderData = pageData?.pageDataByHandle?.pageDatas?.page?.HydrogenGallerySliderData?.references?.edges || [];
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const featuredBlogs = data?.pageDataByHandle?.pageDatas?.page?.featuredBlogs.references?.edges || [];
   // console.log(HydrogenGallerySliderData);
   return (
     <>
@@ -45,7 +47,7 @@ export default function onTheRoad() {
           {inView && (
             <>
               <OfferBanner />
-              <ImageCarousel />
+              <OnTheRoadImageCarousel />
               <VideoBanner />
               {HydrogenGallerySliderData.length > 0 && (
                 <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />
@@ -53,7 +55,7 @@ export default function onTheRoad() {
               {SafetyAtYourFingertipsData.length > 0 && (
                 <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
               )}
-              <UltimatePetParent />
+              <UltimatePetParent featuredBlogs={featuredBlogs} />
               {pageFaqData.length > 0 && (
                 <PageFAQ pageFaqData={pageFaqData} />
               )}
