@@ -37,7 +37,7 @@ const ModernDog = ({CurrentPartner}) => {
       <h2 className="md:mb-[37px] mb-[16px] inter gray-medium text-center font-normal text-[14px] md:text-[16px] leading-[164%] tracking-[0] uppercase">
         {contentData.heading}
       </h2>
-      <div className="flex flex-wrap justify-center gap-[22px] md:gap-[36px]">
+      <div className="flex flex-wrap justify-center gap-[22px] md:gap-[36px] max-w-[1280px] mx-auto w-full">
         {partnersData.map(({ id, logo, alt }) => (
           <div
             key={id}

@@ -302,7 +302,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             {productData.features.map((feature, index) => (
               <div key={index} className="flex items-center gap-2 mt-[7px]">
                 <div className="rounded-full flex items-center justify-center">
-                  <img src={feature.icon} alt="Feature" />
+                  <img src={feature.icon} alt="Feature" className="w-[33px] h-[33px] object-cover" />
                 </div>
                 <span className="text-dark-gray NotoSans font-normal text-base leading-7 tracking-normal text-[14px] md:text-[16px]">
                   {feature.text}

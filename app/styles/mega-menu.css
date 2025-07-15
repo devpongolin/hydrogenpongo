@@ -408,10 +408,10 @@
   .custom-header header {
     background: #24242440;
     backdrop-filter: blur(19.25px);
-    position: absolute;
+    position: fixed;
     width: 100%;
     border: none;
-    top: 14%;
+    top: 120px;
     max-width: 1280px;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -111,8 +111,8 @@ const PerksSection = ({ AmbassadorWeGotThose }) => {
   );
 
   return (
-    <div className="w-full md:px-[111px] md:py-[56px] pt-[42px] pb-[38px] px-[15px] padding flex justify-center">
-      <div className="w-full max-w-[1440px]">
+    <div className="w-full md:px-[111px] md:py-[56px] pt-[42px] pb-[38px] px-[15px] padding flex justify-center max-w-[1440px] mx-auto">
+      <div className="">
         <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-x-[150px] gap">
           <div className="md:col-span-1">
             <h2 className="lexend font-medium md:text-[47.37px] md:leading-[124%] md:tracking-[0] text-[28.48px] leading-[100%] tracking-[-0.36px] text-dark-gray md:mb-4 md:max-w-77">
