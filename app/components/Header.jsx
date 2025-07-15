@@ -12,10 +12,10 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu, metaobjects} = header;
   return (
     <header className="header border-b-[0.5px] border-b-[rgba(223,223,223,1)] !h-auto !z-2">
-      <div className="max-w-[1280px] mx-auto w-full flex py-[16px] h-[inherit] items-center">
+      <div className="max-w-[1280px] mx-auto w-full flex py-[16px] h-[inherit] items-center nav-container">
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
           <strong></strong>
-          <img src={shop.brand.logo.image.url} alt="" width="112" height="28" />
+          <img src={shop.brand.logo.image.url} alt="" width="112" height="28" className="shop-logo" />
         </NavLink>
         <HeaderMenu
           menu={menu}
@@ -69,7 +69,7 @@ export function HeaderMenu({
 
   function renderMenuItems(items, isSublist = false) {
     return (
-      <ul className={isSublist ? "" : "flex flex-row flex-wrap justify-between items-center list-none p-0 m-0 w-full gap-[20px] h-[inherit]"}>
+      <ul className={isSublist ? "" : "flex flex-row flex-wrap justify-between items-center list-none p-0 m-0 w-full gap-[20px] h-[inherit] main-nav-items-custom"}>
         {items.map((item) => {
           if (!item.url) return null;
           const url =
@@ -82,19 +82,23 @@ export function HeaderMenu({
           return (
             <li
               key={item.id}
-              className="inline-flex items-center group h-[inherit] hover-effect-main w-full md:w-auto flex-col md:flex-row"
+              className="inline-flex items-center group h-[inherit] hover-effect-main w-full md:w-auto flex-col md:flex-row main-nav-item-custom"
               onMouseEnter={() => setHoveredMenu(item.title)}
               onMouseLeave={() => setHoveredMenu(null)}
             >
               <NavLink
                 className="no-underline text-neutral-800 md:px-4 md:py-2 flex items-center h-[inherit] w-full"
                 end
-                // onClick={close}
                 prefetch="intent"
                 style={activeLinkStyle}
                 to={url}
+                onClick={() => {
+                  if (viewport === 'mobile') {
+                    setHoveredMenu((prev) => (prev === item.title ? null : item.title));
+                  }
+                }}
               >
-                <span className="flex items-center gap-2 text-[1.1rem] font-medium !text-[#18212D] hover-effect w-full">
+                <span className="flex items-center gap-2 text-[1.1rem] font-medium text-[#18212D] hover-effect w-full">
                   {item.title}
                   {hasDropdown && (
                     <svg className={`inline-flex items-center transition-transform duration-300 ease-in-out text-[1.2rem] ml-1 w-3 h-3 !text-[#18212D] ${hoveredMenu === item.title ? 'rotate-180' : ''}`} width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,7 +157,7 @@ export function HeaderMenu({
  */
 function HeaderCtas({isLoggedIn, cart}) {
   return (
-    <nav className="header-ctas" role="navigation">
+    <nav className="header-ctas custom-nav-right" role="navigation">
       <HeaderMenuMobileToggle />
       {/* <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
@@ -220,7 +224,7 @@ function CartBadge({count}) {
       className='relative'
     >
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M27.35 20.73L30.97 6.25C31.04 5.95 30.97 5.63 30.79 5.39C30.61 5.15 30.31 5.01 30 5.01H28.48C27.93 5.01 27.48 5.46 27.48 6.01C27.48 6.56 27.93 7.01 28.48 7.01H28.72L25.41 20.25C25.3 20.7 24.9 21.01 24.44 21.01H8.59L7.42 7.01H9.85C10.4 7.01 10.85 6.56 10.85 6.01C10.85 5.46 10.4 5.01 9.85 5.01H7.25L7.15 3.76C7.02 2.22 5.71 1.01 4.16 1.01H2C1.45 1.01 1 1.46 1 2.01C1 2.56 1.45 3.01 2 3.01H4.16C4.68 3.01 5.11 3.41 5.16 3.93L6.85 24.26C6.98 25.8 8.29 27.01 9.84 27.01H10V27.51C10 29.44 11.57 31.01 13.5 31.01C15.43 31.01 17 29.44 17 27.51V27.01H20V27.51C20 29.44 21.57 31.01 23.5 31.01C25.43 31.01 27 29.44 27 27.51V27.01H28C28.55 27.01 29 26.56 29 26.01C29 25.46 28.55 25.01 28 25.01H9.84C9.32 25.01 8.89 24.61 8.84 24.09L8.75 23.01H24.43C25.81 23.01 27.01 22.08 27.34 20.74L27.35 20.73ZM15 27.5C15 28.33 14.33 29 13.5 29C12.67 29 12 28.33 12 27.5V27H15V27.5ZM25 27.5C25 28.33 24.33 29 23.5 29C22.67 29 22 28.33 22 27.5V27H25V27.5Z" fill="#2E3138"/>
+        <path className="custom-fill" d="M27.35 20.73L30.97 6.25C31.04 5.95 30.97 5.63 30.79 5.39C30.61 5.15 30.31 5.01 30 5.01H28.48C27.93 5.01 27.48 5.46 27.48 6.01C27.48 6.56 27.93 7.01 28.48 7.01H28.72L25.41 20.25C25.3 20.7 24.9 21.01 24.44 21.01H8.59L7.42 7.01H9.85C10.4 7.01 10.85 6.56 10.85 6.01C10.85 5.46 10.4 5.01 9.85 5.01H7.25L7.15 3.76C7.02 2.22 5.71 1.01 4.16 1.01H2C1.45 1.01 1 1.46 1 2.01C1 2.56 1.45 3.01 2 3.01H4.16C4.68 3.01 5.11 3.41 5.16 3.93L6.85 24.26C6.98 25.8 8.29 27.01 9.84 27.01H10V27.51C10 29.44 11.57 31.01 13.5 31.01C15.43 31.01 17 29.44 17 27.51V27.01H20V27.51C20 29.44 21.57 31.01 23.5 31.01C25.43 31.01 27 29.44 27 27.51V27.01H28C28.55 27.01 29 26.56 29 26.01C29 25.46 28.55 25.01 28 25.01H9.84C9.32 25.01 8.89 24.61 8.84 24.09L8.75 23.01H24.43C25.81 23.01 27.01 22.08 27.34 20.74L27.35 20.73ZM15 27.5C15 28.33 14.33 29 13.5 29C12.67 29 12 28.33 12 27.5V27H15V27.5ZM25 27.5C25 28.33 24.33 29 23.5 29C22.67 29 22 28.33 22 27.5V27H25V27.5Z" fill="#2E3138"/>
         <path d="M19.1719 15C23.0319 15 26.1719 11.86 26.1719 8C26.1719 4.14 23.0319 1 19.1719 1C15.3119 1 12.1719 4.14 12.1719 8C12.1719 11.86 15.3119 15 19.1719 15ZM17.002 8.5L18.7379 7.2C19.1279 6.81 20.112 7.61 20.502 8L22.3719 8.62469C22.7619 9.01469 22.7619 7.43801 22.3719 7.82801C22.1719 8.02801 21.9219 7.49 21.6619 7.49C21.4019 7.49 21.1519 7.39 20.9519 7.2L19.502 6L20.1619 12C20.1619 12.55 19.7219 2.74002 19.1719 2.74002C18.6219 2.74002 18.1619 12.55 18.1619 12L19.002 5L17.3719 7.2C16.9819 7.59 16.3519 7.59 15.9619 7.2C15.5719 6.81 16.612 8.89 17.002 8.5Z" fill="#0085FF"/>
       </svg>
       <span className='absolute text-[10px] text-white font-bold top-[1px] right-[10px]'>
