@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-// Swapped variable names
+// Asset imports...
 import d1node1 from '../assets/Cold ProtectionSmall.png';
 import d2node2 from '../assets/Power Security.png';
 import d3node3 from '../assets/Man wearing an Oura Ring while running outside (2).png';
@@ -24,13 +24,11 @@ import mnode3 from '../assets/Break-in  Detection (1).png';
 import mnode4 from '../assets/Visual  Check-ins (1).png';
 import mnode5 from '../assets/GPS  Tracking (1).png';
 
-
 import pdpnode1 from '../assets/Break-in Detection (1).png';
 import pdpnode2 from '../assets/Break-in Detection (2).png';
 import pdpnode3 from '../assets/Break-in Detection (3).png';
 import pdpnode4 from '../assets/Visual Check-ins (1).png';
 import pdpnode5 from '../assets/GPS Tracking (1).png';
-
 
 import pdpnodemi1 from '../assets/OBJECT (8).png';
 import pdpnodemi2 from '../assets/Group (6).png';
@@ -118,17 +116,21 @@ const OnTheRoadImageCarousel = () => {
   const cardRefs = useRef([]);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
+  // ✅ FIX: Ensure active slide scroll stays within visible bounds
   useEffect(() => {
-    if (
-      activeIndex !== null &&
-      activeIndex !== slides.length - 1 &&
-      cardRefs.current[activeIndex]
-    ) {
+    if (activeIndex !== null && cardRefs.current[activeIndex]) {
       const card = cardRefs.current[activeIndex];
       const parent = card?.parentElement;
+
       if (parent && card) {
         const offset = card.offsetLeft - parent.offsetLeft;
-        parent.scrollTo({ left: offset, behavior: 'smooth' });
+        const maxScroll = parent.scrollWidth - parent.clientWidth;
+        const newScrollLeft = Math.min(offset, maxScroll);
+
+        parent.scrollTo({
+          left: newScrollLeft,
+          behavior: 'smooth',
+        });
       }
     }
   }, [activeIndex]);
@@ -179,13 +181,13 @@ const OnTheRoadImageCarousel = () => {
               {isActive && (
                 <>
                   <div className="absolute top-[4%] left-[8%] md:top-1/2 md:left-[20%] md:translate-x-[-50%] md:translate-y-[-50%] text-[28px] md:text-[47px] text-white font-semibold w-[60%] md:w-[30%] leading-[1]">
-                  <img src={slide.mainicon} alt={`${slide.title} icon`} className="mb-2 w-fit" />
+                    <img src={slide.mainicon} alt={`${slide.title} icon`} className="mb-2 w-fit" />
                     {slide.title}
                     <div className="text-white text-[16px] md:text-[18px] font-medium mt-[9px]">
-                    {slide.description}
+                      {slide.description}
+                    </div>
                   </div>
-                  </div>
-                  
+
                   <div className="absolute top-[19px] right-[19px]">
                     <img src={slide.closeIcon} alt="close" />
                   </div>
@@ -199,9 +201,7 @@ const OnTheRoadImageCarousel = () => {
               {!isActive && (
                 <>
                   <div className="absolute bottom-0 text-white text-[37px] px-[32px] py-[38px] font-medium leading-normal">
-                    <span className="w-[70%] block leading-[1]">
-                      {slide.title}
-                    </span>
+                    <span className="w-[70%] block leading-[1]">{slide.title}</span>
                   </div>
                   <div className="absolute top-[22px] right-[22px]">
                     <img src={slide.openIcon} alt="open" />

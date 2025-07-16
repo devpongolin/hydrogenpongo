@@ -1,34 +1,35 @@
 import React, { useState, useRef, useEffect } from 'react';
-// Asset imports
-import d1node1 from '../assets/Extreme temperatures.png';
-import d2node2 from '../assets/Power  Security (2).png';
-import d3node3 from '../assets/Activity  Tracking.png';
-import d4node4 from '../assets/Visual  Check-ins (2).png';
-import d5node5 from '../assets/Nutrition  Management.png';
 
-import dnode1 from '../assets/Main Image.png';
-import dnode2 from '../assets/Power Security (2).png';
-import dnode3 from '../assets/Activity Tracking.png';
-import dnode4 from '../assets/Visual Check-ins (2).png';
-import dnode5 from '../assets/Nutrition Management.png';
+// Image imports
+import d1node1 from '../assets/f1.png';
+import d2node2 from '../assets/f2.png';
+import d3node3 from '../assets/Man wearing an Oura Ring while running outside (5).png';
+import d4node4 from '../assets/Man wearing an Oura Ring while running outside (6).png';
+import d5node5 from '../assets/Man wearing an Oura Ring while running outside (7).png';
 
-import m1node1 from '../assets/Extreme temperatures.png';
-import m2node2 from '../assets/Power  Security (2).png';
-import m3node3 from '../assets/Activity  Tracking.png';
-import m4node4 from '../assets/Visual  Check-ins (2).png';
-import m5node5 from '../assets/Nutrition  Management.png';
+import dnode1 from '../assets/f1 (1).png';
+import dnode2 from '../assets/f2 (1).png';
+import dnode3 from '../assets/f3.png';
+import dnode4 from '../assets/f4.png';
+import dnode5 from '../assets/f5.png';
 
-import mnode1 from '../assets/Extreme temperatures (1).png';
-import mnode2 from '../assets/Power Security (3).png';
-import mnode3 from '../assets/Activity Tracking (1).png';
-import mnode4 from '../assets/Visual Check-ins (3).png';
-import mnode5 from '../assets/Nutrition Management (1).png';
+import m1node1 from '../assets/f1 (2).png';
+import m2node2 from '../assets/f2 (2).png';
+import m3node3 from '../assets/f3 (1).png';
+import m4node4 from '../assets/f4 (1).png';
+import m5node5 from '../assets/f5 (1).png';
+
+import mnode1 from '../assets/Ready-to-Use Systems.png';
+import mnode2 from '../assets/Flexible Options.png';
+import mnode3 from '../assets/Premium Packaging.png';
+import mnode4 from '../assets/Expert Support.png';
+import mnode5 from '../assets/Gift Guarantees.png';
 
 import pdpnodemi1 from '../assets/OBJECT (8).png';
 import pdpnodemi2 from '../assets/Group (6).png';
-import pdpnodemi3 from '../assets/Fast_Time.png';
+import pdpnodemi3 from '../assets/Group (7).png';
 import pdpnodemi4 from '../assets/Group (8).png';
-import pdpnodemi5 from '../assets/g318.png';
+import pdpnodemi5 from '../assets/OBJECT (9).png';
 
 import open from '../assets/cross-mobile.webp';
 import close from '../assets/cross-desktop.webp';
@@ -40,7 +41,7 @@ const sectionHeading = "The Complete RV Pet Safety System";
 const slides = [
   {
     id: 0,
-    title: 'Extreme temperatures',
+    title: 'Heat / Cold Protection',
     activeImageDesktop: dnode1,
     inactiveImageDesktop: d1node1,
     activeImageMobile: mnode2,
@@ -48,7 +49,7 @@ const slides = [
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi1,
-    description: 'Prevents emergencies with temperature monitoring',
+    description: 'Prevents tragedy with instant temperature alerts',
   },
   {
     id: 1,
@@ -60,11 +61,11 @@ const slides = [
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi2,
-    description: 'Alerts you instantly during outages',
+    description: 'Notifies you the moment electricity fails',
   },
   {
     id: 2,
-    title: 'Activity Tracking',
+    title: 'Break-in Detection',
     activeImageDesktop: dnode3,
     inactiveImageDesktop: d3node3,
     activeImageMobile: mnode3,
@@ -72,7 +73,7 @@ const slides = [
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi3,
-    description: 'Shows what they’re up to when you’re gone',
+    description: 'Alerts you if someone approaches your RV',
   },
   {
     id: 3,
@@ -84,11 +85,11 @@ const slides = [
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi4,
-    description: 'See and speak to them from anywhere',
+    description: 'See and comfort your pets from anywhere',
   },
   {
     id: 4,
-    title: 'Nutrition Management',
+    title: 'GPS Tracking',
     activeImageDesktop: dnode5,
     inactiveImageDesktop: d5node5,
     activeImageMobile: mnode5,
@@ -96,16 +97,15 @@ const slides = [
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi5,
-    description: 'Ensures they eat properly throughout the day',
+    description: 'Monitors your RV location for theft protection',
   },
 ];
 
-const AtHomeImageCarousel = () => {
+const GiftImageCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const cardRefs = useRef([]);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
-  // ✅ Scroll fix: clamp scroll position so last card doesn't overshoot
   useEffect(() => {
     if (activeIndex !== null && cardRefs.current[activeIndex]) {
       const card = cardRefs.current[activeIndex];
@@ -166,6 +166,7 @@ const AtHomeImageCarousel = () => {
             >
               <img src={imageSrc} alt="slide" className="w-full h-full object-cover rounded-lg" />
 
+              {/* Active content */}
               {isActive && (
                 <>
                   <div className="absolute top-[4%] left-[8%] md:top-1/2 md:left-[20%] md:translate-x-[-50%] md:translate-y-[-50%] text-[28px] md:text-[47px] text-white font-semibold w-[60%] md:w-[30%] leading-[1]">
@@ -182,6 +183,7 @@ const AtHomeImageCarousel = () => {
                 </>
               )}
 
+              {/* Inactive content */}
               {!isActive && (
                 <>
                   <div className="absolute bottom-0 text-white text-[37px] px-[32px] py-[38px] font-medium leading-normal">
@@ -210,4 +212,4 @@ const AtHomeImageCarousel = () => {
   );
 };
 
-export default AtHomeImageCarousel;
+export default GiftImageCarousel;

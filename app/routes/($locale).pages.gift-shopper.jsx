@@ -11,6 +11,7 @@ import ImageCarousel from '~/components/ImageCarousel';
 import VideoBanner from '~/components/VideoBanner';
 import ImageMarqueeSlider from '~/components/Galleryslider';
 import UltimatePetParent from '~/components/UltimatePetParent';
+import GiftImageCarousel from '~/components/GiftImageCaroisel';
 
 
 export async function loader({ context }) {
@@ -44,7 +45,7 @@ export default function onTheRoad() {
           {inView && (
             <>
               <OfferBanner />
-              <ImageCarousel />
+              <GiftImageCarousel />
               <VideoBanner />
               {HydrogenGallerySliderData.length > 0 && (
                 <ImageMarqueeSlider HydrogenGallerySliderData={HydrogenGallerySliderData} />

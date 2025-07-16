@@ -35,7 +35,7 @@ export const PAGE_DATA_QUERY = `#graphql
 query PageObjectData($handle: String) {
   page(handle: $handle) {
     id
-
+    body
     mainBannerData: metafield(namespace: "custom", key: "cms_page") {
       reference {
         ...MetaobjectFields
