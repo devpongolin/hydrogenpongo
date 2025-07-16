@@ -81,6 +81,7 @@ export default function Homepage() {
   const mainBannerData = data?.pageDataByHandle?.pageDatas?.page?.mainBannerData?.reference?.fields || [];
   const SafetyAtYourFingertipsData = pageData?.pageDataByHandle?.pageDatas?.page?.SafetyAtYourFingertipsData?.reference?.fields || [];
   const featuredBlogs = data?.pageDataByHandle?.pageDatas?.page?.featuredBlogs.references?.edges || [];
+  const featuredBlogsCommonFields = data?.pageDataByHandle?.pageDatas?.page?.featuredBlogsCommonFields.reference?.fields || [];
   const happyTails = data?.pageDataByHandle?.pageDatas?.page?.happyTails.references?.edges || [];
   const happyTailsTitle = data?.pageDataByHandle?.pageDatas?.page?.happyTailsTitle?.value || '';
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -102,7 +103,7 @@ export default function Homepage() {
             {SafetyAtYourFingertipsData.length > 0 && (
               <WaggleAppLanding SafetyAtYourFingertipsData={SafetyAtYourFingertipsData} />
             )}
-            <UltimatePetParent featuredBlogs={featuredBlogs} />
+            <UltimatePetParent featuredBlogs={featuredBlogs} featuredBlogsCommonFields={featuredBlogsCommonFields} />
           </>
         )}
       </div>

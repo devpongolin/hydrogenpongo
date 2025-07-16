@@ -119,6 +119,16 @@ export const FETCH_PRODUCT_USING_HANDLE = `#graphql
                 }
               }
             }
+            featuredBlogsCommonFields: metafield(namespace: "custom", key: "hydrogen_featured_blog_common_fields") {
+              reference {
+                ... on Metaobject {
+                  fields {
+                    key
+                    value
+                  }
+                }
+              }
+            }
             specComparisonTitle: metafield(namespace: "custom", key: "hydrogen_feature_compare_title") {
               value
             }
