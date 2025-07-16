@@ -74,10 +74,10 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
         {(footer) => (
           <footer className="footer flex flex-col">
             {/* Static Logo Above the Footer Menu */}
-            <div className="max-w-[1216px] w-full flex justify-between md:my-[80px] mb-[23px] mx-auto flex-col-reverse  md:flex-row p-[20px] gap-[40px] md:gap-[0px]">
+            <div className="max-w-[1216px] w-full flex justify-between md:my-[28px] mb-[23px] mx-auto flex-col-reverse  md:flex-row p-[0px] gap-[40px] md:gap-[0px]">
               <div className='flex flex-col gap-[10px]'>
                 <img src={footer_logo} alt="Waggle Logo" className='w-[204px]' />
-                <p className='!text-[#FEFDFDCC] md:text-[16px] text-[14px] !mb-[10px]'>{topLeftText}</p>
+                <p className='!text-[#FEFDFDCC] md:text-[16px] text-[14px]'>{topLeftText}</p>
                 {(footer?.menu || FALLBACK_FOOTER_MENU).items.map((item) => {
                   if (item.title !== 'Contact Us') return null;
 
@@ -125,7 +125,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
               </div>
 
               <div className="md:w-[33%] flex flex-col gap-[4px] md:mr-[27px]">
-                <div className='flex flex-col gap-[2px] mb-[10px] w-[75%]'>
+                <div className='flex flex-col gap-[2px] mb-[10px] w-[79%]'>
                   <span className='!text-[#ffffff] md:text-[23px] text-[23px]'>{topRightText}</span>
                   <p className='!text-[#FEFDFDCC] md:text-[18px] text-[16px] mb-4'>
                     {topRightTextBottom}
@@ -138,7 +138,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
             </div>
 
             {/* Footer Menu Navigation */}
-            <nav className="footer-menu max-w-[1216px] w-full mx-auto border-t border-b border-[#80808040] pl-4 mt-2 space-y-1 !grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-[17px]" role="navigation">
+            <nav className="footer-menu max-w-[1216px] w-full mx-auto border-t border-b border-[#80808040] pl-4 space-y-1 !grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-[17px]" role="navigation">
               {(footer?.menu || FALLBACK_FOOTER_MENU).items.map((item) => {
                 if (!item.url) return null;
 
@@ -199,7 +199,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
 
                           return (
                             <li className='!m-0 leading-[18px] tracking-normal' key={child.id}>
-                              <ChildLinkComponent {...childLinkProps} className="md:text-[15px] text-[14px] !text-[#FEFDFDCC] !font-normal">
+                              <ChildLinkComponent {...childLinkProps} className="md:text-[15px] text-[14px] !text-[#FEFDFDCC] !font-normal hover:!text-white">
                                 {child.title}
                               </ChildLinkComponent>
                             </li>
@@ -214,7 +214,7 @@ export function Footer({ footer: footerPromise, header, publicStoreDomain }) {
 
             {/* Static footer content added after the nav */}
             <div className="max-w-[1216px] w-full mx-auto">
-              <div className="flex flex-col md:flex-row justify-between items-center py-[19.5px] mb-[40px]">
+              <div className="flex flex-col md:flex-row justify-between items-center py-[19.5px] mb-[40px] md:pr-[4.1%]">
                 <div className="text-[16px] !text-[#ffffff] mb-2 md:mb-0">
                   {copyrightText}
                 </div>

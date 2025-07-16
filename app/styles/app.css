@@ -160,6 +160,23 @@ button.reset:hover:not(:has(> *)) {
   text-decoration: underline;
   cursor: pointer;
 }
+.privacy_policy-main ul {
+  list-style-type: disc;
+  padding-left: 46px;
+}
+.privacy_policy-main h2 {
+  font-family: 'Lexend';
+  font-weight: 700;
+  font-size: 26.66px;
+  margin-bottom: 18px;
+}
+p#admin-dynamic-title {
+  font-family: 'Lexend';
+  font-weight: 500;
+  font-size: 56px;
+  letter-spacing: 0;
+  color: #ffffff;
+}
 
 /*
 * --------------------------------------------------
@@ -230,7 +247,7 @@ button.reset:hover:not(:has(> *)) {
   display: flex;
   flex-wrap: wrap;
   grid-gap: 1rem;
-  padding: 1rem;
+  padding: 28px 0;
 }
 
 .footer-menu a {
