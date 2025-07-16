@@ -196,6 +196,30 @@ query PageObjectData($handle: String) {
         }
       }
     }
+    featuredBlogsCommonFields: metafield(namespace: "custom", key: "hydrogen_featured_blog_common_fields") {
+      reference {
+        ... on Metaobject {
+          fields {
+            key
+            value
+          }
+        }
+      }
+    }
+    happyTails: metafield(namespace: "custom", key: "hydrogen_happy_tails_slider") {
+      references(first: 250) {
+        edges {
+          node {
+            ... on Metaobject {
+              ...MetaobjectFields
+            }
+          }
+        }
+      }
+    }
+    happyTailsTitle: metafield(namespace: "custom", key: "hydrogen_happy_tails_title") {
+      value
+    }
   }
 }
 

@@ -1,32 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 
-const PetSafetyGrid = ({featuredBlogs}) => {
+const PetSafetyGrid = ({featuredBlogs, featuredBlogsCommonFields}) => {
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isScrollable, setIsScrollable] = useState(false);
 
-  const commonFieldItem = featuredBlogs?.find((item) => {
-    const sectionFields = item?.node?.fields?.find((field) => field.key === "section_common_fields")?.reference?.fields;
-    return sectionFields; // returns first item with fields
-  });
-
   let commonFields = null;
-  if (commonFieldItem) {
-    const sectionFields = commonFieldItem.node.fields.find((field) => field.key === "section_common_fields")?.reference?.fields;
+  if (featuredBlogsCommonFields) {
     commonFields = {
       headingText:
-        sectionFields.find((subField) => subField.key === "section_heading")
+        featuredBlogsCommonFields.find((subField) => subField.key === "section_heading")
           ?.value || "",
       buttonText:
-        sectionFields.find((subField) => subField.key === "button_text")
+        featuredBlogsCommonFields.find((subField) => subField.key === "button_text")
           ?.value || "",
       buttonLink:
-        sectionFields.find((subField) => subField.key === "view_all_button_link")
+        featuredBlogsCommonFields.find((subField) => subField.key === "view_all_button_link")
           ?.value || "",
     };
   }
-
+  
   if(!featuredBlogs || !featuredBlogs.length) return null;
   const articles = featuredBlogs?.map((item) => ({
     title: item?.node?.fields?.find(field => field.key === "article_title")?.value || "",

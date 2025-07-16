@@ -1,63 +1,19 @@
 import React from 'react';
-import card1Image from '../assets/card1.webp';
-import card2Image from '../assets/card2.webp';
-import card3Image from '../assets/card4.webp';
-import card4Image from '../assets/card3.webp';
 import buttonIcon from '../assets/arrowIcon.webp';
 
-const UltimatePetParent = ({featuredBlogs}) => {
-  const cardData = [
-    {
-      id: 1,
-      image: card1Image,
-      date: 'February 9, 2025',
-      title: 'Watch Over Your Pet Anytime:',
-      description:
-        'Remote monitoring lets you check in on your pet, no matter where you are',
-    },
-    {
-      id: 2,
-      image: card2Image,
-      date: 'February 9, 2025',
-      title: 'Watch Over Your Pet Anytime:',
-      description:
-        'Remote monitoring lets you check in on your pet, no matter where you are',
-    },
-    {
-      id: 3,
-      image: card3Image,
-      date: 'February 9, 2025',
-      title: 'Watch Over Your Pet Anytime:',
-      description:
-        'Remote monitoring lets you check in on your pet, no matter where you are',
-    },
-    {
-      id: 4,
-      image: card4Image,
-      date: 'February 9, 2025',
-      title: 'Watch Over Your Pet Anytime:',
-      description:
-        'Remote monitoring lets you check in on your pet, no matter where you are',
-    },
-  ];
-
-  const commonFieldItem = featuredBlogs?.find((item) => {
-    const sectionFields = item?.node?.fields?.find((field) => field.key === "section_common_fields")?.reference?.fields;
-    return sectionFields; // returns first item with fields
-  });
+const UltimatePetParent = ({featuredBlogs, featuredBlogsCommonFields}) => {
 
   let commonFields = null;
-  if (commonFieldItem) {
-    const sectionFields = commonFieldItem.node.fields.find((field) => field.key === "section_common_fields")?.reference?.fields;
+  if (featuredBlogsCommonFields) {
     commonFields = {
       headingText:
-        sectionFields.find((subField) => subField.key === "section_heading")
+        featuredBlogsCommonFields.find((subField) => subField.key === "section_heading")
           ?.value || "",
       buttonText:
-        sectionFields.find((subField) => subField.key === "button_text")
+        featuredBlogsCommonFields.find((subField) => subField.key === "button_text")
           ?.value || "",
       buttonLink:
-        sectionFields.find((subField) => subField.key === "view_all_button_link")
+        featuredBlogsCommonFields.find((subField) => subField.key === "view_all_button_link")
           ?.value || "",
     };
   }

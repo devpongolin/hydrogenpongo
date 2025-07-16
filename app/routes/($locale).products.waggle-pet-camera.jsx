@@ -65,6 +65,7 @@ export default function CustomPage() {
   const productFAQS= ProductData?.product?.product?.product?.questionAnswer?.references?.edges || [];
   const productReviews = ProductData?.productReviews?.data?.reviews || []; 
   const featuredBlogs = ProductData?.product?.product?.product?.featuredBlogs?.references?.edges || [];
+  const featuredBlogsCommonFields = ProductData?.product?.product?.product?.featuredBlogsCommonFields.reference?.fields || [];
   const productIdValue = ProductData?.productId || null;
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -91,7 +92,7 @@ export default function CustomPage() {
             {productFAQS.length > 0 && (
               <FAQsection productFAQS={productFAQS} />
             )}
-            <PetSafetyGrid featuredBlogs={featuredBlogs} />
+            <PetSafetyGrid featuredBlogs={featuredBlogs} featuredBlogsCommonFields={featuredBlogsCommonFields} />
           </>
         )}
       </div>
