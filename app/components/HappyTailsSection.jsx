@@ -4,14 +4,7 @@ import { Navigation, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
-
-import dog1 from '../assets/human-dog-1.webp';
-import dog2 from '../assets/human-dog-2.webp';
-import dog3 from '../assets/human-dog-3.webp';
 import paw from '../assets/paw-icon.webp';
-import icon1 from '../assets/icon_1.webp';
-import icon2 from '../assets/icon_2.webp';
-import icon3 from '../assets/icon_3.webp';
 import arrow1 from '../assets/rightarrow.webp';
 import arrow2 from '../assets/leftarrow.webp';
 
@@ -24,70 +17,49 @@ function useIsClient() {
   return isClient;
 }
 
-const cardData = [
-
-  { type: 'image', image: dog1 },
-
-  {
-
-    type: 'card',
-
-    icon: icon1,
-
-    quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away.",
-
-    author: "Jackie's Parent",
-
-    handle: '@RVAdventureFam',
-
-  },
-
-  { type: 'image', image: dog2 },
-
-  {
-
-    type: 'card',
-
-    icon: icon2,
-
-    quote: "With Waggle, I can check on my pets anytime and even comfort them with my voice while I'm away. It's my go-to for dog safety at home!",
-
-    author: "Spark's Parent",
-
-    handle: '@PetParentDiaries',
-
-  },
-
-  { type: 'image', image: dog3 },
-
-  {
-
-    type: 'card',
-
-    icon: icon3,
-
-    quote: "Waggle gives me peace of mind knowing I can always stay connected with my furry family members no matter where I am.",
-
-    author: "Max's Parent",
-
-    handle: '@DogLoverLife',
-
-  }
-
-];
-
-const HappyTailsSection = () => {
+const HappyTailsSection = ({happyTails, title}) => {
   const swiperRef = useRef(null);
   const isClient = useIsClient();
 
   if (!isClient) return null;
 
+  const sliderData = happyTails?.reduce((acc, edge) => {
+    const fields = edge.node.fields || [];
+    const image = fields.find(field => field.key === 'card_image')?.reference?.image?.url || '';
+    const quote = fields.find(field => field.key === 'quote_text')?.value || '';
+    const author = fields.find(field => field.key === 'author')?.value || '';
+    const handle = fields.find(field => field.key === 'authorhandle')?.value || '';
+    const icon = fields.find(field => field.key === 'icon')?.reference?.image?.url || '';
+
+    // Determine type based on presence of image only or quote content
+    if (image) {
+      acc.push({
+        type: 'image',
+        image
+      });
+    } 
+    if (quote && author && handle) {
+      acc.push({
+        type: 'card',
+        icon,
+        quote,
+        author,
+        handle
+      });
+    }
+
+    return acc;
+  }, []);
+
+  if (sliderData?.length === 0) return null;
+
   return (
     <div className="bg-[#2c2f36] text-white py-[55px] relative z-0">
       {/* Title and Buttons */}
       <div className="text-center mb-10 relative">
-        <p className="text-[28px] md:text-[47px] font-normal lexend leading-none mb-[13px]">80,000+</p>
-        <p className="text-[28px] md:text-[47px] font-normal lexend leading-none">Happy Tails & Counting!</p>
+        {title?.replace(/\\n/g, '\n')?.split('\n')?.map((line, index) => (
+          <p key={index} className="text-[28px] md:text-[47px] font-normal lexend leading-none mb-[13px]">{line}</p>
+        ))}
 
         <div className="absolute gap-2 z-10 top-[49%] right-[5%] hidden md:flex">
           <button
@@ -126,7 +98,7 @@ const HappyTailsSection = () => {
             },
           }}
         >
-          {cardData.map((item, index) => (
+          {sliderData?.map((item, index) => (
             <SwiperSlide key={index}>
               {item.type === 'image' ? (
                 <div className="w-full h-96 rounded-xl">
