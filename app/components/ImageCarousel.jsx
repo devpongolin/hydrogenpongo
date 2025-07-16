@@ -23,7 +23,6 @@ import node2mobile1 from '../assets/Home Safe  Home.png';
 import node2slidimg from '../assets/Frame 2085665392 (1).png';
 import node2pdpimg from '../assets/Group 1.png';
 
-
 import node3mobile2 from '../assets/Man wearing an Oura Ring while running outside (1).png';
 import node3mobile1 from '../assets/Gifts  That Matter.png';
 
@@ -101,18 +100,17 @@ const ImageCarousel = () => {
   const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
-    if (
-      activeIndex !== null &&
-      activeIndex !== slides.length - 1 &&
-      cardRefs.current[activeIndex]
-    ) {
+    if (activeIndex !== null && cardRefs.current[activeIndex]) {
       const card = cardRefs.current[activeIndex];
       const parent = card?.parentElement;
 
       if (parent && card) {
         const offset = card.offsetLeft - parent.offsetLeft;
+        const maxScroll = parent.scrollWidth - parent.clientWidth;
+        const newScrollLeft = Math.min(offset, maxScroll);
+
         parent.scrollTo({
-          left: offset,
+          left: newScrollLeft,
           behavior: 'smooth',
         });
       }
