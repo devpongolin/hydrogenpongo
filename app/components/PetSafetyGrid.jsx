@@ -7,7 +7,8 @@ const PetSafetyGrid = ({featuredBlogs, featuredBlogsCommonFields}) => {
   const [isScrollable, setIsScrollable] = useState(false);
 
   let commonFields = null;
-  if (featuredBlogsCommonFields) {
+  
+  if (featuredBlogsCommonFields && featuredBlogsCommonFields.length > 0) {
     commonFields = {
       headingText:
         featuredBlogsCommonFields.find((subField) => subField.key === "section_heading")
