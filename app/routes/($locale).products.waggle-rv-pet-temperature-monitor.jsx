@@ -5,7 +5,7 @@ import FrequentlyBoughtTogether from '~/components/FrequentlyBoughtTogether';
 import WaggleSteps from '~/components/WaggleSteps';
 import TestimonialsSection from '~/components/TestimonialsSection';
 import FAQsection from '~/components/FAQsection';
-import { useLoaderData } from 'react-router';
+import { redirect, useLoaderData } from 'react-router';
 import { getAvarageProductRating, getProductsReview, fetchProductByHandle } from '~/utils/common-functions';
 import { getInstructionMetaobjectData } from '~/utils/common-functions';
 import { useInView } from 'react-intersection-observer';
@@ -20,6 +20,9 @@ export async function loader({ context }) {
   const averageProductRating = await getAvarageProductRating(ALI_REVIEWS_API_KEY, ALI_REVIEW_URL, productId)
   const productReviews = await getProductsReview(ALI_REVIEWS_API_KEY, ALI_REVIEW_URL)
 
+  if(product?.product?.product == '' || product?.product?.product == null) {
+    return redirect('/');
+  }
   return {
     productId,
     averageProductRating,
@@ -39,7 +42,7 @@ export default function CustomPage() {
   const productReviews = ProductData?.productReviews?.data?.reviews || [];
   const productIdValue = ProductData?.productId || null;
   const featuredBlogs = ProductData?.product?.product?.product?.featuredBlogs?.references?.edges || [];
-  const featuredBlogsCommonFields = ProductData?.product?.product?.product?.featuredBlogsCommonFields.reference?.fields || [];
+  const featuredBlogsCommonFields = ProductData?.product?.product?.product?.featuredBlogsCommonFields?.reference?.fields || [];
   const productAvarageRating = ProductData?.averageProductRating?.data?.[productIdValue]?.average_rating || 5;
   const specCompare = ProductData?.product?.product?.product?.specComparison?.references?.edges || [];
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
