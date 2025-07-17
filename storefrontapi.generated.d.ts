@@ -260,6 +260,17 @@ export type HeaderQuery = {
       >;
     }
   >;
+  metaobjects: {
+    nodes: Array<{
+      fields: Array<
+        Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+          reference?: StorefrontAPI.Maybe<{
+            image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+          }>;
+        }
+      >;
+    }>;
+  };
 };
 
 export type FooterQueryVariables = StorefrontAPI.Exact<{
@@ -1185,8 +1196,542 @@ export type PredictiveSearchQuery = {
   }>;
 };
 
+export type MetaobjectDataQueryVariables = StorefrontAPI.Exact<{
+  type: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type MetaobjectDataQuery = {
+  metaobjects: {
+    edges: Array<{
+      node: {
+        fields: Array<
+          Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+            reference?: StorefrontAPI.Maybe<{
+              image?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.Image, 'url' | 'altText'>
+              >;
+            }>;
+            references?: StorefrontAPI.Maybe<{
+              nodes: Array<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }>;
+          }
+        >;
+      };
+    }>;
+  };
+};
+
+export type PageObjectDataQueryVariables = StorefrontAPI.Exact<{
+  handle?: StorefrontAPI.InputMaybe<StorefrontAPI.Scalars['String']['input']>;
+}>;
+
+export type PageObjectDataQuery = {
+  page?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'body'> & {
+      mainBannerData?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      SafetyAtYourFingertipsData?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      hydrogenFeaturesSectionData?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      HydrogenGallerySliderData?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<{
+                    image?: StorefrontAPI.Maybe<
+                      Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                    >;
+                  }>;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      HydrogenSmartPetHavenData?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      faqData?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      aboutUsBannerData?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      aboutUsWhereToMeetTails?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      aboutNoMoreRuffDays?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      abourWaggiesApproved?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      abourCartifiedCare?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      partnerProgramBanner?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      partnerProgramTrustByDog?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      partnerProgramFindYourPartner?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      partnerProgramSimpleStep?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      AmbassadorHelpPetsStaySafe?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      AmbassadorCurrentPartner?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      AmbassadorWaysYouCanHelp?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      AmbassadorWeGotThose?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      AmbassadorClaimYourPerksToday?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      featuredBlogs?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<
+                    | {
+                        image?: StorefrontAPI.Maybe<
+                          Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                        >;
+                      }
+                    | {
+                        fields: Array<
+                          Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>
+                        >;
+                      }
+                  >;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      featuredBlogsCommonFields?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>>;
+        }>;
+      }>;
+      happyTails?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<{
+                    image?: StorefrontAPI.Maybe<
+                      Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                    >;
+                  }>;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      happyTailsTitle?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Metafield, 'value'>
+      >;
+    }
+  >;
+};
+
+export type MetaobjectFieldsFragment = {
+  fields: Array<
+    Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+      reference?: StorefrontAPI.Maybe<{
+        image?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.Image, 'url' | 'altText'>
+        >;
+      }>;
+    }
+  >;
+};
+
+export type ProductTitleQueryVariables = StorefrontAPI.Exact<{
+  handle: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type ProductTitleQuery = {
+  product?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Product, 'id' | 'title' | 'description'> & {
+      images: {edges: Array<{node: Pick<StorefrontAPI.Image, 'url'>}>};
+      variants: {
+        edges: Array<{
+          node: Pick<
+            StorefrontAPI.ProductVariant,
+            'id' | 'title' | 'quantityAvailable'
+          > & {
+            price: Pick<StorefrontAPI.MoneyV2, 'amount'>;
+            compareAtPrice?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.MoneyV2, 'amount'>
+            >;
+            image?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText'>
+            >;
+          };
+        }>;
+      };
+      productFeatureTitle?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Metafield, 'value'>
+      >;
+      productFeatureDescription?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<{
+                    image?: StorefrontAPI.Maybe<
+                      Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                    >;
+                  }>;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      petGuideSteps?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<{
+                    image?: StorefrontAPI.Maybe<
+                      Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                    >;
+                  }>;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      questionAnswer?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      featuredBlogs?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<
+                    | {
+                        image?: StorefrontAPI.Maybe<
+                          Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                        >;
+                      }
+                    | {
+                        fields: Array<
+                          Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>
+                        >;
+                      }
+                  >;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      featuredBlogsCommonFields?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>>;
+        }>;
+      }>;
+      specComparisonTitle?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Metafield, 'value'>
+      >;
+      specComparison?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: {
+              fields: Array<
+                Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+                  reference?: StorefrontAPI.Maybe<
+                    | {
+                        image?: StorefrontAPI.Maybe<
+                          Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                        >;
+                      }
+                    | (Pick<
+                        StorefrontAPI.ProductVariant,
+                        'id' | 'title' | 'quantityAvailable'
+                      > & {
+                        price: Pick<StorefrontAPI.MoneyV2, 'amount'>;
+                        compareAtPrice?: StorefrontAPI.Maybe<
+                          Pick<StorefrontAPI.MoneyV2, 'amount'>
+                        >;
+                      })
+                  >;
+                }
+              >;
+            };
+          }>;
+        }>;
+      }>;
+      petsNeeds?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<{
+          fields: Array<
+            Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'> & {
+              reference?: StorefrontAPI.Maybe<{
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                >;
+              }>;
+            }
+          >;
+        }>;
+      }>;
+      bundleProduct?: StorefrontAPI.Maybe<{
+        references?: StorefrontAPI.Maybe<{
+          edges: Array<{
+            node: Pick<StorefrontAPI.Product, 'id' | 'title'> & {
+              images: {edges: Array<{node: Pick<StorefrontAPI.Image, 'url'>}>};
+              variants: {
+                edges: Array<{
+                  node: Pick<
+                    StorefrontAPI.ProductVariant,
+                    'id' | 'quantityAvailable'
+                  > & {
+                    price: Pick<StorefrontAPI.MoneyV2, 'amount'>;
+                    compareAtPrice?: StorefrontAPI.Maybe<
+                      Pick<StorefrontAPI.MoneyV2, 'amount'>
+                    >;
+                  };
+                }>;
+              };
+            };
+          }>;
+        }>;
+      }>;
+    }
+  >;
+};
+
 interface GeneratedQueryTypes {
-  '#graphql\n  fragment Shop on Shop {\n    id\n    name\n    description\n    primaryDomain {\n      url\n    }\n    brand {\n      logo {\n        image {\n          url\n        }\n      }\n    }\n  }\n  query Header(\n    $country: CountryCode\n    $headerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      ...Shop\n    }\n    menu(handle: $headerMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
+  '#graphql\n  fragment Shop on Shop {\n    id\n    name\n    description\n    primaryDomain {\n      url\n    }\n    brand {\n      logo {\n        image {\n          url\n        }\n      }\n    }\n  }\n  query Header(\n    $country: CountryCode\n    $headerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      ...Shop\n    }\n    menu(handle: $headerMenuHandle) {\n      ...Menu\n    }\n    metaobjects(type: "mega_menu_content", first: 50) {\n      nodes {\n        fields {\n          key\n          value\n          reference {\n            ...on MediaImage {\n              image {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: HeaderQuery;
     variables: HeaderQueryVariables;
   };
@@ -1253,6 +1798,18 @@ interface GeneratedQueryTypes {
   '#graphql\n  query PredictiveSearch(\n    $country: CountryCode\n    $language: LanguageCode\n    $limit: Int!\n    $limitScope: PredictiveSearchLimitScope!\n    $term: String!\n    $types: [PredictiveSearchType!]\n  ) @inContext(country: $country, language: $language) {\n    predictiveSearch(\n      limit: $limit,\n      limitScope: $limitScope,\n      query: $term,\n      types: $types,\n    ) {\n      articles {\n        ...PredictiveArticle\n      }\n      collections {\n        ...PredictiveCollection\n      }\n      pages {\n        ...PredictivePage\n      }\n      products {\n        ...PredictiveProduct\n      }\n      queries {\n        ...PredictiveQuery\n      }\n    }\n  }\n  #graphql\n  fragment PredictiveArticle on Article {\n    __typename\n    id\n    title\n    handle\n    blog {\n      handle\n    }\n    image {\n      url\n      altText\n      width\n      height\n    }\n    trackingParameters\n  }\n\n  #graphql\n  fragment PredictiveCollection on Collection {\n    __typename\n    id\n    title\n    handle\n    image {\n      url\n      altText\n      width\n      height\n    }\n    trackingParameters\n  }\n\n  #graphql\n  fragment PredictivePage on Page {\n    __typename\n    id\n    title\n    handle\n    trackingParameters\n  }\n\n  #graphql\n  fragment PredictiveProduct on Product {\n    __typename\n    id\n    title\n    handle\n    trackingParameters\n    selectedOrFirstAvailableVariant(\n      selectedOptions: []\n      ignoreUnknownOptions: true\n      caseInsensitiveMatch: true\n    ) {\n      id\n      image {\n        url\n        altText\n        width\n        height\n      }\n      price {\n        amount\n        currencyCode\n      }\n    }\n  }\n\n  #graphql\n  fragment PredictiveQuery on SearchQuerySuggestion {\n    __typename\n    text\n    styledText\n    trackingParameters\n  }\n\n': {
     return: PredictiveSearchQuery;
     variables: PredictiveSearchQueryVariables;
+  };
+  '#graphql\n  query MetaobjectData($type: String!) {\n    metaobjects(type:$type, first: 250) {\n        edges {\n            node {\n                fields {                    \n                    key\n                    value\n                    reference {\n                        ... on MediaImage {\n                          image {\n                            url\n                            altText\n                          }\n                        }\n                    }\n                    references(first:250) {\n                        nodes{\n                          ... on MediaImage {\n                                image {\n                                    url\n                                    altText\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n  }\n': {
+    return: MetaobjectDataQuery;
+    variables: MetaobjectDataQueryVariables;
+  };
+  '#graphql\nquery PageObjectData($handle: String) {\n  page(handle: $handle) {\n    id\n    body\n    mainBannerData: metafield(namespace: "custom", key: "cms_page") {\n      reference {\n        ...MetaobjectFields\n      }\n    }\n    \n    SafetyAtYourFingertipsData: metafield(namespace: "custom", key: "hydrogen_safety_at_your_fingertips_data") {\n      reference {\n        ...MetaobjectFields\n      }\n    }\n\n    hydrogenFeaturesSectionData: metafield(namespace: "custom", key: "hydrogen_features_section_data") {\n      reference {\n        ...MetaobjectFields\n      }\n    }\n\n    HydrogenGallerySliderData: metafield(namespace: "custom", key: "hydrogen_gallery_slider_data") {\n      references(first: 250) {\n        edges {\n          node {\n            ...MetaobjectFields\n          }\n        }\n      }\n    }\n\n    HydrogenSmartPetHavenData: metafield(namespace: "custom", key: "hydrogen_smart_pet_haven_data") {\n      reference {\n        ...MetaobjectFields \n      }\n    }\n\n    faqData: metafield(namespace: "custom", key: "faq") {\n      references(first: 250) {\n        edges {\n          node {\n            ... on Metaobject {\n              fields {\n                key\n                value\n              }\n            }\n          }\n        }\n      }\n    }\n\n    aboutUsBannerData: metafield(namespace: "custom", key: "about_us_banner_data") {\n      reference {\n        ...MetaobjectFields\n      }\n    }\n\n    aboutUsWhereToMeetTails: metafield(namespace: "custom", key: "about_us_where_to_meet_tails_data") {\n      reference {\n        ...MetaobjectFields\n      }\n    }\n    \n    aboutNoMoreRuffDays: metafield(namespace: "custom", key: "about_us_no_more_ruff_day") {\n      reference {\n        ...MetaobjectFields\n      }\n    }\n    \n    abourWaggiesApproved: metafield(namespace: "custom", key: "about_us_wagging_approved") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n    \n    abourCartifiedCare: metafield(namespace: "custom", key: "about_certified_care") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n    \n    partnerProgramBanner: metafield(namespace: "custom", key: "partner_program_banner_data") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n    \n    partnerProgramTrustByDog: metafield(namespace: "custom", key: "partner_program_trust_by_dog") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n    \n    partnerProgramFindYourPartner: metafield(namespace: "custom", key: "partner_program_find_your_partner") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n    \n    partnerProgramSimpleStep: metafield(namespace: "custom", key: "partner_program_simple_step") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n\n    AmbassadorHelpPetsStaySafe: metafield(namespace: "custom", key: "ambassador_banner_data") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n\n    AmbassadorCurrentPartner: metafield(namespace: "custom", key: "ambassador_current_partner_data") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n\n    AmbassadorWaysYouCanHelp: metafield(namespace: "custom", key: "ambassador_ways_you_can_help_data") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n\n    AmbassadorWeGotThose: metafield(namespace: "custom", key: "ambassador_we_got_those_data") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n\n    AmbassadorClaimYourPerksToday: metafield(namespace: "custom", key: "ambassador_claim_your_perks_today_data") {\n      reference {\n        ...MetaobjectFields\n      }      \n    }\n    featuredBlogs: metafield(namespace: "custom", key: "hydrogen_featured_blogs") {\n      references(first: 250) {\n        edges {\n          node {\n            ... on Metaobject {\n              fields {\n                key\n                value\n                reference {\n                  ... on MediaImage {\n                    image {\n                      url\n                      altText\n                    }\n                  }\n                  ... on Metaobject {\n                    fields {\n                      key\n                      value\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n    featuredBlogsCommonFields: metafield(namespace: "custom", key: "hydrogen_featured_blog_common_fields") {\n      reference {\n        ... on Metaobject {\n          fields {\n            key\n            value\n          }\n        }\n      }\n    }\n    happyTails: metafield(namespace: "custom", key: "hydrogen_happy_tails_slider") {\n      references(first: 250) {\n        edges {\n          node {\n            ... on Metaobject {\n              ...MetaobjectFields\n            }\n          }\n        }\n      }\n    }\n    happyTailsTitle: metafield(namespace: "custom", key: "hydrogen_happy_tails_title") {\n      value\n    }\n  }\n}\n\nfragment MetaobjectFields on Metaobject {\n  fields {\n    key\n    value\n    reference {\n      ... on MediaImage {\n        image {\n          url\n          altText\n        }\n      }\n    }\n  }\n}\n': {
+    return: PageObjectDataQuery;
+    variables: PageObjectDataQueryVariables;
+  };
+  '#graphql\n    query ProductTitle($handle: String!) {\n        product(handle: $handle) {\n            id\n            title\n            description\n            images(first:10){\n                edges{\n                    node{\n                    url\n                    }\n                }\n            }\n            variants(first:10){\n                edges{\n                    node{\n                    id\n                    title\n                    quantityAvailable\n                    price{\n                        amount\n                    }\n                    compareAtPrice{\n                        amount\n                    }\n                    image {\n                        url\n                        altText\n                    }\n                    }\n                }\n            }\n            productFeatureTitle: metafield(namespace:"custom", key:"product_feature_title") {\n                    value\n            }\n            productFeatureDescription: metafield(namespace:"custom", key:"product_features_entries") {\n              references(first: 250) {\n                edges {\n                  node {\n                    ... on Metaobject {\n                      fields {\n                        key\n                        value\n                        reference {\n                        ... on MediaImage {\n                          image {\n                            url\n                            altText\n                          }\n                        }\n                    }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            petGuideSteps: metafield(namespace:"custom", key:"guide_steps") {\n              references(first: 250) {\n                edges {\n                  node {\n                    ... on Metaobject {\n                      fields {\n                        key\n                        value\n                        reference {\n                        ... on MediaImage {\n                          image {\n                            url\n                            altText\n                          }\n                        }\n                    }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            questionAnswer: metafield(namespace: "custom", key: "product_faq_referance") {\n              references(first: 250) {\n                edges {\n                  node {\n                    ... on Metaobject {\n                      fields {\n                        key\n                        value\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            featuredBlogs: metafield(namespace: "custom", key: "hydrogen_featured_blogs_new") {\n              references(first: 250) {\n                edges {\n                  node {\n                    ... on Metaobject {\n                      fields {\n                        key\n                        value\n                        reference {\n                          ... on MediaImage {\n                            image {\n                              url\n                              altText\n                            }\n                          }\n                          ... on Metaobject {\n                            fields {\n                              key\n                              value\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            featuredBlogsCommonFields: metafield(namespace: "custom", key: "hydrogen_featured_blog_common_fields") {\n              reference {\n                ... on Metaobject {\n                  fields {\n                    key\n                    value\n                  }\n                }\n              }\n            }\n            specComparisonTitle: metafield(namespace: "custom", key: "hydrogen_feature_compare_title") {\n              value\n            }\n            specComparison: metafield(namespace: "custom", key: "hydrogen_features_compare") {\n              references(first: 250) {\n                edges {\n                  node {\n                    ... on Metaobject {\n                      fields {\n                        key\n                        value\n                        reference {\n                          ... on MediaImage {\n                            image {\n                              url\n                              altText\n                            }\n                          }\n                          ... on ProductVariant {\n                            id\n                            title\n                            quantityAvailable\n                            price {\n                              amount\n                            }\n                            compareAtPrice {\n                              amount\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            petsNeeds: metafield(namespace: "custom", key: "pets_needs") {\n              reference{\n                ... on Metaobject {\n                  fields {\n                    key\n                    value\n                    reference {\n                      ... on MediaImage {\n                        image {\n                          url\n                          altText\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            bundleProduct: metafield(namespace: "custom", key: "bundle_for_product") {\n              references(first: 10) {\n                edges {\n                  node {\n                    ... on Product {\n                      id\n                      title\n                      images(first: 1) {\n                        edges {\n                          node {\n                            url\n                          }\n                        }\n                      }\n                      variants(first:10){\n                          edges{\n                              node{\n                              id\n                              quantityAvailable\n                              price{\n                                  amount\n                              }\n                              compareAtPrice{\n                                  amount\n                              }\n                              }\n                          }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n        }\n    }\n': {
+    return: ProductTitleQuery;
+    variables: ProductTitleQueryVariables;
   };
 }
 
