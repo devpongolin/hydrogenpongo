@@ -59,7 +59,7 @@ function useScrollSpy(sectionIds, offset = 100) {
 export async function loader({context}) {
   const pageDataByHandle = await getPageData({
     context,
-    pageHandle: 'privacy-policy',
+    pageHandle: 'terms-of-service',
   });
   return {
     pageDataByHandle,
@@ -67,7 +67,7 @@ export async function loader({context}) {
 }
  
 // Component
-export default function PrivacyPolicy() {
+export default function termsService() {
   const metaData = useLoaderData();
   const rawHTML = metaData?.pageDataByHandle?.pageDatas?.page?.body;
  
