@@ -84,6 +84,8 @@ export default function Homepage() {
   const featuredBlogsCommonFields = data?.pageDataByHandle?.pageDatas?.page?.featuredBlogsCommonFields.reference?.fields || [];
   const happyTails = data?.pageDataByHandle?.pageDatas?.page?.happyTails.references?.edges || [];
   const happyTailsTitle = data?.pageDataByHandle?.pageDatas?.page?.happyTailsTitle?.value || '';
+  const petSafetyEssentials = data?.pageDataByHandle?.pageDatas?.page?.petSafetyEssentials?.references?.edges || [];
+  const petSafetyEssentialsTitle = data?.pageDataByHandle?.pageDatas?.page?.petSafetyEssentialsTitle?.value || '';
   const [belowFoldRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
@@ -96,7 +98,7 @@ export default function Homepage() {
         {inView && (
           <>
             <ImageCarousel />
-            <PetSafetyCards />
+            <PetSafetyCards petSafetyEssentials={petSafetyEssentials} petSafetyEssentialsTitle={petSafetyEssentialsTitle} />
             {happyTails?.length > 0 && (
               <HappyTailsSection happyTails={happyTails} title={happyTailsTitle} />
             )}

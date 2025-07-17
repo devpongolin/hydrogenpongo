@@ -1,110 +1,41 @@
 import React, {useState} from 'react';
-
-import petMonitorFront from '../assets/petMonitorFront.webp';
-import waggleCameraFront from '../assets/WaggleCamera.webp';
-import rvCameraFront from '../assets/WaggleRV4GCamera.webp';
-import smartBowlFront from '../assets/WaggleSmartAIBowl.webp';
-
-import petMonitorBack from '../assets/petMonitorBack.webp';
-import waggleCameraBack from '../assets/waggleCameraBack.webp';
-import rvCameraBack from '../assets/rvCameraBack.webp';
-import smartBowlBack from '../assets/smartBowlBack.webp';
-
 import plusIcon from '../assets/minusIcon.webp';
 import minusIcon from '../assets/plusIcon.webp';
 import arrowIcon from '../assets/arrowIcon.webp';
+import { Money } from '@shopify/hydrogen';
 
-import heatProtectionIcon from '../assets/wifiBackupIcon.webp';
-import wifiBackupIcon from '../assets/familyAlertIcon.webp';
-import familyAlertIcon from '../assets/autoFollowIcon.webp';
-import autoFollowIcon from '../assets/stabilityIcon.webp';
-import stabilityIcon from '../assets/treatDispenserIcon.webp';
-import treatDispenserIcon from '../assets/noWifiIcon.webp';
-import noWifiIcon from '../assets/powerBackupIcon.webp';
-import powerBackupIcon from '../assets/weatherProofIcon.webp';
-import weatherProofIcon from '../assets/healthMonitorIcon.webp';
-import healthMonitorIcon from '../assets/heatProtectionIcon.webp';
-import weightManagementIcon from '../assets/weightManagementIcon.webp';
-import petIdentificationIcon from '../assets/petIdentificationIcon.webp';
+const PetSafetyCards = ({petSafetyEssentials, petSafetyEssentialsTitle}) => {
+  const [activeCard, setActiveCard] = useState(null); // ✅ changed from flippedCards
+  const cardData = petSafetyEssentials?.map((item) => ({
+    title: item?.node?.fields?.find((field) => field.key === 'card_tag')?.value || '',
+    frontImage: item?.node?.fields?.find((field) => field.key === 'front_image')?.reference?.image?.url || '',
+    backImage: item?.node?.fields?.find((field) => field.key === 'back_image')?.reference?.image?.url || '',
+    frontPadding: 'pt-[4rem]',
+    features: [
+      {
+        text: item?.node?.fields?.find((field) => field.key === 'feature_text_first')?.value || '',
+        icon: item?.node?.fields?.find((field) => field.key === 'feature_icon_first')?.reference?.image?.url || '',
+      },
+      {
+        text: item?.node?.fields?.find((field) => field.key === 'feature_text_second')?.value || '',
+        icon: item?.node?.fields?.find((field) => field.key === 'feature_icon_second')?.reference?.image?.url || '',
+      },
+      {
+        text: item?.node?.fields?.find((field) => field.key === 'feature_text_third')?.value || '',
+        icon: item?.node?.fields?.find((field) => field.key === 'feature_icon_third')?.reference?.image?.url || '',
+      }
+    ],
+      price: item?.node?.fields?.find((field) => field.key === 'price')?.value || '',
+      originalPrice: item?.node?.fields?.find((field) => field.key === 'original_price')?.value || '',
+      buttonText: item?.node?.fields?.find((field) => field.key === 'button_text')?.value || '',
+      buttonLink: item?.node?.fields?.find((field) => field.key === 'button_product_link')?.reference?.handle || '',
+      priceText: 'Starts at',
+  }));
 
-const petSafetyData = {
-  title: 'Pet Safety Essentials',
+  const petSafetyData = {
+  title: petSafetyEssentialsTitle || 'Pet Safety Essentials',
   productCards: [
-    {
-      title: 'Waggle Pet Monitor',
-      frontImage: petMonitorFront,
-      backImage: petMonitorBack,
-      frontPadding: 'pt-[5rem]',
-      features: [
-        {
-          text: 'Prevents heat/cold emergencies before they happen',
-          icon: heatProtectionIcon,
-        },
-        {text: 'Works when WiFi fails (built-in 4G)', icon: wifiBackupIcon},
-        {
-          text: 'Alerts your entire family circle instantly',
-          icon: familyAlertIcon,
-        },
-      ],
-      price: '$99',
-      originalPrice: '$199',
-      buttonText: 'Monitor Anytime',
-      priceText: 'Starts at',
-    },
-    {
-      title: 'Waggle Camera',
-      frontImage: waggleCameraFront,
-      backImage: waggleCameraBack,
-      frontPadding: 'pt-[4rem] pl-[34px]',
-      backImagePadding: '',
-      features: [
-        {
-          text: 'Follows your pet automatically room-to-room',
-          icon: autoFollowIcon,
-        },
-        {text: 'Stays put (even with ninja cats)', icon: stabilityIcon},
-        {text: 'Tosses treats with a tap', icon: treatDispenserIcon},
-      ],
-      price: '$59',
-      originalPrice: '$199',
-      buttonText: 'Get Protection',
-      priceText: 'Starts at',
-    },
-    {
-      title: 'Waggle RV 4G Camera',
-      frontImage: rvCameraFront,
-      backImage: rvCameraBack,
-      frontPadding: 'pt-[3rem]',
-      backImagePadding: 'pt-[1rem]',
-      features: [
-        {text: 'Works without WiFi, anywhere', icon: noWifiIcon},
-        {text: 'Outlasts power outages for days', icon: powerBackupIcon},
-        {text: 'Handles whatever weather hits', icon: weatherProofIcon},
-      ],
-      price: '$59',
-      originalPrice: '$199',
-      buttonText: 'Keep Watch',
-      priceText: 'Starts at',
-    },
-    {
-      title: 'Waggle Smart AI Bowl',
-      frontImage: smartBowlFront,
-      backImage: smartBowlBack,
-      frontPadding: 'pt-[4rem]',
-      backImagePadding: 'pt-[5rem]',
-      features: [
-        {text: 'Spots illness through eating changes', icon: healthMonitorIcon},
-        {
-          text: 'Prevents weight issues automatically',
-          icon: weightManagementIcon,
-        },
-        {text: 'Knows which pet ate what', icon: petIdentificationIcon},
-      ],
-      price: '$99',
-      originalPrice: '$199',
-      buttonText: 'Monitor Anytime',
-      priceText: 'Starts at',
-    },
+    ...cardData, // Use the cardData array generated from petSafetyEssentials
   ],
   controlIcons: {
     plusIcon: plusIcon,
@@ -112,10 +43,6 @@ const petSafetyData = {
     arrowIcon: arrowIcon,
   },
 };
-
-const PetSafetyCards = () => {
-  const [activeCard, setActiveCard] = useState(null); // ✅ changed from flippedCards
-
   const toggleCard = (index) => {
     setActiveCard((prevIndex) => (prevIndex === index ? null : index)); // ✅ flip only one
   };
@@ -126,7 +53,7 @@ const PetSafetyCards = () => {
         {petSafetyData.title}
       </span>
       <div className="max-w-[1280px] mx-auto flex flex-wrap justify-center md:gap-2 gap-[38px]">
-        {petSafetyData.productCards.map((card, index) => (
+        {petSafetyData?.productCards?.map((card, index) => (
           <div
             key={index}
             className={`md:w-[314px] w-full max-w-[328px] h-[549px] transition-transform duration-700 [transform-style:preserve-3d] ${
@@ -180,7 +107,7 @@ const PetSafetyCards = () => {
                     />
                   </button>
                 </div>
-                <div className={`flex justify-center ${card.backImagePadding}`}>
+                <div className={`flex justify-center`}>
                   <img
                     src={card.backImage}
                     alt={card.title}
@@ -196,7 +123,7 @@ const PetSafetyCards = () => {
                           src={feature.icon}
                           alt="Feature icon"
                           loading="lazy"
-                          className="object-contain"
+                          className="object-contain w-[22px]"
                         />
                         <span className="text-white font-[400] text-[14px] leading-[124%] tracking-[0] lato">
                           {feature.text}
@@ -209,16 +136,18 @@ const PetSafetyCards = () => {
                   ))}
                 </div>
                 <div className="px-4 ">
-                  <span className="text-white lato font-[500] text-[16px] leading-[100%] tracking-[0] ">
-                    {card.priceText}{' '}
-                  </span>
-                  <span className="relative inline-block text-white font-[500] text-[23px] leading-[100%] tracking-[0] lato mb-[20px]">
-                    {card.originalPrice}
-                    <span className="absolute left-0 top-1/2 w-full h-[2px] bg-[#007AFF] transform -rotate-[15deg] origin-center"></span>
-                  </span>
-                  <span className="text-white font-[600] text-[42px] md:text-[48px] leading-[100%] tracking-[0] lato ml-2">
-                    {card.price}
-                  </span>
+                  <div className="flex">
+                    <span className="text-white lato font-[500] text-[16px] leading-[100%] tracking-[0] ">
+                      {card.priceText}{' '}
+                    </span>
+                    <span className="relative inline-block text-white font-[500] text-[23px] leading-[100%] tracking-[0] lato mb-[20px]">
+                      <Money  data={{amount: card.originalPrice, currencyCode: "USD"}} withoutTrailingZeros />
+                      <span className="absolute left-0 top-1/2 w-full h-[2px] bg-[#007AFF] transform -rotate-[15deg] origin-center"></span>
+                    </span>
+                    <span className="text-white font-[600] text-[42px] md:text-[48px] leading-[100%] tracking-[0] lato ml-2">
+                      <Money  data={{amount: card.price, currencyCode: "USD"}} withoutTrailingZeros />
+                    </span>
+                  </div>
                   <div className="flex items-center cursor-pointer">
                     <span className="text-white font-[700] text-[17.2px] leading-[100%] tracking-[0] lato mr-2">
                       {card.buttonText}

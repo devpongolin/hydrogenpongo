@@ -206,6 +206,20 @@ query PageObjectData($handle: String) {
         }
       }
     }
+    petSafetyEssentials: metafield(namespace: "custom", key: "hydrogen_pet_safety_essentials") {
+      references(first: 250) {
+        edges {
+          node {
+            ... on Metaobject {
+              ...MetaobjectFields
+            }
+          }
+        }
+      }
+    }
+    petSafetyEssentialsTitle: metafield(namespace: "custom", key: "hydrogen_pet_safety_essentials_title") {
+      value
+    }
     happyTails: metafield(namespace: "custom", key: "hydrogen_happy_tails_slider") {
       references(first: 250) {
         edges {
@@ -233,6 +247,11 @@ fragment MetaobjectFields on Metaobject {
           url
           altText
         }
+      }
+      ... on Product {
+        id
+        title
+        handle
       }
     }
   }
