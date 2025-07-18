@@ -9,7 +9,7 @@ export default function WaggleHome({ mainBannerData }) {
   const mainBannerStripText1 = mainBannerData?.find(item => item.key === "main_banner_strip_text_node_1")?.value || "";
   const mainBannerStripText2 = mainBannerData?.find(item => item.key === "main_banner_strip_text_node_2")?.value || "";
   const mainBannerTitle = mainBannerData?.find(item => item.key === "main_banner_tiitle")?.value || "";
-  const mainBannerURl = mainBannerData?.find(item=> item.key==="main_banner_url")?.value;
+  const mainBannerURl = mainBannerData?.find(item=> item.key==="new_main_banner_url")?.value;
   const mainBannerSubTitle = mainBannerData?.find(item => item.key === "main_banner_sub_title")?.value || "";
   const mainBannerDesktopImage = mainBannerData?.find(item => item.key === "main_banner_image")?.reference?.image?.url || "";
   const mainBannerMobileImage = mainBannerData?.find(item => item.key === "main_banner_image_mobile")?.reference?.image?.url || "";
@@ -23,9 +23,9 @@ export default function WaggleHome({ mainBannerData }) {
   const mainBannerCollectionImageNode1 = mainBannerData?.find(item => item.key === "main_banner_collection_image_node_1")?.reference?.image?.url || "";
   const mainBannerCollectionImageNode2 = mainBannerData?.find(item => item.key === "main_banner_collection_image_node_2")?.reference?.image?.url || "";
   const mainBannerCollectionImageNode3 = mainBannerData?.find(item => item.key === "main_banner_collection_image_node_3")?.reference?.image?.url || "";
-  const mainBannerCollectionURLNode1 = mainBannerData?.find(item => item.key === "main_banner_collection_image_node_1main_banner_collection_image_")?.value || "";
-  const mainBannerCollectionURLNode2 = mainBannerData?.find(item => item.key === "main_banner_collection_url_node_2")?.value || "";
-  const mainBannerCollectionURLNode3 = mainBannerData?.find(item => item.key === "main_banner_collection_url_node_3")?.value || "";
+  const mainBannerCollectionURLNode1 = mainBannerData?.find(item => item.key === "new_main_banner_collection_url_node_1")?.value || "";
+  const mainBannerCollectionURLNode2 = mainBannerData?.find(item => item.key === "new_main_banner_collection_url_node_2")?.value || "";
+  const mainBannerCollectionURLNode3 = mainBannerData?.find(item => item.key === "new_main_banner_collection_url_node_3")?.value || "";
   const mainBannerCollectionTextNode1 = mainBannerData?.find(item => item.key === "main_banner_collection_text_node_1")?.value || "";
   const mainBannerCollectionTextNode2 = mainBannerData?.find(item => item.key === "main_banner_collection_text_node_2")?.value || "";
   const mainBannerCollectionTextNode3 = mainBannerData?.find(item => item.key === "main_banner_collection_text_node_3")?.value || "";
