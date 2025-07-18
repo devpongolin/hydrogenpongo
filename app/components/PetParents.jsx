@@ -14,6 +14,7 @@ const WaggleHero = ({BannerData}) => {
   const mainTitle = getValue('aboutus_main_title');
   const description = getValue('aboutus_discription');
   const buttonText = getValue('aboutus_button_text');
+  const buttonLink = getValue('button_link');
   const desktopImage = getReferenceImageUrl('aboutus_banner_image_desktop');
   const mobileImage = getReferenceImageUrl('aboutus_banner_image_mobile');
   const buttonIcon = getReferenceImageUrl('aboutus_button_logo');
@@ -25,6 +26,7 @@ const WaggleHero = ({BannerData}) => {
       heading: mainTitle || "We built Waggle for pet parents like us." ,
       description: description || "You walk out the door and instantly wonder—did I leave the AC on? Did the dog spill the water bowl? Is it too hot in the RV? Is my pet okay? So we built a way to check in, no matter where you are.",
       buttonText: buttonText || "Find Your Waggle",
+      buttonLink: buttonLink || "#",
     },
   };
 
@@ -43,7 +45,7 @@ const WaggleHero = ({BannerData}) => {
             </span>
           </div>
           <div className="flex justify-center md:justify-start mt-[14px] md:mt-6 w-full">
-            <button className="button1 button-hover border border-gray-transparent text-dark-gray pt-[6px] pr-[6px] pb-[6px] pl-[28px] md:py-[9px] md:pl-[28px] md:pr-[9px] rounded-full flex items-center md:gap-4 gap-3 mx-auto md:mx-0">
+            <a href={data?.textContent?.buttonLink} className="button1 button-hover border border-gray-transparent text-dark-gray pt-[6px] pr-[6px] pb-[6px] pl-[28px] md:py-[9px] md:pl-[28px] md:pr-[9px] rounded-full flex items-center md:gap-4 gap-3 mx-auto md:mx-0">
               <span className="font-bold tracking-[0] text-[16px] lato text-dark-gray">
                 {data.textContent.buttonText}
               </span>
@@ -57,7 +59,7 @@ const WaggleHero = ({BannerData}) => {
                   className="cursor-pointer"
                 />
               </span>
-            </button>
+            </a>
           </div>
         </div>
         
