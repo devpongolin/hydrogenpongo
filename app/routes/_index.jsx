@@ -90,9 +90,11 @@ export default function Homepage() {
 
   return (
     <div className="home">
+      <div className="bg-[#EEDED3]">
       {mainBannerData.length > 0 && (
         <WaggleHome mainBannerData={mainBannerData} />
       )}
+      </div>
       <ProductShowcase />
       <div ref={belowFoldRef}>
         {inView && (

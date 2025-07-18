@@ -4,7 +4,7 @@ import mobileBg from '../assets/Offer_Image_mobile.png';
 
 const OfferBanner = () => {
   return (
-    <div className="w-full mt-[4%]">
+    <div className="w-full mt-[4%] pb-[40px] md:pb-[56px]">
       <picture className="max-w-[1280px] w-full block mx-auto">
         {/* Mobile image */}
         <source 

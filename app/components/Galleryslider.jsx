@@ -4,11 +4,11 @@ const getPairedData = (HydrogenGallerySliderData) => {
   return HydrogenGallerySliderData.map((imgPair, index) => ({
     top: {
       src: imgPair?.node?.fields?.find(field => field.key === 'hydrogen_gallery_slider_top_image')?.reference?.image?.url,
-      label: imgPair?.node?.fields?.find(field => field.key === 'hydrogen_gallery_slider_top_text').value || ''
+      label: imgPair?.node?.fields?.find(field => field.key === 'hydrogen_gallery_slider_top_text')?.value || ''
     },
     bottom: {
       src: imgPair?.node?.fields?.find(field => field.key === 'hydrogen_gallery_slider_bottom_image')?.reference?.image?.url,
-      label: imgPair?.node?.fields?.find(field => field.key === 'hydrogen_gallery_slider_bottom_text').value || ''
+      label: imgPair?.node?.fields?.find(field => field.key === 'hydrogen_gallery_slider_bottom_text')?.value || ''
     },
     marginClass: index % 2 === 0 ? 'margin-bottom' : 'margin-top'
   }));

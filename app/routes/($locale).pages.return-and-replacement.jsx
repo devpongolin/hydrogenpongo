@@ -1,11 +1,11 @@
 import {getPageData} from '~/utils/common-functions';
 import {useLoaderData} from 'react-router';
 import {useEffect, useState} from 'react';
- 
+
 // ScrollSpy Hook
 function useScrollSpy(sectionIds, offset = 100) {
   const [activeSection, setActiveSection] = useState('');
- 
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + offset;
@@ -13,9 +13,9 @@ function useScrollSpy(sectionIds, offset = 100) {
       const documentHeight = document.documentElement.scrollHeight;
       const isAtBottom =
         Math.abs(scrollPosition + windowHeight - documentHeight) < 50;
- 
+
       let currentActiveSection = '';
- 
+
       for (let i = 0; i < sectionIds.length; i++) {
         const el = document.getElementById(sectionIds[i]);
         if (el) {
@@ -27,7 +27,7 @@ function useScrollSpy(sectionIds, offset = 100) {
           }
         }
       }
- 
+
       if (!currentActiveSection) {
         for (let i = sectionIds.length - 1; i >= 0; i--) {
           const el = document.getElementById(sectionIds[i]);
@@ -37,106 +37,74 @@ function useScrollSpy(sectionIds, offset = 100) {
           }
         }
       }
- 
+
       if (isAtBottom && !currentActiveSection) {
         currentActiveSection = sectionIds[sectionIds.length - 1];
       }
- 
+
       if (currentActiveSection) {
         setActiveSection(currentActiveSection);
       }
     };
- 
+
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sectionIds, offset]);
- 
+
   return activeSection;
 }
- 
+
 // Loader
 export async function loader({context}) {
   const pageDataByHandle = await getPageData({
     context,
-    pageHandle: 'terms-of-service',
+    pageHandle: 'return-and-replacement-policy',
   });
   return {
     pageDataByHandle,
   };
 }
- 
+
 // Component
-export default function termsService() {
+export default function PrivacyPolicy() {
   const metaData = useLoaderData();
   const rawHTML = metaData?.pageDataByHandle?.pageDatas?.page?.body;
- 
+
   const [titleHTML, setTitleHTML] = useState('');
   const [bodyHTML, setBodyHTML] = useState('');
- 
+
   const sectionIds = [
-    'data-retention1',
-    'consent-storage',
-    'availability-service',
-    'modification-service',
-    'personal-information',
-    'cookies-choices',
-    'changes-privacy-policy',
-    'data-protection-security',
-    'data-retention',
-    'financial-arrangements',
-    'User-representations-warranties',
-    'copyrights',
-    'assignment',
-    'user-Generated-content',
-    'restrictions-use',
-    'disclaimer-warranties',
-    'limitation-liability',
-    'indemnification',
-    'suspension-termination',
-    'governing-law-jurisdiction',
-    'click-here-know-about',
-    'return-and-refund-policy',
-    'privacy-policy'
+    '21-day-return-policy',
+    'non-returnable-items',
+    'replacement-process',
+    'requirements-for-replacement',
+    'replacement-product',
+    'process-timeline',
+    'contact-information',
   ];
   const sectionTitles = {
-    'data-retention1': '1. Description of Service',
-    'consent-storage': '2. Consent to storage/use of location information',
-    'availability-service': '3. Availability of Service',
-    'modification-service': '4. Modification of terms of service',
-    'personal-information': '5. Personal information and privacy',
-    'cookies-choices': '5.1 Cookies',
-    'changes-privacy-policy': '5.2 Changes to this Privacy Policy',
-    'data-protection-security': "5.3 Data Protection and Security",
-    'data-retention': '5.4 Data Retention',
-    'financial-arrangements': '6. Financial arrangements',
-    'User-representations-warranties': '7. User’s representations and warranties',
-    'copyrights': '8. Copyrights',
-    'assignment': '9. Assignment',
-    'user-Generated-content' :'10. User-Generated Content (UGC)',
-    'restrictions-use' :'11. Restrictions on use',
-    'disclaimer-warranties': '12. Disclaimer of Warranties',
-    'limitation-liability': '13. Limitation of Liability',
-    'indemnification': '14. Indemnification',
-    'suspension-termination' : '15. Suspension and Termination',
-    'governing-law-jurisdiction':'16. Governing Law and Jurisdiction',
-    'click-here-know-about': '17. Click here to know about',
-    'return-and-refund-policy':'18. Click here to know about Warranty, Return and Refund Policy.',
-    'privacy-policy': '19. Click here to know about Privacy Policy.'
+    '21-day-return-policy': '21-Day Return Policy',
+    'non-returnable-items': 'Non-Returnable Items',
+    'replacement-process': 'Replacement Process',
+    'requirements-for-replacement': 'Requirements for Replacement',
+    'replacement-product': 'Replacement Product',
+    'process-timeline': 'Process Timeline',
+    'contact-information': 'Contact Information',
   };
- 
+
   const activeSection = useScrollSpy(sectionIds, 120);
- 
+
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = -120;
+      const yOffset = -120; 
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
   
- 
+
   // ✅ Safe DOM Parsing only on client
   useEffect(() => {
     if (typeof window !== 'undefined' && rawHTML) {
@@ -148,46 +116,47 @@ export default function termsService() {
       setBodyHTML(doc.body.innerHTML);
     }
   }, [rawHTML]);
- 
+
   return (
     <div className="mx-auto w-full">
       {/* Admin title rendered here */}
       {titleHTML && (
         <div
-          className="text-center bg-[#B47E57] py-[58px]"
+          className="text-center bg-[#B47E57] py-[58px] "
           dangerouslySetInnerHTML={{__html: titleHTML}}
         />
       )}
- 
+
       <div className="flex justify-end">
         {/* Main Privacy Content */}
-        <div className="md:w-[53.8%] pb-[41px] border-r border-[#CCCCCC] w-full mt-[27px] md:pr-[54px] px-[20px] md:px-0">
+        <div className="md:w-[53.8%] pb-[41px] border-r border-[#CCCCCC] w-full mt-[24px] md:pr-[54px] px-[20px] md:px-0">
           <div
             className="privacy_policy-main"
             dangerouslySetInnerHTML={{__html: bodyHTML}}
           />
         </div>
- 
+
         {/* ScrollSpy Sidebar */}
         <div className="sticky right-0 top-[92px] h-auto w-[25.5%] mt-[78px] hidden md:block">
           <div className="sticky top-[49px] px-[54px]">
-            <h3 className="lexend pb-[5px] font-semibold text-[14px] tracking-[0%] uppercase">
-              Privacy Policy
+            <h3 className="lexend pb-[5px] font-semibold text-[14px] tracking-[0%] uppercase pr-[55px]">
+            Return and 
+            Replacement Policy
             </h3>
             <nav>
               {sectionIds.map((id, index) => (
                 <button
                   key={id}  
                   onClick={() => scrollToSection(id)}
-                  className={`pb-[13px] leading-[16px] pt-[13px] border-b border-[#CECECE] text-left lato transition-all font-normal text-[12px] tracking-[0] w-[98%] ${
+                  className={`w-full pb-[13px] leading-[16px] pt-[13px] border-b border-[#CECECE] text-left lato transition-all font-normal text-[12px] tracking-[0] ${
                     activeSection === id
                       ? 'bg-white !font-bold'
                       : 'text-[#6C6F73] hover:text-[#2E2E2E]'
                   }`}
                 >
-                  {` ${sectionTitles[id] || id}`}  
+                  {`${index + 1}. ${sectionTitles[id] || id}`}  
                 </button>
-              ))} 
+              ))}
             </nav>
           </div>
         </div>

@@ -18,7 +18,7 @@ export function MegaMenuDropdown({ type, isVisible, dynamicItems }) {
         'transition-all duration-10 ease-in-out',
       ].join(' ')}
     >
-      <div className="mega-menu-container bg-white rounded-[20px] border border-[rgba(24,24,24,0.07)] shadow-xl">
+      <div className="mega-menu-container bg-white rounded-[20px] md:border md:border-[rgba(24,24,24,0.07)] md:shadow-xl">
         <div className="mega-menu-grid">
           {items.map((item, idx) => (
             <Link
@@ -33,7 +33,7 @@ export function MegaMenuDropdown({ type, isVisible, dynamicItems }) {
               )}
               {item.image && item.price && (
                 <div className="product-image">
-                  <img src={item.image} alt={item.title} loading='lazy' />
+                  <img src={item.image} alt={item.title} loading='lazy' className="object-contain" />
                 </div>
               )}
                 {item.image && !item.price ? (
