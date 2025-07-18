@@ -48,35 +48,35 @@ const slides = [
     id: 0,
     title: 'Heat / Cold Protection',
     activeImageDesktop: dnode1,
-    inactiveImageDesktop: d1node1,
+    inactiveImageDesktop: dnode1,
     activeImageMobile: mnode2,
-    inactiveImageMobile: m2node2,
+    inactiveImageMobile: mnode2,
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi1,
-    pdpImage: pdpnode2,
+    pdpImage: pdpnode1,
     description: 'Prevents tragedy with instant temperature alerts',
   },
   {
     id: 1,
     title: 'Power Security',
     activeImageDesktop: dnode2,
-    inactiveImageDesktop: d2node2,
+    inactiveImageDesktop: dnode2,
     activeImageMobile: mnode1,
-    inactiveImageMobile: m1node1,
+    inactiveImageMobile: mnode1,
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi2,
-    pdpImage: pdpnode1,
+    pdpImage: pdpnode2,
     description: 'Notifies you the moment electricity fails',
   },
   {
     id: 2,
     title: 'Break-in Detection',
     activeImageDesktop: dnode3,
-    inactiveImageDesktop: d3node3,
-    activeImageMobile: mnode3,
-    inactiveImageMobile: m3node3,
+    inactiveImageDesktop: dnode3,
+    activeImageMobile: dnode3,
+    inactiveImageMobile: dnode3,
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi3,
@@ -87,9 +87,9 @@ const slides = [
     id: 3,
     title: 'Visual Check-ins',
     activeImageDesktop: dnode4,
-    inactiveImageDesktop: d4node4,
+    inactiveImageDesktop: dnode4,
     activeImageMobile: mnode4,
-    inactiveImageMobile: m4node4,
+    inactiveImageMobile: mnode4,
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi4,
@@ -100,9 +100,9 @@ const slides = [
     id: 4,
     title: 'GPS Tracking',
     activeImageDesktop: dnode5,
-    inactiveImageDesktop: d5node5,
+    inactiveImageDesktop: dnode5,
     activeImageMobile: mnode5,
-    inactiveImageMobile: m5node5,
+    inactiveImageMobile: mnode5,
     openIcon: open,
     closeIcon: close,
     mainicon: pdpnodemi5,
@@ -173,7 +173,11 @@ const OnTheRoadImageCarousel = () => {
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
               onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-              className={`flex-shrink-0 cursor-pointer relative snap-center ${isActive ? 'md:w-[81%] w-[90%] min-w-[360px] md:min-w-0' : 'md:w-[31.3%] w-[100%] h-fit md:h-auto'}`}
+              className={`flex-shrink-0 cursor-pointer relative snap-center transition-[height] md:transition-[width] duration-900 ease-in-out ${
+                isActive
+                  ? 'w-[90%] md:min-w-0 h-[683px] max-w-[1076px] pb-8 md:h-[512px] md:w-[80vw]'
+                  : 'h-[388px] w-[80vw] max-w-[1076px] pb-8 md:h-[512px] md:w-[404px]'
+              }`}
             >
               <img src={imageSrc} alt="slide" className="w-full h-full object-cover rounded-lg" />
 
@@ -191,7 +195,7 @@ const OnTheRoadImageCarousel = () => {
                   <div className="absolute top-[19px] right-[19px]">
                     <img src={slide.closeIcon} alt="close" />
                   </div>
-                  <div className="absolute w-[58%] md:w-[33%] right-[-7%] md:right-[-72px] top-[50%] md:top-[17%] rounded-[26px] translate-x-[-50%] translate-y-[-50%] md:translate-x-0 md:translate-y-0">
+                  <div className="absolute w-[58%] md:w-[33%] right-[-7%] md:right-[-72px] top-[50%] md:top-[8%] rounded-[26px] translate-x-[-50%] translate-y-[-50%] md:translate-x-0 md:translate-y-0">
                     <img src={slide.pdpImage} alt="product" className="absolute top-[18px] left-[-23%] w-[90%]" />
                   </div>
                 </>
@@ -200,7 +204,7 @@ const OnTheRoadImageCarousel = () => {
               {/* Inactive content */}
               {!isActive && (
                 <>
-                  <div className="absolute bottom-0 text-white text-[37px] px-[32px] py-[38px] font-medium leading-normal">
+                  <div className="absolute bottom-[32px] text-white text-[37px] px-[32px] py-[38px] font-medium leading-normal">
                     <span className="w-[70%] block leading-[1]">{slide.title}</span>
                   </div>
                   <div className="absolute top-[22px] right-[22px]">

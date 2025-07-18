@@ -64,7 +64,7 @@ export default function PageFAQ({ pageFaqData }) {
   }
 
   return (
-    <div className="mx-auto md:p-0 md:flex w-full max-w-[1277px] p-[16px]">
+    <div className="mx-auto md:p-0 md:flex w-full max-w-[1277px] p-[16px] pb-[38px] md:pb-[61px]">
       <h2 className="md:text-[36px] text-center mb-6 md:m-0 font-medium text-[28px] w-[87%] mx-auto md:w-[33%] md:p-[0px] md:text-left lexend leading-[1.3]">Your Questions, Answered</h2>
       <div className="w-full md:w-[67%]">
         {/* Desktop Tabs */}
