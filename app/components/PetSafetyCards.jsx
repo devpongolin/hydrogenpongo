@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import plusIcon from '../assets/minusIcon.webp';
 import minusIcon from '../assets/plusIcon.webp';
 import arrowIcon from '../assets/arrowIcon.webp';
 import { Money } from '@shopify/hydrogen';
 
-const PetSafetyCards = ({petSafetyEssentials, petSafetyEssentialsTitle}) => {
+const PetSafetyCards = ({ petSafetyEssentials, petSafetyEssentialsTitle }) => {
   const [activeCard, setActiveCard] = useState(null); // ✅ changed from flippedCards
   const cardData = petSafetyEssentials?.map((item) => ({
     title: item?.node?.fields?.find((field) => field.key === 'card_tag')?.value || '',
@@ -25,24 +25,24 @@ const PetSafetyCards = ({petSafetyEssentials, petSafetyEssentialsTitle}) => {
         icon: item?.node?.fields?.find((field) => field.key === 'feature_icon_third')?.reference?.image?.url || '',
       }
     ],
-      price: item?.node?.fields?.find((field) => field.key === 'price')?.value || '',
-      originalPrice: item?.node?.fields?.find((field) => field.key === 'original_price')?.value || '',
-      buttonText: item?.node?.fields?.find((field) => field.key === 'button_text')?.value || '',
-      buttonLink: item?.node?.fields?.find((field) => field.key === 'button_product_link')?.reference?.handle || '',
-      priceText: 'Starts at',
+    price: item?.node?.fields?.find((field) => field.key === 'price')?.value || '',
+    originalPrice: item?.node?.fields?.find((field) => field.key === 'original_price')?.value || '',
+    buttonText: item?.node?.fields?.find((field) => field.key === 'button_text')?.value || '',
+    buttonLink: item?.node?.fields?.find((field) => field.key === 'button_product_link')?.reference?.handle || '',
+    priceText: 'Starts at',
   }));
 
   const petSafetyData = {
-  title: petSafetyEssentialsTitle || 'Pet Safety Essentials',
-  productCards: [
-    ...cardData, // Use the cardData array generated from petSafetyEssentials
-  ],
-  controlIcons: {
-    plusIcon: plusIcon,
-    minusIcon: minusIcon,
-    arrowIcon: arrowIcon,
-  },
-};
+    title: petSafetyEssentialsTitle || 'Pet Safety Essentials',
+    productCards: [
+      ...cardData, // Use the cardData array generated from petSafetyEssentials
+    ],
+    controlIcons: {
+      plusIcon: plusIcon,
+      minusIcon: minusIcon,
+      arrowIcon: arrowIcon,
+    },
+  };
   const toggleCard = (index) => {
     setActiveCard((prevIndex) => (prevIndex === index ? null : index)); // ✅ flip only one
   };
@@ -56,9 +56,8 @@ const PetSafetyCards = ({petSafetyEssentials, petSafetyEssentialsTitle}) => {
         {petSafetyData?.productCards?.map((card, index) => (
           <div
             key={index}
-            className={`md:w-[314px] w-full max-w-[328px] h-[549px] transition-transform duration-700 [transform-style:preserve-3d] ${
-              activeCard === index ? '[transform:rotateY(180deg)]' : ''
-            }`}
+            className={`md:w-[314px] w-full max-w-[328px] h-[549px] transition-transform duration-700 [transform-style:preserve-3d] ${activeCard === index ? '[transform:rotateY(180deg)]' : ''
+              }`}
           >
             {activeCard !== index ? (
               // Front
@@ -107,7 +106,7 @@ const PetSafetyCards = ({petSafetyEssentials, petSafetyEssentialsTitle}) => {
                     />
                   </button>
                 </div>
-                <div className={`flex justify-center`}>
+                <div className={`flex justify-center my-auto mx-auto`}>
                   <img
                     src={card.backImage}
                     alt={card.title}
@@ -115,48 +114,51 @@ const PetSafetyCards = ({petSafetyEssentials, petSafetyEssentialsTitle}) => {
                     className="object-contain"
                   />
                 </div>
-                <div className={`px-[22px] ${index === 2 || index === 3 ? 'pt-[4.5rem]' : ''}`}>
-                  {card.features.map((feature, i) => (
-                    <div key={i} className="flex flex-col">
-                      <div className="flex space-x-3 pb-3">
-                        <img
-                          src={feature.icon}
-                          alt="Feature icon"
-                          loading="lazy"
-                          className="object-contain w-[22px]"
-                        />
-                        <span className="text-white font-[400] text-[14px] leading-[124%] tracking-[0] lato">
-                          {feature.text}
-                        </span>
+                <div className="mt-auto mb-7">
+                  <div className={`px-[22px]`}>
+                    {card.features.map((feature, i) => (
+                      <div key={i} className="flex flex-col">
+                        <div className="flex space-x-3 pb-3">
+                          <img
+                            src={feature.icon}
+                            alt="Feature icon"
+                            loading="lazy"
+                            className="object-contain w-[22px] mr-[7px]"
+                          />
+                          <span className="text-white font-[400] text-[14px] leading-[124%] tracking-[0] lato">
+                            {feature.text}
+                          </span>
+                        </div>
+                        {i !== card.features.length - 1 && (
+                          <hr className="border-t border-white/30 mb-[10px]" />
+                        )}
                       </div>
-                      {i !== card.features.length - 1 && (
-                        <hr className="border-t border-white/30 mb-[10px]" />
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <div className="px-4 ">
-                  <div className="flex">
-                    <span className="text-white lato font-[500] text-[16px] leading-[100%] tracking-[0] ">
-                      {card.priceText}{' '}
-                    </span>
-                    <span className="relative inline-block text-white font-[500] text-[23px] leading-[100%] tracking-[0] lato mb-[20px]">
-                      <Money  data={{amount: card.originalPrice, currencyCode: "USD"}} withoutTrailingZeros />
-                      <span className="absolute left-0 top-1/2 w-full h-[2px] bg-[#007AFF] transform -rotate-[15deg] origin-center"></span>
-                    </span>
-                    <span className="text-white font-[600] text-[42px] md:text-[48px] leading-[100%] tracking-[0] lato ml-2">
-                      <Money  data={{amount: card.price, currencyCode: "USD"}} withoutTrailingZeros />
-                    </span>
+                    ))}
                   </div>
-                  <div className="flex items-center cursor-pointer">
-                    <span className="text-white font-[700] text-[17.2px] leading-[100%] tracking-[0] lato mr-2">
-                      {card.buttonText}
-                    </span>
-                    <img
-                      src={petSafetyData.controlIcons.arrowIcon}
-                      alt="Arrow"
-                      loading="lazy"
-                    />
+                  <div className="px-4 ">
+                    <div className="flex items-baseline">
+                      <span className="text-white lato font-[500] text-[16px] leading-[100%] tracking-[0] mr-2">
+                        {card.priceText}{' '}
+                      </span>
+                      <span className="relative inline-block text-white font-[500] text-[23px] leading-[100%] tracking-[0] lato mb-[20px]">
+                        <Money data={{ amount: card.originalPrice, currencyCode: "USD" }} withoutTrailingZeros />
+                        <span className="absolute left-0 top-1/2 w-full h-[2px] bg-[#007AFF] transform -rotate-[15deg] origin-center"></span>
+                      </span>
+                      <span className="text-white font-[600] text-[42px] md:text-[48px] leading-[100%] tracking-[0] lato ml-2">
+                        <Money data={{ amount: card.price, currencyCode: "USD" }} withoutTrailingZeros />
+                      </span>
+                    </div>
+                    <div className="flex items-center cursor-pointer">
+                      <span className="text-white font-[700] text-[17.2px] leading-[100%] tracking-[0] lato mr-2">
+                        {card.buttonText}
+                      </span>
+                      <img
+                        src={petSafetyData.controlIcons.arrowIcon}
+                        alt="Arrow"
+                        loading="lazy"
+                        className="p-[10px] bg-[#0085FF] w-[32px] h-[32px] rounded-[32px] object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

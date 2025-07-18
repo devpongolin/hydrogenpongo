@@ -38,9 +38,9 @@ const UltimatePetParent = ({featuredBlogs, featuredBlogsCommonFields}) => {
     buttonLink: commonFields?.buttonLink || "",
     articles,
   };
- 
+  // custom-radial-blue-bg
   return (
-    <div className="custom-radial-blue-bg from-[#D6E7FF] to-white py-[40px] md:py-[55px]">
+    <div className="from-[#D6E7FF] to-white py-[40px] md:py-[55px]">
       <div className="relative max-w-[1280px] mx-auto mb-[40px] px-4 md:px-0">
         <h1 className="text-center font-[500] md:font-[400] text-[28px] md:text-[47px] leading-[100%] tracking-[0] lexend">
           The Ultimate Pet Parent Guide
@@ -50,7 +50,7 @@ const UltimatePetParent = ({featuredBlogs, featuredBlogsCommonFields}) => {
             <span className="font-[700] text-[16px] leading-[100%] tracking-[0] lato">
               {cardDatas.buttonText || "View All"}
             </span>
-            <img src={buttonIcon} alt="Arrow" loading="lazy" />
+            <img src={buttonIcon} alt="Arrow" loading="lazy" className="p-[10px] bg-[#0085FF] w-[32px] h-[32px] rounded-[32px] object-cover" />
           </div>
         </a>
       </div>
@@ -84,7 +84,7 @@ const UltimatePetParent = ({featuredBlogs, featuredBlogsCommonFields}) => {
                   className="flex items-center gap-2 font-[400] text-[14px] lato leading-[100%] group-hover:text-white mt-auto cursor-pointer"
                 >
                   <span>Read more</span>
-                  <img src={buttonIcon} alt="Arrow" loading="lazy" />
+                  <img src={buttonIcon} alt="Arrow" loading="lazy" className="p-[10px] bg-[#0085FF] w-[32px] h-[32px] rounded-[32px] object-cover" />
                 </a>
               </div>
             </div>
@@ -96,7 +96,7 @@ const UltimatePetParent = ({featuredBlogs, featuredBlogsCommonFields}) => {
               <span className="font-[700] text-[16px] leading-[100%] lato">
                 {cardDatas.buttonText || "View All"}
               </span>
-              <img src={buttonIcon} alt="Arrow" loading="lazy" />
+              <img src={buttonIcon} alt="Arrow" loading="lazy" className="p-[10px] bg-[#0085FF] w-[32px] h-[32px] rounded-[32px] object-cover" />
             </div>
           </a>
         </div>

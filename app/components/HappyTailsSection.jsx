@@ -122,7 +122,7 @@ const HappyTailsSection = ({happyTails, title}) => {
                       <a href="#" className="text-gray-500 text-sm">{item.handle}</a>
                     </div>
                   </div>
-                  <div className="absolute bottom-0 right-0 bg-white rounded-lg">
+                  <div className="absolute bottom-0 right-0 bg-[#2E3138] rounded-none pt-[28px] pl-[28px] rounded-tl-[12px]">
                     <img src={item.icon} alt="icon" className="w-full h-full object-contain" />
                   </div>
                 </div>

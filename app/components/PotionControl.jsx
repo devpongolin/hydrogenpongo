@@ -172,7 +172,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
                 {productAvarageRating} out of 5
               </span>
             </div>
-          <div className="relative">
+          <div className="relative mx-auto md:mx-0">
             <img
               src={productImages[currentImage].src}
               alt={productImages[currentImage].alt}
@@ -193,7 +193,7 @@ export default function PotionControl({ProductData,productAvarageRating}) {
             </button>
           </div>
           <div className="w-full">
-            <div className="flex gap-[17px] md:gap-[23px] mt-[14px] overflow-auto hide-scrollbar">
+            <div className="flex gap-[17px] md:gap-[23px] mt-[14px] overflow-auto hide-scrollbar justify-center">
               {thumbnailImages.map((thumb, index) => {
                 const actualIndex = thumbnailStartIndex + index;
                 return (
